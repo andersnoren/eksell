@@ -1,0 +1,422 @@
+<?php
+
+
+/* ------------------------------------------------------------------------------------------------
+   CUSTOM LOGO OUTPUT
+--------------------------------------------------------------------------------------------------- */
+
+if ( ! function_exists( 'eksell_the_custom_logo' ) ) :
+	function eksell_the_custom_logo( $logo_theme_mod = 'custom_logo' ) {
+
+		echo esc_html( eksell_get_custom_logo( $logo_theme_mod ) );
+
+	}
+endif;
+
+if ( ! function_exists( 'eksell_get_custom_logo' ) ) :
+	function eksell_get_custom_logo( $logo_theme_mod = 'custom_logo' ) {
+
+		// Get the attachment id for the specified logo
+		$logo_id = get_theme_mod( $logo_theme_mod );
+		
+		if ( ! $logo_id ) return;
+
+		$logo = wp_get_attachment_image_src( $logo_id, 'full' );
+
+		if ( ! $logo ) return;
+
+		// For clarity
+		$logo_url = esc_url( $logo[0] );
+		$logo_alt = get_post_meta( $logo_id, '_wp_attachment_image_alt', TRUE );
+		$logo_width = esc_attr( $logo[1] );
+		$logo_height = esc_attr( $logo[2] );
+
+		// If the retina logo setting is active, reduce the width/height by half
+		if ( get_theme_mod( 'eksell_retina_logo', false ) ) {
+			$logo_width = floor( $logo_width / 2 );
+			$logo_height = floor( $logo_height / 2 );
+		}
+
+		// CSS friendly class
+		$logo_theme_mod_class = str_replace( '_', '-', $logo_theme_mod );
+
+		// Record our output
+		ob_start();
+
+		?>
+
+		<a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home" class="custom-logo-link <?php echo esc_attr( $logo_theme_mod_class ); ?>">
+			<img src="<?php echo esc_url( $logo_url ); ?>" width="<?php echo esc_attr( $logo_width ); ?>" height="<?php echo esc_attr( $logo_height ); ?>" <?php if ( $logo_alt ) echo ' alt="' . esc_attr( $logo_alt ) . '"'; ?> />
+		</a>
+
+		<?php
+
+		// Return our output
+		return ob_get_clean();
+
+	}
+endif;
+
+	
+/* ---------------------------------------------------------------------------------------------
+   GET FALLBACK IMAGE
+------------------------------------------------------------------------------------------------ */
+
+if ( ! function_exists( 'eksell_get_fallback_image_url' ) ) :
+	function eksell_get_fallback_image_url() {
+
+		$disable_fallback_image = get_theme_mod( 'eksell_disable_fallback_image', false );
+
+		if ( $disable_fallback_image ) return '';
+
+		$fallback_image_id = get_theme_mod( 'eksell_fallback_image' );
+
+		if ( $fallback_image_id ) {
+			$fallback_image = wp_get_attachment_image_src( $fallback_image_id, 'full' );
+		}
+
+		$fallback_image_url = isset( $fallback_image ) ? esc_url( $fallback_image[0] ) : get_template_directory_uri() . '/assets/images/default-fallback-image.png';
+
+		return $fallback_image_url;
+
+	}
+endif;
+
+
+/* ---------------------------------------------------------------------------------------------
+   OUTPUT AND RETURN FALLBACK IMAGE
+   --------------------------------------------------------------------------------------------- */
+
+if ( ! function_exists( 'eksell_the_fallback_image' ) ) :
+	function eksell_the_fallback_image() {
+
+		echo eksell_get_fallback_image();
+
+	}
+endif;
+
+if ( ! function_exists( 'eksell_get_fallback_image' ) ) :
+	function eksell_get_fallback_image() {
+
+		$fallback_image_url = eksell_get_fallback_image_url();
+
+		if ( ! $fallback_image_url ) return;
+
+		return '<img src="' . esc_attr( $fallback_image_url ) . '" class="fallback-featured-image" />';
+
+	}
+endif;
+
+
+/* ---------------------------------------------------------------------------------------------
+   FILTER POST THUMBNAIL HTML TO INCLUDE FALLBACK IMAGE
+   If a post thumbnail isn't set, filter 
+------------------------------------------------------------------------------------------------ */
+
+if ( ! function_exists( 'eksell_filter_fallback_image' ) ) :
+	function eksell_filter_fallback_image( $html, $post_id, $post_thumbnail_id ) {
+
+		// If this is the featured image of the post currently being displayed, don't modify the html.
+		// I.e. don't show the fallback image for the main image of a singular post or page.
+		if ( is_single( $post_id ) || is_page( $post_id ) ) return $html;
+
+		// Make the disable fallback image variable filterable in child themes and plugins
+		$disable_fallback_image = get_theme_mod( 'eksell_disable_fallback_image', false );
+		$disable_fallback_image = apply_filters( 'eksell_disable_fallback_image_on_post', $disable_fallback_image, $post_id, $post_thumbnail_id );
+
+		// If the post is password protected, return the fallback image (or an empty string, if the fallback image is disabled).
+		if ( post_password_required( $post_id ) ) {
+			return eksell_get_fallback_image();
+
+		// If there's an image already set, return it.
+		} else if ( $html ) {
+			return $html;
+
+		// If not, and the fallback image is not disabled, return the fallback image.
+		} else if ( ! $disable_fallback_image ) {
+			return eksell_get_fallback_image();
+
+		// If not, and the fallback image is disabled, return nothing.
+		} else {
+			return '';
+		}
+
+	}
+	add_filter( 'post_thumbnail_html', 'eksell_filter_fallback_image', 10, 3 );
+endif;
+
+
+/* ---------------------------------------------------------------------------------------------
+   FILTER HAS_POST_THUMBNAIL TO MATCH FALLBACK IMAGE VALUE
+   If the fallback image is enabled, make sure the has_post_thumbnail() reflects that when a post 
+   thumbnail isn't set.
+------------------------------------------------------------------------------------------------ */
+
+if ( ! function_exists( 'eksell_filter_has_post_thumbnail' ) ) :
+	function eksell_filter_has_post_thumbnail( $has_thumbnail, $post_id ) {
+
+		// If this is the featured image of the post currently being displayed, don't modify the has_thumbnail variable.
+		// I.e. don't show the fallback image for the main image of a singular post or page.
+		if ( is_single( $post_id ) || is_page( $post_id ) ) return $has_thumbnail;
+
+		$disable_fallback_image = get_theme_mod( 'eksell_disable_fallback_image', false );
+
+		// If the fallback image is disabled, return the original $has_thumbnail value (true if there's a featured image set).
+		if ( $disable_fallback_image ) {
+			return $has_thumbnail;
+
+		// If the fallback image is enabled, there's always a featured image, so return true.
+		} else {
+			return true;
+		}
+
+	}
+	add_filter( 'has_post_thumbnail', 'eksell_filter_has_post_thumbnail', 10, 2 );
+endif;
+
+
+/*	-----------------------------------------------------------------------------------------------
+	OUTPUT AND GET THEME SVG
+	Output and get the SVG markup for a icon in the Eksell_SVG_Icons class.
+
+	@param string	$group The group the icon belongs to.
+	@param string	$icon The name of the icon in the group array.
+	@param int		$width Icon width in pixels.
+ 	@param int		$height Icon height in pixels.
+--------------------------------------------------------------------------------------------------- */
+
+if ( ! function_exists( 'eksell_the_theme_svg' ) ) :
+	function eksell_the_theme_svg( $group, $icon, $width = 24, $height = 24 ) {
+		echo eksell_get_theme_svg( $group, $icon, $width, $height );
+	}
+endif;
+
+if ( ! function_exists( 'eksell_get_theme_svg' ) ) :
+	function eksell_get_theme_svg( $group, $icon, $width = 24, $height = 24 ) {
+		return Eksell_SVG_Icons::get_svg( $group, $icon, $width, $height );
+	}
+endif;
+
+
+/*	-----------------------------------------------------------------------------------------------
+	GET SOCIAL LINK SVG
+	Detects the social network from a URL and returns the SVG code for its icon.
+
+	@param string	$uri Social link.
+ 	@param int		$width Icon width in pixels.
+ 	@param int		$height Icon height in pixels.
+--------------------------------------------------------------------------------------------------- */
+
+function eksell_get_social_link_svg( $uri, $width = 24, $height = 24 ) {
+	return Eksell_SVG_Icons::get_social_link_svg( $uri, $width, $height );
+}
+
+
+/*	-----------------------------------------------------------------------------------------------
+	SOCIAL MENU ICONS
+	Displays SVG icons in the social menu.
+
+	@param string   $item_output The menu item's starting HTML output.
+	@param WP_Post  $item        Menu item data object.
+	@param int      $depth       Depth of the menu. Used for padding.
+	@param stdClass $args        An object of wp_nav_menu() arguments.
+--------------------------------------------------------------------------------------------------- */
+
+function eksell_nav_menu_social_icons( $item_output, $item, $depth, $args ) {
+
+	// Change SVG icon inside social menu if there is a supported URL.
+	if ( 'social' === $args->theme_location ) {
+		$svg = eksell_get_social_link_svg( $item->url, 24, 24 );
+		if ( ! empty( $svg ) ) {
+			$item_output = str_replace( $args->link_before, $svg, $item_output );
+		}
+	}
+
+	return $item_output;
+}
+add_filter( 'walker_nav_menu_start_el', 'eksell_nav_menu_social_icons', 10, 4 );
+
+
+/*	-----------------------------------------------------------------------------------------------
+	OUTPUT SOCIAL MENU
+	Output the social menu, if set.
+
+	@param array $args		Arguments for wp_nav_menu().
+--------------------------------------------------------------------------------------------------- */
+
+if ( ! function_exists( 'eksell_the_social_menu' ) ) :
+	function eksell_the_social_menu( $args = array() ) {
+
+		$social_args = eksell_get_social_menu_args( $args );
+
+		if ( has_nav_menu( $social_args['theme_location'] ) ) {
+			wp_nav_menu( $social_args );
+		}
+
+	}
+endif;
+
+
+/*	-----------------------------------------------------------------------------------------------
+	IS COMMENT BY POST AUTHOR?
+	Check if the specified comment is written by the author of the post commented on.
+
+	@param obj $comment		The comment object.
+--------------------------------------------------------------------------------------------------- */
+
+if ( ! function_exists( 'eksell_is_comment_by_post_author' ) ) :
+	function eksell_is_comment_by_post_author( $comment = null ) {
+
+		if ( is_object( $comment ) && $comment->user_id > 0 ) {
+			$user = get_userdata( $comment->user_id );
+			$post = get_post( $comment->comment_post_ID );
+			if ( ! empty( $user ) && ! empty( $post ) ) {
+				return $comment->user_id === $post->post_author;
+			}
+		}
+		return false;
+
+	}
+endif;
+
+
+/*	-----------------------------------------------------------------------------------------------
+	IS THE POST/PAGE SET TO A COVER TEMPLATE?
+	Helper function for checking if the specified post is set to any of the cover templates.
+
+	@param	$post mixed		Optional. Post ID or WP_Post object. Default is global $post.
+--------------------------------------------------------------------------------------------------- */
+
+if ( ! function_exists( 'eksell_is_cover_template' ) ) :
+	function eksell_is_cover_template( $post = null ) {
+
+		$post = get_post( $post );
+
+		// Filterable list of cover templates to check for
+		$cover_templates = apply_filters( 'eksell_cover_templates', array( 'template-cover.php', 'template-full-width-cover.php' ) );
+
+		return in_array( get_page_template_slug( $post ), $cover_templates );
+
+	}
+endif;
+
+
+/* ------------------------------------------------------------------------------------------------
+   GET POST GRID COLUMN CLASSES
+   Gets the number of columns set in the Customizer, and returns the classes that should be used to
+   set the post grid to the number of columns specified
+--------------------------------------------------------------------------------------------------- */
+
+if ( ! function_exists( 'eksell_get_archive_columns_classes' ) ) :
+	function eksell_get_archive_columns_classes() {
+
+		$classes = array();
+
+		// Get the array holding all of the columns options
+		$archive_columns_options = Eksell_Customizer::get_archive_columns_options();
+
+		// Loop over the array, and class value of each one to the array
+		foreach ( $archive_columns_options as $setting_name => $setting_data ) {
+
+			// Get the value of the setting, or the default if none is set
+			$value = get_theme_mod( $setting_name, $setting_data['default'] );
+
+			// Convert the number in the setting (1/2/3/4) to the class names used in our twelve column grid
+			switch ( $setting_name ) {
+				case 'eksell_post_grid_columns_mobile' : 
+					$classes['mobile'] = 'cols-' . ( 12 / $value );
+					break;
+
+				case 'eksell_post_grid_columns_tablet_portrait' : 
+					$classes['tablet_portrait'] = 'cols-t-' . ( 12 / $value );
+					break;
+
+				case 'eksell_post_grid_columns_tablet_landscape' : 
+					$classes['tablet_landscape'] = 'cols-tl-' . ( 12 / $value );
+					break;
+
+				case 'eksell_post_grid_columns_desktop' : 
+					$classes['desktop'] = 'cols-d-' . ( 12 / $value );
+					break;
+
+				case 'eksell_post_grid_columns_desktop_large' : 
+					$classes['desktop_large'] = 'cols-dl-' . ( 12 / $value );
+					break;
+
+			}
+		}
+
+		return apply_filters( 'eksell_archive_columns_classes', $classes );
+
+	}
+endif;
+
+
+/*	-----------------------------------------------------------------------------------------------
+	OUTPUT LOADING INDICATOR
+--------------------------------------------------------------------------------------------------- */
+
+if ( ! function_exists( 'eksell_loading_indicator' ) ) :
+	function eksell_loading_indicator() {
+
+		$extra_loading_classes = '';
+
+		// Check if the primary and border colors are the same
+		$primary_color = 	get_theme_mod( 'eksell_primary_text_color' );
+		$border_color = 	get_theme_mod( 'eksell_border_color' );
+
+		$extra_loading_classes .= ( $primary_color == $border_color ) ? ' same-primary-border-color' : '';
+
+		echo '<div class="loader border-color-border' . $extra_loading_classes . '"></div>';
+
+	}
+endif;
+
+
+/*	-----------------------------------------------------------------------------------------------
+	SINGLE POST NAVIGATION
+	Maybe output the single post navigation.
+--------------------------------------------------------------------------------------------------- */
+
+if ( ! function_exists( 'eksell_maybe_output_single_post_navigation' ) ) : 
+	function eksell_maybe_output_single_post_navigation() {
+
+		// Only on posts
+		if ( ! is_singular( apply_filters( 'eksell_the_post_navigation_post_types', array( 'post' ) ) ) ) return;
+
+		the_post_navigation( array(
+			'prev_text' 	=> '<span class="arrow" aria-hidden="true">&larr;</span><span class="screen-reader-text">' . __( 'Previous post:', 'eksell' ) . '</span><span class="post-title">%title</span>',
+			'next_text' 	=> '<span class="arrow" aria-hidden="true">&rarr;</span><span class="screen-reader-text">' . __( 'Next post:', 'eksell' ) . '</span><span class="post-title">%title</span>',
+		) );
+
+	}
+	add_action( 'eksell_entry_footer', 'eksell_maybe_output_single_post_navigation', 30 );
+endif;
+
+
+/*	-----------------------------------------------------------------------------------------------
+	OUTPUT PREVIOUS POSTS LINK ON ARCHIVE PAGES
+	On archive pages, when on at least page 2 and using the button or scroll load more type, output
+	a link allowing visitor to go back to the previous page in the chronology.
+	(When you're on page 2, output a link to go back to page one.)
+--------------------------------------------------------------------------------------------------- */
+
+if ( ! function_exists( 'eksell_output_previous_posts_link' ) ) :
+	function eksell_output_previous_posts_link() {
+
+		global $paged;
+		$pagination_type = get_theme_mod( 'eksell_pagination_type', 'button' );
+		
+		if ( ( $pagination_type == 'button' || $pagination_type = 'scroll' ) && $paged && $paged > 1 ) : 
+			?>
+
+			<div class="previous-posts-link-wrapper color-secondary hide-no-js">
+				<?php previous_posts_link( '<span class="arrow" aria-hidden="true">&larr; </span>' . __( 'To The Previous Page', 'eksell' ) ); ?>
+			</div><!-- .previous-posts-link-wrapper -->
+			
+			<?php
+		endif;
+
+	}
+	add_action( 'eksell_posts_start', 'eksell_output_previous_posts_link' );
+endif;
