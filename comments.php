@@ -12,7 +12,7 @@ if ( post_password_required() ) {
 if ( $comments ) : 
 	?>
 
-	<div class="comments section-inner thin max-percentage no-margin" id="comments">
+	<div class="comments section-inner mw-thin max-percentage no-margin" id="comments">
 
 		<?php
 
@@ -73,7 +73,7 @@ endif;
 
 if ( comments_open() || pings_open() ) {
 	comment_form( array(
-		'class_form'           => 'section-inner thin max-percentage no-margin',
+		'class_form'           => 'section-inner mw-thin max-percentage no-margin',
 		'comment_notes_before' => '',
 		'comment_notes_after'  => '',
 	) );

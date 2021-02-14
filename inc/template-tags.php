@@ -378,3 +378,64 @@ if ( ! function_exists( 'eksell_output_previous_posts_link' ) ) :
 	}
 	add_action( 'eksell_posts_start', 'eksell_output_previous_posts_link' );
 endif;
+
+
+/*	-----------------------------------------------------------------------------------------------
+	OUTPUT ARCHIVE FILTER
+	Output the archive filter beneath the archive header.
+--------------------------------------------------------------------------------------------------- */
+
+if ( ! function_exists( 'eksell_the_archive_filter' ) ) :
+	function eksell_the_archive_filter() {
+
+		global $paged;
+		
+		// Whether to display the filter (defaults to on home or on JetPack Portfolio CPT archive, and when set to active in the Customizer)
+		$show_home_filter = apply_filters( 'eksell_show_home_filter', ( is_home() || is_post_type_archive( 'jetpack-portfolio' ) ) && $paged == 0 && get_theme_mod( 'eksell_show_home_filter', true ) );
+		
+		if ( ! $show_home_filter ) return;
+
+		$filter_taxonomy = is_post_type_archive( 'jetpack-portfolio' ) ? 'jetpack-portfolio-type' : 'category';
+
+		$terms = get_terms( apply_filters( 'eksell_home_filter_get_terms_args', array(
+			'depth'		=> 1,
+			'taxonomy'	=> $filter_taxonomy,
+		) ) );
+
+		if ( ! $terms ) return;
+
+		$home_url = '';
+		$post_type = '';
+
+		// Determine the correct home URL to link to
+		if ( is_home() ) {
+			$home_url = home_url();
+			$post_type = 'post';
+		} elseif ( is_post_type_archive() ) {
+			$post_type = get_post_type();
+			$home_url = get_post_type_archive_link( $post_type );
+		}
+
+		$home_url = apply_filters( 'eksell_filter_home_url', $home_url );
+	
+		?>
+
+		<div class="filter-wrapper">
+			<ul class="filter-list reset-list-style">
+
+				<?php if ( $home_url ) : ?>
+					<li><a class="filter-link active" data-filter-post-type="<?php echo esc_attr( $post_type ); ?>" href="<?php echo esc_url( $home_url ); ?>"><?php _e( 'Show All', 'eksell' ); ?></a></li>
+				<?php endif; ?>
+
+				<?php foreach ( $terms as $term ) : ?>
+					<li><a class="filter-link" data-filter-term-id="<?php echo esc_attr( $term->term_id ); ?>" data-filter-taxonomy="<?php echo esc_attr( $term->taxonomy ); ?>" data-filter-post-type="<?php echo esc_attr( $post_type ); ?>" href="<?php echo esc_url( get_term_link( $term ) ); ?>"><?php echo $term->name; ?></a></li>
+				<?php endforeach; ?>
+				
+			</ul><!-- .filter-list -->
+		</div><!-- .filter-wrapper -->
+
+		<?php 
+
+	}
+	add_action( 'eksell_archive_header_end', 'eksell_the_archive_filter' );
+endif;

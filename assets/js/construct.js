@@ -26,7 +26,7 @@ var viewport = {};
 
 /* Output AJAX errors ------------------------ */
 
-function eksellAJAXErrors( jqXHR, exception ) {
+function eksellAjaxErrors( jqXHR, exception ) {
 	var message = '';
 	if ( jqXHR.status === 0 ) {
 		message = 'Not connect.n Verify Network.';
@@ -907,42 +907,55 @@ eksell.loadMore = {
 
 			// Default values for variables
 			window.loading = false;
-			window.lastPage = $pagination.hasClass( 'last-page' );
+			window.lastPage = $( '.pagination-wrapper' ).hasClass( 'last-page' );
 
-			// Load more posts
 			eksell.loadMore.prepare( $pagination );
 
-			// Update browser history when the visitor scrolls through loaded posts
-			eksell.loadMore.updateHistoryOnScroll();
-
 		}
+
+		// When the pagination query args are updated, reset the posts to reflect the new pagination
+		$win.on( 'reset-posts', function() {
+
+			// Fade out existing posts
+			$( $pagination.data( 'load-more-target' ) ).find( 'article' ).css( 'opacity', 0 );
+
+			// Reset posts
+			eksell.loadMore.prepare( $pagination, resetPosts = true );
+		} );
 
 	},
 
-	prepare: function( $pagination ) {
+	prepare: function( $pagination, resetPosts ) {
+
+		// Default resetPosts to false
+		if ( typeof resetPosts === 'undefined' || ! resetPosts ) {
+			resetPosts = false;
+		}
 
 		// Get the query arguments from the pagination element
-		var query_args = JSON.parse( $pagination.attr( 'data-query-args' ) );
+		var queryArgs = JSON.parse( $pagination.attr( 'data-query-args' ) );
 
-		// If we're already at the last page, exit out here
-		if ( query_args.paged == query_args.max_num_pages ) {
-			$pagination.addClass( 'last-page' );
-		} else {
-			$pagination.removeClass( 'last-page' );
+		// If we're resetting posts, reset them
+		if ( resetPosts ) {
+			eksell.loadMore.loadPosts( $pagination, resetPosts );
 		}
 
-		// Get the load more type (button or scroll)
-		var loadMoreType = $pagination.data( 'pagination-type' );
+		// If not, check the paged value against the max_num_pages
+		else {
+			var $paginationWrapper = $( '.pagination-wrapper' );
+			if ( queryArgs.paged == queryArgs.max_num_pages ) {
+				$paginationWrapper.addClass( 'last-page' );
+			}
 
-		if ( ! loadMoreType ) {
-			var loadMoreType = 'links';
-		}
+			// Get the load more type (button or scroll)
+			var loadMoreType = $pagination.data( 'pagination-type' ) ? $pagination.data( 'pagination-type' ) : 'button';
 
-		// Do the appropriate load more detection, depending on the type
-		if ( loadMoreType == 'scroll' ) {
-			eksell.loadMore.detectScroll( $pagination, query_args );
-		} else if ( loadMoreType == 'button' ) {
-			eksell.loadMore.detectButtonClick( $pagination, query_args );
+			// Do the appropriate load more detection, depending on the type
+			if ( loadMoreType == 'scroll' ) {
+				eksell.loadMore.detectScroll( $pagination );
+			} else if ( loadMoreType == 'button' ) {
+				eksell.loadMore.detectButtonClick( $pagination );
+			}
 		}
 
 	},
@@ -987,36 +1000,59 @@ eksell.loadMore = {
 	},
 
 	// Load the posts
-	loadPosts: function( $pagination, query_args ) {
+	loadPosts: function( $pagination, resetPosts ) {
+
+		// Default resetPosts to false
+		if ( typeof resetPosts === 'undefined' || ! resetPosts ) {
+			resetPosts = false;
+		}
+
+		// Get the query arguments
+		var queryArgs = $pagination.attr( 'data-query-args' ),
+			queryArgsParsed = JSON.parse( queryArgs ),
+			$paginationWrapper = $( '.pagination-wrapper' ),
+			$articleWrapper = $( $pagination.data( 'load-more-target' ) );
 
 		// We're now loading
 		loading = true;
 		$pagination.addClass( 'loading' ).removeClass( 'last-page' );
 
-		// Increment paged to indicate another page has been loaded
-		query_args.paged++;
+		// If we're not resetting posts, increment paged (reset = initial paged is correct)
+		if ( ! resetPosts ) {
+			console.log( 'not resetting posts' );
+			queryArgsParsed.paged++;
+
+			console.log( queryArgsParsed.paged );
+		} else {
+			queryArgsParsed.paged = 1;
+		}
 
 		// Prepare the query args for submission
-		var json_query_args = JSON.stringify( query_args );
+		var jsonQueryArgs = JSON.stringify( queryArgsParsed );
 
 		$.ajax({
 			url: eksell_ajax_load_more.ajaxurl,
 			type: 'post',
 			data: {
 				action: 'eksell_ajax_load_more',
-				json_data: json_query_args
+				json_data: jsonQueryArgs
 			},
 			success: function( result ) {
 
 				// Get the results
-				var $result = $( result ),
-					$articleWrapper = $( $pagination.data( 'load-more-target' ) );
+				var $result = $( result );
+
+				// If we're resetting posts, remove the existing posts
+				if ( resetPosts ) {
+					$articleWrapper.find( '*:not(.grid-sizer)' ).remove();
+				}
 
 				// If there are no results, we're at the last page
 				if ( ! $result.length ) {
 					loading = false;
 					$articleWrapper.addClass( 'no-results' );
-					$pagination.addClass( 'last-page' ).removeClass( 'loading' );
+					$paginationWrapper.addClass( 'last-page' );
+					$pagination.removeClass( 'loading' );
 				}
 
 				if ( $result.length ) {
@@ -1025,7 +1061,7 @@ eksell.loadMore = {
 
 					// Add the paged attribute to the articles, used by updateHistoryOnScroll()
 					$result.find( 'article' ).each( function() {
-						$( this ).attr( 'data-post-paged', query_args.paged );
+						$( this ).attr( 'data-post-paged', queryArgsParsed.paged );
 					} );
 
 					// Wait for the images to load
@@ -1037,20 +1073,22 @@ eksell.loadMore = {
 						$win.triggerHandler( 'ajax-content-loaded' );
 						$win.triggerHandler( 'did-interval-scroll' );
 
-						// Update history
-						eksell.loadMore.updateHistory( query_args.paged );
-
 						// We're now finished with the loading
 						loading = false;
 						$pagination.removeClass( 'loading' );
 
+						// Update the pagination query args
+						$pagination.attr( 'data-query-args', jsonQueryArgs );
+
 						// If that was the last page, make sure we don't check for any more
-						if ( query_args.paged == query_args.max_num_pages ) {
-							$pagination.addClass( 'last-page' );
+						if ( queryArgsParsed.paged == queryArgsParsed.max_num_pages ) {
+							$paginationWrapper.addClass( 'last-page' );
 							lastPage = true;
 							return;
+
+						// If not, make sure the pagination is visible again
 						} else {
-							$pagination.removeClass( 'last-page' );
+							$paginationWrapper.removeClass( 'last-page' );
 							lastPage = false;
 						}
 
@@ -1061,119 +1099,65 @@ eksell.loadMore = {
 			},
 
 			error: function( jqXHR, exception ) {
-				eksellAJAXErrors( jqXHR, exception );
+				eksellAjaxErrors( jqXHR, exception );
 			}
 		} );
-
-	},
-
-	// Update browser history on scroll
-	updateHistoryOnScroll: function() {
-
-		// Get the initial paged value
-		var initialPaged = eksell.loadMore.getCurrentPaged();
-
-		// Get the last post visible in the viewport, and set the browser history to the paged attribute of that post
-		$win.on( 'did-interval-scroll', function() {
-
-			var $posts = $( '.posts article' );
-
-			// Check if the page has had posts loaded
-			// This attribute is added by the loadPosts function
-			if ( $posts.length && $( '[data-post-paged]' ).length ) {
-
-				// Store the ID attributes of the posts above the bottom of the viewport
-				var postsVisible = [];
-
-				// Get the bottom of the viewport
-				var winBottom = $win.scrollTop() + $win.height();
-
-				$posts.each( function() {
-
-					var elemBottom = $( this ).offset().top + $( this ).outerHeight(),
-						elemId = $( this ).attr( 'id' );
-
-					// Add or remove the ID of the post, depending on whether it's within the viewport
-					if ( elemBottom < winBottom ) {
-						postsVisible.push( elemId );
-					} else {
-						var index = postsVisible.indexOf( elemId );
-						if ( index !== -1 ) postsVisible.splice( elemId, 1 );
-					}
-
-				} );
-
-				// If we have visible posts, check if we need to update the history
-				if ( postsVisible.length !== 0 ) {
-
-					// Get the last visible post
-					var $lastPost = $( '#' + postsVisible[postsVisible.length - 1] );
-
-					// Get the paged attribute of the post, or default to the initial paged value
-					// (The initial set of posts do not have a paged attribute)
-					var newPaged = $lastPost.attr( 'data-post-paged' ) ? $lastPost.attr( 'data-post-paged' ) : initialPaged,
-						currentPaged = eksell.loadMore.getCurrentPaged();
-
-					// Update the browser history with the paged value of the post
-					if ( newPaged !== currentPaged ) {
-						eksell.loadMore.updateHistory( newPaged );
-					}
-
-				}
-
-			}
-
-		} );
-
-	},
-
-	// Update browser history
-    updateHistory: function( paged ) {
-
-		var newUrl,
-			currentUrl = document.location.href;
-
-		// Ensure trailing slash
-		if ( currentUrl.substr( -1 ) != '/' ) currentUrl += '/';
-
-		var hasPaginationRegexp = new RegExp( '^(.*/page)/[0-9]*/(.*$)' );
-
-		if ( hasPaginationRegexp.test( currentUrl ) ) {
-			if ( paged ) {
-				newUrl = currentUrl.replace( hasPaginationRegexp, '$1/' + paged + '/$2' );
-			} else {
-				// If there's no paged, remove /page/X from the string
-				var pageString = currentUrl.match( /\/page\/(\d*)/ )[0];
-				if ( pageString ) {
-					newUrl = currentUrl.replace( pageString, '' );
-				}
-			}
-		} else {
-			var beforeSearchReplaceRegexp = new RegExp( '^([^?]*)(\\??.*$)' );
-			newUrl = currentUrl.replace( beforeSearchReplaceRegexp, '$1page/' + paged + '/$2' );
-		}
-
-		if ( newUrl == currentUrl ) return;
-
-		history.pushState( {}, '', newUrl );
-
-	},
-
-	// Get current paged value
-	getCurrentPaged: function() {
-
-		var currentPaged = 0,
-			currentUrl = document.location.href;
-
-		if ( new RegExp( '\/page\/(\d*)' ).test( currentUrl ) ) {
-			currentPaged = currentUrl.match( /\/page\/(\d*)/ )[1];
-		}
-
-		return currentPaged;
 
 	},
 
 } // eksell.loadMore
+
+
+/*	-----------------------------------------------------------------------------------------------
+	Filters
+--------------------------------------------------------------------------------------------------- */
+
+eksell.filters = {
+
+	init: function() {
+
+		$doc.on( 'click', '.filter-link', function() {
+
+			var $link 		= $( this ),
+				termId 		= $link.data( 'filter-term-id' ) ? $link.data( 'filter-term-id' ) : null,
+				taxonomy 	= $link.data( 'filter-taxonomy' ) ? $link.data( 'filter-taxonomy' ) : null,
+				postType 	= $link.data( 'filter-post-type' ) ? $link.data( 'filter-post-type' ) : '';
+
+			$.ajax({
+				url: eksell_ajax_filters.ajaxurl,
+				type: 'post',
+				data: {
+					action: 	'eksell_ajax_filters',
+					post_type: 	postType,
+					term_id: 	termId,
+					taxonomy: 	taxonomy,
+				},
+				success: function( result ) {
+
+					// Add them to the pagination
+					$( '#pagination' ).attr( 'data-query-args', result );
+
+					// Reset the posts
+					$win.trigger( 'reset-posts' );
+
+					// Update active class
+					$( '.filter-link' ).removeClass( 'active' );
+					$link.addClass( 'active' );
+	
+				},
+	
+				error: function( jqXHR, exception ) {
+					eksellAJAXErrors( jqXHR, exception );
+				}
+			} );
+
+			return false;
+
+		} );
+
+	}
+
+} // eksell.filters
 
 
 /*	-----------------------------------------------------------------------------------------------
@@ -1205,32 +1189,25 @@ eksell.elementInView = {
 			} );
 
 			eksell.elementInView.handleFocus( $targets );
+
+			$win.on( 'load resize orientationchange did-interval-scroll', function() {
+				eksell.elementInView.handleFocus( $targets );
+			} );
+
 		}
 
 	},
 
 	handleFocus: function( $targets ) {
 
-		// Get dimensions of window outside of scroll for performance
-		$win.on( 'load resize orientationchange', function() {
-			winHeight = $win.height();
-		} );
+		// Check for our targets
+		$targets.each( function() {
 
-		$win.on( 'resize orientationchange did-interval-scroll', function() {
+			var $this = $( this );
 
-			var winTop 		= $win.scrollTop();
-				winBottom 	= winTop + winHeight;
-
-			// Check for our targets
-			$targets.each( function() {
-
-				var $this = $( this );
-
-				if ( eksell.elementInView.isVisible( $this, checkAbove = true ) ) {
-					$this.addClass( 'spotted' ).triggerHandler( 'spotted' );
-				}
-
-			} );
+			if ( eksell.elementInView.isVisible( $this, checkAbove = true ) ) {
+				$this.addClass( 'spotted' ).trigger( 'spotted' );
+			}
 
 		} );
 
@@ -1253,7 +1230,7 @@ eksell.elementInView = {
 			elemBottom 				= $elem.offset().top + $elem.outerHeight();
 
 		// If checkAbove is set to true, which is default, return true if the browser has already scrolled past the element
-		if ( checkAbove && ( elemBottom <= docViewBottom ) ) {
+		if ( checkAbove && ( elemTop <= docViewBottom ) ) {
 			return true;
 		}
 
@@ -1290,10 +1267,6 @@ eksell.masonry = {
 
 			} );
 
-			$win.on( 'resize', function() {
-				$wrapper.css( 'opacity', 0 );
-			} );
-
 			$grid.on( 'layoutComplete', function() {
 				$wrapper.css( 'opacity', 1 );
 				$win.triggerHandler( 'scroll' );
@@ -1323,6 +1296,7 @@ $doc.ready( function() {
 	eksell.mainMenu.init();						// Main Menu
 	eksell.focusManagement.init();				// Focus Management
 	eksell.loadMore.init();						// Load More
+	eksell.filters.init();						// Filters
 	eksell.masonry.init();						// Masonry
 
 } );

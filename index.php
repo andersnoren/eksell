@@ -7,10 +7,9 @@
 	$archive_title 		= get_the_archive_title();
 	$archive_subtitle 	= get_the_archive_description( '<div>', '</div>' );
 
-	// Check if we should show the archive header on the blog page
-	$show_home_header = get_theme_mod( 'eksell_show_archive_header_on_home', false );
+	do_action( 'eksell_before_archive_header' );
 	
-	if ( ( ! is_home() || is_home() && $show_home_header ) && ( $archive_title || $archive_subtitle ) ) : ?>
+	if ( $archive_title || $archive_subtitle ) : ?>
 		
 		<header class="archive-header section-inner">
 
@@ -26,7 +25,7 @@
 			
 			if ( $archive_subtitle ) : 
 				?>
-				<div class="archive-subtitle section-inner thin max-percentage intro-text"><?php echo wp_kses_post( wpautop( $archive_subtitle ) ); ?></div>
+				<div class="archive-subtitle mw-small intro-text contain-margins"><?php echo wp_kses_post( wpautop( $archive_subtitle ) ); ?></div>
 				<?php 
 			endif;
 			
@@ -36,7 +35,12 @@
 			
 		</header><!-- .archive-header -->
 
-	<?php endif; ?>
+		<?php 
+	endif; 
+
+	do_action( 'eksell_after_archive_header' );
+	
+	?>
 
 	<div class="posts section-inner">
 

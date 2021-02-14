@@ -2,7 +2,7 @@
 
 <main id="site-content" role="main">
 
-	<div class="section-inner thin">
+	<div class="section-inner mw-thin">
 
 		<h1 class="archive-title"><?php esc_html_e( 'Page Not Found', 'eksell' ); ?></h1>
 			

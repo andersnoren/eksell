@@ -184,9 +184,45 @@ if ( ! class_exists( 'Eksell_Customizer' ) ) :
 				'panel'			=> 'eksell_theme_options',
 			) );
 
-			/* ------------------------------------------------------------------------
-			 * Posts > Archive Posts
-			 * ------------------------------------------------------------------------ */
+			/* Home Text --------------- */
+
+			$wp_customize->add_setting( 'eksell_home_text', array(
+				'capability' 		=> 'edit_theme_options',
+				'default'			=> '',
+				'sanitize_callback' => 'sanitize_textarea_field',
+			) );
+
+			$wp_customize->add_control( 'eksell_home_text', array(
+				'type' 			=> 'textarea',
+				'section' 		=> 'eksell_post_archive_options',
+				'label' 		=> __( 'Intro Text', 'eksell' ),
+				'description' 	=> __( 'Shown below the site title on the post archive.', 'eksell' ),
+			) );
+
+			/* Show Home Post Filter --------- */
+
+			$wp_customize->add_setting( 'eksell_show_home_filter', array(
+				'capability' 		=> 'edit_theme_options',
+				'default'			=> true,
+				'sanitize_callback' => 'eksell_sanitize_checkbox',
+			) );
+
+			$wp_customize->add_control( 'eksell_show_home_filter', array(
+				'type' 			=> 'checkbox',
+				'section' 		=> 'eksell_post_archive_options',
+				'label' 		=> __( 'Show Filter', 'eksell' ),
+				'description' 	=> __( 'Whether to display the category filter on the post archive.', 'eksell' ),
+			) );
+
+			/* Separator --------------------- */
+
+			$wp_customize->add_setting( 'eksell_post_archive_options_1', array(
+				'sanitize_callback' => 'wp_filter_nohtml_kses',
+			) );
+
+			$wp_customize->add_control( new Eksell_Separator_Control( $wp_customize, 'eksell_post_archive_options_1', array(
+				'section'			=> 'eksell_post_archive_options',
+			) ) );
 
 			/* Pagination Type --------------- */
 
@@ -210,11 +246,11 @@ if ( ! class_exists( 'Eksell_Customizer' ) ) :
 
 			/* Separator --------------------- */
 
-			$wp_customize->add_setting( 'eksell_post_archive_options_1', array(
+			$wp_customize->add_setting( 'eksell_post_archive_options_2', array(
 				'sanitize_callback' => 'wp_filter_nohtml_kses',
 			) );
 
-			$wp_customize->add_control( new Eksell_Separator_Control( $wp_customize, 'eksell_post_archive_options_1', array(
+			$wp_customize->add_control( new Eksell_Separator_Control( $wp_customize, 'eksell_post_archive_options_2', array(
 				'section'			=> 'eksell_post_archive_options',
 			) ) );
 

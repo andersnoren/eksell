@@ -16,6 +16,8 @@
 
 				</div><!-- .footer-credits -->
 
+				<?php eksell_the_social_menu(); ?>
+
 			</div><!-- .footer-inner -->
 
 			<?php do_action( 'eksell_footer_end' ); ?>

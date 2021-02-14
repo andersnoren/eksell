@@ -145,6 +145,11 @@ if ( ! function_exists( 'eksell_register_scripts' ) ) :
 			'ajaxurl'   => esc_url( $ajax_url ),
 		) );
 
+		// AJAX Filters
+		wp_localize_script( 'eksell-construct', 'eksell_ajax_filters', array(
+			'ajaxurl'   => esc_url( $ajax_url ),
+		) );
+
 	}
 	add_action( 'wp_enqueue_scripts', 'eksell_register_scripts' );
 endif;
@@ -322,11 +327,10 @@ endif;
 if ( ! function_exists( 'eksell_filter_archive_title' ) ) :
 	function eksell_filter_archive_title( $title ) {
 
-		// On home, use title of the page for posts page.
-		$blog_page_id = get_option( 'page_for_posts' );
-		if ( is_home() && $blog_page_id && get_the_title( $blog_page_id ) ) {
-			$title = get_the_title( $blog_page_id );
-		} 
+		// Home: Empty title
+		if ( is_home() ) {
+			$title = '';
+		}
 
 		// On search, show the search query.
 		elseif ( is_search() ) {
@@ -349,10 +353,9 @@ endif;
 if ( ! function_exists( 'eksell_filter_archive_description' ) ) :
 	function eksell_filter_archive_description( $description ) {
 
-		// On the blog page, use the manual excerpt of the page for posts page.
-		$blog_page_id = get_option( 'page_for_posts' );
-		if ( is_home() && $blog_page_id && has_excerpt( $blog_page_id ) ) {
-			$description = get_the_excerpt( $blog_page_id );
+		// Home: Get the Customizer option for post archive text
+		if ( is_home() && get_theme_mod( 'eksell_home_text' ) ) {
+			$description = get_theme_mod( 'eksell_home_text' );
 		}
 		
 		// On search, show a string describing the results of the search.
@@ -504,6 +507,53 @@ if ( ! function_exists( 'eksell_ajax_load_more' ) ) :
 	}
 	add_action( 'wp_ajax_nopriv_eksell_ajax_load_more', 'eksell_ajax_load_more' );
 	add_action( 'wp_ajax_eksell_ajax_load_more', 'eksell_ajax_load_more' );
+endif;
+
+
+/* ---------------------------------------------------------------------------------------------
+	AJAX FILTERS
+	Return the query vars for the query for the taxonomy and terms supplied by JS
+--------------------------------------------------------------------------------------------- */
+
+if ( ! function_exists( 'eksell_ajax_filters' ) ) : 
+	function eksell_ajax_filters() {
+
+		// Get the filters from AJAX
+		$term_id 	= isset( $_POST['term_id'] ) ? $_POST['term_id'] : null;
+		$taxonomy 	= isset( $_POST['taxonomy'] ) ? $_POST['taxonomy'] : '';
+		$post_type 	= isset( $_POST['post_type'] ) ? $_POST['post_type'] : '';
+
+		$args = array(
+			'post_status'			=> 'publish',
+			'post_type'				=> $post_type,
+		);
+
+		if ( $term_id && $taxonomy ) {
+			$args['tax_query'] = array(
+				array(
+					'taxonomy'	=> $taxonomy,
+					'terms'		=> $term_id,
+				)
+			);
+		}
+
+		$custom_query = new WP_Query( $args );
+
+		// Combine the query with the query_vars into a single array
+		$query_args = array_merge( $custom_query->query, $custom_query->query_vars );
+
+		// If max_num_pages is not already set, add it
+		if ( ! array_key_exists( 'max_num_pages', $query_args ) ) {
+			$query_args['max_num_pages'] = $custom_query->max_num_pages;
+		}
+
+		// Format and return
+		echo json_encode( $query_args );
+
+		wp_die();
+	}
+	add_action( 'wp_ajax_nopriv_eksell_ajax_filters', 'eksell_ajax_filters' );
+	add_action( 'wp_ajax_eksell_ajax_filters', 'eksell_ajax_filters' );
 endif;
 
 

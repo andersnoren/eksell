@@ -19,7 +19,7 @@
 
 		if ( has_excerpt() ) : ?>
 
-			<div class="intro-text section-inner thin max-percentage">
+			<div class="intro-text section-inner mw-thin max-percentage">
 				<?php the_excerpt(); ?>
 			</div>
 
