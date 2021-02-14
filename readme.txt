@@ -179,6 +179,7 @@ Source: https://wordpress.org/themes/twentytwentyone/
 Included as part of:
 - Eksell_SVG_Icons class
 - eksell_nav_menu_social_icons function
+- searchform.php template file
 
 
 == Changelog ==

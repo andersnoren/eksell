@@ -53,6 +53,21 @@ if ( ! class_exists( 'Eksell_Customizer' ) ) :
 				'panel'			=> 'eksell_theme_options',
 			) );
 
+			// Disable animations
+			$wp_customize->add_setting( 'eksell_disable_animations', array(
+				'capability' 		=> 'edit_theme_options',
+				'default'			=> false,
+				'sanitize_callback' => 'eksell_sanitize_checkbox'
+			) );
+
+			$wp_customize->add_control( 'eksell_disable_animations', array(
+				'type' 			=> 'checkbox',
+				'section' 		=> 'eksell_general_options',
+				'priority'		=> 15,
+				'label' 		=> __( 'Disable Animations', 'eksell' ),
+				'description'	=> __( 'Check to disable animations and transitions in the theme.', 'eksell' ),
+			) );
+
 			/* ------------------------------------------------------------------------
 			 * Colors
 			 * ------------------------------------------------------------------------ */
@@ -192,6 +207,16 @@ if ( ! class_exists( 'Eksell_Customizer' ) ) :
 					'links'			=> __( 'Previous and next page links', 'eksell' ),
 				),
 			) );
+
+			/* Separator --------------------- */
+
+			$wp_customize->add_setting( 'eksell_post_archive_options_1', array(
+				'sanitize_callback' => 'wp_filter_nohtml_kses',
+			) );
+
+			$wp_customize->add_control( new Eksell_Separator_Control( $wp_customize, 'eksell_post_archive_options_1', array(
+				'section'			=> 'eksell_post_archive_options',
+			) ) );
 
 			/* Number of Post Columns -------- */
 

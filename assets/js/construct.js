@@ -1032,7 +1032,7 @@ eksell.loadMore = {
 					$result.imagesLoaded( function() {
 
 						// Append the results
-						$articleWrapper.append( $result );
+						$articleWrapper.append( $result ).masonry( 'appended', $result ).masonry();
 
 						$win.triggerHandler( 'ajax-content-loaded' );
 						$win.triggerHandler( 'did-interval-scroll' );
@@ -1177,6 +1177,136 @@ eksell.loadMore = {
 
 
 /*	-----------------------------------------------------------------------------------------------
+	Element In View
+--------------------------------------------------------------------------------------------------- */
+
+eksell.elementInView = {
+
+	init: function() {
+
+		$targets = $( '.do-spot' );
+		eksell.elementInView.run( $targets );
+
+		// Rerun on AJAX content loaded
+		$win.on( 'ajax-content-loaded', function() {
+			$targets = $( '.do-spot' );
+			eksell.elementInView.run( $targets );
+		} );
+
+	},
+
+	run: function( $targets ) {
+
+		if ( $targets.length ) {
+
+			// Add class indicating the elements will be spotted
+			$targets.each( function() {
+				$( this ).addClass( 'will-be-spotted' );
+			} );
+
+			eksell.elementInView.handleFocus( $targets );
+		}
+
+	},
+
+	handleFocus: function( $targets ) {
+
+		// Get dimensions of window outside of scroll for performance
+		$win.on( 'load resize orientationchange', function() {
+			winHeight = $win.height();
+		} );
+
+		$win.on( 'resize orientationchange did-interval-scroll', function() {
+
+			var winTop 		= $win.scrollTop();
+				winBottom 	= winTop + winHeight;
+
+			// Check for our targets
+			$targets.each( function() {
+
+				var $this = $( this );
+
+				if ( eksell.elementInView.isVisible( $this, checkAbove = true ) ) {
+					$this.addClass( 'spotted' ).triggerHandler( 'spotted' );
+				}
+
+			} );
+
+		} );
+
+	},
+
+	// Determine whether the element is in view
+	isVisible: function( $elem, checkAbove ) {
+
+		if ( typeof checkAbove === 'undefined' ) {
+			checkAbove = false;
+		}
+
+		var winHeight 				= $win.height();
+
+		var docViewTop 				= $win.scrollTop(),
+			docViewBottom			= docViewTop + winHeight,
+			docViewLimit 			= docViewBottom - 50;
+
+		var elemTop 				= $elem.offset().top,
+			elemBottom 				= $elem.offset().top + $elem.outerHeight();
+
+		// If checkAbove is set to true, which is default, return true if the browser has already scrolled past the element
+		if ( checkAbove && ( elemBottom <= docViewBottom ) ) {
+			return true;
+		}
+
+		// If not, check whether the scroll limit exceeds the element top
+		return ( docViewLimit >= elemTop );
+
+	}
+
+} // eksell.elementInView
+
+
+
+/*	-----------------------------------------------------------------------------------------------
+	Masonry
+--------------------------------------------------------------------------------------------------- */
+
+eksell.masonry = {
+
+	init: function() {
+
+		$wrapper = $( '.posts-grid' );
+
+		if ( $wrapper.length ) {
+
+			$grid = $wrapper.imagesLoaded( function() {
+
+				$grid = $wrapper.masonry( {
+					columnWidth: 		'.grid-sizer',
+					itemSelector: 		'.article-wrapper',
+					percentPosition: 	true,
+					stagger: 			0,
+					transitionDuration: 0,
+				} );
+
+			} );
+
+			$win.on( 'resize', function() {
+				$wrapper.css( 'opacity', 0 );
+			} );
+
+			$grid.on( 'layoutComplete', function() {
+				$wrapper.css( 'opacity', 1 );
+				$win.triggerHandler( 'scroll' );
+			} );
+
+		}
+
+	}
+
+} // eksell.masonry
+
+
+/*	-----------------------------------------------------------------------------------------------
 	Function Calls
 --------------------------------------------------------------------------------------------------- */
 
@@ -1192,6 +1322,7 @@ $doc.ready( function() {
 	eksell.scrollLock.init();					// Scroll Lock
 	eksell.mainMenu.init();						// Main Menu
 	eksell.focusManagement.init();				// Focus Management
-	eksell.loadMore.init();						// Load More	
+	eksell.loadMore.init();						// Load More
+	eksell.masonry.init();						// Masonry
 
 } );

@@ -4,19 +4,19 @@
 
 		<div class="modal-menu-wrapper">
 
+			<div class="menu-modal-toggles">
+
+				<a href="#" class="toggle nav-untoggle" data-toggle-target=".menu-modal" data-toggle-screen-lock="true" data-toggle-body-class="showing-menu-modal" aria-pressed="false" data-set-focus="#site-header .nav-toggle">
+					<span class="screen-reader-text"><?php esc_html_e( 'Close', 'eksell' ); ?></span>
+					<?php eksell_the_theme_svg( 'ui', 'close', 18, 18 ); ?>
+				</a><!-- .nav-untoggle -->
+
+			</div><!-- .menu-modal-toggles -->
+
 			<div class="menu-top">
 
-				<div class="menu-modal-toggles">
-
-					<a href="#" class="toggle nav-untoggle" data-toggle-target=".menu-modal" data-toggle-screen-lock="true" data-toggle-body-class="showing-menu-modal" aria-pressed="false" data-set-focus="#site-header .nav-toggle">
-						<span class="screen-reader-text"><?php esc_html_e( 'Close', 'eksell' ); ?></span>
-						<?php eksell_the_theme_svg( 'ui', 'close', 18, 18 ); ?>
-					</a><!-- .nav-untoggle -->
-
-				</div><!-- .menu-modal-toggles -->
-
 				<?php 
-				do_action( 'eksell_menu_modal_before_menu' );
+				do_action( 'eksell_menu_modal_top_start' );
 				?>
 
 				<ul class="main-menu reset-list-style">
@@ -41,8 +41,14 @@
 					?>
 				</ul><!-- .main-menu -->
 
-				<?php 
-				do_action( 'eksell_menu_modal_after_menu' );
+				<?php if ( ! get_theme_mod( 'eksell_disable_search', false ) ) : ?>
+					<div class="menu-modal-search">
+						<?php get_search_form(); ?>
+					</div><!-- .menu-modal-search -->
+				<?php endif; ?>
+
+				<?php
+				do_action( 'eksell_menu_modal_top_end' );
 				?>
 
 			</div><!-- .menu-top -->
@@ -53,7 +59,9 @@
 				do_action( 'eksell_menu_modal_bottom_start' );
 				
 				// Output the social menu, if set
-				eksell_the_social_menu();
+				eksell_the_social_menu( array(
+					'menu_class'	=> 'social-menu reset-list-style social-icons circular',
+				) );
 
 				do_action( 'eksell_menu_modal_bottom_end' );
 				

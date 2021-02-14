@@ -3,9 +3,36 @@
 	<?php 
 
 	do_action( 'eksell_entry_article_start', $post->ID );
-	
-	get_template_part( 'parts/page-header' );
-	
+
+	?>
+
+	<header class="entry-header">
+
+		<?php 
+		do_action( 'eksell_entry_header_start', $post->ID );
+
+		if ( is_front_page() && is_home() ) {
+			the_title( '<div class="entry-title h1">', '</div>' );
+		} else {
+			the_title( '<h1 class="entry-title">', '</h1>' );
+		}
+
+		if ( has_excerpt() ) : ?>
+
+			<div class="intro-text section-inner thin max-percentage">
+				<?php the_excerpt(); ?>
+			</div>
+
+			<?php 
+		endif;
+
+		do_action( 'eksell_entry_header_end', $post->ID );
+
+		?>
+
+	</header><!-- .entry-header -->
+
+	<?php
 	if ( has_post_thumbnail() && ! post_password_required() ) : 
 		?>
 

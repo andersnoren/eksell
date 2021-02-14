@@ -54,6 +54,8 @@
 			?>
 
 			<div class="posts-grid grid load-more-target<?php echo esc_attr( $archive_columns_classes ); ?>">
+
+				<div class="col grid-sizer"></div>
 			
 				<?php 
 
@@ -73,7 +75,7 @@
 					do_action( 'eksell_posts_loop_before_grid_item', $post->ID, $iteration );
 					?>
 
-					<div class="col">
+					<div class="col article-wrapper">
 						<?php get_template_part( 'inc/parts/preview', get_post_type() ); ?>
 					</div><!-- .col -->
 

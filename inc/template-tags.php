@@ -102,76 +102,9 @@ if ( ! function_exists( 'eksell_get_fallback_image' ) ) :
 
 		if ( ! $fallback_image_url ) return;
 
-		return '<img src="' . esc_attr( $fallback_image_url ) . '" class="fallback-featured-image" />';
+		return '<img src="' . esc_attr( $fallback_image_url ) . '" class="fallback-featured-image" loading="lazy" />';
 
 	}
-endif;
-
-
-/* ---------------------------------------------------------------------------------------------
-   FILTER POST THUMBNAIL HTML TO INCLUDE FALLBACK IMAGE
-   If a post thumbnail isn't set, filter 
------------------------------------------------------------------------------------------------- */
-
-if ( ! function_exists( 'eksell_filter_fallback_image' ) ) :
-	function eksell_filter_fallback_image( $html, $post_id, $post_thumbnail_id ) {
-
-		// If this is the featured image of the post currently being displayed, don't modify the html.
-		// I.e. don't show the fallback image for the main image of a singular post or page.
-		if ( is_single( $post_id ) || is_page( $post_id ) ) return $html;
-
-		// Make the disable fallback image variable filterable in child themes and plugins
-		$disable_fallback_image = get_theme_mod( 'eksell_disable_fallback_image', false );
-		$disable_fallback_image = apply_filters( 'eksell_disable_fallback_image_on_post', $disable_fallback_image, $post_id, $post_thumbnail_id );
-
-		// If the post is password protected, return the fallback image (or an empty string, if the fallback image is disabled).
-		if ( post_password_required( $post_id ) ) {
-			return eksell_get_fallback_image();
-
-		// If there's an image already set, return it.
-		} else if ( $html ) {
-			return $html;
-
-		// If not, and the fallback image is not disabled, return the fallback image.
-		} else if ( ! $disable_fallback_image ) {
-			return eksell_get_fallback_image();
-
-		// If not, and the fallback image is disabled, return nothing.
-		} else {
-			return '';
-		}
-
-	}
-	add_filter( 'post_thumbnail_html', 'eksell_filter_fallback_image', 10, 3 );
-endif;
-
-
-/* ---------------------------------------------------------------------------------------------
-   FILTER HAS_POST_THUMBNAIL TO MATCH FALLBACK IMAGE VALUE
-   If the fallback image is enabled, make sure the has_post_thumbnail() reflects that when a post 
-   thumbnail isn't set.
------------------------------------------------------------------------------------------------- */
-
-if ( ! function_exists( 'eksell_filter_has_post_thumbnail' ) ) :
-	function eksell_filter_has_post_thumbnail( $has_thumbnail, $post_id ) {
-
-		// If this is the featured image of the post currently being displayed, don't modify the has_thumbnail variable.
-		// I.e. don't show the fallback image for the main image of a singular post or page.
-		if ( is_single( $post_id ) || is_page( $post_id ) ) return $has_thumbnail;
-
-		$disable_fallback_image = get_theme_mod( 'eksell_disable_fallback_image', false );
-
-		// If the fallback image is disabled, return the original $has_thumbnail value (true if there's a featured image set).
-		if ( $disable_fallback_image ) {
-			return $has_thumbnail;
-
-		// If the fallback image is enabled, there's always a featured image, so return true.
-		} else {
-			return true;
-		}
-
-	}
-	add_filter( 'has_post_thumbnail', 'eksell_filter_has_post_thumbnail', 10, 2 );
 endif;
 
 
@@ -252,6 +185,31 @@ if ( ! function_exists( 'eksell_the_social_menu' ) ) :
 		if ( has_nav_menu( $social_args['theme_location'] ) ) {
 			wp_nav_menu( $social_args );
 		}
+
+	}
+endif;
+
+
+/*	-----------------------------------------------------------------------------------------------
+	GET SOCIAL MENU WP_NAV_MENU ARGS
+	Return the social menu arguments for wp_nav_menu().
+
+	@param array $args		Arguments to use in conjunction with the default arguments.
+--------------------------------------------------------------------------------------------------- */
+
+if ( ! function_exists( 'eksell_get_social_menu_args' ) ) :
+	function eksell_get_social_menu_args( $args = array() ) {
+
+		return $args = wp_parse_args( $args, array(
+			'theme_location'	=> 'social',
+			'container'			=> '',
+			'container_class'	=> '',
+			'menu_class'		=> 'social-menu reset-list-style social-icons',
+			'depth'				=> 1,
+			'link_before'		=> '<span class="screen-reader-text">',
+			'link_after'		=> '</span>',
+			'fallback_cb'		=> '',
+		) );
 
 	}
 endif;

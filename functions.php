@@ -126,7 +126,7 @@ if ( ! function_exists( 'eksell_register_scripts' ) ) :
 		}
 
 		// Built-in JS assets
-		$js_dependencies = array( 'jquery', 'imagesloaded' );
+		$js_dependencies = array( 'jquery', 'imagesloaded', 'masonry' );
 
 		// Register the Modernizr JS check for touchevents (used to determine whether background-attachment should be active)
 		wp_register_script( 'eksell-modernizr', get_template_directory_uri() . '/assets/js/modernizr-touchevents.min.js', array(), '3.6.0' );
@@ -205,6 +205,13 @@ if ( ! function_exists( 'eksell_body_classes' ) ) :
 		// Check for disabled search
 		if ( get_theme_mod( 'eksell_disable_search', false ) ) {
 			$classes[] = 'disable-search-modal';
+		}
+
+		// Check for disabled animations
+		if ( get_theme_mod( 'eksell_disable_animations', false ) ) {
+			$classes[] = 'no-anim';
+		} else {
+			$classes[] = 'has-anim';
 		}
 
 		// Check for post thumbnail
@@ -477,7 +484,7 @@ if ( ! function_exists( 'eksell_ajax_load_more' ) ) :
 				do_action( 'eksell_posts_loop_before_grid_item', $post->ID, $iteration );
 				?>
 
-				<div class="col">
+				<div class="col article-wrapper">
 					<?php get_template_part( 'inc/parts/preview', $post_type ); ?>
 				</div><!-- .col -->
 
@@ -525,31 +532,6 @@ if ( ! function_exists( 'eksell_block_editor_styles' ) ) :
 
 	}
 	add_action( 'enqueue_block_editor_assets', 'eksell_block_editor_styles', 1, 1 );
-endif;
-
-
-/*	-----------------------------------------------------------------------------------------------
-	GET SOCIAL MENU WP_NAV_MENU ARGS
-	Return the social menu arguments for wp_nav_menu().
-
-	@param array $args		Arguments to use in conjunction with the default arguments.
---------------------------------------------------------------------------------------------------- */
-
-if ( ! function_exists( 'eksell_get_social_menu_args' ) ) :
-	function eksell_get_social_menu_args( $args = array() ) {
-
-		return $args = wp_parse_args( $args, array(
-			'theme_location'	=> 'social',
-			'container'			=> '',
-			'container_class'	=> '',
-			'menu_class'		=> 'social-menu reset-list-style social-icons',
-			'depth'				=> 1,
-			'link_before'		=> '<span class="screen-reader-text">',
-			'link_after'		=> '</span>',
-			'fallback_cb'		=> '',
-		) );
-
-	}
 endif;
 
 
