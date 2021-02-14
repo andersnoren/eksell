@@ -140,46 +140,43 @@ License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 == Licenses ==
 
-Merriweather font
+Eksell is derived from the Chaplin Theme, Copyright 2019 Anders Norén.
+Chaplin Theme is distributed under the terms of the GNU GPL version 2.0.
+
+Eksell bundles the following third-party resources:
+
+Public Sans font
 License: SIL Open Font License, 1.1, https://opensource.org/licenses/OFL-1.1
-Source: https://fonts.google.com/specimen/Merriweather
-
-FontAwesome Icons
-License: SIL Open Font License, 1.1, https://opensource.org/licenses/OFL-1.1
-Source: https://www.fontawesome.io
-
-FontAwesome Code
-License: MIT License, https://opensource.org/licenses/MIT
-Source: https://www.fontawesome.io
-
-Feather Icons
-License: MIT License, https://opensource.org/licenses/MIT
-Source: https://feathericons.com
+Source: https://fonts.google.com/specimen/Public+Sans/
 
 Modernizr Code
 License: MIT License, https://opensource.org/licenses/MIT
 Source: https://modernizr.com/
 
-Illustration in screenshot.png by Anders Norén
+Illustrations in screenshot.png by Anders Norén
 License: Public Domain
-Icons in screenshot.png by Feather Icons
+
+Icons in the "UI" group by Anders Norén
+License: Public Domain
+
+Placeholder image by Anders Norén
+License: Public Domain
 
 Code from Twenty Twenty
-Copyright (c) 2019-2020 WordPress.org
+Copyright (c) 2019-2021 WordPress.org
 License: GPLv2
 Source: https://wordpress.org/themes/twentytwenty/
 Included as part of:
 - Eksell_Custom_CSS class (kudos to @aristath)
-- Single post navigation structure (kudos to @anace)
 
-Code from Twenty Twenty One
-Copyright (c) 2019-2020 WordPress.org
+Code from Twenty Twenty-One
+Copyright (c) 2020-2021 WordPress.org
 License: GPLv2
 Source: https://wordpress.org/themes/twentytwentyone/
 Included as part of:
 - Eksell_SVG_Icons class
-- eksell_nav_menu_social_icons function
-- searchform.php template file
+- eksell_nav_menu_social_icons()
+- searchform.php
 
 
 == Changelog ==
