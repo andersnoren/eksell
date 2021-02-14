@@ -311,27 +311,6 @@ endif;
 
 
 /*	-----------------------------------------------------------------------------------------------
-	OUTPUT LOADING INDICATOR
---------------------------------------------------------------------------------------------------- */
-
-if ( ! function_exists( 'eksell_loading_indicator' ) ) :
-	function eksell_loading_indicator() {
-
-		$extra_loading_classes = '';
-
-		// Check if the primary and border colors are the same
-		$primary_color = 	get_theme_mod( 'eksell_primary_text_color' );
-		$border_color = 	get_theme_mod( 'eksell_border_color' );
-
-		$extra_loading_classes .= ( $primary_color == $border_color ) ? ' same-primary-border-color' : '';
-
-		echo '<div class="loader border-color-border' . $extra_loading_classes . '"></div>';
-
-	}
-endif;
-
-
-/*	-----------------------------------------------------------------------------------------------
 	SINGLE POST NAVIGATION
 	Maybe output the single post navigation.
 --------------------------------------------------------------------------------------------------- */
@@ -398,6 +377,7 @@ if ( ! function_exists( 'eksell_the_archive_filter' ) ) :
 		$filter_taxonomy = is_post_type_archive( 'jetpack-portfolio' ) ? 'jetpack-portfolio-type' : 'category';
 
 		$terms = get_terms( apply_filters( 'eksell_home_filter_get_terms_args', array(
+			'number'	=> 6,
 			'depth'		=> 1,
 			'taxonomy'	=> $filter_taxonomy,
 		) ) );

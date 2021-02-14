@@ -42,71 +42,75 @@
 	
 	?>
 
-	<div class="posts section-inner">
+	<div class="posts">
 
-		<?php if ( have_posts() ) : 
+		<div class="section-inner">
 
-			/*
-			 * @hooked eksell_output_previous_posts_link - 10
-			 */
-			do_action( 'eksell_posts_start' );
+			<?php if ( have_posts() ) : 
 
-			// Get the column classes, based on the settings in the Customizer
-			$archive_columns_classes_array 	= eksell_get_archive_columns_classes();
-			$archive_columns_classes 		= $archive_columns_classes_array ? ' ' . implode( ' ', $archive_columns_classes_array ) : '';
-		
-			?>
+				/*
+				* @hooked eksell_output_previous_posts_link - 10
+				*/
+				do_action( 'eksell_posts_start' );
 
-			<div class="posts-grid grid load-more-target<?php echo esc_attr( $archive_columns_classes ); ?>">
-
-				<div class="col grid-sizer"></div>
+				// Get the column classes, based on the settings in the Customizer
+				$archive_columns_classes_array 	= eksell_get_archive_columns_classes();
+				$archive_columns_classes 		= $archive_columns_classes_array ? ' ' . implode( ' ', $archive_columns_classes_array ) : '';
 			
-				<?php 
-
-				// Calculate the current offset
-				$iteration = intval( $wp_query->get( 'posts_per_page' ) ) * intval( $wp_query->get( 'paged' ) );
-
-				while ( have_posts() ) : the_post(); 
-
-					$iteration++;
-
-					/**
-					 * Fires before output of a grid item in the posts loop.
-					 * 
-					 * @param int   $post_id 	Post ID.
-					 * @param int   $iteration 	The current iteration of the loop.
-					 */
-					do_action( 'eksell_posts_loop_before_grid_item', $post->ID, $iteration );
-					?>
-
-					<div class="col article-wrapper">
-						<?php get_template_part( 'inc/parts/preview', get_post_type() ); ?>
-					</div><!-- .col -->
-
-					<?php 
-
-					/**
-					 * Fires after output of a grid item in the posts loop.
-					 */
-					do_action( 'eksell_posts_loop_after_grid_item', $post->ID, $iteration );
-
-				endwhile;
 				?>
 
-			</div><!-- .posts-grid -->
+				<div class="posts-grid grid load-more-target<?php echo esc_attr( $archive_columns_classes ); ?>">
 
-			<?php do_action( 'eksell_posts_end' ); ?>
+					<div class="col grid-sizer"></div>
+				
+					<?php 
 
-		<?php elseif ( is_search() ) : ?>
+					// Calculate the current offset
+					$iteration = intval( $wp_query->get( 'posts_per_page' ) ) * intval( $wp_query->get( 'paged' ) );
 
-			<div class="no-search-results-form">
+					while ( have_posts() ) : the_post(); 
 
-				<?php get_search_form(); ?>
+						$iteration++;
 
-			</div><!-- .no-search-results -->
+						/**
+						 * Fires before output of a grid item in the posts loop.
+						 * 
+						 * @param int   $post_id 	Post ID.
+						 * @param int   $iteration 	The current iteration of the loop.
+						 */
+						do_action( 'eksell_posts_loop_before_grid_item', $post->ID, $iteration );
+						?>
 
-		<?php endif; ?>
-	
+						<div class="col article-wrapper">
+							<?php get_template_part( 'inc/parts/preview', get_post_type() ); ?>
+						</div>
+
+						<?php 
+
+						/**
+						 * Fires after output of a grid item in the posts loop.
+						 */
+						do_action( 'eksell_posts_loop_after_grid_item', $post->ID, $iteration );
+
+					endwhile;
+					?>
+
+				</div><!-- .posts-grid -->
+
+				<?php do_action( 'eksell_posts_end' ); ?>
+
+			<?php elseif ( is_search() ) : ?>
+
+				<div class="no-search-results-form">
+
+					<?php get_search_form(); ?>
+
+				</div><!-- .no-search-results -->
+
+			<?php endif; ?>
+		
+		</div><!-- .section-inner -->
+
 	</div><!-- .posts -->
 
 	<?php get_template_part( 'pagination' ); ?>

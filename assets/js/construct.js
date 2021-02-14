@@ -1259,16 +1259,16 @@ eksell.masonry = {
 
 				$grid = $wrapper.masonry( {
 					columnWidth: 		'.grid-sizer',
+					horizontalOrder: 	true,
 					itemSelector: 		'.article-wrapper',
 					percentPosition: 	true,
-					stagger: 			0,
-					transitionDuration: 0,
+					stagger:			30,
+					transitionDuration: '0.3s',
 				} );
 
 			} );
 
 			$grid.on( 'layoutComplete', function() {
-				$wrapper.css( 'opacity', 1 );
 				$win.triggerHandler( 'scroll' );
 			} );
 

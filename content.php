@@ -10,7 +10,11 @@
 
 		<?php 
 		do_action( 'eksell_entry_header_start', $post->ID );
+		?>
 
+		<hr class="color-accent" aria-hidden="true" />
+
+		<?php
 		if ( is_front_page() && is_home() ) {
 			the_title( '<div class="entry-title h1">', '</div>' );
 		} else {

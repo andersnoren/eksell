@@ -39,18 +39,17 @@ if ( ! ( $query_args['max_num_pages'] > $query_args['paged'] ) ) {
 
 ?>
 
-<div class="pagination-wrapper section-inner <?php echo esc_attr( $wrapper_class ); ?>">
+<div class="pagination-wrapper <?php echo esc_attr( $wrapper_class ); ?>">
 
-	<div id="pagination" data-query-args="<?php echo esc_attr( $json_query_args ); ?>" data-pagination-type="<?php echo esc_attr( $pagination_type ); ?>" data-load-more-target=".load-more-target">
+	<div id="pagination" class="section-inner" data-query-args="<?php echo esc_attr( $json_query_args ); ?>" data-pagination-type="<?php echo esc_attr( $pagination_type ); ?>" data-load-more-target=".load-more-target">
 
 		<?php if ( ( $query_args['max_num_pages'] > $query_args['paged'] ) ) : ?>
 
 			<?php if ( $pagination_type == 'button' ) : ?>
-				<button id="load-more" class="d-no-js-none"><?php esc_html_e( 'Load More', 'eksell' ); ?></button>
-			<?php endif; ?>
-
-			<?php if ( in_array( $pagination_type, array( 'button', 'scroll' ) ) ) : ?>
-				<div class="loading-icon d-no-js-none"><?php eksell_loading_indicator(); ?></div>
+				<button id="load-more" class="d-no-js-none">
+					<span class="load-text"><?php esc_html_e( 'Load More', 'eksell' ); ?></span>
+					<span class="loading-text"><?php esc_html_e( 'Loading&hellip;', 'eksell' ); ?></span>
+				</button>
 			<?php endif;
 
 			// The pagination links also work as a no-js fallback, so they always need to be output

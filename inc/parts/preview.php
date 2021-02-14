@@ -26,7 +26,7 @@
 	?>
 
 	<header class="preview-header">
-		<?php the_title( '<h2 class="preview-title h5"><a href="' . get_the_permalink() . '">', '</a></h2>' ); ?>
+		<?php the_title( '<h2 class="preview-title h4"><a href="' . get_the_permalink() . '">', '</a></h2>' ); ?>
 	</header><!-- .preview-header -->
 
 </article><!-- .preview -->
