@@ -6,7 +6,7 @@
 
 	?>
 
-	<header class="entry-header">
+	<header class="entry-header section-inner mw-thin">
 
 		<?php 
 		do_action( 'eksell_entry_header_start', $post->ID );
@@ -66,7 +66,7 @@
 
 	<div class="post-inner" id="post-inner">
 
-		<div class="entry-content">
+		<div class="entry-content section-inner mw-thin">
 
 			<?php 
 			the_content();
@@ -90,7 +90,7 @@
 		if ( ( comments_open() || get_comments_number() ) && ! post_password_required() ) : 
 			?>
 
-			<div class="comments-wrapper">
+			<div class="comments-wrapper section-inner mw-thin">
 				<?php comments_template(); ?>
 			</div><!-- .comments-wrapper -->
 
