@@ -2,6 +2,8 @@
 
 	<?php 
 
+	do_action( 'eksell_preview_start' );
+
 	$fallback_image = eksell_get_fallback_image();
 	
 	if ( ( has_post_thumbnail() && ! post_password_required() ) || $fallback_image ) : 
@@ -26,7 +28,15 @@
 	?>
 
 	<header class="preview-header">
-		<?php the_title( '<h2 class="preview-title h4"><a href="' . get_the_permalink() . '">', '</a></h2>' ); ?>
+		<?php 
+		do_action( 'eksell_preview_header_start' );
+		the_title( '<h2 class="preview-title h4"><a href="' . get_the_permalink() . '">', '</a></h2>' ); 
+		do_action( 'eksell_preview_header_end' );
+		?>
 	</header><!-- .preview-header -->
+
+	<?php
+	do_action( 'eksell_preview_end' );
+	?>
 
 </article><!-- .preview -->

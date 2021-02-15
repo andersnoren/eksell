@@ -288,33 +288,55 @@ if ( ! function_exists( 'eksell_add_excerpt_support_to_pages' ) ) :
 endif;
 
 
-/* 	-----------------------------------------------------------------------------------------------
-	FILTER THE EXCERPT LENGTH
-	Modify the length of automated excerpts to better fit the Eksell previews
+/*	-----------------------------------------------------------------------------------------------
+	DISABLE ARCHIVE TITLE PREFIX
 --------------------------------------------------------------------------------------------------- */
 
-if ( ! function_exists( 'eksell_excerpt_length' ) ) :
-	function eksell_excerpt_length() {
-
-		return 28;
-
-	}
-	add_filter( 'excerpt_length', 'eksell_excerpt_length' );
-endif;
+add_filter( 'get_the_archive_title_prefix', '__return_false' );
 
 
-/* 	-----------------------------------------------------------------------------------------------
-	FILTER THE EXCERPT SUFFIX
-	Replaces the default [...] with a &hellip; (three dots)
+/*	-----------------------------------------------------------------------------------------------
+	GET ARCHIVE TITLE PREFIX
 --------------------------------------------------------------------------------------------------- */
 
-if ( ! function_exists( 'eksell_excerpt_more' ) ) :
-	function eksell_excerpt_more() {
+if ( ! function_exists( 'eksell_get_the_archive_title_prefix' ) ) :
+	function eksell_get_the_archive_title_prefix() {
 
-		return '&hellip;';
+		$prefix = '';
+
+		if ( is_search() ) {
+			$prefix = _x( 'Search Results', 'search archive title prefix', 'eksell' );
+		} elseif ( is_category() ) {
+			$prefix = _x( 'Category', 'category archive title prefix', 'eksell' );
+		} elseif ( is_tag() ) {
+			$prefix = _x( 'Tag', 'tag archive title prefix', 'eksell' );
+		} elseif ( is_author() ) {
+			$prefix = _x( 'Author', 'author archive title prefix', 'eksell' );
+		} elseif ( is_year() ) {
+			$prefix = _x( 'Year', 'date archive title prefix', 'eksell' );
+		} elseif ( is_month() ) {
+			$prefix = _x( 'Month', 'date archive title prefix', 'eksell' );
+		} elseif ( is_day() ) {
+			$prefix = _x( 'Day', 'date archive title prefix', 'eksell' );
+		} elseif ( is_post_type_archive() ) {
+			// No prefix for post type archives
+		} elseif ( is_tax( 'post_format' ) ) {
+			// No prefix for post format archives
+		} elseif ( is_tax() ) {
+			$queried_object = get_queried_object();
+			if ( $queried_object ) {
+				$tax    = get_taxonomy( $queried_object->taxonomy );
+				$prefix = sprintf(
+					/* translators: %s: Taxonomy singular name. */
+					_x( '%s:', 'taxonomy term archive title prefix' ),
+					$tax->labels->singular_name
+				);
+			}
+		}
+
+		return apply_filters( 'eksell_archive_title_prefix', $prefix );
 
 	}
-	add_filter( 'excerpt_more', 'eksell_excerpt_more' );
 endif;
 
 
@@ -327,14 +349,14 @@ endif;
 if ( ! function_exists( 'eksell_filter_archive_title' ) ) :
 	function eksell_filter_archive_title( $title ) {
 
-		// Home: Empty title
-		if ( is_home() ) {
-			$title = '';
+		// Home: Get the Customizer option for post archive text
+		if ( is_home() && get_theme_mod( 'eksell_home_text' ) ) {
+			$title = get_theme_mod( 'eksell_home_text' );
 		}
 
 		// On search, show the search query.
 		elseif ( is_search() ) {
-			$title = sprintf( _x( 'Search: %s', '%s = The search query', 'eksell' ), '&ldquo;' . get_search_query() . '&rdquo;' );
+			$title = '&ldquo;' . get_search_query() . '&rdquo;';
 		}
 
 		return $title;
@@ -353,9 +375,9 @@ endif;
 if ( ! function_exists( 'eksell_filter_archive_description' ) ) :
 	function eksell_filter_archive_description( $description ) {
 
-		// Home: Get the Customizer option for post archive text
-		if ( is_home() && get_theme_mod( 'eksell_home_text' ) ) {
-			$description = get_theme_mod( 'eksell_home_text' );
+		// Home: Empty description
+		if ( is_home() ) {
+			$description = '';
 		}
 		
 		// On search, show a string describing the results of the search.
@@ -467,38 +489,18 @@ if ( ! function_exists( 'eksell_ajax_load_more' ) ) :
 			$post_type = 'post';
 		}
 
-		// Calculate the current offset
-		$iteration = intval( $ajax_query->query['posts_per_page'] ) * intval( $ajax_query->query['paged'] );
-
 		if ( $ajax_query->have_posts() ) :
-			while ( $ajax_query->have_posts() ) : $ajax_query->the_post();
+			while ( $ajax_query->have_posts() ) : 
+				$ajax_query->the_post();
 
 				global $post;
-
-				$iteration++;
-
-				/**
-				 * Fires before output of a grid item in the posts loop.
-				 * 
-				 * @param int   $post_id 	Post ID.
-				 * @param int   $iteration 	The current iteration of the loop.
-				 */
-
-				do_action( 'eksell_posts_loop_before_grid_item', $post->ID, $iteration );
 				?>
 
-				<div class="col article-wrapper">
+				<div class="article-wrapper col">
 					<?php get_template_part( 'inc/parts/preview', $post_type ); ?>
-				</div><!-- .col -->
+				</div>
 
 				<?php 
-
-				/**
-				 * Fires after output of a grid item in the posts loop.
-				 */
-
-				do_action( 'eksell_posts_loop_after_grid_item', $post->ID, $iteration );
-
 			endwhile;
 		endif;
 

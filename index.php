@@ -4,33 +4,80 @@
 
 	<?php
 
-	$archive_title 		= get_the_archive_title();
-	$archive_subtitle 	= get_the_archive_description( '<div>', '</div>' );
+	$archive_prefix 		= eksell_get_the_archive_title_prefix();
+	$archive_title 			= get_the_archive_title();
+	$archive_description 	= get_the_archive_description( '<div>', '</div>' );
 
 	do_action( 'eksell_before_archive_header' );
 	
-	if ( $archive_title || $archive_subtitle ) : ?>
+	if ( $archive_title || $archive_description ) : 
+
+		// By default, only use the grid structure in the archive header if we have both a title and a description
+		$use_header_grid = apply_filters( 'eksell_archive_header_use_grid', $archive_title && $archive_description );
+
+		?>
 		
 		<header class="archive-header section-inner">
 
-			<?php 
+			<?php if ( $use_header_grid ) : ?>
 
-			do_action( 'eksell_archive_header_start' );
-			
-			if ( $archive_title ) : 
-				?>
-				<h1 class="archive-title"><?php echo wp_kses_post( $archive_title ); ?></h1>
+				<div class="archive-header-grid grid cols-tl-6 no-v-gutter">
+
+					<div class="col">
+					
+						<?php 
+						
+						endif;
+
+						do_action( 'eksell_archive_header_start' );
+						
+						if ( $archive_prefix ) : 
+							?>
+							<p class="archive-prefix color-accent"><?php echo $archive_prefix; ?></p>
+							<?php 
+						endif;
+
+						if ( $archive_title ) :
+
+							// On home, where we're outputting the eksell_home_text Customizer value, output the title in a div to enable multiple paragraphs
+							if ( is_home() ) : 
+								?>
+								<div class="archive-title contain-margins"><?php echo wpautop( $archive_title ); ?></div>
+								<?php
+							else : 
+								?>
+								<h1 class="archive-title"><?php echo $archive_title; ?></h1>
+								<?php
+							endif;
+						endif;
+						
+						if ( $use_header_grid ) : ?>
+
+							</div><!-- .col -->
+
+							<div class="col">
+
+						<?php 
+
+						endif; 
+						if ( $archive_description ) : 
+							?>
+							<div class="archive-description mw-small contain-margins"><?php echo wpautop( $archive_description ); ?></div>
+							<?php 
+						endif;
+				
+						do_action( 'eksell_archive_header_end' ); 
+						
+						if ( $use_header_grid ) : 
+						
+						?>
+
+					</div><!-- .col -->
+
+				</div><!-- .archive-header-grid -->
+
 				<?php 
-			endif;
-			
-			if ( $archive_subtitle ) : 
-				?>
-				<div class="archive-subtitle mw-small intro-text contain-margins"><?php echo wp_kses_post( wpautop( $archive_subtitle ) ); ?></div>
-				<?php 
-			endif;
-			
-			do_action( 'eksell_archive_header_end' ); 
-			
+			endif; 
 			?>
 			
 		</header><!-- .archive-header -->
@@ -39,14 +86,16 @@
 	endif; 
 
 	do_action( 'eksell_after_archive_header' );
+			
+	if ( have_posts() ) : 
 	
-	?>
+		?>
 
-	<div class="posts">
+		<div class="posts">
 
-		<div class="section-inner">
+			<div class="section-inner">
 
-			<?php if ( have_posts() ) : 
+				<?php 
 
 				/*
 				* @hooked eksell_output_previous_posts_link - 10
@@ -64,56 +113,35 @@
 					<div class="col grid-sizer"></div>
 				
 					<?php 
-
-					// Calculate the current offset
-					$iteration = intval( $wp_query->get( 'posts_per_page' ) ) * intval( $wp_query->get( 'paged' ) );
-
-					while ( have_posts() ) : the_post(); 
-
-						$iteration++;
-
-						/**
-						 * Fires before output of a grid item in the posts loop.
-						 * 
-						 * @param int   $post_id 	Post ID.
-						 * @param int   $iteration 	The current iteration of the loop.
-						 */
-						do_action( 'eksell_posts_loop_before_grid_item', $post->ID, $iteration );
+					while ( have_posts() ) : 
+						the_post(); 
 						?>
 
-						<div class="col article-wrapper">
+						<div class="article-wrapper col">
 							<?php get_template_part( 'inc/parts/preview', get_post_type() ); ?>
 						</div>
 
 						<?php 
-
-						/**
-						 * Fires after output of a grid item in the posts loop.
-						 */
-						do_action( 'eksell_posts_loop_after_grid_item', $post->ID, $iteration );
-
 					endwhile;
 					?>
 
 				</div><!-- .posts-grid -->
 
 				<?php do_action( 'eksell_posts_end' ); ?>
+			
+			</div><!-- .section-inner -->
 
-			<?php elseif ( is_search() ) : ?>
+		</div><!-- .posts -->
 
-				<div class="no-search-results-form">
+		<?php get_template_part( 'pagination' ); ?>
 
-					<?php get_search_form(); ?>
+	<?php elseif ( is_search() ) : ?>
 
-				</div><!-- .no-search-results -->
+		<div class="no-search-results-form section-inner">
+			<?php get_search_form(); ?>
+		</div><!-- .no-search-results -->
 
-			<?php endif; ?>
-		
-		</div><!-- .section-inner -->
-
-	</div><!-- .posts -->
-
-	<?php get_template_part( 'pagination' ); ?>
+	<?php endif; ?>
 
 </main><!-- #site-content -->
 

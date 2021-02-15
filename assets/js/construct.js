@@ -1279,6 +1279,29 @@ eksell.masonry = {
 } // eksell.masonry
 
 
+
+/*	-----------------------------------------------------------------------------------------------
+	Dynamic Heights
+--------------------------------------------------------------------------------------------------- */
+
+eksell.dynamicHeights = {
+
+	init: function() {
+
+		var $header 	= $( '#site-header' ),
+			$footer 	= $( '#site-footer' ),
+			$content 	= $( '#site-content' );
+
+		$win.on( 'load resize orientationchange', function() {
+			var contentHeight = $win.outerHeight() - $header.outerHeight() - parseInt( $header.css( 'marginBottom' ) ) - $footer.outerHeight();
+			$content.css( 'min-height', contentHeight );
+		} );
+
+	}
+
+} // eksell.dynamicHeights
+
+
 /*	-----------------------------------------------------------------------------------------------
 	Function Calls
 --------------------------------------------------------------------------------------------------- */
@@ -1298,5 +1321,6 @@ $doc.ready( function() {
 	eksell.loadMore.init();						// Load More
 	eksell.filters.init();						// Filters
 	eksell.masonry.init();						// Masonry
+	eksell.dynamicHeights.init();				// Dynamic Heights
 
 } );
