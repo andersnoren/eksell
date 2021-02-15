@@ -1288,14 +1288,22 @@ eksell.dynamicHeights = {
 
 	init: function() {
 
+		eksell.dynamicHeights.resize();
+
+		$win.on( 'resize orientationchange', function() {
+			eksell.dynamicHeights.resize();
+		} );
+
+	},
+
+	resize: function() {
+
 		var $header 	= $( '#site-header' ),
 			$footer 	= $( '#site-footer' ),
 			$content 	= $( '#site-content' );
+			contentHeight = $win.outerHeight() - $header.outerHeight() - parseInt( $header.css( 'marginBottom' ) ) - $footer.outerHeight();
 
-		$win.on( 'load resize orientationchange', function() {
-			var contentHeight = $win.outerHeight() - $header.outerHeight() - parseInt( $header.css( 'marginBottom' ) ) - $footer.outerHeight();
-			$content.css( 'min-height', contentHeight );
-		} );
+		$content.css( 'min-height', contentHeight );
 
 	}
 

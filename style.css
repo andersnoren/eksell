@@ -1135,6 +1135,7 @@ a.faux-image {
 /* Search Form ------------------------------- */
 
 .search-form {
+	max-width: 32rem;
 	position: relative;
 }
 
@@ -1148,7 +1149,12 @@ a.faux-image {
 	font-size: 1.8rem;
 	padding: 1.35rem 6.6rem 1.35rem 2.4rem;
 	position: relative;
+	transition: border-color .15s linear;
 	width: 100%;
+}
+
+.search-form .search-field:focus {
+	border-color: var( --secondary-color );
 }
 
 .search-form .search-submit {
@@ -1647,6 +1653,7 @@ a.sub-menu-toggle.active svg {
 
 .menu-modal-search .search-form {
 	margin: 4rem 0 0;
+	max-width: 100%;
 }
 
 .menu-modal-search .search-form:before {
@@ -1664,8 +1671,11 @@ a.sub-menu-toggle.active svg {
 
 .menu-modal-search .search-field {
 	background-color: transparent;
-	border-color: transparent;
 	color: inherit;
+}
+
+:root .menu-modal-search .search-field {
+	border-color: transparent;
 }
 
 .menu-modal-search .search-submit {
@@ -1936,13 +1946,6 @@ a.sub-menu-toggle.active svg {
 
 .preview-title a:hover {
 	text-decoration: underline;
-}
-
-/* No Search Results ------------------------- */
-
-.no-search-results-form .search-form {
-	margin: 0;
-	max-width: 32rem;
 }
 
 
@@ -3141,13 +3144,25 @@ html.js .pagination-wrapper:not(.pagination-type-links) .link-pagination {
 
 .error404 #site-content {
 	align-items: center;
+	background: url( ./assets/images/404.svg ) no-repeat center;
+	background-size: contain;
 	display: flex;
+	min-height: calc( 100vh - 19rem );
 	text-align: center;
 }
 
-.error404 #site-content .search-form {
+.error404-inner {
+	margin: 0 auto;
+	max-width: 62rem;
+}
+
+.error404-inner .intro-text {
+	margin-top: 1.8rem;
+}
+
+.error404-inner .search-form {
 	justify-content: center;
-	margin-top: 3rem;
+	margin: 2.4rem auto 0 auto;
 }
 
 
@@ -3880,6 +3895,16 @@ body.woocommerce-page .entry-content {
 		padding: 3.1rem 4.5rem;
 	}
 
+	/* Error 404 ----------------------------- */
+
+	.error404-inner .intro-text {
+		margin-top: 2.4rem;
+	}
+
+	.error404-inner .search-form {
+		margin-top: 3.2rem;
+	}
+
 	/* Site Footer --------------------------- */
 
 	/* FOOTER INNER */
@@ -4046,7 +4071,14 @@ body.woocommerce-page .entry-content {
 	}
 
 	/* Comments ------------------------------ */
+	/* Error 404 ----------------------------- */
+
+	.error404 #site-content {
+		min-height: calc( 100vh - 22.2rem );
+	}
+	
 	/* Site Pagination ----------------------- */
+	/* Error 404 ----------------------------- */
 	/* Site Footer --------------------------- */
 
 }
@@ -4225,6 +4257,7 @@ body.woocommerce-page .entry-content {
 		margin-bottom: 4.8rem;
 	}
 
+	/* Error 404 ----------------------------- */
 	/* Site Footer --------------------------- */
 
 }

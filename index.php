@@ -137,7 +137,7 @@
 
 	<?php elseif ( is_search() ) : ?>
 
-		<div class="no-search-results-form section-inner">
+		<div class="no-search-results-form section-inner contain-margins">
 			<?php get_search_form(); ?>
 		</div><!-- .no-search-results -->
 
