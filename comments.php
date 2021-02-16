@@ -30,9 +30,8 @@ if ( $comments ) :
 		?>
 
 		<div class="comments-header">
-
-			<h3 class="comment-reply-title"><?php echo esc_html( $comments_title ); ?></h3>
-
+			<h2 class="comment-reply-title"><?php echo esc_html( $comments_title ); ?></h2>
+			<hr class="color-accent" aria-hidden="true" />
 		</div><!-- .comments-header -->
 
 		<?php
@@ -46,8 +45,8 @@ if ( $comments ) :
 			'echo'      => false,
 			'end_size'  => 0,
 			'mid_size'  => 0,
-			'next_text' => __( 'Newer Comments', 'eksell' ) . ' &rarr;',
-			'prev_text' => '&larr; ' . __( 'Older Comments', 'eksell' ),
+			'next_text' => '<span class="text"><span class="long">' . __( 'Newer Comments', 'eksell' ) . '</span><span class="short">' . __( 'Newer', 'eksell' ) . '</span></span><span class="arrow">&rarr;</span>',
+			'prev_text' => '<span class="arrow">&larr;</span><span class="text"><span class="long">' . __( 'Older Comments', 'eksell' ) . '</span><span class="short">' . __( 'Older', 'eksell' ) . '</span></span>',
 		) );
 
 		if ( $comment_pagination ) :
@@ -61,7 +60,10 @@ if ( $comments ) :
 			?>
 
 			<nav class="comments-pagination pagination<?php echo esc_attr( $pagination_classes ); ?>">
-				<?php echo wp_kses_post( $comment_pagination ); ?>
+				<hr class="wp-block-separator is-style-wide" aria-hidden="true" />
+				<div class="comments-pagination-inner">
+					<?php echo wp_kses_post( $comment_pagination ); ?>
+				</div><!-- .comments-pagination-inner -->
 			</nav>
 
 		<?php endif; ?>
@@ -73,8 +75,9 @@ endif;
 
 if ( comments_open() || pings_open() ) {
 	comment_form( array(
-		'class_form'           => 'section-inner mw-thin max-percentage no-margin',
-		'comment_notes_before' => '',
-		'comment_notes_after'  => '',
+		'comment_notes_before'	=> '',
+		'comment_notes_after'	=> '',
+		'title_reply_before'	=> '<h2 id="reply-title" class="comment-reply-title">',
+		'title_reply_after'		=> '</h2><hr class="color-accent" aria-hidden="true" />'
 	) );
 }

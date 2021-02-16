@@ -82,7 +82,6 @@
 				'before'           => '<nav class="post-nav-links bg-light-background"><span class="label">' . __( 'Pages:', 'eksell' ) . '</span>',
 				'after'            => '</nav>',
 			) );
-			edit_post_link();
 			?>
 
 		</div><!-- .entry-content -->
@@ -90,6 +89,7 @@
 		<?php 
 
 		$entry_time 		= get_the_time( get_option( 'date_format' ) );
+		$edit_url 			= get_edit_post_link();
 
 		// Determine which category and which tag taxonomy to display, depending on post type.
 		if ( is_singular( 'post' ) ) {
@@ -109,7 +109,7 @@
 		$entry_tags 		= $entry_tag_tax 		? get_the_term_list( $post->ID, $entry_tag_tax, '', ', ' ) 		: '';
 
 		// Show the entry footer if there is meta, or if set to display it with the filter.
-		$show_entry_footer 	= apply_filters( 'eksell_show_entry_footer', ( ( $entry_time && ! is_page() ) || $entry_categories || $entry_tags ) );
+		$show_entry_footer 	= apply_filters( 'eksell_show_entry_footer', ( ( $entry_time && ! is_page() ) || $edit_url || $entry_categories || $entry_tags ) );
 
 		if ( $show_entry_footer ) : 
 			?>
@@ -119,7 +119,7 @@
 				<?php do_action( 'eksell_entry_footer_start', $post->ID ); ?>
 
 				<?php if ( $entry_time ) : ?>
-					<p class="entry-meta-time"><?php printf( _x( 'Published %s', '%s = The date of the post', 'eksell' ), '<time>' . $entry_time . '</time>' ); ?></p>
+					<p class="entry-meta-time"><?php printf( _x( 'Published %s', '%s = The date of the post', 'eksell' ), '<time><a href="' . get_permalink() . '">' . $entry_time . '</a></time>' ); ?></p>
 				<?php endif; ?>
 
 				<?php if ( $entry_categories ) : ?>
@@ -128,6 +128,10 @@
 
 				<?php if ( $entry_tags ) : ?>
 					<p class="entry-tags"><?php printf( _x( 'Tagged %s', '%s = The list of tags', 'eksell' ), $entry_tags ); ?></p>
+				<?php endif; ?>
+
+				<?php if ( $edit_url ) : ?>
+					<p class="edit-link"><a href="<?php echo esc_url( $edit_url ); ?>"><?php _e( 'Edit This', 'eksell' ); ?></a></p>
 				<?php endif; ?>
 
 				<?php do_action( 'eksell_entry_footer_end', $post->ID ); ?>

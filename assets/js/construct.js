@@ -94,34 +94,6 @@ eksell.intervalScroll = {
 
 
 /*	-----------------------------------------------------------------------------------------------
-	Resize End Event
---------------------------------------------------------------------------------------------------- */
-
-eksell.resizeEnd = {
-
-	init: function() {
-
-		var resizeTimer;
-
-		$win.on( 'resize', function(e) {
-
-			clearTimeout( resizeTimer );
-			
-			resizeTimer = setTimeout( function() {
-
-				// Trigger this at the end of screen resizing
-				$win.triggerHandler( 'resize-end' );
-						
-			}, 250 );
-
-		} );
-
-	},
-
-} // eksell.resizeEnd
-
-
-/*	-----------------------------------------------------------------------------------------------
 	Toggles
 --------------------------------------------------------------------------------------------------- */
 
@@ -1321,7 +1293,6 @@ eksell.dynamicHeights = {
 $doc.ready( function() {
 
 	eksell.intervalScroll.init();				// Check for scroll on an interval
-	eksell.resizeEnd.init();					// Trigger event at end of resize
 	eksell.toggles.init();						// Handle toggles
 	eksell.coverModals.init();					// Handle cover modals
 	eksell.elementInView.init();				// Check if elements are in view
