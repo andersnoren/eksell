@@ -1,4 +1,4 @@
-<article <?php post_class( 'section-inner' ); ?> id="post-<?php the_ID(); ?>">
+<article <?php post_class( '' ); ?> id="post-<?php the_ID(); ?>">
 
 	<?php 
 
@@ -23,9 +23,9 @@
 
 		if ( has_excerpt() ) : ?>
 
-			<div class="intro-text section-inner mw-thin max-percentage">
+			<div class="intro-text">
 				<?php the_excerpt(); ?>
-			</div>
+			</div><!-- .intro-text -->
 
 			<?php 
 		endif;
@@ -40,20 +40,24 @@
 	if ( has_post_thumbnail() && ! post_password_required() ) : 
 		?>
 
-		<figure class="featured-media">
+		<figure class="featured-media section-inner">
 
 			<?php 
-
 			do_action( 'eksell_featured_media_start', $post->ID );
-			
-			the_post_thumbnail();
+			?>
+
+			<div class="media-wrapper">
+				<?php the_post_thumbnail(); ?>
+			</div><!-- .media-wrapper -->
+
+			<?php
 
 			$caption = get_the_post_thumbnail_caption();
 			
 			if ( $caption ) : 
 				?>
 
-				<figcaption class="wp-caption-text"><?php echo wp_kses_post( $caption ); ?></figcaption>
+				<figcaption><?php echo $caption; ?></figcaption>
 
 				<?php 
 			endif; 
@@ -68,9 +72,9 @@
 	endif; // has_post_thumbnail()
 	?>
 
-	<div class="post-inner" id="post-inner">
+	<div class="post-inner section-inner mw-thin">
 
-		<div class="entry-content section-inner mw-thin">
+		<div class="entry-content">
 
 			<?php 
 			the_content();
@@ -85,25 +89,77 @@
 
 		<?php 
 
-		/*
-		 * @hooked eksell_maybe_output_single_post_navigation - 30
-		 */
-		do_action( 'eksell_entry_footer', $post->ID );
+		$entry_time 		= get_the_time( get_option( 'date_format' ) );
 
-		// Output comments wrapper if comments are open or if there are comments, and check for password
-		if ( ( comments_open() || get_comments_number() ) && ! post_password_required() ) : 
+		// Determine which category and which tag taxonomy to display, depending on post type.
+		if ( is_singular( 'post' ) ) {
+			$entry_category_tax	= 'category';
+			$entry_tag_tax		= 'post_tag';
+		} else if ( is_singular( 'jetpack-portfolio' ) ) {
+			$entry_category_tax	= 'jetpack-portfolio-type';
+			$entry_tag_tax		= 'jetpack-portfolio-tag';
+		}
+
+		// You can use these filters in a child theme to change which taxonomy to use.
+		$entry_category_tax = apply_filters( 'eksell_entry_meta_category_tax', isset( $entry_category_tax ) ? $entry_category_tax : '' );
+		$entry_tag_tax 		= apply_filters( 'eksell_entry_meta_tag_tax', isset( $entry_tag_tax ) ? $entry_tag_tax : '' );
+
+		// Get the markup for the categories and tags.
+		$entry_categories 	= $entry_category_tax 	? get_the_term_list( $post->ID, $entry_category_tax, '', ', ' ) 	: '';
+		$entry_tags 		= $entry_tag_tax 		? get_the_term_list( $post->ID, $entry_tag_tax, '', ', ' ) 		: '';
+
+		// Show the entry footer if there is meta, or if set to display it with the filter.
+		$show_entry_footer 	= apply_filters( 'eksell_show_entry_footer', ( ( $entry_time && ! is_page() ) || $entry_categories || $entry_tags ) );
+
+		if ( $show_entry_footer ) : 
 			?>
 
-			<div class="comments-wrapper section-inner mw-thin">
-				<?php comments_template(); ?>
-			</div><!-- .comments-wrapper -->
+			<footer class="entry-footer color-secondary">
 
-			<?php 
-		endif; 
+				<?php do_action( 'eksell_entry_footer_start', $post->ID ); ?>
+
+				<?php if ( $entry_time ) : ?>
+					<p class="entry-meta-time"><?php printf( _x( 'Published %s', '%s = The date of the post', 'eksell' ), '<time>' . $entry_time . '</time>' ); ?></p>
+				<?php endif; ?>
+
+				<?php if ( $entry_categories ) : ?>
+					<p class="entry-categories"><?php printf( _x( 'Posted in %s', '%s = The list of categories', 'eksell' ), $entry_categories ); ?></p>
+				<?php endif; ?>
+
+				<?php if ( $entry_tags ) : ?>
+					<p class="entry-tags"><?php printf( _x( 'Tagged %s', '%s = The list of tags', 'eksell' ), $entry_tags ); ?></p>
+				<?php endif; ?>
+
+				<?php do_action( 'eksell_entry_footer_end', $post->ID ); ?>
+
+			</footer><!-- .entry-footer -->
+
+			<?php
+		endif;
 		?>
 
 	</div><!-- .post-inner -->
 
-	<?php do_action( 'eksell_entry_article_end', $post->ID ); ?>
+	<?php 
+
+	// Conditional display of the single post navigation, depending on the post type.
+	if ( is_singular( apply_filters( 'eksell_singular_post_navigation_post_types', array( 'post', 'jetpack-portfolio' ) ) ) ) {
+		get_template_part( 'inc/parts/single-post-navigation.php' );
+	}
+
+	// Output comments wrapper if comments are open or if there are comments, and check for password.
+	if ( ( comments_open() || get_comments_number() ) && ! post_password_required() ) : 
+		?>
+
+		<div class="comments-wrapper section-inner mw-thin">
+			<?php comments_template(); ?>
+		</div><!-- .comments-wrapper -->
+
+		<?php 
+	endif; 
+	
+	do_action( 'eksell_entry_article_end', $post->ID ); 
+	
+	?>
 
 </article><!-- .post -->

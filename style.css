@@ -380,7 +380,7 @@ hr {
 a {
 	color: var( --accent-color );
 	text-decoration: underline;
-	text-underline-offset: .10em;
+	text-underline-offset: .2em;
 	text-decoration-thickness: .1rem;
 }
 
@@ -510,6 +510,7 @@ object {
 
 figcaption,
 .wp-caption-text {
+	color: var( --secondary-color );
 	display: block;
 	font-size: 1.5rem;
 	font-weight: 500;
@@ -1966,13 +1967,19 @@ h1.entry-title,
 }
 
 .intro-text {
-	margin: 2rem 0 0;
+	font-size: 1.8rem;
+	margin: 1.6rem 0 0;
 }
 
 /* Featured Media ---------------------------- */
 
 .featured-media {
 	margin-top: 5rem;
+}
+
+.featured-media .media-wrapper {
+	margin-left: calc( 50% - 50vw + .2rem );
+	width: calc( 100vw - .4rem );
 }
 
 .featured-media img {
@@ -1983,7 +1990,19 @@ h1.entry-title,
 	padding-top: 5rem;
 }
 
-/* Post Footer ------------------------------- */
+/* Entry Footer ------------------------------ */
+
+.entry-footer {
+	margin-top: 3.2rem;
+}
+
+.entry-footer a {
+	color: inherit;
+}
+
+.entry-footer p {
+	margin: 0;
+}
 
 /* POST NAV LINKS */
 
@@ -2000,6 +2019,8 @@ h1.entry-title,
 .post-nav-links > * {
 	padding: 1em .75em;
 }
+
+/* ENTRY META */
 
 /* Single Pagination ------------------------- */
 
@@ -3153,11 +3174,11 @@ html.js .pagination-wrapper:not(.pagination-type-links) .link-pagination {
 
 .error404-inner {
 	margin: 0 auto;
-	max-width: 62rem;
+	max-width: 56rem;
 }
 
-.error404-inner .intro-text {
-	margin-top: 1.8rem;
+.error404-inner p {
+	margin: 1.8rem auto 0 auto;
 }
 
 .error404-inner .search-form {
@@ -3193,6 +3214,8 @@ body.woocommerce-page .entry-content {
 	justify-content: space-between;
 }
 
+/* Footer Credits ---------------------------- */
+
 .footer-credits,
 #site-footer .social-menu {
 	padding: .4rem 0;
@@ -3222,6 +3245,20 @@ body.woocommerce-page .entry-content {
 .theme-credits {
 	display: none;
 }
+
+/* STATE: ONLY CREDITS */
+
+.footer-credits:only-child {
+	flex-wrap: wrap;
+	justify-content: space-between;
+	margin-right: 0;
+}
+
+.footer-credits:only-child .theme-credits {
+	display: block;
+}
+
+/* Footer Social ----------------------------- */
 
 #site-footer .social-menu {
 	margin: 0 -1.2rem;
@@ -3273,15 +3310,12 @@ body.woocommerce-page .entry-content {
 	/* TITLES */
 
 	h1, .h1,
-	h2, .h2 {
-		margin: 6rem 0 3.5rem;
-	}
-
+	h2, .h2,
 	h3, .h3,
 	h4, .h4,
 	h5, .h5,
 	h6, .h6 {
-		margin: 4.5rem 0 2.5rem;
+		margin: 4.8rem 0 3.2rem;
 	}
 
 	h1, .h1 { font-size: 4.8rem; }
@@ -3433,21 +3467,13 @@ body.woocommerce-page .entry-content {
 		display: none;
 	}
 
-	/* Modal: Search ----------------------------- */
+	/* Modal: Search ------------------------- */
 
 	.search-modal.active {
 		left: 6.4rem;
 	}
 
 	/* Sub Page ------------------------------ */
-
-	/* FEATURED MEDIA */
-
-	.featured-media figcaption {
-		margin: 2rem auto 0 auto;
-		width: calc( 100% - 8rem );
-	}
-
 	/* Post: Archive ------------------------- */
 
 	.archive-header {
@@ -3503,7 +3529,7 @@ body.woocommerce-page .entry-content {
 	}
 
 	.intro-text {
-		font-size: 2rem;
+		font-size: 2.4rem;
 	}
 
 	.featured-media {
@@ -3514,7 +3540,18 @@ body.woocommerce-page .entry-content {
 		padding-top: 8rem;
 	}
 
-	/* POST FOOTER */
+	/* ENTRY MEDIA */
+
+	.featured-media .media-wrapper {
+		margin-left: calc( 50% - 50vw + 3.2rem );
+		width: calc( 100vw - 6.4rem );
+	}
+
+	/* ENTRY FOOTER */
+
+	.entry-footer {
+		margin-top: 4rem;
+	}
 
 	/* SINGLE PAGINATION */
 
@@ -3897,7 +3934,11 @@ body.woocommerce-page .entry-content {
 
 	/* Error 404 ----------------------------- */
 
-	.error404-inner .intro-text {
+	.error404-inner .archive-title {
+		font-size: 4rem;
+	}
+
+	.error404-inner p {
 		margin-top: 2.4rem;
 	}
 
@@ -3975,6 +4016,20 @@ body.woocommerce-page .entry-content {
 	}
 
 	/* Post: Single -------------------------- */
+
+	/* ENTRY MEDIA */
+
+	.featured-media .media-wrapper {
+		margin-left: 0;
+		width: 100%;
+	}
+
+	/* ENTRY FOOTER */
+
+	.entry-footer {
+		margin-top: 4.8rem;
+	}
+
 	/* Blocks -------------------------------- */
 
 	/* BLOCK: COLUMNS */

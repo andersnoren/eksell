@@ -311,27 +311,6 @@ endif;
 
 
 /*	-----------------------------------------------------------------------------------------------
-	SINGLE POST NAVIGATION
-	Maybe output the single post navigation.
---------------------------------------------------------------------------------------------------- */
-
-if ( ! function_exists( 'eksell_maybe_output_single_post_navigation' ) ) : 
-	function eksell_maybe_output_single_post_navigation() {
-
-		// Only on posts
-		if ( ! is_singular( apply_filters( 'eksell_the_post_navigation_post_types', array( 'post' ) ) ) ) return;
-
-		the_post_navigation( array(
-			'prev_text' 	=> '<span class="arrow" aria-hidden="true">&larr;</span><span class="screen-reader-text">' . __( 'Previous post:', 'eksell' ) . '</span><span class="post-title">%title</span>',
-			'next_text' 	=> '<span class="arrow" aria-hidden="true">&rarr;</span><span class="screen-reader-text">' . __( 'Next post:', 'eksell' ) . '</span><span class="post-title">%title</span>',
-		) );
-
-	}
-	add_action( 'eksell_entry_footer', 'eksell_maybe_output_single_post_navigation', 30 );
-endif;
-
-
-/*	-----------------------------------------------------------------------------------------------
 	OUTPUT PREVIOUS POSTS LINK ON ARCHIVE PAGES
 	On archive pages, when on at least page 2 and using the button or scroll load more type, output
 	a link allowing visitor to go back to the previous page in the chronology.

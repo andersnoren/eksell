@@ -4,6 +4,8 @@
 			
 			<div class="footer-inner section-inner">
 
+				<?php do_action( 'eksell_footer_inner_start' ); ?>
+
 				<div class="footer-credits">
 
 					<p class="footer-copyright">&copy; <?php echo esc_html( date_i18n( __( 'Y', 'eksell' ) ) ); ?> <a href="<?php echo esc_url( home_url() ); ?>" rel="home"><?php echo bloginfo( 'name' ); ?></a></p>
@@ -17,6 +19,8 @@
 				</div><!-- .footer-credits -->
 
 				<?php eksell_the_social_menu(); ?>
+
+				<?php do_action( 'eksell_footer_inner_end' ); ?>
 
 			</div><!-- .footer-inner -->
 
