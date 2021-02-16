@@ -1,20 +1,24 @@
 <?php get_header(); ?>
 
-<main id="site-content">
+<main id="site-content" role="main">
 
-	<?php
+	<div class="site-content-inner">
 
-	if ( have_posts() ) :
-		while ( have_posts() ) : 
-		
-			the_post();
+		<?php
 
-			get_template_part( 'content', get_post_type() );
+		if ( have_posts() ) :
+			while ( have_posts() ) : 
+			
+				the_post();
 
-		endwhile;
-	endif;
+				get_template_part( 'content', get_post_type() );
 
-	?>
+			endwhile;
+		endif;
+
+		?>
+
+	</div><!-- .site-content-inner -->
 
 </main><!-- #site-content -->
 

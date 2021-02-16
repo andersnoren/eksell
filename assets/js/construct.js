@@ -917,7 +917,7 @@ eksell.loadMore = {
 		$win.on( 'reset-posts', function() {
 
 			// Fade out existing posts
-			$( $pagination.data( 'load-more-target' ) ).find( 'article' ).css( 'opacity', 0 );
+			$( $pagination.data( 'load-more-target' ) ).find( '.article-wrapper' ).animate( { opacity: 0 }, 300, 'linear' );
 
 			// Reset posts
 			eksell.loadMore.prepare( $pagination, resetPosts = true );
@@ -1080,6 +1080,8 @@ eksell.loadMore = {
 						// Update the pagination query args
 						$pagination.attr( 'data-query-args', jsonQueryArgs );
 
+						$( 'body' ).removeClass( 'filtering-posts' );
+
 						// If that was the last page, make sure we don't check for any more
 						if ( queryArgsParsed.paged == queryArgsParsed.max_num_pages ) {
 							$paginationWrapper.addClass( 'last-page' );
@@ -1117,6 +1119,8 @@ eksell.filters = {
 	init: function() {
 
 		$doc.on( 'click', '.filter-link', function() {
+
+			$( 'body' ).addClass( 'filtering-posts' );
 
 			var $link 		= $( this ),
 				termId 		= $link.data( 'filter-term-id' ) ? $link.data( 'filter-term-id' ) : null,
@@ -1262,8 +1266,8 @@ eksell.masonry = {
 					horizontalOrder: 	true,
 					itemSelector: 		'.article-wrapper',
 					percentPosition: 	true,
-					stagger:			30,
-					transitionDuration: '0.3s',
+					stagger:			0,
+					transitionDuration: 0,
 				} );
 
 			} );
@@ -1301,7 +1305,7 @@ eksell.dynamicHeights = {
 		var $header 	= $( '#site-header' ),
 			$footer 	= $( '#site-footer' ),
 			$content 	= $( '#site-content' );
-			contentHeight = $win.outerHeight() - $header.outerHeight() - parseInt( $header.css( 'marginBottom' ) ) - $footer.outerHeight();
+			contentHeight = $win.outerHeight() - $header.outerHeight() - parseInt( $header.css( 'marginBottom' ) ) - $footer.outerHeight() - parseInt( $footer.css( 'marginTop' ) );
 
 		$content.css( 'min-height', contentHeight );
 

@@ -131,8 +131,14 @@ body {
 }
 
 #site-content {
+	align-items: center;
+	display: flex;
 	overflow: hidden;
-	min-height: calc( 100vh - 25.4rem );
+	min-height: calc( 100vh - 31.8rem );
+}
+
+.site-content-inner {
+	width: 100%;
 }
 
 /* Clearing ---------------------------------- */
@@ -1836,6 +1842,15 @@ a.sub-menu-toggle.active svg {
 /* --------------------------------------------------------------------------------------------- */
 
 
+.archive-page #site-content {
+	align-items: flex-start;
+}
+
+.archive-page #site-footer {
+	margin-top: 1.6rem;
+}
+
+
 /* Archive Header ---------------------------- */
 
 .archive-header {
@@ -1856,14 +1871,11 @@ a.sub-menu-toggle.active svg {
 	font-size: 2.4rem;
 	font-weight: 700;
 	line-height: 1.3;
+	max-width: 74rem;
 	margin: 0;
 }
 
-.home .archive-title {
-	max-width: 74rem;
-}
-
-.home .archive-title p {
+.archive-title p {
 	line-height: inherit;
 	margin: 0 0 .75em;
 }
@@ -1920,10 +1932,6 @@ a.sub-menu-toggle.active svg {
 		left: 0;
 		right: 0;
 		top: 2.4rem;
-}
-
-.posts-grid {
-	transition: opacity .1s linear;
 }
 
 .no-js .grid-sizer {
@@ -3164,11 +3172,8 @@ html.js .pagination-wrapper:not(.pagination-type-links) .link-pagination {
 }
 
 .error404 #site-content {
-	align-items: center;
 	background: url( ./assets/images/404.svg ) no-repeat center;
 	background-size: contain;
-	display: flex;
-	min-height: calc( 100vh - 19rem );
 	text-align: center;
 }
 
@@ -3204,7 +3209,8 @@ body.woocommerce-page .entry-content {
 
 
 #site-footer {
-	padding: 2.8rem 0;
+	margin-top: 6.4rem;
+	padding: 1.5rem 0;
 }
 
 .footer-inner {
@@ -3275,6 +3281,12 @@ body.woocommerce-page .entry-content {
 	body {
 		border-left-width: 6.4rem;
 		font-size: 1.8rem;
+	}
+
+	/* Document Setup ------------------------ */
+
+	#site-content {
+		min-height: calc( 100vh - 38.2rem );
 	}
 
 	/* Element Base -------------------------- */
@@ -3923,10 +3935,6 @@ body.woocommerce-page .entry-content {
 
 	/* Site Pagination ----------------------- */
 
-	.pagination-wrapper {
-		margin-bottom: 1.6rem;
-	}
-
 	#load-more {
 		font-size: 1.8rem;
 		padding: 3.1rem 4.5rem;
@@ -3947,6 +3955,11 @@ body.woocommerce-page .entry-content {
 	}
 
 	/* Site Footer --------------------------- */
+
+	#site-footer {
+		margin-top: 8rem;
+		padding: 3.1rem 0;
+	}
 
 	/* FOOTER INNER */
 
@@ -3980,11 +3993,6 @@ body.woocommerce-page .entry-content {
 @media ( min-width: 1000px ) {
 
 	/* Document Setup ------------------------ */
-
-	#site-content {
-		min-height: calc( 100vh - 30.2rem );
-	}
-
 	/* Helper Classes ------------------------ */
 
 	/* GRID STRUCTURE */
@@ -4126,12 +4134,6 @@ body.woocommerce-page .entry-content {
 	}
 
 	/* Comments ------------------------------ */
-	/* Error 404 ----------------------------- */
-
-	.error404 #site-content {
-		min-height: calc( 100vh - 22.2rem );
-	}
-	
 	/* Site Pagination ----------------------- */
 	/* Error 404 ----------------------------- */
 	/* Site Footer --------------------------- */
@@ -4236,6 +4238,10 @@ body.woocommerce-page .entry-content {
 	/* Sub Page ------------------------------ */
 	/* Post: Archive ------------------------- */
 
+	.archive-page #site-footer {
+		margin-top: 3.2rem;
+	}
+
 	.archive-header {
 		margin-bottom: 6.4rem;
 	}
@@ -4249,7 +4255,7 @@ body.woocommerce-page .entry-content {
 	/* POST GRID */
 
 	.posts {
-		padding-bottom: 9.6rem;
+		padding-bottom: 8rem;
 	}
 
 	/* Post: Single -------------------------- */
@@ -4307,11 +4313,6 @@ body.woocommerce-page .entry-content {
 
 	/* Comments ------------------------------ */
 	/* Site Pagination ----------------------- */
-
-	.pagination-wrapper {
-		margin-bottom: 4.8rem;
-	}
-
 	/* Error 404 ----------------------------- */
 	/* Site Footer --------------------------- */
 

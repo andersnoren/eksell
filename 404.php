@@ -2,7 +2,7 @@
 
 <main id="site-content" role="main" class="section-inner">
 
-	<div class="error404-inner">
+	<div class="error404-inner site-content-inner">
 
 		<h1 class="archive-title"><?php esc_html_e( 'Page Not Found', 'eksell' ); ?></h1>
 			

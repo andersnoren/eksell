@@ -356,7 +356,6 @@ if ( ! function_exists( 'eksell_the_archive_filter' ) ) :
 		$filter_taxonomy = is_post_type_archive( 'jetpack-portfolio' ) ? 'jetpack-portfolio-type' : 'category';
 
 		$terms = get_terms( apply_filters( 'eksell_home_filter_get_terms_args', array(
-			'number'	=> 6,
 			'depth'		=> 1,
 			'taxonomy'	=> $filter_taxonomy,
 		) ) );

@@ -245,6 +245,10 @@ if ( ! function_exists( 'eksell_body_classes' ) ) :
 			$classes[] = 'not-showing-comments';
 		}
 
+		if ( is_archive() || is_search() || is_home() ) {
+			$classes[] = 'archive-page';
+		}
+
 		// Slim page template class names (class = name - file suffix)
 		if ( is_page_template() ) {
 			$classes[] = basename( get_page_template_slug(), '.php' );

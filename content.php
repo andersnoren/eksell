@@ -23,7 +23,7 @@
 
 		if ( has_excerpt() ) : ?>
 
-			<div class="intro-text">
+			<div class="intro-text contain-margins">
 				<?php the_excerpt(); ?>
 			</div><!-- .intro-text -->
 
