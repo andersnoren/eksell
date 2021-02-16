@@ -1999,6 +1999,7 @@ h1.entry-title,
 /* Entry Footer ------------------------------ */
 
 .entry-footer {
+	font-size: 1.5rem;
 	margin-top: 3.2rem;
 }
 
@@ -2830,16 +2831,31 @@ table.is-style-stripes tbody tr:nth-child( odd ),
 	margin-top: 6.4rem;
 }
 
-.comment-reply-title,
-.comment-reply-title + hr {
-	margin-top: 0;
+.comments-header hr {
+	margin: 0;
+}
+
+hr + .comment-reply-title {
+	margin-top: 1.8rem;
+}
+
+.comment-reply-title {
+	align-items: baseline;
+	display: flex;
+	flex-wrap: wrap;
+	margin-bottom: 3.2rem;
+}
+
+.comment-reply-title .title:not(:only-child) {
+	margin-right: 1.6rem;
 }
 
 .comment-reply-title small {
-	display: block;
-	font-size: 1.7rem;
+	color: var( --secondary-color );
+	flex-shrink: 0;
+	font-size: 1.6rem;
 	font-weight: 400;
-	margin-top: 1em;
+	white-space: nowrap;
 }
 
 .comment-reply-title small a {
@@ -2918,7 +2934,7 @@ table.is-style-stripes tbody tr:nth-child( odd ),
 .comment-metadata a:hover { text-decoration: underline; }
 
 .comment-metadata .edit-link {
-	margin-left: .8rem;
+	margin-left: 1.6rem;
 }
 
 /* COMMENT CONTENT */
@@ -2942,6 +2958,7 @@ table.is-style-stripes tbody tr:nth-child( odd ),
 	display: inline-flex;
 	font-size: 1.2rem;
 	font-weight: 700;
+	letter-spacing: 0;
 	text-decoration: none;
 	padding: .6rem .9rem;
 }
@@ -2961,12 +2978,12 @@ table.is-style-stripes tbody tr:nth-child( odd ),
 /* Comments Pagination ----------------------- */
 
 .comments-pagination {
-	margin: 4.8rem 0 0;
+	margin: 4rem 0 0;
 	text-align: center;
 }
 
 .comments-pagination hr {
-	margin-top: 0;
+	margin: 0 0 4rem;
 }
 
 .comments-pagination .comments-pagination-inner {
@@ -3018,7 +3035,11 @@ table.is-style-stripes tbody tr:nth-child( odd ),
 }
 
 .comment-respond:not(:first-child) {
-	margin-top: 4.8rem;
+	margin-top: 4rem;
+}
+
+.comment-respond > hr {
+	margin: 0;
 }
 
 .comment-form {
@@ -3050,7 +3071,7 @@ table.is-style-stripes tbody tr:nth-child( odd ),
 }
 
 .comment-form p.logged-in-as {
-	margin-bottom: 3.2rem;
+	margin: -1.6rem 0 3.2rem;
 }
 
 .comment-form-cookies-consent {
@@ -3550,6 +3571,7 @@ body.woocommerce-page .entry-content {
 	/* ENTRY FOOTER */
 
 	.entry-footer {
+		font-size: 1.6rem;
 		margin-top: 4rem;
 	}
 
@@ -3823,14 +3845,12 @@ body.woocommerce-page .entry-content {
 		margin-top: 9.6rem;
 	}
 
-	.comments-header hr,
-	.comments-pagination hr,
-	.comment-respond form hr {
-		margin-bottom: 6.4rem;
+	hr + .comment-reply-title {
+		margin-top: 2.4rem;
 	}
 
-	.comment-reply-title small {
-		font-size: 1.8rem;
+	.comment-reply-title {
+		margin-bottom: 4.8rem;
 	}
 
 	/* COMMENT ITEM */
@@ -3839,11 +3859,11 @@ body.woocommerce-page .entry-content {
 	.comments .pingback,
 	.comments .trackback,
 	.comments .review {
-		padding-top: 4rem;
+		padding-top: 4.8rem;
 	}
 
 	.comment > .comment:first-of-type {
-		margin-top: 4rem;
+		margin-top: 4.8rem;
 		padding-top: 0;
 	}
 
@@ -3884,6 +3904,10 @@ body.woocommerce-page .entry-content {
 		margin-top: 6.4rem;
 	}
 
+	.comments-pagination hr {
+		margin-bottom: 6.4rem;
+	}
+
 	.comments-pagination span.short { display: none; }
 	.comments-pagination span.long { display: inline; }
 
@@ -3912,6 +3936,11 @@ body.woocommerce-page .entry-content {
 		margin-bottom: 2.4rem;
 	}
 
+	.comment-form p.logged-in-as {
+		font-size: 2.1rem;
+		margin: -3.2rem 0 4rem;
+	}
+
 	.comment-respond .comment-form-author,
 	.comment-respond .comment-form-email {
 		float: left;
@@ -3920,6 +3949,12 @@ body.woocommerce-page .entry-content {
 
 	.comment-respond .comment-form-email {
 		margin-left: 2.4rem;
+	}
+
+	/* REPLY RESPOND */
+
+	:root .comments .comment-respond .comment-reply-title {
+		font-size: 3.2rem;
 	}
 
 	/* Site Pagination ----------------------- */
