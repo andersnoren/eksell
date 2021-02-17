@@ -78,7 +78,7 @@ if ( comments_open() || pings_open() ) {
 		'cancel_reply_before'	=> '</span><small>',
 		'comment_notes_before'	=> '',
 		'comment_notes_after'	=> '',
-		'title_reply_before'	=> '<hr class="color-accent" aria-hidden="true" /><h2 id="reply-title" class="comment-reply-title"><span class="title">',
+		'title_reply_before'	=> '<hr class="color-accent" aria-hidden="true" /><h2 id="reply-title" class="comment-reply-title h3"><span class="title">',
 		'title_reply_after'		=> '</h2>'
 	) );
 }
