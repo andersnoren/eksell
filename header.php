@@ -52,7 +52,7 @@
 						$home_link_contents = '<a href="' . esc_url( home_url( '/' ) ) . '" rel="home">' . wp_kses_post( $site_title ) . '</a>';
 					}
 
-					if ( is_front_page() && is_home() ) : ?>
+					if ( is_front_page() && is_home() && ! is_paged() ) : ?>
 						<h1 class="<?php echo esc_attr( $site_title_class ); ?>"><?php echo $home_link_contents; ?></h1>
 					<?php else : ?>
 						<div class="<?php echo esc_attr( $site_title_class ); ?>"><?php echo $home_link_contents; ?></div>

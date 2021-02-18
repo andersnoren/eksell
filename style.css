@@ -1976,60 +1976,57 @@ h1.entry-title,
 	padding: 1em .75em;
 }
 
-/* ENTRY META */
+/* Single Navigation ------------------------- */
 
-/* Single Pagination ------------------------- */
-
-.post-navigation {
-	border-color: var( --border-color );
-	border-style: solid;
-	border-width: .1rem 0;
-	font-size: 1.8rem;
-	margin-top: 5rem;
-	padding: 3rem 0;
+.single-nav {
+	margin-top: 4.8rem;
 }
 
-.post-navigation .nav-links {
-	display: flex;
-	flex-direction: column;
+.single-nav-grid {
+	justify-content: space-between;
 }
 
-.post-navigation .nav-links > div + div {
-	margin-top: 1rem;
+.single-nav.only-next .single-nav-grid {
+	justify-content: flex-end;
 }
 
-.post-navigation a {
-	align-items: baseline;
+.single-nav a {
 	color: inherit;
-	display: flex;
-	font-weight: 500;
+	display: block;
 	text-decoration: none;
 }
 
-.post-navigation .arrow {
-	margin-right: 1rem;
+.single-nav .col + .col a {
+	margin-top: 4.8rem;
 }
 
-.post-navigation a:hover .post-title,
-.post-navigation a:focus .post-title {
+.single-nav-item-media {
+	position: relative;
+}
+
+.single-nav-item .arrow {
+	transition: transform .5s ease;
+}
+
+.single-nav .prev-post .arrow {
+	position: absolute;
+		bottom: 1.6rem;
+		right: 0;
+	transform: translateX( 3.2rem );
+}
+
+.single-nav .next-post .arrow {
+	position: absolute;
+		top: 1.6rem;
+		left: 0;
+	transform: translateX( -3.2rem );
+}
+.single-nav-item:hover .single-nav-item-title {
 	text-decoration: underline;
 }
 
-/* Related Posts ----------------------------- */
-
-.related-posts {
-	border-top: .1rem solid var( --border-color );
-	margin-top: 5rem;
-	padding-top: 5rem;
-}
-
-.has-single-pagination.not-showing-comments .related-posts {
-	border-top: none;
-	padding-top: 0;
-}
-
-.related-posts .related-posts-title {
-	margin-top: 0;
+.single-nav-item-header {
+	margin-top: 1.6rem;
 }
 
 
@@ -3691,50 +3688,22 @@ body.woocommerce-page .entry-content {
 		margin-top: 4rem;
 	}
 
-	/* SINGLE PAGINATION */
+	/* SINGLE NAVIGATION */
 
-	.post-navigation {
-		font-size: 2.4rem;
-		padding: 3.5rem 0;
-		margin-top: 8rem;
+	.single-nav {
+		margin-top: 12.8rem;
 	}
 
-	.post-navigation .nav-links {
-		flex-direction: row;
-		justify-content: space-between;
+	.single-nav .col + .col a {
+		animation-delay: .15s;
+		margin-top: 0;
 	}
 
-	.post-navigation .nav-links > div {
-		max-width: calc( 50% - 2rem );
-	}
+	.single-nav .prev-post .arrow { 		transform: translateX( 1.6rem ); }
+	.single-nav .prev-post:hover .arrow { 	transform: translateX( calc( 1.6rem - .8rem ) ); }
 
-	.post-navigation .nav-links > div + div {
-		margin: 0 0 0 4rem;
-	}
-
-	.post-navigation .arrow {
-		margin: 0 2rem 0 0;
-	}
-
-	.post-navigation .nav-next:only-child {
-		margin-left: auto;
-	}
-
-	.post-navigation .nav-next a {
-		flex-direction: row-reverse;
-		text-align: right;
-	}
-
-	.post-navigation .nav-next .arrow {
-		margin: 0 0 0 2rem;
-	}
-
-	/* RELATED POSTS */
-
-	.related-posts {
-		margin-top: 8rem;
-		padding-top: 6rem;
-	}
+	.single-nav .next-post .arrow { 		transform: translateX( -1.6rem ); }
+	.single-nav .next-post:hover .arrow { 	transform: translateX( calc( -1.6rem + .8rem ) ); }
 
 	/* Blocks -------------------------------- */
 
@@ -4031,7 +4000,7 @@ body.woocommerce-page .entry-content {
 	/* Comments ------------------------------ */
 
 	.comments-wrapper {
-		margin-top: 9.6rem;
+		margin-top: 12.8rem;
 	}
 
 	hr + .comment-reply-title {
@@ -4245,6 +4214,14 @@ body.woocommerce-page .entry-content {
 		margin-top: 4.8rem;
 	}
 
+	/* SINGLE NAVIGATION */
+
+	.single-nav .prev-post .arrow { 		transform: translateX( 50% ); }
+	.single-nav .prev-post:hover .arrow { 	transform: translateX( calc( 50% - .8rem ) ); }
+
+	.single-nav .next-post .arrow { 		transform: translateX( -50% ); }
+	.single-nav .next-post:hover .arrow { 	transform: translateX( calc( -50% + .8rem ) ); }
+
 	/* Blocks -------------------------------- */
 
 	/* BLOCK: COLUMNS */
@@ -4369,13 +4346,6 @@ body.woocommerce-page .entry-content {
 	}
 
 	/* Post: Single -------------------------- */
-
-	/* RELATED POSTS */
-
-	.related-posts-grid.dcols-4 .grid-item:nth-child(4) {
-		display: block;
-	}
-
 	/* Blocks -------------------------------- */
 
 	/* BLOCK: GALLERY */

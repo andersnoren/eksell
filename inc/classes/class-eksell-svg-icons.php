@@ -23,6 +23,8 @@ class Eksell_SVG_Icons {
 	 * User Interface icons – SVG sources.
 	 */
 	protected static $icons = array(
+		'arrow-left'	=> '<svg viewBox="0 0 98 50" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M26 1L2 25L26 49" stroke-width="2"/><path d="M2 25H98" stroke-width="2"/></svg>',
+		'arrow-right'	=> '<svg viewBox="0 0 98 50" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M72 1L96 25L72 49" stroke-width="2"/><path d="M96 25H0" stroke-width="2"/></svg>',
 		'chevron-down'	=> '<svg viewBox="0 0 18 11" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M17 1L9 9L1 1" stroke-width="2"/></svg>',
 		'close'			=> '<svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1L19 19" stroke-width="2"/><path d="M1 19L19 1.00003" stroke-width="2"/></svg>',
 		'menu'			=> '<svg viewBox="0 0 25 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 1H24.5" stroke-width="2"/><path d="M0.5 9H24.5" stroke-width="2"/><path d="M0.5 17H24.5" stroke-width="2"/></svg>',

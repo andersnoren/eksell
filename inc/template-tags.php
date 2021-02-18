@@ -311,34 +311,6 @@ endif;
 
 
 /*	-----------------------------------------------------------------------------------------------
-	OUTPUT PREVIOUS POSTS LINK ON ARCHIVE PAGES
-	On archive pages, when on at least page 2 and using the button or scroll load more type, output
-	a link allowing visitor to go back to the previous page in the chronology.
-	(When you're on page 2, output a link to go back to page one.)
---------------------------------------------------------------------------------------------------- */
-
-if ( ! function_exists( 'eksell_output_previous_posts_link' ) ) :
-	function eksell_output_previous_posts_link() {
-
-		global $paged;
-		$pagination_type = get_theme_mod( 'eksell_pagination_type', 'button' );
-		
-		if ( ( $pagination_type == 'button' || $pagination_type = 'scroll' ) && $paged && $paged > 1 ) : 
-			?>
-
-			<div class="previous-posts-link-wrapper color-secondary hide-no-js">
-				<?php previous_posts_link( '<span class="arrow" aria-hidden="true">&larr; </span>' . __( 'To The Previous Page', 'eksell' ) ); ?>
-			</div><!-- .previous-posts-link-wrapper -->
-			
-			<?php
-		endif;
-
-	}
-	add_action( 'eksell_posts_start', 'eksell_output_previous_posts_link' );
-endif;
-
-
-/*	-----------------------------------------------------------------------------------------------
 	OUTPUT ARCHIVE FILTER
 	Output the archive filter beneath the archive header.
 --------------------------------------------------------------------------------------------------- */

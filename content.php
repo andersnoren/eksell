@@ -148,7 +148,7 @@
 
 	// Conditional display of the single post navigation, depending on the post type.
 	if ( is_singular( apply_filters( 'eksell_singular_post_navigation_post_types', array( 'post', 'jetpack-portfolio' ) ) ) ) {
-		get_template_part( 'inc/parts/single-post-navigation.php' );
+		get_template_part( 'inc/parts/single-post-navigation' );
 	}
 
 	// Output comments wrapper if comments are open or if there are comments, and check for password.

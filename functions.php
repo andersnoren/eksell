@@ -336,6 +336,8 @@ if ( ! function_exists( 'eksell_get_the_archive_title_prefix' ) ) :
 					$tax->labels->singular_name
 				);
 			}
+		} elseif ( is_home() && is_paged() ) {
+			$prefix = _x( 'Archives', 'general archive title prefix', 'eksell' );
 		}
 
 		return apply_filters( 'eksell_archive_title_prefix', $prefix );
@@ -354,8 +356,16 @@ if ( ! function_exists( 'eksell_filter_archive_title' ) ) :
 	function eksell_filter_archive_title( $title ) {
 
 		// Home: Get the Customizer option for post archive text
-		if ( is_home() && get_theme_mod( 'eksell_home_text' ) ) {
+		if ( is_home() && ! is_paged() && get_theme_mod( 'eksell_home_text' ) ) {
 			$title = get_theme_mod( 'eksell_home_text' );
+		}
+
+		// Home and paged: Output page number
+		elseif ( is_home() && is_paged() ) {
+			global $wp_query;
+			$paged 	= get_query_var( 'paged' ) ? get_query_var( 'paged' ) : 1;
+			$max 	= isset( $wp_query->max_num_pages ) ? $wp_query->max_num_pages : 1;
+			$title 	= sprintf( _x( 'Page %1$s of %2$s', '%1$s = Current page number, %2$s = Number of pages', 'eksell' ), $paged, $max );
 		}
 
 		// On search, show the search query.

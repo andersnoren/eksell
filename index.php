@@ -42,7 +42,7 @@
 							if ( $archive_title ) :
 
 								// On home, where we're outputting the eksell_home_text Customizer value, output the title in a div to enable multiple paragraphs
-								if ( is_home() ) : 
+								if ( is_home() && ! is_paged() ) : 
 									?>
 									<div class="archive-title contain-margins"><?php echo wpautop( $archive_title ); ?></div>
 									<?php
