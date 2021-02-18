@@ -1,6 +1,6 @@
 <div class="menu-modal cover-modal" data-modal-target-string=".menu-modal" aria-expanded="false">
 
-	<div class="menu-modal-inner modal-inner bg-primary color-body-background">
+	<div class="menu-modal-inner modal-inner bg-menu-modal-background color-menu-modal-text">
 
 		<div class="modal-menu-wrapper">
 

@@ -72,10 +72,62 @@ if ( ! class_exists( 'Eksell_Customizer' ) ) :
 			 * Colors
 			 * ------------------------------------------------------------------------ */
 
-			$eksell_accent_color_options = self::get_color_options();
+			$color_options = self::get_color_options();
 
-			// Loop over the color options and add them to the customizer
-			foreach ( $eksell_accent_color_options as $color_option_name => $color_option ) {
+			// Contains two groups of colors: regular and dark_mode
+			$color_options_regular 		= $color_options['regular'];
+			$color_options_dark_mode 	= $color_options['dark_mode'];
+
+			/* Regular Colors ---------------- */
+
+			// First, loop over the regular color options and add them to the customizer
+			foreach ( $color_options_regular as $color_option_name => $color_option ) {
+
+				$wp_customize->add_setting( $color_option_name, array(
+					'default' 			=> $color_option['default'],
+					'type' 				=> 'theme_mod',
+					'sanitize_callback' => 'sanitize_hex_color',
+				) );
+
+				$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, $color_option_name, array(
+					'label' 		=> $color_option['label'],
+					'section' 		=> 'colors',
+					'settings' 		=> $color_option_name,
+				) ) );
+
+			}
+
+			/* Separator --------------------- */
+
+			$wp_customize->add_setting( 'eksell_colors_sep_1', array(
+				'sanitize_callback' => 'wp_filter_nohtml_kses',
+			) );
+
+			$wp_customize->add_control( new Eksell_Separator_Control( $wp_customize, 'eksell_colors_sep_1', array(
+				'section'			=> 'colors',
+			) ) );
+
+			/* Dark Mode Palette Checkbox ---- */
+
+			$wp_customize->add_setting( 'eksell_enable_dark_mode_palette', array(
+				'capability' 		=> 'edit_theme_options',
+				'default'			=> true,
+				'sanitize_callback' => 'eksell_sanitize_checkbox'
+			) );
+
+			$wp_customize->add_control( 'eksell_enable_dark_mode_palette', array(
+				'type' 			=> 'checkbox',
+				'section' 		=> 'colors',
+				'label' 		=> __( 'Enable Dark Mode Color Palette', 'eksell' ),
+				'description'	=> __( 'The dark mode colors are used when the visitor views the site on an operating system set to display sites with a dark color scheme. The feature is not supported in all browsers or on all operating systems.', 'eksell' ),
+			) );
+
+			/* TOD */
+
+			/* Dark Mode Colors -------------- */
+
+			// Second, loop over the dark mode color options and add them to the customizer
+			foreach ( $color_options_dark_mode as $color_option_name => $color_option ) {
 
 				$wp_customize->add_setting( $color_option_name, array(
 					'default' 			=> $color_option['default'],
@@ -91,10 +143,6 @@ if ( ! class_exists( 'Eksell_Customizer' ) ) :
 				) ) );
 
 			}
-
-			// Update background color with postMessage, so inline CSS output is updated as well
-			$wp_customize->get_setting( 'background_color' )->transport = 'refresh';
-
 
 			/* ------------------------------------------------------------------------
 			 * Fallback Image Options
@@ -216,11 +264,11 @@ if ( ! class_exists( 'Eksell_Customizer' ) ) :
 
 			/* Separator --------------------- */
 
-			$wp_customize->add_setting( 'eksell_post_archive_options_1', array(
+			$wp_customize->add_setting( 'eksell_post_archive_options_sep_1', array(
 				'sanitize_callback' => 'wp_filter_nohtml_kses',
 			) );
 
-			$wp_customize->add_control( new Eksell_Separator_Control( $wp_customize, 'eksell_post_archive_options_1', array(
+			$wp_customize->add_control( new Eksell_Separator_Control( $wp_customize, 'eksell_post_archive_options_sep_1', array(
 				'section'			=> 'eksell_post_archive_options',
 			) ) );
 
@@ -246,11 +294,11 @@ if ( ! class_exists( 'Eksell_Customizer' ) ) :
 
 			/* Separator --------------------- */
 
-			$wp_customize->add_setting( 'eksell_post_archive_options_2', array(
+			$wp_customize->add_setting( 'eksell_post_archive_options_sep_2', array(
 				'sanitize_callback' => 'wp_filter_nohtml_kses',
 			) );
 
-			$wp_customize->add_control( new Eksell_Separator_Control( $wp_customize, 'eksell_post_archive_options_2', array(
+			$wp_customize->add_control( new Eksell_Separator_Control( $wp_customize, 'eksell_post_archive_options_sep_2', array(
 				'section'			=> 'eksell_post_archive_options',
 			) ) );
 
@@ -297,34 +345,107 @@ if ( ! class_exists( 'Eksell_Customizer' ) ) :
 
 		}
 
-		// Return the sitewide color options included
+		// Return the sitewide color options. Used by...
+		// Eksell_Customizer				To generate the color settings in the Customizer
+		// Eksell_Custom_CSS				To output the color settings on the front-end
+		// eksell_block_editor_settings()	To register the color palette
 		public static function get_color_options() {
 
 			return apply_filters( 'eksell_color_options', array(
-				'eksell_accent_color' => array(
-					'default'	=> '#007C89',
-					'label'		=> __( 'Accent Color', 'eksell' ),
-					'slug'		=> 'accent',
+				'regular'		=> array(
+					'eksell_accent_color' => array(
+						'default'	=> '#d23c50',
+						'label'		=> __( 'Accent Color', 'eksell' ),
+						'slug'		=> 'accent',
+						'palette'	=> true,
+					),
+					'eksell_primary_color' => array(
+						'default'	=> '#1e2d32',
+						'label'		=> __( 'Primary Text Color', 'eksell' ),
+						'slug'		=> 'primary',
+						'palette'	=> true,
+					),
+					'eksell_secondary_color' => array(
+						'default'	=> '#707376',
+						'label'		=> __( 'Secondary Text Color', 'eksell' ),
+						'slug'		=> 'secondary',
+						'palette'	=> true,
+					),
+					'eksell_border_color' => array(
+						'default'	=> '#d6d5d4',
+						'label'		=> __( 'Border Color', 'eksell' ),
+						'slug'		=> 'border',
+						'palette'	=> true,
+					),
+					'eksell_light_background_color' => array(
+						'default'	=> '#f3efe9',
+						'label'		=> __( 'Light Background Color', 'eksell' ),
+						'slug'		=> 'light-background',
+						'palette'	=> true,
+					),
+					// Note: The body background color uses the built-in WordPress theme mod.
+					'eksell_menu_modal_text_color' => array(
+						'default'	=> '#ffffff',
+						'label'		=> __( 'Menu Modal Text Color', 'eksell' ),
+						'slug'		=> 'menu-modal-text',
+						'palette'	=> false,
+					),
+					'eksell_menu_modal_background_color' => array(
+						'default'	=> '#1e2d32',
+						'label'		=> __( 'Menu Modal Background Color', 'eksell' ),
+						'slug'		=> 'menu-modal-background',
+						'palette'	=> false,
+					),
 				),
-				'eksell_primary_text_color' => array(
-					'default'	=> '#1A1B1F',
-					'label'		=> __( 'Primary Text Color', 'eksell' ),
-					'slug'		=> 'primary',
-				),
-				'eksell_secondary_text_color' => array(
-					'default'	=> '#747579',
-					'label'		=> __( 'Secondary Text Color', 'eksell' ),
-					'slug'		=> 'secondary',
-				),
-				'eksell_border_color' => array(
-					'default'	=> '#E1E1E3',
-					'label'		=> __( 'Border Color', 'eksell' ),
-					'slug'		=> 'border',
-				),
-				'eksell_light_background_color' => array(
-					'default'	=> '#F1F1F3',
-					'label'		=> __( 'Light Background Color', 'eksell' ),
-					'slug'		=> 'light-background',
+				'dark_mode'		=> array(
+					'eksell_dark_mode_background_color' => array(
+						'default'	=> '#1E2D32',
+						'label'		=> __( 'Background Color', 'eksell' ),
+						'slug'		=> 'background',
+						'palette'	=> false,
+					),
+					'eksell_dark_mode_accent_color' => array(
+						'default'	=> '#d23c50',
+						'label'		=> __( 'Accent Color', 'eksell' ),
+						'slug'		=> 'accent',
+						'palette'	=> false,
+					),
+					'eksell_dark_mode_primary_color' => array(
+						'default'	=> '#ffffff',
+						'label'		=> __( 'Primary Text Color', 'eksell' ),
+						'slug'		=> 'primary',
+						'palette'	=> false,
+					),
+					'eksell_dark_mode_secondary_color' => array(
+						'default'	=> '#939699',
+						'label'		=> __( 'Secondary Text Color', 'eksell' ),
+						'slug'		=> 'secondary',
+						'palette'	=> false,
+					),
+					'eksell_dark_mode_border_color' => array(
+						'default'	=> '#404C51',
+						'label'		=> __( 'Border Color', 'eksell' ),
+						'slug'		=> 'border',
+						'palette'	=> false,
+					),
+					'eksell_dark_mode_light_background_color' => array(
+						'default'	=> '#29373C',
+						'label'		=> __( 'Light Background Color', 'eksell' ),
+						'slug'		=> 'light-background',
+						'palette'	=> false,
+					),
+					'eksell_dark_mode_menu_modal_text_color' => array(
+						'default'	=> '#ffffff',
+						'label'		=> __( 'Menu Modal Text Color', 'eksell' ),
+						'slug'		=> 'menu-modal-text',
+						'palette'	=> false,
+					),
+					'eksell_dark_mode_menu_modal_background_color' => array(
+						'default'	=> '#344247',
+						'label'		=> __( 'Menu Modal Background Color', 'eksell' ),
+						'slug'		=> 'menu-modal-background',
+						'palette'	=> false,
+					),
 				),
 			) );
 			

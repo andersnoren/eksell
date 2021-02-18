@@ -101,7 +101,7 @@ if ( ! function_exists( 'eksell_register_styles' ) ) :
 		wp_enqueue_style( 'eksell-style', get_template_directory_uri() . '/style.css', $css_dependencies, $theme_version, 'all' );
 
 		// Add output of Customizer settings as inline style
-		wp_add_inline_style( 'eksell-style', Eksell_Custom_CSS::get_customizer_css( 'front-end' ) );
+		wp_add_inline_style( 'eksell-style', Eksell_Custom_CSS::get_customizer_css() );
 
 		// Enqueue the print styles stylesheet
 		wp_enqueue_style( 'eksell-print-styles', get_template_directory_uri() . '/assets/css/print.css', false, $theme_version, 'print' );
@@ -584,7 +584,7 @@ if ( ! function_exists( 'eksell_block_editor_styles' ) ) :
 		wp_enqueue_style( 'eksell_block_editor_styles', get_theme_file_uri( 'assets/css/eksell-editor-style-block-editor.css' ), $css_dependencies, wp_get_theme( 'eksell' )->get( 'Version' ), 'all' );
 
 		// Add inline style from the Customizer
-		wp_add_inline_style( 'eksell_block_editor_styles', Eksell_Custom_CSS::get_customizer_css( 'block-editor' ) );
+		wp_add_inline_style( 'eksell_block_editor_styles', Eksell_Custom_CSS::get_customizer_css() );
 
 	}
 	add_action( 'enqueue_block_editor_assets', 'eksell_block_editor_styles', 1, 1 );
@@ -601,14 +601,25 @@ if ( ! function_exists( 'eksell_block_editor_settings' ) ) :
 
 		/* Block Editor Palette -------------- */
 
-		$editor_color_palette = array();
+		$editor_color_palette 	= array();
+		$color_options 			= array();
 
 		// Get the color options
-		$eksell_accent_color_options = Eksell_Customizer::get_color_options();
+		// By default, this array contains two groups of colors: primary and dark-mode
+		$color_options_groups = Eksell_Customizer::get_color_options();
+
+		// Merge the two groups into one array with all colors
+		foreach ( $color_options_groups as $group ) {
+			$color_options = array_merge( $color_options, $group );
+		}
 
 		// Loop over them and construct an array for the editor-color-palette
-		if ( $eksell_accent_color_options ) {
-			foreach ( $eksell_accent_color_options as $color_option_name => $color_option ) {
+		if ( $color_options ) {
+			foreach ( $color_options as $color_option_name => $color_option ) {
+
+				// Only add the colors set to be included in the color palette
+				if ( ! $color_option['palette'] ) continue;
+
 				$editor_color_palette[] = array(
 					'name'  => $color_option['label'],
 					'slug'  => $color_option['slug'],
@@ -618,15 +629,11 @@ if ( ! function_exists( 'eksell_block_editor_settings' ) ) :
 		}
 
 		// Add the background option
-		$background_color = get_theme_mod( 'background_color' );
-		if ( ! $background_color ) {
-			$background_color_arr = get_theme_support( 'custom-background' );
-			$background_color     = $background_color_arr[0]['default-color'];
-		}
+		$background_color = '#' . get_background_color();
 		$editor_color_palette[] = array(
 			'name'  => __( 'Background Color', 'eksell' ),
-			'slug'  => 'background',
-			'color' => '#' . $background_color,
+			'slug'  => 'body-background',
+			'color' => $background_color,
 		);
 
 		// If we have accent colors, add them to the block editor palette

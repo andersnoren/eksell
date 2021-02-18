@@ -6,6 +6,8 @@
 
 		<?php
 
+		Eksell_Custom_CSS::get_customizer_css();
+
 		if ( have_posts() ) :
 			while ( have_posts() ) : 
 			
