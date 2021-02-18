@@ -118,7 +118,7 @@
 
 				<?php do_action( 'eksell_entry_footer_start', $post->ID ); ?>
 
-				<?php if ( $entry_time ) : ?>
+				<?php if ( $entry_time && ! is_page() ) : ?>
 					<p class="entry-meta-time"><?php printf( _x( 'Published %s', '%s = The date of the post', 'eksell' ), '<time><a href="' . get_permalink() . '">' . $entry_time . '</a></time>' ); ?></p>
 				<?php endif; ?>
 
