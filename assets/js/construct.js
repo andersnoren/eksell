@@ -205,6 +205,8 @@ eksell.toggles = {
 					$target.trigger( 'toggle-target-after-inactive' );
 				}
 
+				$toggle.trigger( 'toggled' );
+
 			}, timeOutTime );
 
 			return false;

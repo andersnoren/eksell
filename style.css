@@ -1298,51 +1298,6 @@ ul.social-icons li {
 	display: none;
 }
 
-/* Navigation Toggle ------------------------- */
-
-.nav-toggle {
-	color: inherit;
-	width: auto;
-}
-
-.nav-toggle .bars {
-	height: 1.4rem;
-	position: relative;
-	width: 2rem;
-}
-
-.nav-toggle .bar {
-	background: currentColor;
-	display: block;
-	height: .18rem;
-	position: absolute;
-		right: 0;
-		top: 50%;
-	transition: transform 0.2s ease-in, opacity 0s ease-out 0.2s, margin 0.2s ease-out 0.2s;
-	width: 100%;
-}
-
-.nav-toggle .bar:nth-child(1) { margin-top: -.6rem; }
-.nav-toggle .bar:nth-child(3) { margin-top: 0.6rem; }
-
-.nav-toggle.active .bar {
-	transition: margin 0.2s ease-in, opacity 0s ease-in 0.2s, transform 0.2s ease-out 0.25s;
-}
-
-.nav-toggle.active .bar:nth-child(1) {
-	margin-top: 0;
-	transform: rotate( 45deg );
-}
-
-.nav-toggle.active .bar:nth-child(2) {
-	opacity: 0;
-}
-
-.nav-toggle.active .bar:nth-child(3) {
-	margin-top: 0;
-	transform: rotate( -45deg );
-}
-
 
 /* --------------------------------------------------------------------------------------------- */
 /*	5. Site Aside
@@ -1377,6 +1332,103 @@ ul.social-icons li {
 	justify-content: center;
 	height: 12rem;
 	width: 6.4rem;
+}
+
+/* Navigation Toggle ------------------------- */
+
+.nav-toggle .bars {
+	animation: bars-fade-in .1s linear .3s both;
+}
+
+@keyframes bars-fade-in {
+	from { 	opacity: 0; }
+	to { 	opacity: 1; }
+}
+
+.nav-toggle .bars {
+	height: 1.4rem;
+	position: relative;
+	width: 2rem;
+}
+
+.nav-toggle .bar {
+	animation: .4s forwards;
+	background-color: currentColor;
+	display: block;
+	height: .2rem;
+	position: absolute;
+		right: 0;
+		top: 50%;
+	width: 100%;
+}
+
+.nav-toggle .bar:nth-child(1) { transform: translateY( -.6rem ); }
+.nav-toggle .bar:nth-child(3) { transform: translateY( .6rem ); }
+
+/* STATE: INITIAL */
+
+.nav-toggle .bar:nth-child(1) { animation-name: bar-one; }
+@keyframes bar-one {
+	0% { 			transform: translateY( 0 ) rotate( 45deg );  }
+	0%, 50% {		width: 50%; transform-origin: center right; }
+	50%, 50.1% {	transform: translateY( 0 ) rotate( 0deg ); }
+	50.1%, 100% {	width: 100%; transform-origin: center; }
+	100% { 			transform: translateY( -.6rem ) rotate( 0deg ); }
+}
+
+.nav-toggle .bar:nth-child(3) { animation-name: bar-three; }
+@keyframes bar-three {
+	0% { 			transform: translateY( 0 ) rotate( -45deg ); }
+	0%, 50% { 		width: 50%; transform-origin: center right; }
+	50%, 50.1% { 	transform: translateY( 0 ) rotate( 0deg ); }
+	50.1%, 100% { 	width: 100%; transform-origin: center; }
+	100% { 			transform: translateY( .6rem ) rotate( 0deg ); }
+}
+
+/* STATE: HOVER */
+
+.nav-toggle:hover .bar:nth-child(1) { animation-name: bar-one-hover; }
+@keyframes bar-one-hover {
+	0% { 			transform: translateY( -.6rem ) rotate( 0deg ); }
+	0%, 50% { 		width: 100%; transform-origin: center; }
+	50%, 50.1% { 	transform: translateY( .05rem ) rotate( 0deg ); }
+	50.1%, 100% { 	width: 50%; transform-origin: center right; }
+	100% { 			transform: translateY( .05rem ) rotate( 45deg ); }
+}
+
+.nav-toggle:hover .bar:nth-child(3) { animation-name: bar-three-hover; }
+@keyframes bar-three-hover {
+	0% { 			transform: translateY( .6rem ) rotate( 0deg ); }
+	0%, 50% { 		width: 100%; transform-origin: center; }
+	50%, 50.1% { 	transform: translateY( -.05rem ) rotate( 0deg ); }
+	50.1%, 100% { 	width: 50%; transform-origin: center right; }
+	100% { 			transform: translateY( -.05rem ) rotate( -45deg ); }
+}
+
+/* STATE: ACTIVE */
+
+.nav-toggle.active .bar:nth-child(1) { animation-name: bar-one-active; }
+@keyframes bar-one-active {
+	0% { 			transform: translateY( .05rem ) rotate( 45deg ); }
+	0%, 50% { 		width: 50%; transform-origin: center right; }
+	50%, 50.1% {	transform: translateY( 0 ) rotate( 0deg ); }
+	50.1%, 100% { 	width: 100%; transform-origin: center; }
+	100% {			transform: translateY( 0 ) rotate( 45deg ); }
+}
+
+.nav-toggle.active .bar:nth-child(2) { animation-name: bar-two-active; }
+@keyframes bar-two-active {
+	0%, 50% { 		opacity: 1; }
+	50.1%, 100% {	opacity: 0; }
+}
+
+.nav-toggle.active .bar:nth-child(3) { animation-name: bar-three-active; }
+@keyframes bar-three-active {
+	0% { 			transform: translateY( .05rem ) rotate( -45deg ); }
+	0%, 50% { 		width: 50%; transform-origin: center right; }
+	50%, 50.1% {	transform: translateY( 0 ) rotate( 0deg ); }
+	50.1%, 100% { 	width: 100%; transform-origin: center; }
+	100% {			transform: translateY( 0 ) rotate( -45deg ); }
 }
 
 
