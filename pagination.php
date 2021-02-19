@@ -45,40 +45,40 @@ if ( ! ( $query_args['max_num_pages'] > $query_args['paged'] ) ) {
 
 		<?php if ( ( $query_args['max_num_pages'] > $query_args['paged'] ) ) : ?>
 
+			<?php if ( $pagination_type == 'scroll' ) : ?>
+				<div class="scroll-loading">
+					<div class="loading-icon">
+						<span class="dot-pulse"></span>
+					</div>
+				</div>
+			<?php endif; ?>
+
 			<?php if ( $pagination_type == 'button' ) : ?>
 				<button id="load-more" class="d-no-js-none">
 					<span class="load-text"><?php esc_html_e( 'Load More', 'eksell' ); ?></span>
-					<span class="loading-text"><?php esc_html_e( 'Loading&hellip;', 'eksell' ); ?></span>
+					<span class="loading-icon"><span class="dot-pulse"></span></span>
 				</button>
 			<?php endif;
 
 			// The pagination links also work as a no-js fallback, so they always need to be output
-			$has_previous_link = get_previous_posts_link();
-			$has_next_link = get_next_posts_link();
+			$prev_link 	= get_previous_posts_link( '<span class="arrow stroke-cc">' . eksell_get_theme_svg( 'ui', 'arrow-left', 96, 49 ) . '</span><span class="screen-reader-text">' . __( 'Previous Page', 'eksell' ) . '</span></span>' );
+			$next_link 	= get_next_posts_link( '<span class="screen-reader-text">' . __( 'Next Page', 'eksell' ) . '</span></span><span class="arrow stroke-cc">' . eksell_get_theme_svg( 'ui', 'arrow-right', 96, 49 ) . '</span>' );
 
-			if ( $has_previous_link || $has_next_link ) :
-
-				$pagination_class = '';
-
-				if ( ! $has_previous_link ) {
-					$pagination_class = ' only-next';
-				} elseif ( ! $has_next_link ) {
-					$pagination_class = ' only-previous';
-				}
-
+			if ( $prev_link || $next_link ) :
+				$pagination_class = ! $prev_link ? ' only-next' : ( ! $next_link ? ' only-previous' : '' );
 				?>
 
-				<nav class="link-pagination font-sans<?php echo esc_attr( $pagination_class ); ?>">
+				<nav class="link-pagination<?php echo esc_attr( $pagination_class ); ?>">
 
-					<?php if ( get_previous_posts_link() ) : ?>
+					<?php if ( $prev_link ) : ?>
 						<div class="previous-wrapper">
-							<?php previous_posts_link( __( 'Previous', 'eksell' ) ); ?>
+							<?php echo $prev_link; ?>
 						</div><!-- .previous-wrapper -->
 					<?php endif; ?>
 
-					<?php if ( get_next_posts_link() ) : ?>
+					<?php if ( $next_link ) : ?>
 						<div class="next-wrapper">
-							<?php next_posts_link( __( 'Next', 'eksell' ) ); ?>
+							<?php echo $next_link; ?>
 						</div><!-- .next-wrapper -->
 					<?php endif; ?>
 

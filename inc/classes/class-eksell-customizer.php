@@ -288,7 +288,7 @@ if ( ! class_exists( 'Eksell_Customizer' ) ) :
 				'choices' 		=> array(
 					'button'		=> __( 'Load more on button click', 'eksell' ),
 					'scroll'		=> __( 'Load more on scroll', 'eksell' ),
-					'links'			=> __( 'Previous and next page links', 'eksell' ),
+					'links'			=> __( 'Links', 'eksell' ),
 				),
 			) );
 

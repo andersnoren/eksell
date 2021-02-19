@@ -61,6 +61,21 @@
 	--menu-modal-text-color: #fff;
 }
 
+/* P3 Colors, where supported */
+
+@supports ( color: color( display-p3 0 0 0 / 1 ) ) {
+	:root {
+		--accent-color: color( display-p3 0.824 0.235 0.314 / 1 );
+		--primary-color: color( display-p3 0.118 0.176 0.196 / 1 );
+		--secondary-color: color( display-p3 0.439 0.451 0.463 / 1 );
+		--border-color: color( display-p3 0.839 0.835 0.831 / 1 );
+		--light-background-color: color( display-p3 0.953 0.937 0.914 / 1 );
+		--menu-modal-text-color: color( display-p3 1 1 1 / 1 );
+		--menu-modal-background-color: color( display-p3 0.118 0.176 0.196 / 1 );
+		--background-color: color( display-p3 1 1 1 / 1 );
+	}
+}
+
 
 /* -------------------------------------------------------------------------------- */
 /*	0. CSS Reset
@@ -1148,6 +1163,68 @@ ul.social-icons li {
 	display: block;
 }
 
+/* Loading Icon ------------------------------ */
+
+/* 
+	Based on dot Pulse loading animation by nzbin
+	Released under the MIT license
+	https://nzbin.github.io/three-dots/
+*/
+
+.dot-pulse,
+.dot-pulse:before,
+.dot-pulse:after {
+	animation: 1.2s infinite ease-in-out;
+	background-color: currentColor;
+	border-radius: 50%;
+	color: currentColor;
+	height: 1rem;
+	width: 1rem;
+}
+
+.dot-pulse {
+	animation-name: dotPulse;
+	animation-delay: .2s;
+	box-shadow: 999rem 0 0 -.5rem currentColor;
+	display: block;
+	position: relative;
+		left: -999rem;
+}
+
+.dot-pulse:before, 
+.dot-pulse:after {
+	content: "";
+	display: inline-block;
+	position: absolute;
+		top: 0;
+}
+
+.dot-pulse:before {
+	animation-name: dotPulseBefore;
+	box-shadow: 997.5rem 0 0 -.5rem currentColor;
+}
+
+.dot-pulse:after {
+	animation-name: dotPulseAfter;
+	animation-delay: .4s;
+	box-shadow: 1002.3rem 0 0 -.5rem currentColor;
+}
+
+@keyframes dotPulseBefore {
+	0%, 60%, 100% { box-shadow: 997.5rem 0 0 -.5rem currentColor; }
+	30% { 			box-shadow: 997.5rem 0 0 .2rem currentColor; }
+}
+
+@keyframes dotPulse {
+	0%, 60%, 100% { box-shadow: 999.9rem 0 0 -.5rem currentColor; }
+	30% { 			box-shadow: 999.9rem 0 0 .2rem currentColor; }
+}
+
+@keyframes dotPulseAfter {
+	0%, 60%, 100% { box-shadow: 1002.3rem 0 0 -.5rem currentColor; }
+	30% { 			box-shadow: 1002.3rem 0 0 .2rem currentColor; }
+}
+
 /* CSS Animations ---------------------------- */
 
 .has-anim .i-a, 
@@ -1792,9 +1869,8 @@ a.sub-menu-toggle.active svg {
 }
 
 .archive-page #site-footer {
-	margin-top: 1.6rem;
+	margin-top: 0;
 }
-
 
 /* Archive Header ---------------------------- */
 
@@ -1878,6 +1954,10 @@ a.sub-menu-toggle.active svg {
 		left: 0;
 		right: 0;
 		top: 2.4rem;
+}
+
+.posts .section-inner {
+	position: relative;
 }
 
 .no-js .grid-sizer {
@@ -3223,6 +3303,45 @@ hr + .comment-reply-title {
 	position: relative;
 }
 
+.pagination-wrapper.pagination-type-button.last-page,
+.pagination-wrapper.pagination-type-scroll.last-page,
+.pagination-wrapper:not(.pagination-type-button) #load-more,
+.js .pagination-wrapper:not(.pagination-type-links) .link-pagination,
+.no-js #load-more,
+.no-js .scroll-loading {
+	display: none;
+}
+
+#pagination {
+	position: relative;
+}
+
+/* Loading Icon ------------------------------ */
+
+#pagination .loading-icon {
+	height: 1rem;
+	opacity: 0;
+	position: absolute;
+		left: 50%;
+		top: 50%;
+	text-align: left;
+	transform: translateX( calc( -50% - .9rem ) ) translateY( -50% );
+	transition: opacity .2s linear;
+	width: 1rem;
+}
+
+#pagination.loading .loading-icon {
+	opacity: 1;
+}
+
+/* Type: Button ------------------------------ */
+
+.js .pagination-wrapper.pagination-type-button {
+	background-color: transparent;
+	margin-bottom: 1.6rem;
+	padding-bottom: 0;
+}
+
 .js .pagination-wrapper.pagination-type-button:before {
 	background: var( --light-background-color );
 	content: "";
@@ -3234,52 +3353,83 @@ hr + .comment-reply-title {
 		top: 0;
 }
 
-#pagination {
-	position: relative;
-}
-
 #load-more {
+	position: relative;
 	width: 100%;
 }
 
-#pagination:not(.loading) #load-more .loading-text,
+#load-more .load-text {
+	opacity: 1;
+	transition: opacity .2s linear;
+}
+
+#load-more .loading-icon {
+	transition-delay: .2s;
+}
+
 #pagination.loading #load-more .load-text { 
-	display: none; 
+	opacity: 0;
 }
 
-.pagination-wrapper.pagination-type-button.last-page,
-.pagination-wrapper.pagination-type-scroll.last-page,
-.pagination-wrapper:not(.pagination-type-button) #load-more,
-html.js .pagination-wrapper:not(.pagination-type-links) .link-pagination {
-	display: none;
+/* Type: Scroll ------------------------------ */
+
+.js .pagination-wrapper.pagination-type-scroll {
+	background-color: var( --light-background-color );
+	padding-bottom: 4.8rem;
 }
 
-/* LINK PAGINATION */
+.js #pagination .scroll-loading {
+	color: var( --accent-color );
+	height: 1.6rem;
+	margin: 0 auto;
+	position: relative;
+}
+
+/* Type: Links/JS Fallback ------------------- */
+
+.no-js .pagination-wrapper,
+.pagination-wrapper.pagination-type-links {
+	background-color: var( --light-background-color );
+}
+
+.no-js .pagination-wrapper #pagination,
+.pagination-wrapper.pagination-type-links #pagination {
+	padding: 3.2rem 0;
+}
 
 .link-pagination {
 	align-items: center;
 	display: flex;
-	flex-wrap: wrap;
-	justify-content: center;
+	justify-content: space-between;
 }
 
-.link-pagination div {
-	display: flex;
+.link-pagination.only-next,
+.link-pagination .next-wrapper a {
+	justify-content: flex-end;
 }
 
-.link-pagination div + div:before {
-	content: "/";
-	margin: 0 2rem;
+.link-pagination > div {
+	width: 100%;
 }
 
 .link-pagination a {
+	color: inherit;
+	display: flex;
 	text-decoration: none;
 }
 
-.link-pagination a:hover,
-.link-pagination a:focus {
-	text-decoration: underline;
-	text-decoration-thickness: .2rem;
+.link-pagination svg {
+	transition: transform .5s;
+	height: 3.2rem;
+	width: 6.4rem;
+}
+
+.link-pagination .previous-wrapper a:hover svg {
+	transform: translateX( -8.333% );
+}
+
+.link-pagination .next-wrapper a:hover svg {
+	transform: translateX( 8.333% );
 }
 
 
@@ -4116,9 +4266,29 @@ body.woocommerce-page .entry-content {
 
 	/* Site Pagination ----------------------- */
 
+	/* TYPE: BUTTON */
+
 	#load-more {
 		font-size: 1.8rem;
 		padding: 3.1rem 4.5rem;
+	}
+
+	/* TYPE: SCROLL */
+
+	.js .pagination-wrapper.pagination-type-scroll {
+		padding-bottom: 8rem;
+	}
+
+	/* TYPE: LINKS/JS FALLBACK */
+
+	.no-js .pagination-wrapper #pagination,
+	.pagination-wrapper.pagination-type-links #pagination {
+		padding: 4.8rem 0;
+	}
+
+	.link-pagination svg {
+		height: 4.8rem;
+		width: 9.6rem;
 	}
 
 	/* Error 404 ----------------------------- */
@@ -4325,10 +4495,6 @@ body.woocommerce-page .entry-content {
 	/* Sub Page ------------------------------ */
 	/* Post: Archive ------------------------- */
 
-	.archive-page #site-footer {
-		margin-top: 3.2rem;
-	}
-
 	.archive-header {
 		margin-bottom: 6.4rem;
 	}
@@ -4388,6 +4554,11 @@ body.woocommerce-page .entry-content {
 
 	/* Comments ------------------------------ */
 	/* Site Pagination ----------------------- */
+
+	.js .pagination-wrapper.pagination-type-button {
+		margin-bottom: 3.2rem;
+	}
+	
 	/* Error 404 ----------------------------- */
 	/* Site Footer --------------------------- */
 
@@ -4429,6 +4600,15 @@ body.woocommerce-page .entry-content {
 	.cols-dl-10 > .col, :root .col-dl-10 { width: calc( 8.3333% * 10 ); }
 	.cols-dl-11 > .col, :root .col-dl-11 { width: calc( 8.3333% * 11 ); }
 	.cols-dl-12 > .col, :root .col-dl-12 { width: calc( 8.3333% * 12 ); }
+
+	/* Site Pagination ----------------------- */
+
+	/* TYPE: BUTTON */
+
+	#load-more {
+		font-size: 2.1rem;
+		padding: 3.75rem 4.5rem;
+	}
 
 }
 

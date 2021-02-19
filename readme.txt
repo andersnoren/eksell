@@ -140,8 +140,17 @@ License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 == Licenses ==
 
-Eksell is derived from the Chaplin Theme, Copyright 2019 Anders Norén.
+Eksell is derived from the Chaplin Theme, Copyright (c) 2019-2021 Anders Norén.
 Chaplin Theme is distributed under the terms of the GNU GPL version 2.0.
+
+Illustrations in screenshot.png by Anders Norén
+License: Public Domain
+
+Icons in the "UI" group by Anders Norén
+License: Public Domain
+
+Placeholder image by Anders Norén
+License: Public Domain
 
 Eksell bundles the following third-party resources:
 
@@ -153,14 +162,9 @@ Modernizr Code
 License: MIT License, https://opensource.org/licenses/MIT
 Source: https://modernizr.com/
 
-Illustrations in screenshot.png by Anders Norén
-License: Public Domain
-
-Icons in the "UI" group by Anders Norén
-License: Public Domain
-
-Placeholder image by Anders Norén
-License: Public Domain
+Dot Pulse Loading Animation
+License: MIT license, https://opensource.org/licenses/MIT
+Source: https://nzbin.github.io/three-dots/
 
 Code from Twenty Twenty
 Copyright (c) 2019-2021 WordPress.org

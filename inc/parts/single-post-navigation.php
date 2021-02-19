@@ -54,19 +54,31 @@ $nav_class = ( $nav['prev'] && $nav['next'] ) ? ' has-both' : ( ! $nav['prev'] ?
 
 					</figure><!-- .single-nav-item-media -->
 
-					<header class="single-nav-item-header contain-margins">
+					<?php
 
-						<?php do_action( 'eksell_single_nav_item_header_start', $nav_post, $slug ); ?>
+					$nav_post_title = get_the_title( $nav_post->ID );
 
-						<h3 class="single-nav-item-title h4">
-							<?php echo get_the_title( $nav_post->ID ); ?>
-						</h3><!-- .single-nav-item-title -->
+					if ( $nav_post_title || has_action( 'eksell_single_nav_item_header_start' ) || has_action( 'eksell_single_nav_item_header_end' ) ) : 
+						?>
 
-						<?php do_action( 'eksell_single_nav_item_header_end', $nav_post, $slug ); ?>
+						<header class="single-nav-item-header contain-margins">
 
-					</header><!-- .single-nav-item-header -->
+							<?php do_action( 'eksell_single_nav_item_header_start', $nav_post, $slug ); ?>
 
-					<?php do_action( 'eksell_single_nav_item_end', $nav_post, $slug ); ?>
+							<h3 class="single-nav-item-title h4">
+								<?php echo $nav_post_title; ?>
+							</h3><!-- .single-nav-item-title -->
+
+							<?php do_action( 'eksell_single_nav_item_header_end', $nav_post, $slug ); ?>
+
+						</header><!-- .single-nav-item-header -->
+
+						<?php 
+					endif;
+					
+					do_action( 'eksell_single_nav_item_end', $nav_post, $slug ); 
+					
+					?>
 
 				</a>
 

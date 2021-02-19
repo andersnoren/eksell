@@ -25,18 +25,23 @@
 
 		<?php 
 	endif;
-	?>
-
-	<header class="preview-header">
-		<?php 
-		do_action( 'eksell_preview_header_start' );
-		the_title( '<h2 class="preview-title h4"><a href="' . get_the_permalink() . '">', '</a></h2>' ); 
-		do_action( 'eksell_preview_header_end' );
+	
+	if ( get_the_title() || has_action( 'eksell_preview_header_start' ) || has_action( 'eksell_preview_header_end' ) ) : 
 		?>
-	</header><!-- .preview-header -->
 
-	<?php
+		<header class="preview-header">
+			<?php 
+			do_action( 'eksell_preview_header_start' );
+			the_title( '<h2 class="preview-title h4"><a href="' . get_the_permalink() . '">', '</a></h2>' ); 
+			do_action( 'eksell_preview_header_end' );
+			?>
+		</header><!-- .preview-header -->
+
+		<?php
+	endif;
+	
 	do_action( 'eksell_preview_end' );
+
 	?>
 
 </article><!-- .preview -->
