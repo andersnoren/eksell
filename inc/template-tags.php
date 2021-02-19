@@ -65,17 +65,13 @@ endif;
 if ( ! function_exists( 'eksell_get_fallback_image_url' ) ) :
 	function eksell_get_fallback_image_url() {
 
-		$disable_fallback_image = get_theme_mod( 'eksell_disable_fallback_image', false );
-
-		if ( $disable_fallback_image ) return '';
-
 		$fallback_image_id = get_theme_mod( 'eksell_fallback_image' );
 
 		if ( $fallback_image_id ) {
 			$fallback_image = wp_get_attachment_image_src( $fallback_image_id, 'full' );
 		}
 
-		$fallback_image_url = isset( $fallback_image ) ? esc_url( $fallback_image[0] ) : get_template_directory_uri() . '/assets/images/default-fallback-image.png';
+		$fallback_image_url = isset( $fallback_image ) && $fallback_image ? esc_url( $fallback_image[0] ) : get_template_directory_uri() . '/assets/images/default-fallback-image.png';
 
 		return $fallback_image_url;
 

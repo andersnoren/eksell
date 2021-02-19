@@ -22,15 +22,25 @@
 		}
 
 		// Check whether the header search is disabled in the customizer
-		$disable_search = get_theme_mod( 'eksell_disable_search', false );
+		$enable_search = get_theme_mod( 'eksell_enable_search', true );
 
 		?>
 
 		<a class="skip-link faux-button" href="#site-content"><?php esc_html_e( 'Skip to the content', 'eksell' ); ?></a>
 
-		<?php include( locate_template( 'inc/parts/site-aside.php' ) ); ?>
+		<?php 
+		
+		// Include the site aside, which contains the navigation toggle on desktop
+		include( locate_template( 'inc/parts/site-aside.php' ) ); 
 
-		<header id="site-header" class="stick-me">
+		// Determine whether we have a sticky header
+		$header_classes 	= get_theme_mod( 'eksell_enable_sticky_header', true ) ? 'stick-me' : '';
+		$header_classes 	= apply_filters( 'eksell_header_classes', $header_classes );
+		$header_class_attr 	= $header_classes ? ' class="' . esc_attr( $header_classes ) . '"' : '';
+		
+		?>
+
+		<header id="site-header"<?php echo $header_class_attr; ?>>
 
 			<?php do_action( 'eksell_header_start' ); ?>
 
@@ -72,26 +82,28 @@
 
 					eksell_the_social_menu();
 
-					if ( ! $disable_search ) : 
+					if ( $enable_search ) : 
 						?>
 
-						<a href="#" class="search-toggle toggle" data-toggle-target=".search-modal" data-toggle-screen-lock="true" data-toggle-body-class="showing-search-modal" data-set-focus=".search-modal .search-field" aria-pressed="false">
+						<a href="#" class="search-toggle toggle" data-toggle-target=".search-modal" data-toggle-screen-lock="true" data-toggle-body-class="showing-search-modal" data-set-focus=".search-modal .search-field" aria-pressed="false" data-untoggle-below="700">
 							<span class="screen-reader-text"><?php esc_html_e( 'Search', 'eksell' ); ?></span>
 							<?php eksell_the_theme_svg( 'ui', 'search', 18, 18 ); ?>
 						</a>
 
 						<?php 
 					endif;
+
+					$nav_toggle_class = $enable_search ? ' icon-menu-search' : ' icon-menu';
 					?>
 
-					<a href="#" class="nav-toggle mobile-nav-toggle toggle" data-toggle-target=".menu-modal" data-toggle-screen-lock="true" data-toggle-body-class="showing-menu-modal" data-set-focus=".menu-modal" aria-pressed="false">
+					<a href="#" class="nav-toggle mobile-nav-toggle toggle<?php echo $nav_toggle_class; ?>" data-toggle-target=".menu-modal" data-toggle-screen-lock="true" data-toggle-body-class="showing-menu-modal" data-set-focus=".menu-modal" aria-pressed="false">
 						<span class="screen-reader-text"><?php esc_html_e( 'Menu', 'eksell' ); ?></span>
 						<?php 
 						// Determine the menu icon based on whether search is disabled.
-						if ( $disable_search ) {
-							eksell_the_theme_svg( 'ui', 'menu', 24, 24 );
-						} else {
+						if ( $enable_search ) {
 							eksell_the_theme_svg( 'ui', 'menu-search', 26, 24 );
+						} else {
+							eksell_the_theme_svg( 'ui', 'menu', 24, 24 );
 						}
 						?>
 					</a>
@@ -116,7 +128,7 @@
 		get_template_part( 'inc/parts/modal-menu' );
 
 		// Output the search modal (if it isn't deactivated in the customizer)
-		if ( ! $disable_search ) {
+		if ( $enable_search ) {
 			get_template_part( 'inc/parts/modal-search' );
 		}
 

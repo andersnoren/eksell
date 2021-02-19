@@ -118,14 +118,9 @@ eksell.toggles = {
 		$( '*[data-toggle-target]' ).on( 'click', function( e ) {
 
 			// Get our targets
-			var $toggle = $( this ),
-				targetString = $( this ).data( 'toggle-target' );
-
-			if ( targetString == 'next' ) {
-				var $target = $toggle.next();
-			} else {
-				var $target = $( targetString );
-			}
+			var $toggle 		= $( this ),
+				targetString 	= $( this ).data( 'toggle-target' ),
+				$target 		= $( targetString );
 
 			// Trigger events on the toggle targets before they are toggled
 			if ( $target.is( '.active' ) ) {
@@ -134,15 +129,8 @@ eksell.toggles = {
 				$target.trigger( 'toggle-target-before-inactive' );
 			}
 
-			// Get the class to toggle, if specified
-			var classToToggle = $toggle.data( 'class-to-toggle' ) ? $toggle.data( 'class-to-toggle' ) : 'active';
-
 			// For cover modals, set a short timeout duration so the class animations have time to play out
-			var timeOutTime = 0;
-
-			if ( $target.hasClass( 'cover-modal' ) ) {
-				var timeOutTime = 10;
-			}
+			var timeOutTime = $target.hasClass( 'cover-modal' ) ? 5 : 0;
 
 			setTimeout( function() {
 
@@ -151,17 +139,11 @@ eksell.toggles = {
 					var duration = $toggle.data( 'toggle-duration' ) ? $toggle.data( 'toggle-duration' ) : 250;
 					$target.slideToggle( duration );
 				} else {
-					$target.toggleClass( classToToggle );
+					$target.toggleClass( 'active' );
 				}
 
-				// If the toggle target is 'next', only give the clicked toggle the active class
-				if ( targetString == 'next' ) {
-					$toggle.toggleClass( 'active' )
-
-				// If not, toggle all toggles with this toggle target
-				} else {
-					$( '*[data-toggle-target="' + targetString + '"]' ).toggleClass( 'active' );
-				}
+				// Toggle all toggles with this toggle target
+				$( '*[data-toggle-target="' + targetString + '"]' ).toggleClass( 'active' );
 
 				// Toggle aria-expanded on the target
 				eksellToggleAttribute( $target, 'aria-expanded', 'true', 'false' );
@@ -204,8 +186,6 @@ eksell.toggles = {
 				} else {
 					$target.trigger( 'toggle-target-after-inactive' );
 				}
-
-				$toggle.trigger( 'toggled' );
 
 			}, timeOutTime );
 
@@ -412,7 +392,6 @@ eksell.coverModals = {
 		// Show the modal
 		$modals.on( 'toggle-target-before-inactive', function( e ) {
 			if ( e.target != this ) return;
-			
 			$( this ).addClass( 'show-modal' );
 		} );
 
@@ -423,7 +402,7 @@ eksell.coverModals = {
 			var $modal = $( this );
 			setTimeout( function() {
 				$modal.removeClass( 'show-modal' );
-			}, 500 );
+			}, 250 );
 		} );
 
 	},

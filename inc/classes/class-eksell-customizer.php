@@ -42,33 +42,6 @@ if ( ! class_exists( 'Eksell_Customizer' ) ) :
 			) );
 
 			/* ------------------------------------------------------------------------
-			 * General Options
-			 * ------------------------------------------------------------------------ */
-
-			$wp_customize->add_section( 'eksell_general_options', array(
-				'title' 		=> __( 'General Options', 'eksell' ),
-				'priority' 		=> 40,
-				'capability' 	=> 'edit_theme_options',
-				'description' 	=> __( 'General theme options for Eksell.', 'eksell' ),
-				'panel'			=> 'eksell_theme_options',
-			) );
-
-			// Disable animations
-			$wp_customize->add_setting( 'eksell_disable_animations', array(
-				'capability' 		=> 'edit_theme_options',
-				'default'			=> false,
-				'sanitize_callback' => 'eksell_sanitize_checkbox'
-			) );
-
-			$wp_customize->add_control( 'eksell_disable_animations', array(
-				'type' 			=> 'checkbox',
-				'section' 		=> 'eksell_general_options',
-				'priority'		=> 15,
-				'label' 		=> __( 'Disable Animations', 'eksell' ),
-				'description'	=> __( 'Check to disable animations and transitions in the theme.', 'eksell' ),
-			) );
-
-			/* ------------------------------------------------------------------------
 			 * Colors
 			 * ------------------------------------------------------------------------ */
 
@@ -145,43 +118,31 @@ if ( ! class_exists( 'Eksell_Customizer' ) ) :
 			}
 
 			/* ------------------------------------------------------------------------
-			 * Fallback Image Options
+			 * General Options
 			 * ------------------------------------------------------------------------ */
 
-			$wp_customize->add_section( 'eksell_image_options', array(
-				'title' 		=> __( 'Images', 'eksell' ),
-				'priority' 		=> 40,
+			$wp_customize->add_section( 'eksell_general_options', array(
+				'title' 		=> __( 'General Options', 'eksell' ),
+				'priority' 		=> 10,
 				'capability' 	=> 'edit_theme_options',
-				'description' 	=> __( 'Settings for images in Eksell.', 'eksell' ),
+				'description' 	=> __( 'General theme options for Eksell.', 'eksell' ),
 				'panel'			=> 'eksell_theme_options',
 			) );
 
-			// Fallback image setting
-			$wp_customize->add_setting( 'eksell_fallback_image', array(
-				'capability' 		=> 'edit_theme_options',
-				'sanitize_callback' => 'absint'
-			) );
+			/* Disable Animations ------------ */
 
-			$wp_customize->add_control( new WP_Customize_Media_Control( $wp_customize, 'eksell_fallback_image', array(
-				'label'			=> __( 'Fallback Image', 'eksell' ),
-				'description'	=> __( 'The selected image will be used when a post is missing a featured image. A default fallback image included in the theme will be used if no image is set.', 'eksell' ),
-				'priority'		=> 10,
-				'mime_type'		=> 'image',
-				'section' 		=> 'eksell_image_options',
-			) ) );
-
-			// Disable fallback image setting
-			$wp_customize->add_setting( 'eksell_disable_fallback_image', array(
+			$wp_customize->add_setting( 'eksell_disable_animations', array(
 				'capability' 		=> 'edit_theme_options',
 				'default'			=> false,
 				'sanitize_callback' => 'eksell_sanitize_checkbox'
 			) );
 
-			$wp_customize->add_control( 'eksell_disable_fallback_image', array(
+			$wp_customize->add_control( 'eksell_disable_animations', array(
 				'type' 			=> 'checkbox',
-				'section' 		=> 'eksell_image_options',
+				'section' 		=> 'eksell_general_options',
 				'priority'		=> 15,
-				'label' 		=> __( 'Disable Fallback Image', 'eksell' )
+				'label' 		=> __( 'Disable Animations', 'eksell' ),
+				'description'	=> __( 'Check to disable animations and transitions in the theme.', 'eksell' ),
 			) );
 
 			/* ------------------------------------------------------------------------
@@ -190,45 +151,53 @@ if ( ! class_exists( 'Eksell_Customizer' ) ) :
 
 			$wp_customize->add_section( 'eksell_site_header_options', array(
 				'title' 		=> __( 'Site Header', 'eksell' ),
-				'priority' 		=> 40,
+				'priority' 		=> 20,
 				'capability' 	=> 'edit_theme_options',
 				'description' 	=> __( 'Settings for the site header.', 'eksell' ),
 				'panel'			=> 'eksell_theme_options',
 			) );
 
-			/* Disable Header Search --------- */
+			/* Enable Sticky Header ---------- */
 
-			$wp_customize->add_setting( 'eksell_disable_search', array(
+			$wp_customize->add_setting( 'eksell_enable_sticky_header', array(
 				'capability' 		=> 'edit_theme_options',
-				'default'			=> false,
+				'default'			=> true,
 				'sanitize_callback' => 'eksell_sanitize_checkbox',
 			) );
 
-			$wp_customize->add_control( 'eksell_disable_search', array(
+			$wp_customize->add_control( 'eksell_enable_sticky_header', array(
 				'type' 			=> 'checkbox',
 				'section' 		=> 'eksell_site_header_options',
 				'priority'		=> 10,
-				'label' 		=> __( 'Disable Search Button', 'eksell' ),
-				'description' 	=> __( 'Check to disable the search button in the header, and the search form in the mobile menu.', 'eksell' ),
+				'label' 		=> __( 'Enable Sticky Header', 'eksell' ),
+				'description' 	=> __( 'Determines whether to header should stick to the top of the screen when scrolling.', 'eksell' ),
+			) );
+
+			/* Enable Search ----------------- */
+
+			$wp_customize->add_setting( 'eksell_enable_search', array(
+				'capability' 		=> 'edit_theme_options',
+				'default'			=> true,
+				'sanitize_callback' => 'eksell_sanitize_checkbox',
+			) );
+
+			$wp_customize->add_control( 'eksell_enable_search', array(
+				'type' 			=> 'checkbox',
+				'section' 		=> 'eksell_site_header_options',
+				'priority'		=> 10,
+				'label' 		=> __( 'Enable Search', 'eksell' ),
+				'description' 	=> __( 'Uncheck to disable the search button in the header, and the search form in the mobile menu.', 'eksell' ),
 			) );
 
 			/* ------------------------------------------------------------------------
 			 * Posts
 			 * ------------------------------------------------------------------------ */
 
-			$wp_customize->add_section( 'eksell_post_archive_options', array(
-				'title' 		=> __( 'Post Archive', 'eksell' ),
-				'priority' 		=> 50,
+			$wp_customize->add_section( 'eksell_archive_pages_options', array(
+				'title' 		=> __( 'Archive Pages', 'eksell' ),
+				'priority' 		=> 30,
 				'capability' 	=> 'edit_theme_options',
-				'description' 	=> __( 'Settings for post archives.', 'eksell' ),
-				'panel'			=> 'eksell_theme_options',
-			) );
-
-			$wp_customize->add_section( 'eksell_single_post_options', array(
-				'title' 		=> __( 'Single Post', 'eksell' ),
-				'priority' 		=> 60,
-				'capability' 	=> 'edit_theme_options',
-				'description' 	=> __( 'Settings for single posts.', 'eksell' ),
+				'description' 	=> __( 'Settings for archive pages.', 'eksell' ),
 				'panel'			=> 'eksell_theme_options',
 			) );
 
@@ -242,7 +211,7 @@ if ( ! class_exists( 'Eksell_Customizer' ) ) :
 
 			$wp_customize->add_control( 'eksell_home_text', array(
 				'type' 			=> 'textarea',
-				'section' 		=> 'eksell_post_archive_options',
+				'section' 		=> 'eksell_archive_pages_options',
 				'label' 		=> __( 'Intro Text', 'eksell' ),
 				'description' 	=> __( 'Shown below the site title on the post archive.', 'eksell' ),
 			) );
@@ -257,19 +226,19 @@ if ( ! class_exists( 'Eksell_Customizer' ) ) :
 
 			$wp_customize->add_control( 'eksell_show_home_filter', array(
 				'type' 			=> 'checkbox',
-				'section' 		=> 'eksell_post_archive_options',
+				'section' 		=> 'eksell_archive_pages_options',
 				'label' 		=> __( 'Show Filter', 'eksell' ),
 				'description' 	=> __( 'Whether to display the category filter on the post archive.', 'eksell' ),
 			) );
 
 			/* Separator --------------------- */
 
-			$wp_customize->add_setting( 'eksell_post_archive_options_sep_1', array(
+			$wp_customize->add_setting( 'eksell_archive_pages_options_sep_1', array(
 				'sanitize_callback' => 'wp_filter_nohtml_kses',
 			) );
 
-			$wp_customize->add_control( new Eksell_Separator_Control( $wp_customize, 'eksell_post_archive_options_sep_1', array(
-				'section'			=> 'eksell_post_archive_options',
+			$wp_customize->add_control( new Eksell_Separator_Control( $wp_customize, 'eksell_archive_pages_options_sep_1', array(
+				'section'			=> 'eksell_archive_pages_options',
 			) ) );
 
 			/* Pagination Type --------------- */
@@ -282,11 +251,11 @@ if ( ! class_exists( 'Eksell_Customizer' ) ) :
 
 			$wp_customize->add_control( 'eksell_pagination_type', array(
 				'type'			=> 'select',
-				'section' 		=> 'eksell_post_archive_options',
+				'section' 		=> 'eksell_archive_pages_options',
 				'label'   		=> __( 'Pagination Type', 'eksell' ),
 				'description'	=> __( 'Determines how the pagination on archive pages should be displayed.', 'eksell' ),
 				'choices' 		=> array(
-					'button'		=> __( 'Load more on button click', 'eksell' ),
+					'button'		=> __( 'Load more button', 'eksell' ),
 					'scroll'		=> __( 'Load more on scroll', 'eksell' ),
 					'links'			=> __( 'Links', 'eksell' ),
 				),
@@ -294,12 +263,12 @@ if ( ! class_exists( 'Eksell_Customizer' ) ) :
 
 			/* Separator --------------------- */
 
-			$wp_customize->add_setting( 'eksell_post_archive_options_sep_2', array(
+			$wp_customize->add_setting( 'eksell_archive_pages_options_sep_2', array(
 				'sanitize_callback' => 'wp_filter_nohtml_kses',
 			) );
 
-			$wp_customize->add_control( new Eksell_Separator_Control( $wp_customize, 'eksell_post_archive_options_sep_2', array(
-				'section'			=> 'eksell_post_archive_options',
+			$wp_customize->add_control( new Eksell_Separator_Control( $wp_customize, 'eksell_archive_pages_options_sep_2', array(
+				'section'			=> 'eksell_archive_pages_options',
 			) ) );
 
 			/* Number of Post Columns -------- */
@@ -317,7 +286,7 @@ if ( ! class_exists( 'Eksell_Customizer' ) ) :
 
 				$wp_customize->add_control( $setting_name, array(
 					'type'			=> 'select',
-					'section' 		=> 'eksell_post_archive_options',
+					'section' 		=> 'eksell_archive_pages_options',
 					'label'   		=> $data['label'],
 					'description'   => $data['description'],
 					'choices' 		=> array(
@@ -329,14 +298,44 @@ if ( ! class_exists( 'Eksell_Customizer' ) ) :
 				) );
 			}
 
-			/* Sanitation Functions ---------- */
+			/* ------------------------------------------------------------------------
+			 * Fallback Image Options
+			 * ------------------------------------------------------------------------ */
 
-			// Sanitize boolean for checkbox
+			$wp_customize->add_section( 'eksell_image_options', array(
+				'title' 		=> __( 'Images', 'eksell' ),
+				'priority' 		=> 40,
+				'capability' 	=> 'edit_theme_options',
+				'description' 	=> __( 'Settings for images.', 'eksell' ),
+				'panel'			=> 'eksell_theme_options',
+			) );
+
+			/* Fallback Image Setting -------- */
+
+			$wp_customize->add_setting( 'eksell_fallback_image', array(
+				'capability' 		=> 'edit_theme_options',
+				'sanitize_callback' => 'absint'
+			) );
+
+			$wp_customize->add_control( new WP_Customize_Media_Control( $wp_customize, 'eksell_fallback_image', array(
+				'label'			=> __( 'Fallback Image', 'eksell' ),
+				'description'	=> __( 'The selected image will be used on archive pages when a post is missing a featured image. A default fallback image included in the theme will be used if no image is set.', 'eksell' ),
+				'mime_type'		=> 'image',
+				'section' 		=> 'eksell_image_options',
+			) ) );
+
+			/* ------------------------------------------------------------------------
+			 * Sanitation Functions
+			 * ------------------------------------------------------------------------ */
+
+			/* Sanitize Checkbox ------------- */
+
 			function eksell_sanitize_checkbox( $checked ) {
 				return ( ( isset( $checked ) && true == $checked ) ? true : false );
 			}
 
-			// Sanitize select
+			/* Sanitize Select --------------- */
+
 			function eksell_sanitize_select( $input, $setting ) {
 				$input = sanitize_key( $input );
 				$choices = $setting->manager->get_control( $setting->id )->choices;
@@ -345,10 +344,16 @@ if ( ! class_exists( 'Eksell_Customizer' ) ) :
 
 		}
 
-		// Return the sitewide color options. Used by...
-		// Eksell_Customizer				To generate the color settings in the Customizer
-		// Eksell_Custom_CSS				To output the color settings on the front-end
-		// eksell_block_editor_settings()	To register the color palette
+
+		/*	-----------------------------------------------------------------------------------------------
+			RETURN SITEWIDE COLOR OPTIONS
+			Used by...
+
+			Eksell_Customizer				To generate the color settings in the Customizer
+			Eksell_Custom_CSS				To output the color settings on the front-end
+			eksell_block_editor_settings()	To register the color palette
+		--------------------------------------------------------------------------------------------------- */
+
 		public static function get_color_options() {
 
 			return apply_filters( 'eksell_color_options', array(
@@ -451,7 +456,11 @@ if ( ! class_exists( 'Eksell_Customizer' ) ) :
 			
 		}
 
-		// Return the archive columns options
+		/*	-----------------------------------------------------------------------------------------------
+			RETURN ARCHIVE COLUMNS OPTIONS
+			Used to add the settings, and to loop over them when adding the column classes to the post grid.
+		--------------------------------------------------------------------------------------------------- */
+
 		public static function get_archive_columns_options() {
 			
 			return apply_filters( 'eksell_archive_columns_options', array(
@@ -501,9 +510,8 @@ endif;
 
 
 /* ---------------------------------------------------------------------------------------------
-   CUSTOM CONTROLS
+   REGISTER CUSTOM CUSTOMIZER CONTROLS
    --------------------------------------------------------------------------------------------- */
-
 
 if ( class_exists( 'WP_Customize_Control' ) ) :
 

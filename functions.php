@@ -208,7 +208,7 @@ if ( ! function_exists( 'eksell_body_classes' ) ) :
 		}
 
 		// Check for disabled search
-		if ( get_theme_mod( 'eksell_disable_search', false ) ) {
+		if ( ! get_theme_mod( 'eksell_enable_search', true ) ) {
 			$classes[] = 'disable-search-modal';
 		}
 

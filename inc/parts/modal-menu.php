@@ -41,13 +41,15 @@
 					?>
 				</ul><!-- .main-menu -->
 
-				<?php if ( ! get_theme_mod( 'eksell_disable_search', false ) ) : ?>
+				<?php 
+				if ( get_theme_mod( 'eksell_enable_search', true ) ) : 
+					?>
 					<div class="menu-modal-search">
 						<?php get_search_form(); ?>
 					</div><!-- .menu-modal-search -->
-				<?php endif; ?>
-
-				<?php
+					<?php 
+				endif;
+				
 				do_action( 'eksell_menu_modal_top_end' );
 				?>
 

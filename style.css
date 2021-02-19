@@ -1375,6 +1375,10 @@ ul.social-icons li {
 	display: none;
 }
 
+.header-toggles .nav-toggle.icon-menu-search svg {
+	transform: translateX( .2rem );
+}
+
 
 /* --------------------------------------------------------------------------------------------- */
 /*	5. Site Aside

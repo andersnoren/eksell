@@ -13,22 +13,17 @@
 
 		if ( $( dark_mode_setting ).prop( 'checked' ) ) {
 			$( dark_mode_colors ).show();
-			console.log( 'start show' );
 		} else {
 			$( dark_mode_colors ).hide();
-			console.log( 'start hide' );
 		}
 
 	} );
 
 	// Hide or show on change
 	$( document ).on( 'change', dark_mode_setting, function() {
-		console.log( 'change' );
 		if ( this.checked ) {
-			console.log( 'checked' );
 			$( dark_mode_colors ).show();
 		} else {
-			console.log( 'not checked' );
 			$( dark_mode_colors ).hide();
 		}
 	} );
