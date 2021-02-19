@@ -119,7 +119,7 @@ if ( ! class_exists( 'Eksell_Customizer' ) ) :
 				'type' 			=> 'checkbox',
 				'section' 		=> 'colors',
 				'label' 		=> __( 'Enable Dark Mode Color Palette', 'eksell' ),
-				'description'	=> __( 'The dark mode colors are used when the visitor views the site on an operating system set to display sites with a dark color scheme. The feature is not supported in all browsers or on all operating systems.', 'eksell' ),
+				'description'	=> __( 'The palette is used when the visitor has set their operating system to a light-on-dark color scheme. The feature is supported by most modern OSs and browsers, but not all. Your OS needs to be set to a light-on-dark color scheme for you to preview the color palette.', 'eksell' ),
 			) );
 
 			/* TOD */
@@ -136,7 +136,7 @@ if ( ! class_exists( 'Eksell_Customizer' ) ) :
 				) );
 
 				$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, $color_option_name, array(
-					'label' 		=> $color_option['label'],
+					'label' 		=> sprintf( _x( 'Dark Mode %s', 'Customizer option label. %s = Name of the color.', 'eksell' ), $color_option['label'] ),
 					'section' 		=> 'colors',
 					'settings' 		=> $color_option_name,
 					'priority' 		=> 10,
@@ -405,7 +405,7 @@ if ( ! class_exists( 'Eksell_Customizer' ) ) :
 						'palette'	=> false,
 					),
 					'eksell_dark_mode_accent_color' => array(
-						'default'	=> '#d23c50',
+						'default'	=> '#dc737d',
 						'label'		=> __( 'Accent Color', 'eksell' ),
 						'slug'		=> 'accent',
 						'palette'	=> false,
@@ -451,6 +451,7 @@ if ( ! class_exists( 'Eksell_Customizer' ) ) :
 			
 		}
 
+		// Return the archive columns options
 		public static function get_archive_columns_options() {
 			
 			return apply_filters( 'eksell_archive_columns_options', array(
@@ -483,10 +484,18 @@ if ( ! class_exists( 'Eksell_Customizer' ) ) :
 
 		}
 
+		// Enqueue the Customizer JavaScript
+		public static function enqueue_customizer_javascript() {
+			wp_enqueue_script( 'eksell-customizer-javascript', get_template_directory_uri() . '/assets/js/customizer.js', array( 'jquery', 'customize-controls' ), '', true );
+		}
+
 	}
 
-	// Setup the Theme Customizer settings and controls
+	// Setup the Customizer settings and controls
 	add_action( 'customize_register', array( 'Eksell_Customizer', 'eksell_register' ) );
+
+	// Enqueue the Customizer JavaScript
+	add_action( 'customize_controls_enqueue_scripts', array( 'Eksell_Customizer', 'enqueue_customizer_javascript' ) );
 
 endif;
 
@@ -502,6 +511,8 @@ if ( class_exists( 'WP_Customize_Control' ) ) :
 
 	if ( ! class_exists( 'Eksell_Separator_Control' ) ) :
 		class Eksell_Separator_Control extends WP_Customize_Control {
+
+			public $type = 'eksell_separator_control';
 
 			public function render_content() {
 				echo '<hr/>';
