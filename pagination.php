@@ -54,7 +54,7 @@ if ( ! ( $query_args['max_num_pages'] > $query_args['paged'] ) ) {
 			<?php endif; ?>
 
 			<?php if ( $pagination_type == 'button' ) : ?>
-				<button id="load-more" class="d-no-js-none">
+				<button id="load-more" class="d-no-js-none do-spot spot-fade-up">
 					<span class="load-text"><?php esc_html_e( 'Load More', 'eksell' ); ?></span>
 					<span class="loading-icon"><span class="dot-pulse"></span></span>
 				</button>

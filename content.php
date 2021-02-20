@@ -1,4 +1,4 @@
-<article <?php post_class( '' ); ?> id="post-<?php the_ID(); ?>">
+<article <?php post_class(); ?> id="post-<?php the_ID(); ?>">
 
 	<?php 
 
@@ -6,7 +6,7 @@
 
 	?>
 
-	<header class="entry-header section-inner mw-thin">
+	<header class="entry-header section-inner mw-thin i-a a-fade-up">
 
 		<?php 
 		do_action( 'eksell_entry_header_start', $post->ID );
@@ -40,7 +40,7 @@
 	if ( has_post_thumbnail() && ! post_password_required() ) : 
 		?>
 
-		<figure class="featured-media section-inner">
+		<figure class="featured-media section-inner i-a a-fade-up a-del-200">
 
 			<?php 
 			do_action( 'eksell_featured_media_start', $post->ID );
@@ -72,15 +72,15 @@
 	endif; // has_post_thumbnail()
 	?>
 
-	<div class="post-inner section-inner mw-thin">
+	<div class="post-inner section-inner mw-thin do-spot spot-fade-up a-del-200">
 
 		<div class="entry-content">
 
 			<?php 
 			the_content();
 			wp_link_pages( array(
-				'before'           => '<nav class="post-nav-links bg-light-background"><span class="label">' . __( 'Pages:', 'eksell' ) . '</span>',
-				'after'            => '</nav>',
+				'before'           => '<nav class="post-nav-links"><hr /><div class="post-nav-links-list">',
+				'after'            => '</div></nav>',
 			) );
 			?>
 

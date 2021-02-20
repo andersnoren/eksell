@@ -30,7 +30,6 @@ if ( ! class_exists( 'Eksell_Customizer' ) ) :
 			$wp_customize->add_setting( 'eksell_retina_logo', array(
 				'capability' 		=> 'edit_theme_options',
 				'sanitize_callback' => 'eksell_sanitize_checkbox',
-				'transport'			=> 'postMessage',
 			) );
 
 			$wp_customize->add_control( 'eksell_retina_logo', array(

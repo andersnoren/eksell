@@ -46,7 +46,7 @@ if ( ! function_exists( 'eksell_get_custom_logo' ) ) :
 		?>
 
 		<a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home" class="custom-logo-link <?php echo esc_attr( $logo_theme_mod_class ); ?>">
-			<img src="<?php echo esc_url( $logo_url ); ?>" width="<?php echo esc_attr( $logo_width ); ?>" height="<?php echo esc_attr( $logo_height ); ?>" <?php if ( $logo_alt ) echo ' alt="' . esc_attr( $logo_alt ) . '"'; ?> />
+			<img src="<?php echo esc_url( $logo_url ); ?>" width="<?php echo esc_attr( $logo_width ); ?>" height="<?php echo esc_attr( $logo_height ); ?>" style="height: <?php echo esc_attr( $logo_height ); ?>px;"<?php if ( $logo_alt ) echo ' alt="' . esc_attr( $logo_alt ) . '"'; ?> />
 		</a>
 
 		<?php
@@ -346,7 +346,7 @@ if ( ! function_exists( 'eksell_the_archive_filter' ) ) :
 	
 		?>
 
-		<div class="filter-wrapper">
+		<div class="filter-wrapper i-a a-fade-up a-del-200">
 			<ul class="filter-list reset-list-style">
 
 				<?php if ( $home_url ) : ?>

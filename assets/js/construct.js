@@ -434,95 +434,6 @@ eksell.coverModals = {
 
 
 /*	-----------------------------------------------------------------------------------------------
-	Element In View
---------------------------------------------------------------------------------------------------- */
-
-eksell.elementInView = {
-
-	init: function() {
-
-		$targets = $( '.do-spot' );
-		eksell.elementInView.run( $targets );
-
-		// Rerun on AJAX content loaded
-		$win.on( 'ajax-content-loaded', function() {
-			$targets = $( '.do-spot' );
-			eksell.elementInView.run( $targets );
-		} );
-
-	},
-
-	run: function( $targets ) {
-
-		if ( $targets.length ) {
-
-			// Add class indicating the elements will be spotted
-			$targets.each( function() {
-				$( this ).addClass( 'will-be-spotted' );
-			} );
-
-			eksell.elementInView.handleFocus( $targets );
-		}
-
-	},
-
-	handleFocus: function( $targets ) {
-
-		// Get dimensions of window outside of scroll for performance
-		$win.on( 'load resize orientationchange', function() {
-			winHeight = $win.height();
-		} );
-
-		$win.on( 'resize orientationchange did-interval-scroll', function() {
-
-			var winTop 		= $win.scrollTop();
-				winBottom 	= winTop + winHeight;
-
-			// Check for our targets
-			$targets.each( function() {
-
-				var $this = $( this );
-
-				if ( eksell.elementInView.isVisible( $this, checkAbove = true ) ) {
-					$this.addClass( 'spotted' ).triggerHandler( 'spotted' );
-				}
-
-			} );
-
-		} );
-
-	},
-
-	// Determine whether the element is in view
-	isVisible: function( $elem, checkAbove ) {
-
-		if ( typeof checkAbove === 'undefined' ) {
-			checkAbove = false;
-		}
-
-		var winHeight 				= $win.height();
-
-		var docViewTop 				= $win.scrollTop(),
-			docViewBottom			= docViewTop + winHeight,
-			docViewLimit 			= docViewBottom - 50;
-
-		var elemTop 				= $elem.offset().top,
-			elemBottom 				= $elem.offset().top + $elem.outerHeight();
-
-		// If checkAbove is set to true, which is default, return true if the browser has already scrolled past the element
-		if ( checkAbove && ( elemBottom <= docViewBottom ) ) {
-			return true;
-		}
-
-		// If not, check whether the scroll limit exceeds the element top
-		return ( docViewLimit >= elemTop );
-
-	}
-
-} // eksell.elementInView
-
-
-/*	-----------------------------------------------------------------------------------------------
 	Stick Me
 --------------------------------------------------------------------------------------------------- */
 
@@ -1080,6 +991,8 @@ eksell.filters = {
 				taxonomy 	= $link.data( 'filter-taxonomy' ) ? $link.data( 'filter-taxonomy' ) : null,
 				postType 	= $link.data( 'filter-post-type' ) ? $link.data( 'filter-post-type' ) : '';
 
+			$link.addClass( 'pre-active' );
+
 			$.ajax({
 				url: eksell_ajax_filters.ajaxurl,
 				type: 'post',
@@ -1098,7 +1011,7 @@ eksell.filters = {
 					$win.trigger( 'reset-posts' );
 
 					// Update active class
-					$( '.filter-link' ).removeClass( 'active' );
+					$( '.filter-link' ).removeClass( 'pre-active active' );
 					$link.addClass( 'active' );
 	
 				},
@@ -1125,12 +1038,12 @@ eksell.elementInView = {
 
 	init: function() {
 
-		$targets = $( '.do-spot' );
+		$targets = $( 'body.has-anim .do-spot' );
 		eksell.elementInView.run( $targets );
 
 		// Rerun on AJAX content loaded
 		$win.on( 'ajax-content-loaded', function() {
-			$targets = $( '.do-spot' );
+			$targets = $( 'body.has-anim .do-spot' );
 			eksell.elementInView.run( $targets );
 		} );
 
@@ -1183,8 +1096,7 @@ eksell.elementInView = {
 			docViewBottom			= docViewTop + winHeight,
 			docViewLimit 			= docViewBottom - 50;
 
-		var elemTop 				= $elem.offset().top,
-			elemBottom 				= $elem.offset().top + $elem.outerHeight();
+		var elemTop 				= $elem.offset().top;
 
 		// If checkAbove is set to true, which is default, return true if the browser has already scrolled past the element
 		if ( checkAbove && ( elemTop <= docViewBottom ) ) {
@@ -1236,7 +1148,6 @@ eksell.masonry = {
 } // eksell.masonry
 
 
-
 /*	-----------------------------------------------------------------------------------------------
 	Dynamic Heights
 --------------------------------------------------------------------------------------------------- */
@@ -1257,10 +1168,18 @@ eksell.dynamicHeights = {
 
 		var $header 	= $( '#site-header' ),
 			$footer 	= $( '#site-footer' ),
-			$content 	= $( '#site-content' );
-			contentHeight = $win.outerHeight() - $header.outerHeight() - parseInt( $header.css( 'marginBottom' ) ) - $footer.outerHeight() - parseInt( $footer.css( 'marginTop' ) );
+			$content 	= $( '#site-content' )
+			
+		var headerHeight = $header.outerHeight(),
+			contentHeight = $win.outerHeight() - headerHeight - parseInt( $header.css( 'marginBottom' ) ) - $footer.outerHeight() - parseInt( $footer.css( 'marginTop' ) );
 
+		// Set a min-height for the content
 		$content.css( 'min-height', contentHeight );
+
+		// Set the desktop navigation toggle and search modal field to match the header height, including line-height of pseudo (thanks, Firefox)
+		$( '#site-aside .nav-toggle-inner' ).css( 'height', headerHeight );
+		$( '.search-modal .search-field' ).css( 'height', headerHeight );
+		$( '<style>.modal-search-form .search-field::-moz-placeholder { line-height: ' + headerHeight + 'px }</style>' ).appendTo( 'head' );
 
 	}
 

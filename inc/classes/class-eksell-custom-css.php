@@ -40,7 +40,7 @@ if ( ! class_exists( 'Eksell_Custom_CSS' ) ) :
 						}
 
 						$colors[$group_name][$color_option['slug']] = array(
-							'css_variable'  => '--' . $color_option['slug'] . '-color',
+							'css_variable'  => '--eksell-' . $color_option['slug'] . '-color',
 							'color' 		=> get_theme_mod( $color_option_name, $color_option['default'] ),
 						);
 					}

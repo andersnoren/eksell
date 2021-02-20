@@ -35,7 +35,7 @@
 							
 							if ( $archive_prefix ) : 
 								?>
-								<p class="archive-prefix color-accent"><?php echo $archive_prefix; ?></p>
+								<p class="archive-prefix color-accent i-a a-fade-up"><?php echo $archive_prefix; ?></p>
 								<?php 
 							endif;
 
@@ -44,11 +44,11 @@
 								// On home, where we're outputting the eksell_home_text Customizer value, output the title in a div to enable multiple paragraphs
 								if ( is_home() && ! is_paged() ) : 
 									?>
-									<div class="archive-title contain-margins"><?php echo wpautop( $archive_title ); ?></div>
+									<div class="archive-title contain-margins i-a a-fade-up"><?php echo wpautop( $archive_title ); ?></div>
 									<?php
 								else : 
 									?>
-									<h1 class="archive-title"><?php echo $archive_title; ?></h1>
+									<h1 class="archive-title i-a a-fade-up"><?php echo $archive_title; ?></h1>
 									<?php
 								endif;
 							endif;
@@ -64,7 +64,7 @@
 							endif; 
 							if ( $archive_description ) : 
 								?>
-								<div class="archive-description mw-small contain-margins"><?php echo wpautop( $archive_description ); ?></div>
+								<div class="archive-description mw-small contain-margins i-a a-fade-up a-del-100"><?php echo wpautop( $archive_description ); ?></div>
 								<?php 
 							endif;
 					

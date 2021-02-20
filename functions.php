@@ -34,8 +34,8 @@ if ( ! function_exists( 'eksell_theme_support' ) ) :
 
 		// Custom logo
 		add_theme_support( 'custom-logo', array(
-			'height'      => 240,
-			'width'       => 320,
+			'height'      => 144,
+			'width'       => 192,
 			'flex-height' => true,
 			'flex-width'  => true,
 			'header-text' => array( 'site-title', 'site-description' ),
@@ -540,6 +540,7 @@ if ( ! function_exists( 'eksell_ajax_filters' ) ) :
 		$post_type 	= isset( $_POST['post_type'] ) ? $_POST['post_type'] : '';
 
 		$args = array(
+			'ignore_sticky_posts'	=> false,
 			'post_status'			=> 'publish',
 			'post_type'				=> $post_type,
 		);
@@ -591,7 +592,7 @@ if ( ! function_exists( 'eksell_block_editor_styles' ) ) :
 		}
 
 		// Enqueue the editor styles
-		wp_enqueue_style( 'eksell_block_editor_styles', get_theme_file_uri( 'assets/css/eksell-editor-style-block-editor.css' ), $css_dependencies, wp_get_theme( 'eksell' )->get( 'Version' ), 'all' );
+		wp_enqueue_style( 'eksell_block_editor_styles', get_theme_file_uri( 'assets/css/eksell-editor-styles.css' ), $css_dependencies, wp_get_theme( 'eksell' )->get( 'Version' ), 'all' );
 
 		// Add inline style from the Customizer
 		wp_add_inline_style( 'eksell_block_editor_styles', Eksell_Custom_CSS::get_customizer_css() );

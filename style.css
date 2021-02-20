@@ -48,31 +48,31 @@
 
 :root {
 	/* Typography */
-	--body-font: 'Public Sans', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, sans-serif;
-	--headings-font: 'Public Sans', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, sans-serif;
+	--eksell-body-font: 'Public Sans', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, sans-serif;
+	--eksell-headings-font: 'Public Sans', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, sans-serif;
 	/* Colors */
-	--accent-color: #d23c50;
-	--primary-color: #1e2d32;
-	--secondary-color: #707376;
-	--border-color: #d6d5d4;
-	--light-background-color: #f3efe9;
-	--background-color: #fff;
-	--menu-modal-background-color: #1e2d32;
-	--menu-modal-text-color: #fff;
+	--eksell-accent-color: #d23c50;
+	--eksell-primary-color: #1e2d32;
+	--eksell-secondary-color: #707376;
+	--eksell-border-color: #d6d5d4;
+	--eksell-light-background-color: #f3efe9;
+	--eksell-background-color: #fff;
+	--eksell-menu-modal-background-color: #1e2d32;
+	--eksell-menu-modal-text-color: #fff;
 }
 
 /* P3 Colors, where supported */
 
 @supports ( color: color( display-p3 0 0 0 / 1 ) ) {
 	:root {
-		--accent-color: color( display-p3 0.824 0.235 0.314 / 1 );
-		--primary-color: color( display-p3 0.118 0.176 0.196 / 1 );
-		--secondary-color: color( display-p3 0.439 0.451 0.463 / 1 );
-		--border-color: color( display-p3 0.839 0.835 0.831 / 1 );
-		--light-background-color: color( display-p3 0.953 0.937 0.914 / 1 );
-		--menu-modal-text-color: color( display-p3 1 1 1 / 1 );
-		--menu-modal-background-color: color( display-p3 0.118 0.176 0.196 / 1 );
-		--background-color: color( display-p3 1 1 1 / 1 );
+		--eksell-accent-color: color( display-p3 0.824 0.235 0.314 / 1 );
+		--eksell-primary-color: color( display-p3 0.118 0.176 0.196 / 1 );
+		--eksell-secondary-color: color( display-p3 0.439 0.451 0.463 / 1 );
+		--eksell-border-color: color( display-p3 0.839 0.835 0.831 / 1 );
+		--eksell-light-background-color: color( display-p3 0.953 0.937 0.914 / 1 );
+		--eksell-menu-modal-text-color: color( display-p3 1 1 1 / 1 );
+		--eksell-menu-modal-background-color: color( display-p3 0.118 0.176 0.196 / 1 );
+		--eksell-background-color: color( display-p3 1 1 1 / 1 );
 	}
 }
 
@@ -118,13 +118,13 @@ html {
 }
 
 body {
-	background: var( --background-color ) !important;
+	background: var( --eksell-background-color ) !important;
 		-webkit-box-sizing: border-box;
 		-moz-box-sizing: border-box;
-	border-left: .4rem solid var( --primary-color );
+	border-left: .4rem solid var( --eksell-primary-color );
 	box-sizing: border-box;
-	color: var( --primary-color );
-	font-family: var( --body-font );
+	color: var( --eksell-primary-color );
+	font-family: var( --eksell-body-font );
 	font-size: 1.7rem;
 	min-height: 100vh;
 	text-align: left;
@@ -143,8 +143,8 @@ body {
 }
 
 ::selection {
-	background: black;
-	color: var( --background-color );
+	background: var( --eksell-primary-color );
+	color: var( --eksell-background-color );
 }
 
 #site-content {
@@ -249,6 +249,11 @@ path {
 	100% { 	opacity: 1.0; transform: scale( 1.0 ); }
 }
 
+@keyframes fade-up {
+	0% { 	opacity: 0.0; transform: translateY( 5rem ); }
+	100% { 	opacity: 1.0; transform: translateY( 0 ); }
+}
+
 /* Accessibility Settings -------------------- */
 
 @media ( prefers-reduced-motion: reduce ) {
@@ -283,7 +288,7 @@ h3, .h3,
 h4, .h4,
 h5, .h5,
 h6, .h6 {
-	font-family: var( --headings-font );
+	font-family: var( --eksell-headings-font );
 	font-feature-settings: "lnum";
 	font-variant-numeric: lining-nums;
 	font-weight: 700;
@@ -336,7 +341,7 @@ address {
 
 hr {
 	border: none;
-	color: var( --border-color );
+	color: var( --eksell-border-color );
 	height: 1rem;
 	image-rendering: pixelated;
 	margin: 3.2rem 0;
@@ -347,9 +352,9 @@ hr {
 }
 
 a {
-	color: var( --accent-color );
+	color: var( --eksell-accent-color );
 	text-decoration: underline;
-	text-underline-offset: .2em;
+	text-underline-offset: .3em;
 	text-decoration-thickness: .1rem;
 }
 
@@ -401,7 +406,7 @@ dd + dt { margin-top: 1.5rem; }
 /* Quotes ------------------------------------ */
 
 blockquote {
-	border-color: var( --accent-color );
+	border-color: var( --eksell-accent-color );
 	border-style: solid;
 	border-width: 0 0 0 .2rem;
 	color: inherit;
@@ -411,7 +416,7 @@ blockquote {
 }
 
 cite {
-	color: var( --accent-color );
+	color: var( --eksell-accent-color );
 	font-size: 1.6rem;
 	font-style: normal;
 	font-weight: 700;
@@ -440,12 +445,12 @@ samp {
 code,
 kbd,
 samp {
-	background: var( --light-background-color );
+	background: var( --eksell-light-background-color );
 	border-radius: .2rem;
 }
 
 pre {
-	border: .1rem solid var( --border-color );
+	border: .1rem solid var( --eksell-border-color );
 	line-height: 1.5;
 	margin: 4rem 0;
 	overflow: auto;
@@ -481,12 +486,16 @@ object {
 
 figcaption,
 .wp-caption-text {
-	color: var( --secondary-color );
+	color: var( --eksell-secondary-color );
 	display: block;
 	font-size: 1.5rem;
 	font-weight: 400;
 	line-height: 1.5;
 	margin-top: .8rem;
+}
+
+figcaption a {
+	color: inherit;
 }
 
 /* GALLERIES */
@@ -517,7 +526,7 @@ figcaption,
 /* Inputs ------------------------------------ */
 
 fieldset {
-	border: .2rem solid var( --border-color );
+	border: .2rem solid var( --eksell-border-color );
 	margin-bottom: 3rem;
 	margin-top: 3rem;
 	padding: 2rem;
@@ -558,8 +567,8 @@ button,
 input,
 textarea,
 .select2-container .select2-selection--single {
-	background-color: var( --background-color );
-	border-color: var( --border-color );
+	background-color: var( --eksell-background-color );
+	border-color: var( --eksell-border-color );
 }
 
 input[type="text"],
@@ -605,11 +614,11 @@ select {
 	font-size: inherit;
 }
 
-::-webkit-input-placeholder { color: var( --secondary-color ); line-height: normal; }
-::-moz-placeholder { color: var( --secondary-color ); line-height: normal; }
-:-ms-input-placeholder { color: var( --secondary-color ); line-height: normal; }
-:-moz-placeholder { color: var( --secondary-color ); opacity: 1; line-height: normal; }
-::placeholder { color: var( --secondary-color ); line-height: normal; opacity: 1; }
+::-webkit-input-placeholder { color: var( --eksell-secondary-color ); line-height: normal; }
+::-moz-placeholder { color: var( --eksell-secondary-color ); line-height: normal; }
+:-ms-input-placeholder { color: var( --eksell-secondary-color ); line-height: normal; }
+:-moz-placeholder { color: var( --eksell-secondary-color ); opacity: 1; line-height: normal; }
+::placeholder { color: var( --eksell-secondary-color ); line-height: normal; opacity: 1; }
 
 input[type="search"]::-webkit-search-decoration,
 input[type="search"]::-webkit-search-cancel-button,
@@ -632,19 +641,19 @@ input[type="submit"],
 :root .woocommerce input.button {
 	-webkit-appearance: none;
 	-moz-appearance: none;
-	background: var( --accent-color );
+	background: var( --eksell-accent-color );
 	border: none;
 	border-radius: 0;
-	color: var( --background-color );
+	color: var( --eksell-background-color );
 	cursor: pointer;
 	display: inline-flex;
 	font-size: 1.6rem;
 	font-weight: 700;
 	justify-content: center;
 	letter-spacing: 0;
-	line-height: 1;
+	line-height: 1.25;
 	margin: 0;
-	padding: 1.7rem 2.4rem;
+	padding: 1.5rem 2.4rem;
 	text-align: center;
 	text-decoration: none;
 	text-underline-offset: .25em;
@@ -679,21 +688,28 @@ input[type="submit"]:focus,
 	text-decoration: underline;
 }
 
+.wp-block-button__link:active, 
+.wp-block-button__link:focus, 
+.wp-block-button__link:hover, 
+.wp-block-button__link:visited {
+	color: var( --eksell-background-color );
+}
+
 /* STYLE: OUTLINE */
 
 .is-style-outline .wp-block-button__link:not(.has-text-color) {
-	color: var( --accent-color );
+	color: var( --eksell-accent-color );
 }
 
 .is-style-outline .wp-block-button__link,
 .wp-block-button__link.is-style-outline {
     background-color: transparent;
     border: .2rem solid currentColor;
-	padding: 1.5rem 2.2rem;
+	padding: 1.3rem 2.2rem;
 }
 
 .wp-block-button__link.is-style-outline {
-	color: var( --accent-color );
+	color: var( --eksell-accent-color );
 }
 
 /* Input Reset ------------------------------- */
@@ -734,14 +750,14 @@ caption {
 
 th,
 td {
-	border: .1rem solid var( --border-color );
+	border: .1rem solid var( --eksell-border-color );
 	line-height: 1.4;
 	margin: 0;
 	overflow: visible;
 }
 
 caption {
-	background-color: var( --border-color );
+	background-color: var( --eksell-border-color );
 	font-weight: 700;
 	text-align: center;
 }
@@ -914,25 +930,25 @@ button.toggle {
 
 /* TEXT COLOR */
 
-.color-body-background { color: var( --background-color ); }
-.color-primary { color: var( --primary-color ); }
-.color-secondary { color: var( --secondary-color ); }
-.color-accent { color: var( --accent-color ); }
-.color-border { color: var( --border-color ); }
-.color-light-background { color: var( --light-background-color ); }
-.color-menu-modal-background { color: var( --menu-modal-background-color ); }
-.color-menu-modal-text { color: var( --menu-modal-text-color ); }
+.color-body-background { color: var( --eksell-background-color ); }
+.color-primary { color: var( --eksell-primary-color ); }
+.color-secondary { color: var( --eksell-secondary-color ); }
+.color-accent { color: var( --eksell-accent-color ); }
+.color-border { color: var( --eksell-border-color ); }
+.color-light-background { color: var( --eksell-light-background-color ); }
+.color-menu-modal-background { color: var( --eksell-menu-modal-background-color ); }
+.color-menu-modal-text { color: var( --eksell-menu-modal-text-color ); }
 
 /* BACKGROUND COLOR */
 
-.bg-body-background { background-color: var( --background-color ); }
-.bg-primary { background-color: var( --primary-color ); }
-.bg-secondary { background-color: var( --secondary-color ); }
-.bg-accent { background-color: var( --accent-color ); }
-.bg-border { background-color: var( --border-color ); }
-.bg-light-background { background-color: var( --light-background-color ); }
-.bg-menu-modal-background { background-color: var( --menu-modal-background-color ); }
-.bg-menu-modal-text { background-color: var( --menu-modal-text-color ); }
+.bg-body-background { background-color: var( --eksell-background-color ); }
+.bg-primary { background-color: var( --eksell-primary-color ); }
+.bg-secondary { background-color: var( --eksell-secondary-color ); }
+.bg-accent { background-color: var( --eksell-accent-color ); }
+.bg-border { background-color: var( --eksell-border-color ); }
+.bg-light-background { background-color: var( --eksell-light-background-color ); }
+.bg-menu-modal-background { background-color: var( --eksell-menu-modal-background-color ); }
+.bg-menu-modal-text { background-color: var( --eksell-menu-modal-text-color ); }
 
 .bg-current-color {
 	background: currentColor;
@@ -940,45 +956,45 @@ button.toggle {
 
 /* BORDER COLOR */
 
-.border-body-background { border-color: var( --background-color ); }
-.border-color-primary { border-color: var( --primary-color ); }
-.border-color-secondary { border-color: var( --secondary-color ); }
-.border-color-accent { border-color: var( --accent-color ); }
-.border-color-border { border-color: var( --border-color ); }
-.border-color-light-background { border-color: var( --light-background-color ); }
-.border-menu-modal-background { border-color: var( --menu-modal-background-color ); }
-.border-menu-modal-text { border-color: var( --menu-modal-text-color ); }
+.border-body-background { border-color: var( --eksell-background-color ); }
+.border-color-primary { border-color: var( --eksell-primary-color ); }
+.border-color-secondary { border-color: var( --eksell-secondary-color ); }
+.border-color-accent { border-color: var( --eksell-accent-color ); }
+.border-color-border { border-color: var( --eksell-border-color ); }
+.border-color-light-background { border-color: var( --eksell-light-background-color ); }
+.border-menu-modal-background { border-color: var( --eksell-menu-modal-background-color ); }
+.border-menu-modal-text { border-color: var( --eksell-menu-modal-text-color ); }
 
 /* FILL COLOR */
 
 .fill-cc, .fill-cc * { fill: currentColor;}
 
-.fill-background, .fill-background * { fill: var( --background-color ); }
-.fill-primary, .fill-primary * { fill: var( --primary-color ); }
-.fill-secondary, .fill-secondary * { fill: var( --secondary-color ); }
-.fill-accent, .fill-accent * { fill: var( --accent-color ); }
-.fill-border, .fill-border * { fill: var( --border-color ); }
-.fill-light-background, .fill-light-background * { fill: var( --light-background-color ); }
-.fill-menu-modal-background, .fill-menu-modal-background * {  fill: var( --menu-modal-background-color ); }
-.fill-menu-modal-text, .fill-menu-modal-text * {  fill: var( --menu-modal-text-color ); }
+.fill-background, .fill-background * { fill: var( --eksell-background-color ); }
+.fill-primary, .fill-primary * { fill: var( --eksell-primary-color ); }
+.fill-secondary, .fill-secondary * { fill: var( --eksell-secondary-color ); }
+.fill-accent, .fill-accent * { fill: var( --eksell-accent-color ); }
+.fill-border, .fill-border * { fill: var( --eksell-border-color ); }
+.fill-light-background, .fill-light-background * { fill: var( --eksell-light-background-color ); }
+.fill-menu-modal-background, .fill-menu-modal-background * {  fill: var( --eksell-menu-modal-background-color ); }
+.fill-menu-modal-text, .fill-menu-modal-text * {  fill: var( --eksell-menu-modal-text-color ); }
 
 /* STROKE COLOR */
 
 .stroke-cc, .stroke-cc * { stroke: currentColor;}
 
-.stroke-background, .stroke-background * { stroke: var( --background-color ); }
-.stroke-primary, .stroke-primary * { stroke: var( --primary-color ); }
-.stroke-secondary, .stroke-secondary * { stroke: var( --secondary-color ); }
-.stroke-accent, .stroke-accent * { stroke: var( --accent-color ); }
-.stroke-border, .stroke-border * { stroke: var( --border-color ); }
-.stroke-light-background, .stroke-light-background * { stroke: var( --light-background-color ); }
-.stroke-menu-modal-background, .stroke-menu-modal-background * {  stroke: var( --menu-modal-background-color ); }
-.stroke-menu-modal-text, .stroke-menu-modal-text * {  stroke: var( --menu-modal-text-color ); }
+.stroke-background, .stroke-background * { stroke: var( --eksell-background-color ); }
+.stroke-primary, .stroke-primary * { stroke: var( --eksell-primary-color ); }
+.stroke-secondary, .stroke-secondary * { stroke: var( --eksell-secondary-color ); }
+.stroke-accent, .stroke-accent * { stroke: var( --eksell-accent-color ); }
+.stroke-border, .stroke-border * { stroke: var( --eksell-border-color ); }
+.stroke-light-background, .stroke-light-background * { stroke: var( --eksell-light-background-color ); }
+.stroke-menu-modal-background, .stroke-menu-modal-background * {  stroke: var( --eksell-menu-modal-background-color ); }
+.stroke-menu-modal-text, .stroke-menu-modal-text * {  stroke: var( --eksell-menu-modal-text-color ); }
 
 /* Typography -------------------------------- */
 
-.ff-body { font-family: var( --body-font ); }
-.ff-headings { font-family: var( --headings-font ); }
+.ff-body { font-family: var( --eksell-body-font ); }
+.ff-headings { font-family: var( --eksell-headings-font ); }
 
 /* Opacity ----------------------------------- */
 
@@ -1063,10 +1079,10 @@ a.faux-image {
 
 .search-form .search-field {
 	align-items: center;
-	background-color: var( --background-color );
-	border: .1rem solid var( --border-color );
+	background-color: var( --eksell-background-color );
+	border: .1rem solid var( --eksell-border-color );
 	border-radius: 999rem;
-	color: var( --primary-color );
+	color: var( --eksell-primary-color );
 	display: flex;
 	font-size: 1.8rem;
 	padding: 1.35rem 6.6rem 1.35rem 2.4rem;
@@ -1076,12 +1092,12 @@ a.faux-image {
 }
 
 .search-form .search-field:focus {
-	border-color: var( --secondary-color );
+	border-color: var( --eksell-secondary-color );
 }
 
 .search-form .search-submit {
 	align-items: center;
-	color: var( --secondary-color );
+	color: var( --eksell-secondary-color );
 	display: flex;
 	justify-content: center;
 	position: absolute;
@@ -1131,9 +1147,9 @@ ul.social-icons li {
 
 .social-icons.circular a {
 	align-items: center;
-	background-color: var( --background-color );
+	background-color: var( --eksell-background-color );
 	border-radius: 50%;
-	color: var( --primary-color );
+	color: var( --eksell-primary-color );
 	display: flex;
 	justify-content: center;
 	margin: 1.2rem 0 0 1.2rem;
@@ -1143,8 +1159,8 @@ ul.social-icons li {
 }
 
 .menu-modal .social-icons.circular a {
-	background-color: var( --menu-modal-text-color );
-	color: var( --menu-modal-background-color );
+	background-color: var( --eksell-menu-modal-text-color );
+	color: var( --eksell-menu-modal-background-color );
 }
 
 /* Cover Modals ------------------------------ */
@@ -1227,22 +1243,33 @@ ul.social-icons li {
 
 /* CSS Animations ---------------------------- */
 
-.has-anim .i-a, 
-.has-anim .will-be-spotted { 
-	animation: .8s forwards; 
+.has-anim .i-a, .has-anim .will-be-spotted { 
+	animation: 1s forwards; 
 }
 
-/* INITIAL STATES */
+/* STATE: INITIAL */
 
-.has-anim .a-fade-in-scale, .has-anim .spot-fade-in-scale 	{ opacity: 0.0; transform: scale( 0.8 ); }
+.has-anim .a-fade-in-scale, .has-anim .spot-fade-in-scale { opacity: 0.0; transform: scale( 0.8 ); }
+.has-anim .a-fade-up, .has-anim .spot-fade-up { opacity: 0.0; transform: translateY( 5rem ); }
 
-/* ANIMATION STATES */
+/* STATE: ANIMATION */
 
 .has-anim .a-fade-in-scale, .has-anim .spot-fade-in-scale.spotted { animation-name: fade-in-scale; }
+.has-anim .a-fade-up, .has-anim .spot-fade-up.spotted { animation-name: fade-up; }
 
-/* NO JS */
+/* STATE: NO JS */
 
-.no-js .a-fade-in-scale, .no-js .spot-fade-in-scale 	{ opacity: 1.0; transform: none; }
+.no-js .a-fade-in-scale, .no-js .spot-fade-in-scale,
+.no-js .a-fade-up, .no-js .spot-fade-up { opacity: 1.0; transform: none; }
+
+/* HELPER CLASSES */
+
+:root .a-del-100 { animation-delay: .1s; }
+:root .a-del-200 { animation-delay: .2s; }
+:root .a-del-300 { animation-delay: .3s; }
+:root .a-del-400 { animation-delay: .4s; }
+:root .a-del-500 { animation-delay: .5s; }
+:root .a-del-600 { animation-delay: .6s; }
 
 
 /* -------------------------------------------------------------------------------- */
@@ -1254,14 +1281,14 @@ ul.social-icons li {
 	background: transparent;
 	display: flex;
 	min-height: 8.2rem;
-	padding: 1.6rem 0;
+	padding: 1.2rem 0;
 	position: relative;
 	transition: none;
 	margin-bottom: 6.4rem;
 }
 
 #site-header.is-sticky {
-	background: var( --background-color );
+	background: var( --eksell-background-color );
 }
 
 .header-inner {
@@ -1311,7 +1338,7 @@ ul.social-icons li {
 }
 
 .site-logo img {
-	max-height: 6rem;
+	max-height: 5.8rem;
 	width: auto;
 }
 
@@ -1386,8 +1413,8 @@ ul.social-icons li {
 
 
 #site-aside {
-	background-color: var( --menu-modal-background-color );
-	color: var( --menu-modal-text-color );
+	background-color: var( --eksell-menu-modal-background-color );
+	color: var( --eksell-menu-modal-text-color );
 	display: none;
 	position: fixed;
 		bottom: 0;
@@ -1408,11 +1435,15 @@ ul.social-icons li {
 }
 
 #site-aside .nav-toggle {
+	display: block;
+	width: 100%;
+}
+
+#site-aside .nav-toggle-inner {
 	align-items: center;
 	display: flex;
-	justify-content: center;
 	height: 12rem;
-	width: 6.4rem;
+	justify-content: center;
 }
 
 /* Navigation Toggle ------------------------- */
@@ -1519,7 +1550,7 @@ ul.social-icons li {
 
 
 .menu-modal {
-	background: var( --background-color );
+	background: var( --eksell-background-color );
 	display: none;
 	opacity: 0;
 	overflow: hidden;
@@ -1681,7 +1712,7 @@ a.sub-menu-toggle.active svg {
 /* Menu Search ------------------------------- */
 
 .menu-modal-search {
-	color: var( --background-color );
+	color: var( --eksell-background-color );
 }
 
 .menu-modal-search .search-form {
@@ -1690,7 +1721,7 @@ a.sub-menu-toggle.active svg {
 }
 
 .menu-modal-search .search-form:before {
-	background-color: var( --background-color );
+	background-color: var( --eksell-background-color );
 	border-radius: 999rem;
 	content: "";
 	display: block;
@@ -1715,11 +1746,11 @@ a.sub-menu-toggle.active svg {
 	color: inherit;
 }
 
-.menu-modal-search .search-field::-webkit-input-placeholder { color: var( --background-color ); }
-.menu-modal-search .search-field::-moz-placeholder { color: var( --background-color ); }
-.menu-modal-search .search-field:-ms-input-placeholder { color: var( --background-color ); }
-.menu-modal-search .search-field:-moz-placeholder { color: var( --background-color ); }
-.menu-modal-search .search-field::placeholder { color: var( --background-color ); }
+.menu-modal-search .search-field::-webkit-input-placeholder { color: var( --eksell-background-color ); }
+.menu-modal-search .search-field::-moz-placeholder { color: var( --eksell-background-color ); }
+.menu-modal-search .search-field:-ms-input-placeholder { color: var( --eksell-background-color ); }
+.menu-modal-search .search-field:-moz-placeholder { color: var( --eksell-background-color ); }
+.menu-modal-search .search-field::placeholder { color: var( --eksell-background-color ); }
 
 /* Menu Bottom ------------------------------- */
 
@@ -1747,7 +1778,7 @@ a.sub-menu-toggle.active svg {
 }
 
 .search-modal:before {
-	background: var( --primary-color );
+	background: var( --eksell-primary-color );
 	content: "";
 	opacity: .2;
 	position: absolute;
@@ -1933,10 +1964,11 @@ a.sub-menu-toggle.active svg {
 }
 
 .filter-list a.active { 
-	color: var( --accent-color );
+	color: var( --eksell-accent-color );
 }
 
 .filter-list a:hover,
+.filter-list a.pre-active,
 .filter-list a.active { 
 	text-decoration: underline;
 }
@@ -1950,7 +1982,7 @@ a.sub-menu-toggle.active svg {
 }
 
 .posts:before {
-	background-color: var( --light-background-color );
+	background-color: var( --eksell-light-background-color );
 	content: "";
 	display: block;
 	position: absolute;
@@ -1970,6 +2002,12 @@ a.sub-menu-toggle.active svg {
 
 /* Preview: Post ----------------------------- */
 
+.preview-inner {
+	color: inherit;
+	display: block;
+	text-decoration: none;
+}
+
 .preview-media + .preview-header {
 	margin-top: 1.2rem;
 }
@@ -1978,13 +2016,8 @@ a.sub-menu-toggle.active svg {
 	margin: 0;
 }
 
-.preview-title a {
-	color: inherit;
-	text-decoration: none;
-}
-
-.preview-title a:hover,
-.preview-title a:focus {
+.preview-inner:hover .preview-title,
+.preview-inner:focus .preview-title {
 	text-decoration: underline;
 }
 
@@ -2047,17 +2080,44 @@ h1.entry-title,
 /* POST NAV LINKS */
 
 .post-nav-links {
-	border-radius: .4rem;
-	display: flex;
-	font-size: .9em;
-	font-weight: 600;
+	font-size: 1.5rem;
+	font-weight: 700;
 	line-height: 1;
-	margin-top: 3em;
-	padding: 0 .25em;
+	margin-top: 4.8rem;
 }
 
-.post-nav-links > * {
-	padding: 1em .75em;
+.post-nav-links hr {
+	margin: 0 0 2.4rem 0;
+}
+
+.post-nav-links-list {
+	align-items: center;
+	display: flex;
+}
+
+.post-page-numbers {
+	align-items: center;
+	display: flex;
+	height: 3.2rem;
+	min-width: 3.2rem;
+	justify-content: center;
+	padding: 0 .4rem;
+	text-align: center;
+}
+
+.post-page-numbers + .post-page-numbers {
+	margin-left: .8rem;
+}
+
+.post-nav-links a {
+	border: .2rem solid var( --eksell-accent-color );
+	text-decoration: none;
+}
+
+.post-nav-links a:hover,
+.post-nav-links .current {
+	background-color: var( --eksell-accent-color );
+	color: var( --eksell-background-color );
 }
 
 /* Single Navigation ------------------------- */
@@ -2127,23 +2187,23 @@ h1.entry-title,
 
 /* CUSTOM COLORS */
 
-:root .has-accent-color { color: var( --accent-color ); }
-:root .has-primary-color { color: var( --primary-color ); }
-:root .has-secondary-color { color: var( --secondary-color ); }
-:root .has-border-color { color: var( --border-color ); }
-:root .has-light-background-color { color: var( --light-background-color ); }
-:root .has-body-background-color { color: var( --background-color ); }
-:root .has-buttons-background-color { color: var( --accent-color ); }
-:root .has-buttons-text-color { color: var( --background-color ); }
+:root .has-accent-color { color: var( --eksell-accent-color ); }
+:root .has-primary-color { color: var( --eksell-primary-color ); }
+:root .has-secondary-color { color: var( --eksell-secondary-color ); }
+:root .has-border-color { color: var( --eksell-border-color ); }
+:root .has-light-background-color { color: var( --eksell-light-background-color ); }
+:root .has-body-background-color { color: var( --eksell-background-color ); }
+:root .has-buttons-background-color { color: var( --eksell-accent-color ); }
+:root .has-buttons-text-color { color: var( --eksell-background-color ); }
 
-:root .has-accent-background-color { background-color: var( --accent-color ); }
-:root .has-primary-background-color { background-color: var( --primary-color ); }
-:root .has-secondary-background-color { background-color: var( --secondary-color ); }
-:root .has-border-background-color { background-color: var( --border-color ); }
-:root .has-light-background-background-color { background-color: var( --light-background-color ); }
-:root .has-body-background-background-color { background-color: var( --background-color ); }
-:root .has-buttons-background-background-color { background-color: var( --accent-color ); }
-:root .has-buttons-text-background-color { background-color: var( --background-color ); }
+:root .has-accent-background-color { background-color: var( --eksell-accent-color ); }
+:root .has-primary-background-color { background-color: var( --eksell-primary-color ); }
+:root .has-secondary-background-color { background-color: var( --eksell-secondary-color ); }
+:root .has-border-background-color { background-color: var( --eksell-border-color ); }
+:root .has-light-background-background-color { background-color: var( --eksell-light-background-color ); }
+:root .has-body-background-background-color { background-color: var( --eksell-background-color ); }
+:root .has-buttons-background-background-color { background-color: var( --eksell-accent-color ); }
+:root .has-buttons-text-background-color { background-color: var( --eksell-background-color ); }
 
 /* Block Typography Classes ------------------ */
 
@@ -2271,7 +2331,7 @@ h1.entry-title,
 /* Block: Calendar --------------------------- */
 
 .wp-block-calendar {
-	border-color: var( --border-color );
+	border-color: var( --eksell-border-color );
 }
 
 :root .wp-block-calendar * {
@@ -2363,7 +2423,7 @@ h1.entry-title,
 
 .wp-block-cover,
 .wp-block-cover-image {
-	color: var( --background-color );
+	color: #fff; /* Always default to white on the cover block */
 }
 
 .wp-block-cover-image.alignleft, .wp-block-cover-image.alignright,
@@ -2412,7 +2472,7 @@ section.wp-block-cover-image > h2 {
 /* Block: File ------------------------------- */
 
 .wp-block-file {
-	background-color: var( --light-background-color );
+	background-color: var( --eksell-light-background-color );
 	display: block;
 	padding: 2.4rem;
 	text-align: center;
@@ -2477,6 +2537,12 @@ section.wp-block-cover-image > h2 {
 
 /* Block: Gallery ---------------------------- */
 
+.wp-block-gallery + .wp-block-gallery,
+.wp-block-gallery + .wp-block-image,
+.wp-block-image + .wp-block-gallery {
+	margin-top: -1.6rem;
+}
+
 .wp-block-gallery > .blocks-gallery-grid {
 	margin-bottom: -1.6rem;
 	width: 100%;
@@ -2487,11 +2553,52 @@ section.wp-block-cover-image > h2 {
 .wp-block-gallery .blocks-gallery-image, 
 .wp-block-gallery .blocks-gallery-item {
 	margin: 0 1.6rem 1.6rem 0;
-	width: calc( 50% - .8rem );
+	width: calc( 50% - ( ( 1.6rem * 1 ) / 2 ) );
+}
+
+.blocks-gallery-grid .blocks-gallery-image:last-child, 
+.blocks-gallery-grid .blocks-gallery-item:last-child, 
+.wp-block-gallery .blocks-gallery-image:last-child, 
+.wp-block-gallery .blocks-gallery-item:last-child {
+	margin-right: 0 !important;
 }
 
 .wp-block-gallery figure > a {
 	width: 100%;
+}
+
+/* 
+	Note: Media queries match the structure in Core styles.
+*/
+
+@media ( min-width: 600px ) {
+
+	.wp-block-gallery + .wp-block-gallery,
+	.wp-block-gallery + .wp-block-image,
+	.wp-block-image + .wp-block-gallery {
+		margin-top: -.8rem;
+	}
+
+	.wp-block-gallery > figcaption {
+		margin-top: 1.6rem;
+	}
+
+	.wp-block-gallery > .blocks-gallery-grid { 
+		margin-bottom: -2.4rem; 
+	}
+	
+	:root .wp-block-gallery .blocks-gallery-item { 
+		margin: 0 2.4rem 2.4rem 0; 
+	}
+
+	.wp-block-gallery .blocks-gallery-item { 			width: calc( 50% - ( ( 2.4rem * 1 ) / 2 ) ); }
+	.wp-block-gallery.columns-3 .blocks-gallery-item { 	width: calc( 33.33333% - ( ( 2.4rem * 2 ) / 3 ) ); }
+	.wp-block-gallery.columns-4 .blocks-gallery-item { 	width: calc( 25% - ( ( 2.4rem * 3 ) / 4 ) ); }
+	.wp-block-gallery.columns-5 .blocks-gallery-item { 	width: calc( 20% - ( ( 2.4rem * 4 ) / 5 ) ); }
+	.wp-block-gallery.columns-6 .blocks-gallery-item { 	width: calc( 16.66667% - ( ( 2.4rem * 5 ) / 6 ) ); }
+	.wp-block-gallery.columns-7 .blocks-gallery-item { 	width: calc( 14.28571% - ( ( 2.4rem * 6 ) / 7 ) ); }
+	.wp-block-gallery.columns-8 .blocks-gallery-item { 	width: calc( 12.5% - ( ( 2.4rem * 7 ) / 8 ) ); }
+
 }
 
 /* Block: Group ------------------------------ */
@@ -2574,7 +2681,7 @@ section.wp-block-cover-image > h2 {
 /* HAS TIME */
 
 .wp-block-latest-comments time {
-	color: var( --secondary-color );
+	color: var( --eksell-secondary-color );
 	font-size: .9em;
 	font-weight: 400;
 	margin-top: .2rem;
@@ -2596,7 +2703,7 @@ section.wp-block-cover-image > h2 {
 }
 
 .wp-block-latest-posts.is-grid li {
-	border-top: .1rem solid var( --border-color );
+	border-top: .1rem solid var( --eksell-border-color );
     margin: 0 0 2.4rem 0;
 	padding-top: 1.2rem;
     width: 100%;
@@ -2612,7 +2719,7 @@ section.wp-block-cover-image > h2 {
 }
 
 .wp-block-latest-posts time {
-	color: var( --secondary-color );
+	color: var( --eksell-secondary-color );
 	font-size: .9em;
 	margin: .8rem 0 0;
 }
@@ -2706,7 +2813,7 @@ p.has-background {
 }
 
 .wp-block-pullquote blockquote:not(.has-text-color):before {
-	color: var( --accent-color );
+	color: var( --eksell-accent-color );
 }
 
 .wp-block-pullquote p {
@@ -2723,7 +2830,7 @@ p.has-background {
 }
 
 .wp-block-pullquote blockquote:not(.has-text-color) cite {
-	color: var( --accent-color );
+	color: var( --eksell-accent-color );
 }
 
 /* STYLE: SOLID */
@@ -2751,7 +2858,7 @@ p.has-background {
 .wp-block-quote.has-text-align-center:after,
 .wp-block-quote[style*="text-align:center"]:after,
 .wp-block-quote[style*="text-align: center"]:after {
-	background-color: var( --accent-color );
+	background-color: var( --eksell-accent-color );
 	content: "";
 	display: block;
 	height: .2rem;
@@ -2884,7 +2991,7 @@ table.is-style-stripes * {
 
 table.is-style-stripes tbody tr:nth-child( odd ),
 .wp-block-table.is-style-stripes tbody tr:nth-child(odd) {
-	background: var( --light-background-color );
+	background: var( --eksell-light-background-color );
 }
 
 /* Block: Tag Cloud -------------------------- */
@@ -2915,7 +3022,7 @@ table.is-style-stripes tbody tr:nth-child( odd ),
 /* Drop Cap ---------------------------------- */
 
 .has-drop-cap:not(:focus):first-letter {
-	color: var( --accent-color );
+	color: var( --eksell-accent-color );
     font-size: 5.2em;
     font-weight: 700;
 	margin: .09em 1rem .5rem 0;
@@ -3002,6 +3109,7 @@ table.is-style-stripes tbody tr:nth-child( odd ),
 
 .alignfull > figcaption,
 .alignfull > .wp-caption-text {
+	flex-grow: 0;
 	margin-left: auto;
 	margin-right: auto;
 	max-width: 205.2rem;
@@ -3040,7 +3148,7 @@ hr + .comment-reply-title {
 }
 
 .comment-reply-title small {
-	color: var( --secondary-color );
+	color: var( --eksell-secondary-color );
 	flex-shrink: 0;
 	font-size: 1.6rem;
 	font-weight: 400;
@@ -3077,7 +3185,7 @@ hr + .comment-reply-title {
 }
 
 .comment .comment {
-	border-left: .1rem solid var( --border-color );
+	border-left: .1rem solid var( --eksell-border-color );
 	padding-left: 5%;
 }
 
@@ -3114,7 +3222,7 @@ hr + .comment-reply-title {
 }
 
 .comment-metadata {
-	color: var( --secondary-color );
+	color: var( --eksell-secondary-color );
 	font-size: 1.4rem;
 	margin: .8rem 0 0;
 }
@@ -3143,7 +3251,7 @@ hr + .comment-reply-title {
 }
 
 .comment-body .reply a {
-	background: var( --light-background-color );
+	background: var( --eksell-light-background-color );
 	border-radius: .2rem;
 	display: inline-flex;
 	font-size: 1.2rem;
@@ -3154,8 +3262,8 @@ hr + .comment-reply-title {
 }
 
 .comment-body .reply a:hover {
-	background-color: var( --accent-color );
-	color: var( --background-color );
+	background-color: var( --eksell-accent-color );
+	color: var( --eksell-background-color );
 }
 
 /* Pingbacks & Trackbacks -------------------- */
@@ -3220,7 +3328,7 @@ hr + .comment-reply-title {
 /* Comment Respond --------------------------- */
 
 .comment-respond {
-	background-color: var( --light-background-color );
+	background-color: var( --eksell-light-background-color );
 	margin: 0 -3.2rem;
 	padding: 3.2rem;
 }
@@ -3347,7 +3455,7 @@ hr + .comment-reply-title {
 }
 
 .js .pagination-wrapper.pagination-type-button:before {
-	background: var( --light-background-color );
+	background: var( --eksell-light-background-color );
 	content: "";
 	display: block;
 	position: absolute;
@@ -3378,12 +3486,12 @@ hr + .comment-reply-title {
 /* Type: Scroll ------------------------------ */
 
 .js .pagination-wrapper.pagination-type-scroll {
-	background-color: var( --light-background-color );
+	background-color: var( --eksell-light-background-color );
 	padding-bottom: 4.8rem;
 }
 
 .js #pagination .scroll-loading {
-	color: var( --accent-color );
+	color: var( --eksell-accent-color );
 	height: 1.6rem;
 	margin: 0 auto;
 	position: relative;
@@ -3393,7 +3501,7 @@ hr + .comment-reply-title {
 
 .no-js .pagination-wrapper,
 .pagination-wrapper.pagination-type-links {
-	background-color: var( --light-background-color );
+	background-color: var( --eksell-light-background-color );
 }
 
 .no-js .pagination-wrapper #pagination,
@@ -3669,12 +3777,7 @@ body.woocommerce-page .entry-content {
 	}
 
 	.site-logo img {
-		max-height: 9rem;
-		transition: height .15s linear, width .15s linear, max-height .15s linear;
-	}
-
-	#site-header.is-sticky .site-logo img {
-		max-height: 7rem;
+		max-height: 7.2rem;
 	}
 
 	#site-header.is-sticky {
@@ -3715,7 +3818,7 @@ body.woocommerce-page .entry-content {
 	}
 
 	.menu-modal:before {
-		background: var( --background-color );
+		background: var( --eksell-background-color );
 		content: "";
 		display: block;
 		opacity: 0;
@@ -3801,7 +3904,7 @@ body.woocommerce-page .entry-content {
 	}
 
 	.posts:before {
-		background-color: var( --light-background-color );
+		background-color: var( --eksell-light-background-color );
 		content: "";
 		display: block;
 		position: absolute;
@@ -3849,7 +3952,7 @@ body.woocommerce-page .entry-content {
 	}
 
 	.single-nav .col + .col a {
-		animation-delay: .15s;
+		animation-delay: .2s;
 		margin-top: 0;
 	}
 
@@ -3954,7 +4057,6 @@ body.woocommerce-page .entry-content {
 		margin: 0 0 0 1.6rem;
 		width: auto;
 	}
-	
 
 	/* BLOCK: IMAGE */
 
@@ -3983,24 +4085,19 @@ body.woocommerce-page .entry-content {
 
 	/* BLOCK: GALLERY */
 
-	.wp-block-gallery > .blocks-gallery-grid {
-		margin-bottom: -4.8rem;
+	.wp-block-gallery + .wp-block-gallery,
+	.wp-block-gallery + .wp-block-image,
+	.wp-block-image + .wp-block-gallery {
+		margin-top: -2.4rem;
 	}
 
-	.blocks-gallery-grid .blocks-gallery-image, 
-	.blocks-gallery-grid .blocks-gallery-item, 
-	.wp-block-gallery .blocks-gallery-image, 
-	.wp-block-gallery .blocks-gallery-item {
-		margin: 0 4.8rem 4.8rem 0;
-		width: calc( 50% - 2.4rem );
-	}
-
+	.alignfull.wp-block-gallery + .alignfull.wp-block-gallery,
+	.alignfull.wp-block-gallery + .alignwide.wp-block-gallery,
 	.alignwide.wp-block-gallery + .alignwide.wp-block-gallery,
-	.alignwide.wp-block-gallery + .alignwide.wp-block-image,
-	.alignwide.wp-block-image + .alignwide.wp-block-gallery,
 	.alignwide.wp-block-gallery + .alignfull.wp-block-gallery,
-	.alignfull.wp-block-gallery + .alignwide.wp-block-gallery {
-		margin-top: -1.6rem;
+	.alignwide.wp-block-gallery + .alignwide.wp-block-image,
+	.alignwide.wp-block-image + .alignwide.wp-block-gallery {
+		margin-top: -4rem;
 	}
 
 	/* BLOCK: GROUP */
@@ -4412,6 +4509,35 @@ body.woocommerce-page .entry-content {
 	}
 
 	/* BLOCK: GALLERY */
+
+	.alignfull.wp-block-gallery + .alignfull.wp-block-gallery,
+	.alignfull.wp-block-gallery + .alignwide.wp-block-gallery,
+	.alignwide.wp-block-gallery + .alignwide.wp-block-gallery,
+	.alignwide.wp-block-gallery + .alignfull.wp-block-gallery,
+	.alignwide.wp-block-gallery + .alignwide.wp-block-image,
+	.alignwide.wp-block-image + .alignwide.wp-block-gallery {
+		margin-top: -1.6rem;
+	}
+
+	.alignfull.wp-block-gallery > .blocks-gallery-grid,
+	.alignwide.wp-block-gallery > .blocks-gallery-grid { 
+		margin-bottom: -4.8rem; 
+	}
+
+	.alignfull.wp-block-gallery .blocks-gallery-item,
+	.alignwide.wp-block-gallery .blocks-gallery-item { 
+		flex-grow: 0;
+		margin: 0 4.8rem 4.8rem 0; 
+	}
+
+	.alignfull.wp-block-gallery .blocks-gallery-item, .alignwide.wp-block-gallery .blocks-gallery-item { 						width: calc( 50% - ( ( 4.8rem * 1 ) / 2 ) ); }
+	.alignfull.wp-block-gallery.columns-3 .blocks-gallery-item, .alignwide.wp-block-gallery.columns-3 .blocks-gallery-item { 	width: calc( 33.33333% - ( ( 4.8rem * 2 ) / 3 ) ); }
+	.alignfull.wp-block-gallery.columns-4 .blocks-gallery-item, .alignwide.wp-block-gallery.columns-4 .blocks-gallery-item { 	width: calc( 25% - ( ( 4.8rem * 3 ) / 4 ) ); }
+	.alignfull.wp-block-gallery.columns-5 .blocks-gallery-item, .alignwide.wp-block-gallery.columns-5 .blocks-gallery-item { 	width: calc( 20% - ( ( 4.8rem * 4 ) / 5 ) ); }
+	.alignfull.wp-block-gallery.columns-6 .blocks-gallery-item, .alignwide.wp-block-gallery.columns-6 .blocks-gallery-item { 	width: calc( 16.66667% - ( ( 4.8rem * 5 ) / 6 ) ); }
+	.alignfull.wp-block-gallery.columns-7 .blocks-gallery-item, .alignwide.wp-block-gallery.columns-7 .blocks-gallery-item { 	width: calc( 14.28571% - ( ( 4.8rem * 6 ) / 7 ) ); }
+	.alignfull.wp-block-gallery.columns-8 .blocks-gallery-item, .alignwide.wp-block-gallery.columns-8 .blocks-gallery-item { 	width: calc( 12.5% - ( ( 4.8rem * 7 ) / 8 ) ); }
+
 	/* BLOCK: LATEST POSTS */
 
 	.wp-block-latest-posts.is-grid li {
@@ -4476,11 +4602,6 @@ body.woocommerce-page .entry-content {
 	/* Site Aside ---------------------------- */
 
 	#site-aside {
-		width: 12rem;
-	}
-
-	#site-aside .nav-toggle {
-		height: 12rem;
 		width: 12rem;
 	}
 

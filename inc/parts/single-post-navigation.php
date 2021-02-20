@@ -32,7 +32,7 @@ $nav_class = ( $nav['prev'] && $nav['next'] ) ? ' has-both' : ( ! $nav['prev'] ?
 
 			<div class="col">
 
-				<a class="single-nav-item do-spot spot-fade-in-scale<?php echo esc_attr( $link_classes ); ?>" href="<?php echo esc_url( get_permalink( $nav_post->ID ) ); ?>">
+				<a class="single-nav-item do-spot spot-fade-up<?php echo esc_attr( $link_classes ); ?>" href="<?php echo esc_url( get_permalink( $nav_post->ID ) ); ?>">
 
 					<?php do_action( 'eksell_single_nav_item_start', $nav_post, $slug ); ?>
 
