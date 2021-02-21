@@ -736,6 +736,7 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 	empty-cells: show;
+	font-size: 1.6rem;
 	margin: 4rem 0;
 	max-width: 100%;
 	overflow: hidden;
@@ -2296,7 +2297,7 @@ h1.entry-title,
 .wp-block-categories li > a,
 .wp-block-latest-posts li > a,
 .wp-block-latest-comments li > a {
-	font-size: 1.25em;
+	font-size: 2.1rem;
 	font-weight: 700;
 	text-decoration: none;
 }
@@ -2709,8 +2710,16 @@ section.wp-block-cover-image > h2 {
     width: 100%;
 }
 
+.wp-block-latest-posts.columns-2 li:nth-child(2n),
+.wp-block-latest-posts.columns-3 li:nth-child(3n),
+.wp-block-latest-posts.columns-4 li:nth-child(4n),
+.wp-block-latest-posts.columns-5 li:nth-child(5n),
+.wp-block-latest-posts.columns-6 li:nth-child(6n) { 
+	margin-right: 0 !important;
+}
+
 .wp-block-latest-posts.is-grid li > a {
-	font-size: 1.25em;
+	font-size: 2.4rem;
 }
 
 .wp-block-latest-posts.is-grid a:hover,
@@ -2728,6 +2737,23 @@ section.wp-block-cover-image > h2 {
 	font-size: .95em;
 	line-height: 1.4;
 	margin-top: 1.5rem;
+}
+
+/* 
+	Note: Media queries match the structure in Core styles.
+*/
+
+@media ( min-width: 600px ) {
+
+	.wp-block-latest-posts.is-grid li {
+		margin: 0 2.4rem 2.4rem 0;
+	}
+
+    .wp-block-latest-posts.columns-2 li { width: calc( 50% - ( 1 * 2.4rem ) / 2 ); }
+    .wp-block-latest-posts.columns-3 li { width: calc( 33.33333% - ( 2 * 2.4rem ) / 3 ); }
+    .wp-block-latest-posts.columns-4 li { width: calc( 25% - ( 3 * 2.4rem ) / 4 ); }
+    .wp-block-latest-posts.columns-5 li { width: calc( 20% - ( 4 * 2.4rem ) / 5 ); }
+    .wp-block-latest-posts.columns-6 li { width: calc( 16.66667% - ( 5 * 2.4rem ) / 6 ); }
 }
 
 /* Block: List ------------------------------- */
@@ -2790,6 +2816,10 @@ p.has-background {
 	border: none;
 	padding: 0;
 	text-align: left;
+}
+
+.wp-block-pullquote:not(.has-background).alignfull {
+	padding: 0 1.6rem;
 }
 
 .wp-block-pullquote blockquote {
@@ -4011,6 +4041,15 @@ body.woocommerce-page .entry-content {
 		font-size: 1.6rem;
     }
 
+	.wp-block-column h1, 
+	.wp-block-column h2, 
+	.wp-block-column h3, 
+	.wp-block-column h4, 
+	.wp-block-column h5, 
+	.wp-block-column h6 {
+		margin: 4rem 0 2.4rem;
+	}
+
 	/* BLOCK: COVER */
 
 	.wp-block-cover-image .wp-block-cover__inner-container,
@@ -4108,26 +4147,8 @@ body.woocommerce-page .entry-content {
 
 	/* BLOCK: LATEST POSTS */
 
-	.wp-block-latest-posts.is-grid {
-		margin-left: -4rem;
-	}
-
 	.wp-block-latest-posts.is-grid li {
-		margin: 0 0 4rem 4rem;
 		padding-top: 1.6rem;
-	}
-
-	.wp-block-latest-posts.is-grid.columns-2 li { width: calc( ( 100% / 2 ) - 4rem ); }
-	.wp-block-latest-posts.is-grid.columns-3 li { width: calc( ( 100% / 3 ) - 4rem ); }
-	.wp-block-latest-posts.is-grid.columns-4 li { width: calc( ( 100% / 4 ) - 4rem ); }
-	.wp-block-latest-posts.is-grid.columns-5 li { width: calc( ( 100% / 5 ) - 4rem ); }
-	.wp-block-latest-posts.is-grid.columns-6 li { width: calc( ( 100% / 6 ) - 4rem ); }
-	.wp-block-latest-posts.is-grid.columns-7 li { width: calc( ( 100% / 7 ) - 4rem ); }
-	.wp-block-latest-posts.is-grid.columns-8 li { width: calc( ( 100% / 8 ) - 4rem ); }
-	.wp-block-latest-posts.is-grid.columns-9 li { width: calc( ( 100% / 9 ) - 4rem ); }
-
-	.wp-block-latest-posts.is-grid li > a {
-		font-size: 1.33em;
 	}
 
 	/* BLOCK: MEDIA AND CONTENT */
@@ -4159,6 +4180,10 @@ body.woocommerce-page .entry-content {
 	}
 
 	/* BLOCK: PULLQUOTE */
+
+	.wp-block-pullquote:not(.has-background).alignfull {
+		padding: 0 2.4rem;
+	}
 
 	.wp-block-pullquote blockquote {
 		font-size: 3.2rem;
@@ -4541,9 +4566,24 @@ body.woocommerce-page .entry-content {
 	/* BLOCK: LATEST POSTS */
 
 	.wp-block-latest-posts.is-grid li {
-		margin: 0 0 6rem 4rem;
 		padding-top: 2.4rem;
 	}
+
+	.wp-block-latest-posts.alignwide.is-grid li,
+	.wp-block-latest-posts.alignfull.is-grid li {
+		margin: 0 4.8rem 4.8rem 0;
+	}
+
+	.wp-block-latest-posts.alignfull.columns-2 li,
+	.wp-block-latest-posts.alignwide.columns-2 li { width: calc( 50% - ( 1 * 4.8rem ) / 2 ); }
+	.wp-block-latest-posts.alignfull.columns-3 li,
+	.wp-block-latest-posts.alignwide.columns-3 li { width: calc( 33.33333% - ( 2 * 4.8rem ) / 3 ); }
+	.wp-block-latest-posts.alignfull.columns-4 li,
+	.wp-block-latest-posts.alignwide.columns-4 li { width: calc( 25% - ( 3 * 4.8rem ) / 4 ); }
+	.wp-block-latest-posts.alignfull.columns-5 li,
+	.wp-block-latest-posts.alignwide.columns-5 li { width: calc( 20% - ( 4 * 4.8rem ) / 5 ); }
+	.wp-block-latest-posts.alignfull.columns-6 li,
+	.wp-block-latest-posts.alignwide.columns-6 li { width: calc( 16.66667% - ( 5 * 4.8rem ) / 6 ); }
 
 	/* Entry Content ------------------------- */
 	/* Comments ------------------------------ */
