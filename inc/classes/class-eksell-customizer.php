@@ -212,7 +212,7 @@ if ( ! class_exists( 'Eksell_Customizer' ) ) :
 				'type' 			=> 'textarea',
 				'section' 		=> 'eksell_archive_pages_options',
 				'label' 		=> __( 'Intro Text', 'eksell' ),
-				'description' 	=> __( 'Shown below the site title on the post archive.', 'eksell' ),
+				'description' 	=> __( 'Shown below the site title on the front page, when the front page is set to display latest posts.', 'eksell' ),
 			) );
 
 			/* Show Home Post Filter --------- */

@@ -3,7 +3,7 @@ Contributors: Anlino
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=anders%40andersnoren%2ese&lc=US&item_name=Free%20WordPress%20Themes%20from%20Anders%20Noren&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted
 Requires at least: 4.5
 Requires PHP: 5.4
-Tested up to: 5.6
+Tested up to: 5.X
 Stable tag: trunk
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -15,25 +15,14 @@ License URI: https://www.gnu.org/licenses/gpl-2.0.html
 2. Activate the theme
 
 
-== How to Recreate the Screenshot ==
+== How to Use the Only Content Template ==
 
-1. The screenshot of Eksell (the one displayed on WordPress.org and in Themes → Add New) uses the Cover Page Template together with a couple of blocks in the WordPress Block Editor.
-2. Go to Pages → Add New.
-3. Enter a title of the page. In the righthand sidebar, expand the "Page Attributes" dropdown, click the "Template" dropdown and select "Cover Template" in the list.
-4. Expand the "Excerpt" dropdown in the sidebar, and enter a subtitle/intro paragraph in the textarea.
-5. Expand the "Featured Image" dropdown in the sidebar, click "Set featured image", and select which image to use.
-6. Next, click the "Plus" symbol in the content and select the block "Columns" from the list. In the sidebar block settings, change "Columns: 2" to "Columns: 3". Add an image, a title, and a paragraph of text to each column in the "Columns" block, and you've recreated the structure of the screenshot in Eksell.
+The Only Content Template hides all elements in the content area of Eksell except the block editor content, allowing you to create completely custom layouts. The site header, footer and aside (with the navigation toggle) are still displayed.
 
-
-== How to Use the Cover Template ==
-
-1. Go to Pages → Add New, or Posts → Add New. The cover template can be used on both posts and pages.
-2. In the righthand sidebar, expand the "Page Attributes" dropdown, click the "Template" dropdown, and select "Cover Template" from the list.
-3. The cover template works best when you've added a featured image and an excerpt, which you can do in the righthand sidebar.
-4. Click the gray "Preview" button to preview your page, or the blue "Publish" button to make it public.
-5. The cover template includes a number of different settings that you can use to modify how your page is presented. Go to Appearance → Customize, click the "Theme Options" panel, and then the "Cover Template" panel.
-6. Here, you can modify the color of the image overlay, the color of the text in the overlay, whether to use a fixed background image (creating a parallax-esque effect), how the color overlay should blend into the image, and which opacity the color overlay should have.
-7. When you're done, click the blue "Publish" button to save your changes.
+1. Go to Pages → Add New or edit an existing page.
+2. In the righthand sidebar, expand the "Page Attributes" dropdown, click the "Template" dropdown, and select "Only Content Template" from the list.
+3. Add the block editor content you want to include on the page.
+4. When you're done, click the "Publish" or "Update" button to publish your changes.
 
 
 == Change Colors ==
@@ -44,40 +33,64 @@ License URI: https://www.gnu.org/licenses/gpl-2.0.html
 4. Select the colors you want to use, and click the blue "Publish" button to save your changes.
 
 
+== Set Dark Mode Colors ==
+
+Eksell includes supports for dark mode, in which browsers and operating system displays websites with light text on a dark background. It's enabled by default, and allows you to specify a separate color palette for visitors with dark mode enabled.
+
+1. Log in to the administration panel of your site.
+2. Go to Appearance → Customize.
+3. Click the "Colors" panel.
+4. Make sure the "Enable Dark Mode Color Palette" checkbox is checked. When it is, a separate list of dark mode color settings should be visible beneath the checkbox.
+4. Select the dark mode colors you want to use, and click the blue "Publish" button to save your changes.
+
+
 == Change Fonts ==
 
-1. Log in to the administration panel of your site.
-2. Go to Appearance → Customize.
-3. Click the "Theme Options" panel, and then the "Fonts" panel.
-4. Open fonts.google.com in a different browser window, and find the fonts you want to use. You can select one font for headings, and one for body text (everything but titles). Your body font should have at least the following styles: Regular, Regular Italic, Bold, and Bold Italic.
-5. Go back to the "Fonts" window in your browser, and enter the names of the fonts you want to use in the "Body Font" and "Headings Font" text fields.
-6. Select the weight of the headings in the dropdown. Note that all fonts do not have support for all font weights, so check which weights/styles the font you want to use supports.
-7. Select which language packs you want to include in the list below "Languages". Again, check Google Fonts to make sure that your fonts supports the language packs you want to use.
-8. Click the blue "Publish" button to save your changes.
+Eksell doesn't include controls for changing fonts, but the theme is built to be compatible with third-party font plugins like Easy Google Fonts.
 
 
-== Set Sticky Header ==
+== Disable Animations ==
+
+By default, Eksell will animate some elements in the theme when they first become visible. These are automatically disabled for visitors who have set their OS and/or browser to reduce non-essential motion on websites, but you can also disable them for all visitors on the site through the Customizer.
 
 1. Log in to the administration panel of your site.
 2. Go to Appearance → Customize.
-3. Click the "Theme Options" panel, and then the "Site Header" panel.
-4. Check the "Sticky Header" checkbox, and click the blue "Publish" button to save your changes.
+3. Click the "Theme Options" panel, and then the "General Options" panel.
+4. Check the "Disable Animations" checkbox, and click the blue "Publish" button to save your changes.
 
 
-== Disable Search Button ==
+== Disable Sticky Header ==
 
 1. Log in to the administration panel of your site.
 2. Go to Appearance → Customize.
 3. Click the "Theme Options" panel, and then the "Site Header" panel.
-4. Check the "Disable Search Button" checkbox, and click the blue "Publish" button to save your changes.
+4. Uncheck the "Enable Sticky Header" checkbox, and click the blue "Publish" button to save your changes.
 
 
-== Replace the Menu Modal With a Regular Menu ==
+== Disable Search ==
 
 1. Log in to the administration panel of your site.
 2. Go to Appearance → Customize.
 3. Click the "Theme Options" panel, and then the "Site Header" panel.
-4. Check the "Disable Menu Modal on Desktop" checkbox, and click the blue "Publish" button to save your changes.
+4. Uncheck the "Enable Search" checkbox, and click the blue "Publish" button to save your changes.
+
+
+== Add Intro Text to the Front Page ==
+
+1. Log in to the administration panel of your site.
+2. Go to Appearance → Customize.
+3. Click the "Theme Options" panel, and then the "Post Archive" panel.
+4. Add the text you want to display of the front page to the "Intro Text" textarea.
+5. Select the type you want to use, and click the blue "Publish" button to save your changes.
+
+
+== Disable the Archive Filter ==
+
+1. Log in to the administration panel of your site.
+2. Go to Appearance → Customize.
+3. Click the "Theme Options" panel, and then the "Post Archive" panel.
+4. Uncheck the "Show Filter" checkbox.
+5. Select the type you want to use, and click the blue "Publish" button to save your changes.
 
 
 == Change Pagination Type ==
@@ -86,26 +99,10 @@ License URI: https://www.gnu.org/licenses/gpl-2.0.html
 2. Go to Appearance → Customize.
 3. Click the "Theme Options" panel, and then the "Post Archive" panel.
 4. There are three options for the pagination:
-	a. "Load more on button click": Displays a button that, when clicked, loads more posts without a hard reload.
+	a. "Load more button": Displays a button that, when clicked, loads more posts without a hard reload.
 	b. "Load more on scroll": When the visitor has reached the bottom of the page, more posts are loaded without a hard reload.
-	c. "Previoius and next page links": Displays links that, when clicked, takes the visitor to then next or previous archive page with a hard reload.
+	c. "Links": Displays links that, when clicked, takes the visitor to then next or previous archive page with a hard reload.
 5. Select the type you want to use, and click the blue "Publish" button to save your changes.
-
-
-== Hide Related Posts ==
-
-1. Log in to the administration panel of your site.
-2. Go to Appearance → Customize.
-3. Click the "Theme Options" panel, and then the "Single Post" panel.
-4. Uncheck the "Show Related Posts" checkbox, and click the blue "Publish" button to save your changes.
-
-
-== Show Excerpts In Previews ==
-
-1. Log in to the administration panel of your site.
-2. Go to Appearance → Customize.
-3. Click the "Theme Options" panel, and then the "Post Archive" panel.
-4. Check the "Show Excerpts" checkbox, and click the blue "Publish" button to save your changes.
 
 
 == Change the Number of Columns in the Post Archive ==
@@ -113,29 +110,24 @@ License URI: https://www.gnu.org/licenses/gpl-2.0.html
 1. Log in to the administration panel of your site.
 2. Go to Appearance → Customize.
 3. Click the "Theme Options" panel, and then the "Post Archive" panel.
-4. Locate the "Number of Columns" setting in the list, and select the number of columns you want displayed.
-5. Click the blue "Publish" button to save your changes.
+4. Here, you'll find five settings for how many columns to display at different screen sizes. They are:
+	a. Columns on Mobile (Screen width: 0px - 700px)
+	b. Columns on Tablet Portrait (Screen width: 700px - 1000px)
+	c. Columns on Tablet Landscape (Screen width: 1000px - 1200px)
+	d. Columns on Desktop (Screen width: 1200px - 1600px)
+	e. Columns on Large Desktop (Screen width: > 1600px)
+5. Select the number of columns you want to use at each screen size, and click the blue "Publish" button to save your changes.
 
 
-== Adjust Image Aspect Ratio On Archive Pages
+== Change Fallback Image ==
 
-1. Log in to the administration panel of your site.
-2. Go to Appearance → Customize.
-3. Click the "Theme Options" panel, and then the "Post Archive" panel.
-4. Locate the "Preview Image Aspect Ratio" setting in the list, and select the aspect ratio you want to use.
-5. Click the blue "Publish" button to save your changes.
-
-
-== Select Which Post Meta to Display ==
+The fallback image is used for posts that are missing a featured image. By default, a fallback image with a generic image icon is used, but you can select any image in your media library to be used as a fallback image instead.
 
 1. Log in to the administration panel of your site.
 2. Go to Appearance → Customize.
-3. Click the "Theme Options" panel. If you want to modify the post meta on single posts, click "Single Post". If you want to modify the post meta on the post archive, click "Post Archive".
-4. There are three different post meta locations that you can modify:
-	a. "Top Post Meta": Displayed above the content, and below the titles, when viewing a single post.
-	b. "Bottom Post Meta": Displayed below the content, and above the comments, when viewing a single post.
-	c. "Archive Post Meta": Displayed below the title of post previews on archive pages.
-5. Select the post meta you want to display in each locations, and click the blue "Publish" button to save your changes.
+3. Click the "Theme Options" panel, and then the "Images" panel.
+4. Click the "Select Image" field beneath the "Fallback Image", and select the image you want to use in your media library.
+5. Click the blue "Publish" button to save your changes.
 
 
 == Licenses ==

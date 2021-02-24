@@ -212,12 +212,11 @@ if ( ! function_exists( 'eksell_body_classes' ) ) :
 			$classes[] = 'disable-search-modal';
 		}
 
-		// Check for disabled animations
-		if ( get_theme_mod( 'eksell_disable_animations', false ) ) {
-			$classes[] = 'no-anim';
-		} else {
-			$classes[] = 'has-anim';
-		}
+		// Check for dark mode.
+		if ( get_theme_mod( 'eksell_enable_dark_mode_palette', true ) ) $classes[] = 'has-dark-mode-palette';
+
+		// Check for disabled animations.
+		$classes[] = get_theme_mod( 'eksell_disable_animations', false ) ? 'no-anim' : 'has-anim';
 
 		// Check for post thumbnail
 		if ( is_singular() && has_post_thumbnail() ) {
@@ -245,6 +244,7 @@ if ( ! function_exists( 'eksell_body_classes' ) ) :
 			$classes[] = 'not-showing-comments';
 		}
 
+		// Shared archive page class
 		if ( is_archive() || is_search() || is_home() ) {
 			$classes[] = 'archive-page';
 		}

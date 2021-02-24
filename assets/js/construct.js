@@ -82,7 +82,7 @@ eksell.intervalScroll = {
 				didScroll = false;
 
 				// When this triggers, we know that we have scrolled
-				$win.triggerHandler( 'did-interval-scroll' );
+				$win.trigger( 'did-interval-scroll' );
 
 			}
 
@@ -137,7 +137,11 @@ eksell.toggles = {
 				// Toggle the target of the clicked toggle
 				if ( $toggle.data( 'toggle-type' ) == 'slidetoggle' ) {
 					var duration = $toggle.data( 'toggle-duration' ) ? $toggle.data( 'toggle-duration' ) : 250;
-					$target.slideToggle( duration );
+					if ( $( 'body' ).hasClass( 'has-anim' ) ) {
+						$target.slideToggle( duration );
+					} else {
+						$target.toggle();
+					}
 				} else {
 					$target.toggleClass( 'active' );
 				}
@@ -178,7 +182,7 @@ eksell.toggles = {
 				}
 
 				// Trigger the toggled event on the toggle target
-				$target.triggerHandler( 'toggled' );
+				$target.trigger( 'toggled' );
 
 				// Trigger events on the toggle targets after they are toggled
 				if ( $target.is( '.active' ) ) {
@@ -354,7 +358,7 @@ eksell.coverModals = {
 
 			if ( modalTargetString && $modalTarget.length ) {
 				setTimeout( function() {
-					$modalTarget.addClass( 'active' ).triggerHandler( 'toggled' );
+					$modalTarget.addClass( 'active' ).trigger( 'toggled' );
 					eksell.scrollLock.setTo( true );
 				}, 250 );
 			}
@@ -372,7 +376,7 @@ eksell.coverModals = {
 
 				if ( modalTargetString && $modalTarget.length ) {
 					
-					$modalTarget.addClass( 'active' ).triggerHandler( 'toggled' );
+					$modalTarget.addClass( 'active' ).trigger( 'toggled' );
 					eksell.scrollLock.setTo( true );
 
 					return false;
@@ -770,8 +774,8 @@ eksell.loadMore = {
 		if ( $pagination.length ) {
 
 			// Default values for variables
-			window.loading = false;
-			window.lastPage = $( '.pagination-wrapper' ).hasClass( 'last-page' );
+			window.eksellIsLoading = false;
+			window.eksellIsLastPage = $( '.pagination-wrapper' ).hasClass( 'last-page' );
 
 			eksell.loadMore.prepare( $pagination );
 
@@ -806,9 +810,8 @@ eksell.loadMore = {
 
 		// If not, check the paged value against the max_num_pages
 		else {
-			var $paginationWrapper = $( '.pagination-wrapper' );
 			if ( queryArgs.paged == queryArgs.max_num_pages ) {
-				$paginationWrapper.addClass( 'last-page' );
+				$( '.pagination-wrapper' ).addClass( 'last-page' );
 			}
 
 			// Get the load more type (button or scroll)
@@ -830,7 +833,7 @@ eksell.loadMore = {
 		$win.on( 'did-interval-scroll', function() {
 
 			// If it's the last page, or we're already loading, we're done here
-			if ( lastPage || loading ) {
+			if ( eksellIsLastPage || eksellIsLoading ) {
 				return;
 			}
 
@@ -853,7 +856,7 @@ eksell.loadMore = {
 		$( '#load-more' ).on( 'click', function() {
 
 			// Make sure we aren't already loading
-			if ( loading ) {
+			if ( eksellIsLoading ) {
 				return;
 			}
 
@@ -872,21 +875,18 @@ eksell.loadMore = {
 		}
 
 		// Get the query arguments
-		var queryArgs = $pagination.attr( 'data-query-args' ),
-			queryArgsParsed = JSON.parse( queryArgs ),
-			$paginationWrapper = $( '.pagination-wrapper' ),
-			$articleWrapper = $( $pagination.data( 'load-more-target' ) );
+		var queryArgs 			= $pagination.attr( 'data-query-args' ),
+			queryArgsParsed 	= JSON.parse( queryArgs ),
+			$paginationWrapper 	= $( '.pagination-wrapper' ),
+			$articleWrapper 	= $( $pagination.data( 'load-more-target' ) );
 
 		// We're now loading
-		loading = true;
-		$pagination.addClass( 'loading' ).removeClass( 'last-page' );
+		eksellIsLoading = true;
+		$paginationWrapper.addClass( 'loading' );
 
 		// If we're not resetting posts, increment paged (reset = initial paged is correct)
 		if ( ! resetPosts ) {
-			console.log( 'not resetting posts' );
 			queryArgsParsed.paged++;
-
-			console.log( queryArgsParsed.paged );
 		} else {
 			queryArgsParsed.paged = 1;
 		}
@@ -913,10 +913,9 @@ eksell.loadMore = {
 
 				// If there are no results, we're at the last page
 				if ( ! $result.length ) {
-					loading = false;
+					eksellIsLoading = false;
 					$articleWrapper.addClass( 'no-results' );
-					$paginationWrapper.addClass( 'last-page' );
-					$pagination.removeClass( 'loading' );
+					$paginationWrapper.addClass( 'last-page' ).removeClass( 'loading' );
 				}
 
 				if ( $result.length ) {
@@ -934,28 +933,28 @@ eksell.loadMore = {
 						// Append the results
 						$articleWrapper.append( $result ).masonry( 'appended', $result ).masonry();
 
-						$win.triggerHandler( 'ajax-content-loaded' );
-						$win.triggerHandler( 'did-interval-scroll' );
+						$win.trigger( 'ajax-content-loaded' );
+						$win.trigger( 'did-interval-scroll' );
 
 						// We're now finished with the loading
-						loading = false;
-						$pagination.removeClass( 'loading' );
+						eksellIsLoading = false;
+						$paginationWrapper.removeClass( 'loading' );
 
 						// Update the pagination query args
 						$pagination.attr( 'data-query-args', jsonQueryArgs );
 
 						$( 'body' ).removeClass( 'filtering-posts' );
 
-						// If that was the last page, make sure we don't check for any more
+						// If that was the last page, make sure we don't check for more
 						if ( queryArgsParsed.paged == queryArgsParsed.max_num_pages ) {
 							$paginationWrapper.addClass( 'last-page' );
-							lastPage = true;
+							eksellIsLastPage = true;
 							return;
 
 						// If not, make sure the pagination is visible again
 						} else {
 							$paginationWrapper.removeClass( 'last-page' );
-							lastPage = false;
+							eksellIsLastPage = false;
 						}
 
 					} );
@@ -1138,7 +1137,7 @@ eksell.masonry = {
 			} );
 
 			$grid.on( 'layoutComplete', function() {
-				$win.triggerHandler( 'scroll' );
+				$win.trigger( 'scroll' );
 			} );
 
 		}

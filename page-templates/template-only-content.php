@@ -2,51 +2,55 @@
 
 /* 
 Template Name: Only Content Template
-Template Post Type: post, page
 */
 
 get_header(); ?>
 
-<main id="site-content">
+<main id="site-content" role="main">
 
-	<?php
+	<div class="site-content-inner">
 
-	if ( have_posts() ) :
-		while ( have_posts() ) : 
-		
-			the_post(); 
+		<?php
 
-			?>
+		if ( have_posts() ) :
+			while ( have_posts() ) : 
+			
+				the_post();
 
-			<article <?php post_class( 'section-inner' ); ?> id="post-<?php the_ID(); ?>">
+				do_action( 'eksell_entry_article_start', $post->ID );
 
-				<?php do_action( 'eksell_entry_article_start', $post->ID ); ?>
+				if ( is_front_page() && is_home() ) {
+					the_title( '<div class="entry-title screen-reader-text h1">', '</div>' );
+				} else {
+					the_title( '<h1 class="entry-title screen-reader-text">', '</h1>' );
+				}
 
-				<?php the_title( '<h1 class="screen-reader-text">', '</h1>' ); ?>
+				?>
 
-				<div class="post-inner" id="post-inner">
+				<div class="section-inner mw-thin">
 
 					<div class="entry-content">
 
 						<?php 
 						the_content();
-						wp_link_pages();
-						edit_post_link();
+						wp_link_pages( array(
+							'before'           => '<nav class="post-nav-links"><hr /><div class="post-nav-links-list">',
+							'after'            => '</div></nav>',
+						) );
 						?>
 
 					</div><!-- .entry-content -->
 
-				</div><!-- .post-inner -->
+				</div><!-- .section-inner -->
 
-				<?php do_action( 'eksell_entry_article_end', $post->ID ); ?>
+				<?php 
 
-			</article><!-- .post -->
-			<?php
+			endwhile;
+		endif;
 
-		endwhile;
-	endif;
+		?>
 
-	?>
+	</div><!-- .site-content-inner -->
 
 </main><!-- #site-content -->
 
