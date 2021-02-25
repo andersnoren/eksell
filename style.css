@@ -1732,10 +1732,11 @@ a.sub-menu-toggle:hover:before {
 
 a.sub-menu-toggle svg {
 	transition: transform .15s linear;
+	transform: translateY( .1rem );
 }
 
 a.sub-menu-toggle.active svg {
-	transform: rotate( 180deg );
+	transform: rotate( 180deg ) translateY( .2rem );
 }
 
 .main-menu ul {
@@ -2423,12 +2424,6 @@ h1.entry-title,
 
 @media ( max-width: 599px ) {
 
-	.wp-block-columns.alignwide + .wp-block-columns.alignwide,
-	.wp-block-columns.alignfull + .wp-block-columns.alignfull,
-	.wp-block-columns:not(.alignwide):not(.alignfull):not(.alignleft):not(.alignright) + .wp-block-columns:not(.alignwide):not(.alignfull):not(.alignleft):not(.alignright) {
-		margin-top: -1.6rem;
-	}
-
 	.wp-block-column + .wp-block-column {
 		margin-top: 3.2rem;
 	}
@@ -2436,20 +2431,40 @@ h1.entry-title,
 }
 
 @media ( min-width: 600px ) {
+
 	.wp-block-columns:not(.alignwide):not(.alignfull):not(.alignleft):not(.alignright) + .wp-block-columns:not(.alignwide):not(.alignfull):not(.alignleft):not(.alignright) {
 		margin-top: 0;
 	}
+	
 }
 
-@media ( min-width: 600px ) and ( max-width: 781px ) {
+@media ( min-width: 600px ) and ( max-width: 699px ) {
+
+    :root .wp-block-column:not(:only-child) {
+        flex-basis: calc(50% - 1.6rem) !important;
+		margin: 0 0 3.2rem;
+    }
+
+    :root .wp-block-column:nth-child(2n) {
+        margin-left: 3.2rem;
+    }
+
+}
+
+@media ( min-width: 700px ) and ( max-width: 781px ) {
 
     :root .wp-block-column:not(:only-child) {
         flex-basis: calc(50% - 2.4rem) !important;
+		margin: 0 0 4.8rem;
     }
 
-	:root .wp-block-column:not(:only-child) {
-		margin: 0 0 4.8rem;
-	}
+    :root .wp-block-column:nth-child(2n) {
+        margin-left: 4.8rem;
+    }
+
+}
+
+@media ( min-width: 600px ) and ( max-width: 781px ) {
 
 	/* Last two when they form a full row. */
 
@@ -2458,13 +2473,10 @@ h1.entry-title,
 		margin-bottom: 0;
 	}
 
-    :root .wp-block-column:nth-child(2n) {
-        margin-left: 4.8rem;
-    }
-
 }
 
 @media ( min-width: 782px ) {
+	
     :root .wp-block-column:not(:first-child) {
         margin-left: 4.8rem;
     }
@@ -2822,6 +2834,10 @@ section.wp-block-cover-image > h2 {
 	padding-bottom: 0;
 	padding-left: 0;
 	padding-top: 0;
+}
+
+.wp-block-media-text__content > .wp-block-group:not(.alignwide):not(.alignfull) {
+	max-width: 64rem;
 }
 
 @media ( max-width: 600px ) {
