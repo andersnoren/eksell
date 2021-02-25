@@ -59,6 +59,10 @@
 	--eksell-background-color: #fff;
 	--eksell-menu-modal-background-color: #1e2d32;
 	--eksell-menu-modal-text-color: #fff;
+	/* Layout */
+	--eksell-inner-width-thin: 64rem;
+	--eksell-inner-width-small: 76rem;
+	--eksell-inner-width-max: 205.2rem;
 }
 
 /* P3 Colors, where supported */
@@ -813,15 +817,15 @@ section {
 
 .section-inner {
 	margin: 0 auto;
-	max-width: 205.2rem;
+	max-width: var( --eksell-inner-width-max );
 	width: calc( 100% - 6.4rem );
 }
 
 .section-inner.max-percentage { width: 100%; }
 .section-inner.no-margin { margin: 0; }
 
-:root .mw-thin { max-width: 64rem; }
-:root .mw-small { max-width: 76rem; }
+:root .mw-thin { max-width: var( --eksell-inner-width-thin ); }
+:root .mw-small { max-width: var( --eksell-inner-width-small ); }
 
 /* Toggles ----------------------------------- */
 
@@ -2295,7 +2299,7 @@ h1.entry-title,
 [class*="__inner-container"] .wp-block-cover:not(.alignfull):not(.alignwide):not(.alignleft):not(.alignright) {
 	margin-left: auto;
 	margin-right: auto;
-	max-width: 64rem;
+	max-width: var( --eksell-inner-width-thin );
 }
 
 .alignfull > [class*="__inner-container"] > .wp-block-group.alignwide,
@@ -2435,7 +2439,7 @@ h1.entry-title,
 	.wp-block-columns:not(.alignwide):not(.alignfull):not(.alignleft):not(.alignright) + .wp-block-columns:not(.alignwide):not(.alignfull):not(.alignleft):not(.alignright) {
 		margin-top: 0;
 	}
-	
+
 }
 
 @media ( min-width: 600px ) and ( max-width: 699px ) {
@@ -2673,7 +2677,7 @@ section.wp-block-cover-image > h2 {
 .wp-block-group__inner-container {
 	margin-left: auto;
 	margin-right: auto;
-	max-width: 205.2rem;
+	max-width: var( --eksell-inner-width-max );
 }
 
 /* Block: HTML ------------------------------- */
@@ -2837,7 +2841,7 @@ section.wp-block-cover-image > h2 {
 }
 
 .wp-block-media-text__content > .wp-block-group:not(.alignwide):not(.alignfull) {
-	max-width: 64rem;
+	max-width: var( --eksell-inner-width-thin );
 }
 
 @media ( max-width: 600px ) {
@@ -3170,7 +3174,7 @@ table.is-style-stripes tbody tr:nth-child( odd ),
 }
 
 .alignwide {
-	max-width: 205.2rem;
+	max-width: var( --eksell-inner-width-max );
 }
 
 .entry-content > .alignwide {
@@ -3225,7 +3229,7 @@ table.is-style-stripes tbody tr:nth-child( odd ),
 	flex-grow: 0;
 	margin-left: auto;
 	margin-right: auto;
-	max-width: 205.2rem;
+	max-width: var( --eksell-inner-width-max );
 	width: calc( 100% - 6.4rem );
 }
 
