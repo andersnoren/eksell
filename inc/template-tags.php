@@ -6,53 +6,81 @@
 --------------------------------------------------------------------------------------------------- */
 
 if ( ! function_exists( 'eksell_the_custom_logo' ) ) :
-	function eksell_the_custom_logo( $logo_theme_mod = 'custom_logo' ) {
+	function eksell_the_custom_logo() {
 
-		echo esc_html( eksell_get_custom_logo( $logo_theme_mod ) );
+		echo esc_html( eksell_get_custom_logo() );
 
 	}
 endif;
 
 if ( ! function_exists( 'eksell_get_custom_logo' ) ) :
-	function eksell_get_custom_logo( $logo_theme_mod = 'custom_logo' ) {
+	function eksell_get_custom_logo() {
 
-		// Get the attachment id for the specified logo
-		$logo_id = get_theme_mod( $logo_theme_mod );
-		
+		$has_logo = false;
+
+		// Get the logo, the dark mode logo, and the retina logo setting
+		$logo_id 		= get_theme_mod( 'custom_logo', null );
+		$logo_dark_id 	= get_theme_mod( 'eksell_dark_mode_logo', null );
+		$retina_logo 	= get_theme_mod( 'eksell_retina_logo', false );
+
 		if ( ! $logo_id ) return;
 
-		$logo = wp_get_attachment_image_src( $logo_id, 'full' );
+		// Build an array containing the regular and the dark mode logo, if set
+		$logos = array();
+		if ( $logo_id ) $logos['regular'] = $logo_id;
+		if ( $logo_dark_id ) $logos['dark-mode'] = $logo_dark_id;
 
-		if ( ! $logo ) return;
+		// The regular logo is required for output
+		if ( ! isset( $logos['regular'] ) ) return;
 
-		// For clarity
-		$logo_url = esc_url( $logo[0] );
-		$logo_alt = get_post_meta( $logo_id, '_wp_attachment_image_alt', TRUE );
-		$logo_width = esc_attr( $logo[1] );
-		$logo_height = esc_attr( $logo[2] );
-
-		// If the retina logo setting is active, reduce the width/height by half
-		if ( get_theme_mod( 'eksell_retina_logo', false ) ) {
-			$logo_width = floor( $logo_width / 2 );
-			$logo_height = floor( $logo_height / 2 );
+		// If they are set to the same image, unset the dark modo logo
+		if ( isset( $logos['dark-mode'] ) && $logos['dark-mode'] == $logos['regular'] ) {
+			unset( $logos['dark-mode'] );
 		}
-
-		// CSS friendly class
-		$logo_theme_mod_class = str_replace( '_', '-', $logo_theme_mod );
 
 		// Record our output
 		ob_start();
 
 		?>
 
-		<a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home" class="custom-logo-link <?php echo esc_attr( $logo_theme_mod_class ); ?>">
-			<img src="<?php echo esc_url( $logo_url ); ?>" width="<?php echo esc_attr( $logo_width ); ?>" height="<?php echo esc_attr( $logo_height ); ?>" style="height: <?php echo esc_attr( $logo_height ); ?>px;"<?php if ( $logo_alt ) echo ' alt="' . esc_attr( $logo_alt ) . '"'; ?> />
+		<a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home" class="custom-logo-link custom-logo">
+			<?php 
+
+			// Loop over the (up to) two logos
+			foreach ( $logos as $slug => $logo_id ) : 
+
+				$logo = wp_get_attachment_image_src( $logo_id, 'full' );
+
+				if ( ! $logo ) continue;
+				$has_logo = true;
+
+				// For clarity
+				$logo_url 		= $logo[0];
+				$logo_width 	= $logo[1];
+				$logo_height 	= $logo[2];
+
+				// Get alt tag
+				$logo_alt = get_post_meta( $logo_id, '_wp_attachment_image_alt', TRUE );
+
+				// If the retina logo setting is active, reduce the width/height by half
+				if ( $retina_logo ) {
+					$logo_width 	= floor( $logo_width / 2 );
+					$logo_height 	= floor( $logo_height / 2 );
+				}
+			
+				?>
+
+				<img class="logo-<?php echo $slug; ?>" src="<?php echo esc_url( $logo_url ); ?>" width="<?php echo esc_attr( $logo_width ); ?>" height="<?php echo esc_attr( $logo_height ); ?>" style="height: <?php echo esc_attr( $logo_height ); ?>px;"<?php if ( $logo_alt ) echo ' alt="' . esc_attr( $logo_alt ) . '"'; ?> />
+
+				<?php 
+			endforeach; 
+			?>
 		</a>
 
 		<?php
 
-		// Return our output
-		return ob_get_clean();
+		// Return our output, if there are logos to output
+		return $has_logo ? ob_get_clean() : '';
 
 	}
 endif;

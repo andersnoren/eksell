@@ -1080,7 +1080,7 @@ a.faux-image {
 	display: none;
 }
 
-@media (prefers-color-scheme: dark) {
+@media ( prefers-color-scheme: dark ) {
 	.has-dark-mode-palette .fallback-image-dark-mode { display: block; }
 	.has-dark-mode-palette .fallback-image-regular { display: none; }
 }
@@ -1355,6 +1355,15 @@ ul.social-icons li {
 .site-logo img {
 	max-height: 5.8rem;
 	width: auto;
+}
+
+.site-logo img.logo-dark-mode {
+	display: none;
+}
+
+@media ( prefers-color-scheme: dark ) {
+	.has-dark-mode-palette .site-logo img.logo-regular:not(:only-child) { display: none; }
+	.has-dark-mode-palette .site-logo img.logo-dark-mode { display: block; }
 }
 
 .site-description {

@@ -25,6 +25,21 @@ if ( ! class_exists( 'Eksell_Customizer' ) ) :
 			 * Site Identity
 			 * ------------------------------------------------------------------------ */
 
+			/* Dark Mode Logo ---------------- */
+
+			$wp_customize->add_setting( 'eksell_dark_mode_logo', array(
+				'capability' 		=> 'edit_theme_options',
+				'sanitize_callback' => 'absint'
+			) );
+
+			$wp_customize->add_control( new WP_Customize_Media_Control( $wp_customize, 'eksell_dark_mode_logo', array(
+				'label'			=> __( 'Dark Mode Logo', 'eksell' ),
+				'description'	=> __( 'Used when a visitor views the site with dark mode active and the "Enable Dark Mode Color Palette" setting is enabled in Customizer → Colors.', 'eksell' ),
+				'mime_type'		=> 'image',
+				'priority'		=> 9,
+				'section' 		=> 'title_tagline',
+			) ) );
+
 			/* 2X Header Logo ---------------- */
 
 			$wp_customize->add_setting( 'eksell_retina_logo', array(
@@ -35,7 +50,7 @@ if ( ! class_exists( 'Eksell_Customizer' ) ) :
 			$wp_customize->add_control( 'eksell_retina_logo', array(
 				'type' 			=> 'checkbox',
 				'section' 		=> 'title_tagline',
-				'priority'		=> 10,
+				'priority'		=> 9,
 				'label' 		=> __( 'Retina logo', 'eksell' ),
 				'description' 	=> __( 'Scales the logo to half its uploaded size, making it sharp on high-res screens.', 'eksell' ),
 			) );
@@ -93,8 +108,6 @@ if ( ! class_exists( 'Eksell_Customizer' ) ) :
 				'label' 		=> __( 'Enable Dark Mode Color Palette', 'eksell' ),
 				'description'	=> __( 'The palette is used when the visitor has set their operating system to a light-on-dark color scheme. The feature is supported by most modern OSs and browsers, but not all. Your OS needs to be set to a light-on-dark color scheme for you to preview the color palette.', 'eksell' ),
 			) );
-
-			/* TOD */
 
 			/* Dark Mode Colors -------------- */
 
