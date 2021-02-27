@@ -52,7 +52,7 @@ if ( ! class_exists( 'Eksell_Custom_CSS' ) ) :
 			$background_color_default = get_theme_support( 'custom-background', 'default-color' );
 			if ( $background_color != $background_color_default ) {
 				$colors['regular']['background'] = array(
-					'css_variable'	=> '--background-color',
+					'css_variable'	=> '--eksell-background-color',
 					'color' 		=> '#' . $background_color,
 				);
 			}

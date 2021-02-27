@@ -129,6 +129,10 @@ if ( ! class_exists( 'Eksell_Customizer' ) ) :
 
 			}
 
+			/* Background Color -------------- */
+
+			$wp_customize->get_setting( 'background_color' )->transport = 'refresh';
+
 			/* ------------------------------------------------------------------------
 			 * General Options
 			 * ------------------------------------------------------------------------ */

@@ -640,7 +640,7 @@ if ( ! function_exists( 'eksell_block_editor_settings' ) ) :
 		}
 
 		// Add the background option
-		$background_color = '#' . get_background_color();
+		$background_color = '#' . get_theme_mod( 'background_color' );
 		$editor_color_palette[] = array(
 			'name'  => __( 'Background Color', 'eksell' ),
 			'slug'  => 'body-background',
