@@ -83,6 +83,8 @@ if ( ! class_exists( 'Eksell_Custom_CSS' ) ) :
 
 			/* P3 Colors --------------------- */
 		
+			// Filter for whether to output P3 colors. P3 colors have limited browser support (mainly Safari), so you might 
+			// want to disable this if you want the colors to be consistent between browsers and operating systems.
 			$output_p3 = apply_filters( 'eksell_custom_css_output_p3_colors', true );
 
 			if ( $output_p3 ) {

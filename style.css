@@ -2910,11 +2910,11 @@ section.wp-block-cover-image > h2 {
 
 @media ( min-width: 601px ) {
 
-	.wp-block-media-text:not(.has-background):not(.has-media-on-the-right) .wp-block-media-text__content {
+	.wp-block-media-text:not(.alignfull):not(.has-background):not(.has-media-on-the-right) .wp-block-media-text__content {
 		padding-right: 0;
 	}
 
-	.wp-block-media-text:not(.has-background).has-media-on-the-right .wp-block-media-text__content {
+	.wp-block-media-text:not(.alignfull):not(.has-background).has-media-on-the-right .wp-block-media-text__content {
 		padding-left: 0;
 	}
 
@@ -3212,8 +3212,8 @@ table.is-style-stripes tbody tr:nth-child( odd ),
 
 :root .has-small-font-size { font-size: .888em; }
 :root .has-regular-font-size, :root .has-normal-font-size { font-size: 1em; }
-:root .has-large-font-size { font-size: 1.166em; }
-:root .has-larger-font-size { font-size: 1.333em; }
+:root .has-large-font-size { font-size: 1.333em; }
+:root .has-larger-font-size { font-size: 1.777em; }
 
 /* Drop Cap ---------------------------------- */
 

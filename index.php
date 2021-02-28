@@ -14,7 +14,7 @@
 		
 		if ( $archive_title || $archive_description ) : 
 
-			// By default, only use the grid structure in the archive header if we have both a title and a description
+			// By default, only use the grid structure in the archive header if we have both a title and a description.
 			$use_header_grid = apply_filters( 'eksell_archive_header_use_grid', $archive_title && $archive_description );
 
 			?>

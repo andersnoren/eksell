@@ -62,25 +62,29 @@ if ( ! class_exists( 'Eksell_Customizer' ) ) :
 			$color_options = self::get_color_options();
 
 			// Contains two groups of colors: regular and dark_mode
-			$color_options_regular 		= $color_options['regular'];
-			$color_options_dark_mode 	= $color_options['dark_mode'];
+			$color_options_regular 		= isset( $color_options['regular'] ) ? $color_options['regular'] : array();
+			$color_options_dark_mode 	= isset( $color_options['dark_mode'] ) ? $color_options['dark_mode'] : array();
 
 			/* Regular Colors ---------------- */
 
-			// First, loop over the regular color options and add them to the customizer
-			foreach ( $color_options_regular as $color_option_name => $color_option ) {
+			if ( $color_options_regular ) {
 
-				$wp_customize->add_setting( $color_option_name, array(
-					'default' 			=> $color_option['default'],
-					'type' 				=> 'theme_mod',
-					'sanitize_callback' => 'sanitize_hex_color',
-				) );
+				// First, loop over the regular color options and add them to the customizer
+				foreach ( $color_options_regular as $color_option_name => $color_option ) {
 
-				$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, $color_option_name, array(
-					'label' 		=> $color_option['label'],
-					'section' 		=> 'colors',
-					'settings' 		=> $color_option_name,
-				) ) );
+					$wp_customize->add_setting( $color_option_name, array(
+						'default' 			=> $color_option['default'],
+						'type' 				=> 'theme_mod',
+						'sanitize_callback' => 'sanitize_hex_color',
+					) );
+
+					$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, $color_option_name, array(
+						'label' 		=> $color_option['label'],
+						'section' 		=> 'colors',
+						'settings' 		=> $color_option_name,
+					) ) );
+
+				}
 
 			}
 
@@ -111,26 +115,31 @@ if ( ! class_exists( 'Eksell_Customizer' ) ) :
 
 			/* Dark Mode Colors -------------- */
 
-			// Second, loop over the dark mode color options and add them to the customizer
-			foreach ( $color_options_dark_mode as $color_option_name => $color_option ) {
+			if ( $color_options_dark_mode ) {
 
-				$wp_customize->add_setting( $color_option_name, array(
-					'default' 			=> $color_option['default'],
-					'type' 				=> 'theme_mod',
-					'sanitize_callback' => 'sanitize_hex_color',
-				) );
+				// Second, loop over the dark mode color options and add them to the customizer
+				foreach ( $color_options_dark_mode as $color_option_name => $color_option ) {
 
-				$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, $color_option_name, array(
-					'label' 		=> sprintf( _x( 'Dark Mode %s', 'Customizer option label. %s = Name of the color.', 'eksell' ), $color_option['label'] ),
-					'section' 		=> 'colors',
-					'settings' 		=> $color_option_name,
-					'priority' 		=> 10,
-				) ) );
+					$wp_customize->add_setting( $color_option_name, array(
+						'default' 			=> $color_option['default'],
+						'type' 				=> 'theme_mod',
+						'sanitize_callback' => 'sanitize_hex_color',
+					) );
+
+					$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, $color_option_name, array(
+						'label' 		=> sprintf( _x( 'Dark Mode %s', 'Customizer option label. %s = Name of the color.', 'eksell' ), $color_option['label'] ),
+						'section' 		=> 'colors',
+						'settings' 		=> $color_option_name,
+						'priority' 		=> 10,
+					) ) );
+
+				}
 
 			}
 
 			/* Background Color -------------- */
 
+			// Make the core background_color setting use refresh transport, for consistency.
 			$wp_customize->get_setting( 'background_color' )->transport = 'refresh';
 
 			/* ------------------------------------------------------------------------
@@ -363,7 +372,7 @@ if ( ! class_exists( 'Eksell_Customizer' ) ) :
 
 		/*	-----------------------------------------------------------------------------------------------
 			RETURN SITEWIDE COLOR OPTIONS
-			Used by...
+			Used by:
 
 			Eksell_Customizer				To generate the color settings in the Customizer
 			Eksell_Custom_CSS				To output the color settings on the front-end
@@ -372,6 +381,8 @@ if ( ! class_exists( 'Eksell_Customizer' ) ) :
 
 		public static function get_color_options() {
 
+			// You can modify the color options to include in the theme with this filter, 
+			// or disable color options entirely by filtering it to false.
 			return apply_filters( 'eksell_color_options', array(
 				'regular'		=> array(
 					'eksell_accent_color' => array(
@@ -404,7 +415,7 @@ if ( ! class_exists( 'Eksell_Customizer' ) ) :
 						'slug'		=> 'light-background',
 						'palette'	=> true,
 					),
-					// Note: The body background color uses the built-in WordPress theme mod.
+					// Note: The body background color uses the built-in WordPress theme mod, which is why it isn't included in this array.
 					'eksell_menu_modal_text_color' => array(
 						'default'	=> '#ffffff',
 						'label'		=> __( 'Menu Modal Text Color', 'eksell' ),
@@ -479,6 +490,7 @@ if ( ! class_exists( 'Eksell_Customizer' ) ) :
 
 		public static function get_archive_columns_options() {
 			
+			// You can modify the columns options in the theme with the `eksell_archive_columns_options` filter.
 			return apply_filters( 'eksell_archive_columns_options', array(
 				'eksell_post_grid_columns_mobile'			=> array(
 					'label'			=> __( 'Columns on Mobile', 'eksell' ),

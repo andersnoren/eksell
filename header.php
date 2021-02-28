@@ -21,7 +21,7 @@
 			wp_body_open();
 		}
 
-		// Check whether the header search is disabled in the customizer
+		// Check whether the header search is disabled in the customizer.
 		$enable_search = get_theme_mod( 'eksell_enable_search', true );
 
 		?>
@@ -30,12 +30,16 @@
 
 		<?php 
 		
-		// Include the site aside, which contains the navigation toggle on desktop
+		// Include the site aside, which contains the navigation toggle on desktop.
 		include( locate_template( 'inc/parts/site-aside.php' ) ); 
 
-		// Determine whether we have a sticky header
+		// Determine whether we have a sticky header.
 		$header_classes 	= get_theme_mod( 'eksell_enable_sticky_header', true ) ? 'stick-me' : '';
+
+		// Make the header classes filterable.
 		$header_classes 	= apply_filters( 'eksell_header_classes', $header_classes );
+
+		// Build a class attribute out of the classes, if there are any.
 		$header_class_attr 	= $header_classes ? ' class="' . esc_attr( $header_classes ) . '"' : '';
 		
 		?>

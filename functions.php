@@ -87,7 +87,8 @@ if ( ! function_exists( 'eksell_register_styles' ) ) :
 		$theme_version = wp_get_theme( 'eksell' )->get( 'Version' );
 		$css_dependencies = array();
 
-		// Retrieve and enqueue the URL for Google Fonts
+		// Retrieve and enqueue the URL for Google Fonts.
+		// You can remove the Google Fonts enqueue by filtering `eksell_google_fonts_url`.
 		$google_fonts_url = apply_filters( 'eksell_google_fonts_url', '//fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap' );
 
 		if ( $google_fonts_url ) {
@@ -95,7 +96,7 @@ if ( ! function_exists( 'eksell_register_styles' ) ) :
 			$css_dependencies[] = 'eksell-google-fonts';
 		}
 
-		// Filter the list of dependencies used by the eksell-style CSS enqueue
+		// Filter the list of dependencies used by the eksell-style CSS enqueue.
 		$css_dependencies = apply_filters( 'eksell_css_dependencies', $css_dependencies );
 
 		wp_enqueue_style( 'eksell-style', get_template_directory_uri() . '/style.css', $css_dependencies, $theme_version, 'all' );
@@ -128,11 +129,11 @@ if ( ! function_exists( 'eksell_register_scripts' ) ) :
 		// Built-in JS assets
 		$js_dependencies = array( 'jquery', 'imagesloaded', 'masonry' );
 
-		// Register the Modernizr JS check for touchevents (used to determine whether background-attachment should be active)
+		// Register the Modernizr JS check for touchevents (used to determine whether background-attachment should be active).
 		wp_register_script( 'eksell-modernizr', get_template_directory_uri() . '/assets/js/modernizr-touchevents.min.js', array(), '3.6.0' );
 		$js_dependencies[] = 'eksell-modernizr';
 
-		// Filter the list of dependencies used by the eksell-construct JavaScript enqueue
+		// Filter the list of dependencies used by the eksell-construct JavaScript enqueue.
 		$js_dependencies = apply_filters( 'eksell_js_dependencies', $js_dependencies );
 
 		wp_enqueue_script( 'eksell-construct', get_template_directory_uri() . '/assets/js/construct.js', $js_dependencies, $theme_version );
@@ -294,6 +295,7 @@ endif;
 
 /*	-----------------------------------------------------------------------------------------------
 	DISABLE ARCHIVE TITLE PREFIX
+	The prefix is output separately in the archive header with eksell_get_the_archive_title_prefix().
 --------------------------------------------------------------------------------------------------- */
 
 add_filter( 'get_the_archive_title_prefix', '__return_false' );
@@ -340,6 +342,7 @@ if ( ! function_exists( 'eksell_get_the_archive_title_prefix' ) ) :
 			$prefix = _x( 'Archives', 'general archive title prefix', 'eksell' );
 		}
 
+		// Make the prefix filterable before returning it.
 		return apply_filters( 'eksell_archive_title_prefix', $prefix );
 
 	}
@@ -583,7 +586,8 @@ if ( ! function_exists( 'eksell_block_editor_styles' ) ) :
 
 		$css_dependencies = array();
 
-		// Retrieve and enqueue the URL for Google Fonts
+		// Retrieve and enqueue the URL for Google Fonts.
+		// You can remove the Google Fonts enqueue by filtering `eksell_google_fonts_url`.
 		$google_fonts_url = apply_filters( 'eksell_google_fonts_url', '//fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap' );
 
 		if ( $google_fonts_url ) {
@@ -618,34 +622,37 @@ if ( ! function_exists( 'eksell_block_editor_settings' ) ) :
 		// Get the color options
 		// By default, this array contains two groups of colors: primary and dark-mode
 		$color_options_groups = Eksell_Customizer::get_color_options();
+		
+		if ( $color_options_groups ) {
 
-		// Merge the two groups into one array with all colors
-		foreach ( $color_options_groups as $group ) {
-			$color_options = array_merge( $color_options, $group );
-		}
-
-		// Loop over them and construct an array for the editor-color-palette
-		if ( $color_options ) {
-			foreach ( $color_options as $color_option_name => $color_option ) {
-
-				// Only add the colors set to be included in the color palette
-				if ( ! $color_option['palette'] ) continue;
-
-				$editor_color_palette[] = array(
-					'name'  => $color_option['label'],
-					'slug'  => $color_option['slug'],
-					'color' => get_theme_mod( $color_option_name, $color_option['default'] ),
-				);
+			// Merge the two groups into one array with all colors
+			foreach ( $color_options_groups as $group ) {
+				$color_options = array_merge( $color_options, $group );
 			}
-		}
 
-		// Add the background option
-		$background_color = '#' . get_theme_mod( 'background_color' );
-		$editor_color_palette[] = array(
-			'name'  => __( 'Background Color', 'eksell' ),
-			'slug'  => 'body-background',
-			'color' => $background_color,
-		);
+			// Loop over them and construct an array for the editor-color-palette
+			if ( $color_options ) {
+				foreach ( $color_options as $color_option_name => $color_option ) {
+
+					// Only add the colors set to be included in the color palette
+					if ( ! $color_option['palette'] ) continue;
+
+					$editor_color_palette[] = array(
+						'name'  => $color_option['label'],
+						'slug'  => $color_option['slug'],
+						'color' => get_theme_mod( $color_option_name, $color_option['default'] ),
+					);
+				}
+			}
+
+			// Add the background option
+			$background_color = '#' . get_theme_mod( 'background_color' );
+			$editor_color_palette[] = array(
+				'name'  => __( 'Background Color', 'eksell' ),
+				'slug'  => 'body-background',
+				'color' => $background_color,
+			);
+		}
 
 		// If we have accent colors, add them to the block editor palette
 		if ( $editor_color_palette ) {
@@ -665,7 +672,7 @@ if ( ! function_exists( 'eksell_block_editor_settings' ) ) :
 				array(
 					'name'      => _x( 'Regular', 'Name of the regular font size in Gutenberg', 'eksell' ),
 					'shortName' => _x( 'M', 'Short name of the regular font size in the Gutenberg editor.', 'eksell' ),
-					'size'      => 19,
+					'size'      => 18,
 					'slug'      => 'normal',
 				),
 				array(

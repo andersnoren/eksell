@@ -268,27 +268,6 @@ if ( ! function_exists( 'eksell_is_comment_by_post_author' ) ) :
 endif;
 
 
-/*	-----------------------------------------------------------------------------------------------
-	IS THE POST/PAGE SET TO A COVER TEMPLATE?
-	Helper function for checking if the specified post is set to any of the cover templates.
-
-	@param	$post mixed		Optional. Post ID or WP_Post object. Default is global $post.
---------------------------------------------------------------------------------------------------- */
-
-if ( ! function_exists( 'eksell_is_cover_template' ) ) :
-	function eksell_is_cover_template( $post = null ) {
-
-		$post = get_post( $post );
-
-		// Filterable list of cover templates to check for
-		$cover_templates = apply_filters( 'eksell_cover_templates', array( 'template-cover.php', 'template-full-width-cover.php' ) );
-
-		return in_array( get_page_template_slug( $post ), $cover_templates );
-
-	}
-endif;
-
-
 /* ------------------------------------------------------------------------------------------------
    GET POST GRID COLUMN CLASSES
    Gets the number of columns set in the Customizer, and returns the classes that should be used to
@@ -334,6 +313,7 @@ if ( ! function_exists( 'eksell_get_archive_columns_classes' ) ) :
 			}
 		}
 
+		// Make the column classes filterable before returning them.
 		return apply_filters( 'eksell_archive_columns_classes', $classes );
 
 	}
@@ -350,13 +330,15 @@ if ( ! function_exists( 'eksell_the_archive_filter' ) ) :
 
 		global $paged;
 		
-		// Whether to display the filter (defaults to on home or on JetPack Portfolio CPT archive, and when set to active in the Customizer)
+		// Whether to display the filter (defaults to on home or on Jetpack Portfolio CPT archive, and when set to active in the Customizer).
+		// The value can be filtered with eksell_show_home_filter.
 		$show_home_filter = apply_filters( 'eksell_show_home_filter', ( is_home() || is_post_type_archive( 'jetpack-portfolio' ) ) && $paged == 0 && get_theme_mod( 'eksell_show_home_filter', true ) );
 		
 		if ( ! $show_home_filter ) return;
 
 		$filter_taxonomy = is_post_type_archive( 'jetpack-portfolio' ) ? 'jetpack-portfolio-type' : 'category';
 
+		// Use the eksell_home_filter_get_terms_args filter to modify which taxonomy is used for the filtration.
 		$terms = get_terms( apply_filters( 'eksell_home_filter_get_terms_args', array(
 			'depth'		=> 1,
 			'taxonomy'	=> $filter_taxonomy,
@@ -367,7 +349,7 @@ if ( ! function_exists( 'eksell_the_archive_filter' ) ) :
 		$home_url = '';
 		$post_type = '';
 
-		// Determine the correct home URL to link to
+		// Determine the correct home URL to link to.
 		if ( is_home() ) {
 			$home_url = home_url();
 			$post_type = 'post';
@@ -376,6 +358,8 @@ if ( ! function_exists( 'eksell_the_archive_filter' ) ) :
 			$home_url = get_post_type_archive_link( $post_type );
 		}
 
+		// Make the home_url filterable. If you change the taxonomy of the filtration with `eksell_home_filter_get_terms_args`,
+		// you'll probably want to filter this to make sure it points to the correct URL as well.
 		$home_url = apply_filters( 'eksell_filter_home_url', $home_url );
 	
 		?>

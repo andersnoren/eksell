@@ -151,8 +151,6 @@ class Eksell_SVG_Icons {
 		 * The dynamic portion of the hook name, `$group`, refers to
 		 * the name of the group of icons, either "ui" or "social".
 		 *
-		 * @since Eksell 1.0
-		 *
 		 * @param array $arr Array of icons.
 		 */
 		$arr = apply_filters( "eksell_svg_icons_{$group}", $arr );

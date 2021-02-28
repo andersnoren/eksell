@@ -16,25 +16,30 @@ if ( $comments ) :
 
 		<?php
 
+		$post_type 			= get_post_type();
 		$comments_number 	= absint( get_comments_number() );
-		$review_post_types 	= apply_filters( 'eksell_post_types_with_reviews_instead_of_comments', array( 'product' ) );
 		
-		if ( in_array( get_post_type(), $review_post_types ) ) {
-			// Translators: %s = the number of review
+		if ( get_post_type() == 'product' ) {
+			// Translators: %s = the number of reviews.
 			$comments_title = sprintf( _nx( '%s Review', '%s Reviews', $comments_number, 'Translators: %s = the number of reviews', 'eksell' ), $comments_number );
 		} else {
-			// Translators: %s = the number of comments
+			// Translators: %s = the number of comments.
 			$comments_title = sprintf( _nx( '%s Comment', '%s Comments', $comments_number, 'Translators: %s = the number of comments', 'eksell' ), $comments_number );
 		}
-		
-		?>
 
-		<div class="comments-header">
-			<hr class="color-accent" aria-hidden="true" />
-			<h2 class="comment-reply-title"><?php echo esc_html( $comments_title ); ?></h2>
-		</div><!-- .comments-header -->
+		// Filter the comments title before output.
+		$comments_title = apply_filters( $comments_title, $comments_number, $post_type );
 
-		<?php
+		if ( $comments_title ) : 
+			?>
+
+			<div class="comments-header">
+				<hr class="color-accent" aria-hidden="true" />
+				<h2 class="comment-reply-title"><?php echo esc_html( $comments_title ); ?></h2>
+			</div><!-- .comments-header -->
+
+			<?php
+		endif;
 
 		wp_list_comments( array(
 			'avatar_size' => 120,
