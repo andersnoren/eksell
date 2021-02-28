@@ -24,6 +24,8 @@
 	--eksell-inner-width-thin: 64rem;
 	--eksell-inner-width-small: 76rem;
 	--eksell-inner-width-max: 205.2rem;
+	--eksell-inner-gutter: 4.8rem;
+	--eksell-inner-gutter-compensated: 2.8rem; /* Removes 20px (10px padding) added by Core to the top block editor ancestor */
 }
 
 html {
@@ -90,10 +92,23 @@ html {
 	color: var( --eksell-secondary-color );
 }
 
-/* Structure --------------------------------- */
+
+/* --------------------------------------------------------------------------------------------- */
+/*	Structure
+/* --------------------------------------------------------------------------------------------- */
+
 
 .wp-block {
 	max-width: var( --eksell-inner-width-thin );
+}
+
+.editor-styles-wrapper .block-editor-block-list__layout.is-root-container > *[data-align="full"] {
+	margin-left: -1rem;
+	margin-right: -1rem;
+}
+
+.editor-styles-wrapper .block-editor-block-list__layout.is-root-container > *:not([data-align="full"]) {
+	width: calc( 100% - var( --eksell-inner-gutter-compensated ) );
 }
 
 .wp-block .wp-block,
@@ -139,6 +154,10 @@ html {
     max-width: none;
 }
 
+.editor-styles-wrapper *[data-align="full"] + *[data-align="full"] {
+	margin-top: -3.2rem;
+}
+
 .editor-styles-wrapper *[data-align="wide"] [data-type="core/group"]:not([data-align="wide"]):not([data-align="full"]),
 .editor-styles-wrapper *[data-align="full"] [data-type="core/group"]:not([data-align="wide"]):not([data-align="full"]) {
 	max-width: var( --eksell-inner-width-thin );
@@ -182,9 +201,11 @@ html {
 :root .has-black-color { color: #000; }
 :root .has-white-color { color: var( --eksell-background-color ); }
 
+
 /* --------------------------------------------------------------------------------------------- */
 /*	Typography
 /* --------------------------------------------------------------------------------------------- */
+
 
 .editor-styles-wrapper .editor-block-list__layout a,
 .editor-styles-wrapper .block-editor-block-list__layout a {
@@ -195,8 +216,8 @@ html {
 }
 
 .edit-post-visual-editor__post-title-wrapper .editor-post-title {
-	margin-bottom: 2.9rem;
-	margin-top: 2.9rem;
+	margin: 2.9rem auto;
+	width: calc( 100% - var( --eksell-inner-gutter-compensated ) );
 }
 
 .editor-post-title__block .editor-post-title__input,
@@ -504,6 +525,12 @@ h6 + h1, h6 + h2, h6 + h3, h6 + h4, h6 + h5, h6 + h6 {
 	padding-right: 0 !important;
 }
 
+@media ( max-width: 599px ) {
+	:root .wp-block-column + .wp-block-column {
+		margin-top: calc( var( --eksell-inner-gutter ) / 2 );
+	}
+}
+
 @media ( min-width: 782px ) {
 	:root .editor-styles-wrapper .block-editor-block-list__block.wp-block-column:not(:first-child) {
 		margin: 0 0 0 4.8rem;
@@ -669,7 +696,19 @@ h6 + h1, h6 + h2, h6 + h3, h6 + h4, h6 + h5, h6 + h6 {
 /* Block: Group ------------------------------ */
 
 :root .wp-block-group.has-background {
-	padding: 3.2rem;
+	padding: calc( var( --eksell-inner-gutter ) / 2 );
+}
+
+.wp-block-group__inner-container {
+	margin-left: auto;
+	margin-right: auto;
+	max-width: var( --eksell-inner-width-max );
+}
+
+:root [data-align="full"] > .wp-block-group.has-background > .wp-block-group__inner-container > .wp-block,
+:root [data-align="full"] > .has-background .wp-block-group > .wp-block-group__inner-container > .wp-block {
+	padding-left: 0;
+	padding-right: 0;
 }
 
 /* Block: Image ------------------------------ */
@@ -773,7 +812,16 @@ h6 + h1, h6 + h2, h6 + h3, h6 + h4, h6 + h5, h6 + h6 {
 	margin: 0;
 }
 
+.editor-styles-wrapper .wp-block-media-text .wp-block-media-text__content {
+	padding: calc( var( --eksell-inner-gutter ) / 2 );
+}
+
 /* Block: Paragraph -------------------------- */
+
+.editor-styles-wrapper p.has-background {
+	padding: calc( var( --eksell-inner-gutter ) / 2 );
+}
+
 /* Block: Pullquote -------------------------- */
 
 .editor-styles-wrapper .wp-block-pullquote {
@@ -1007,6 +1055,13 @@ h6 + h1, h6 + h2, h6 + h3, h6 + h4, h6 + h5, h6 + h6 {
 
 @media ( min-width: 700px ) {
 
+	/* Setup --------------------------------- */
+
+	:root {
+		--eksell-inner-gutter: 9.6rem;
+		--eksell-inner-gutter-compensated: 7.6rem;
+	}
+
 	/* Structure ----------------------------- */
 
 	.editor-styles-wrapper > * {
@@ -1041,8 +1096,7 @@ h6 + h1, h6 + h2, h6 + h3, h6 + h4, h6 + h5, h6 + h6 {
 	/* Typography ---------------------------- */
 
 	.edit-post-visual-editor__post-title-wrapper .editor-post-title {
-		margin-bottom: 4.5rem;
-		margin-top: 4.5rem;
+		margin: 4.5rem auto;
 	}
 
 	.editor-post-title__block .editor-post-title__input,
@@ -1151,6 +1205,18 @@ h6 + h1, h6 + h2, h6 + h3, h6 + h4, h6 + h5, h6 + h6 {
 		margin-top: 4.8rem;
 	}
 
+	/* BLOCK: MEDIA AND TEXT */
+
+	.editor-styles-wrapper .wp-block-media-text .wp-block-media-text__content {
+		padding: 4.8rem;
+	}
+
+	/* BLOCK: PARAGRAPH */
+
+	.editor-styles-wrapper p.has-background {
+		padding: 4.8rem;
+	}
+
 	/* BLOCK: PULLQUOTE */
 
 	.editor-styles-wrapper .wp-block-pullquote {
@@ -1158,12 +1224,12 @@ h6 + h1, h6 + h2, h6 + h3, h6 + h4, h6 + h5, h6 + h6 {
 	}
 
 	.editor-styles-wrapper .wp-block-pullquote.is-style-solid-color.has-background {
-		padding: 4rem;
+		padding: 4.8rem;
 	}
 
 	.editor-styles-wrapper [data-align="wide"] > .wp-block-pullquote blockquote, 
 	.editor-styles-wrapper [data-align="full"] > .wp-block-pullquote blockquote {
-		font-size: 4rem;
+		font-size: 4.8rem;
 	}
 
 	/* BLOCK: QUOTE */
@@ -1214,5 +1280,25 @@ h6 + h1, h6 + h2, h6 + h3, h6 + h4, h6 + h5, h6 + h6 {
 	.alignfull.wp-block-gallery.columns-6 .blocks-gallery-item, .alignwide.wp-block-gallery.columns-6 .blocks-gallery-item { 	width: calc( 16.66667% - ( ( 4.8rem * 5 ) / 6 ) ); }
 	.alignfull.wp-block-gallery.columns-7 .blocks-gallery-item, .alignwide.wp-block-gallery.columns-7 .blocks-gallery-item { 	width: calc( 14.28571% - ( ( 4.8rem * 6 ) / 7 ) ); }
 	.alignfull.wp-block-gallery.columns-8 .blocks-gallery-item, .alignwide.wp-block-gallery.columns-8 .blocks-gallery-item { 	width: calc( 12.5% - ( ( 4.8rem * 7 ) / 8 ) ); }
+
+}
+
+@media ( min-width: 1200px ) {
+
+	/* Setup --------------------------------- */
+
+	:root {
+		--eksell-inner-gutter: 19.2rem;
+		--eksell-inner-gutter-compensated: 17.2rem;
+	}
+
+	/* Blocks -------------------------------- */
+
+	/* BLOCK: GROUP */
+
+	.editor-styles-wrapper .block-editor-block-list__layout.is-root-container > .wp-block[data-align="full"] > .wp-block-group.has-background {
+		padding-left: calc( var( --eksell-inner-gutter-compensated ) / 2 );
+		padding-right: calc( var( --eksell-inner-gutter-compensated ) / 2 );
+	}
 
 }
