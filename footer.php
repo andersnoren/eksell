@@ -1,10 +1,14 @@
 		<footer id="site-footer">
 
-			<?php do_action( 'eksell_footer_start' ); ?>
+			<?php 
+			do_action( 'eksell_footer_start' ); 
+			?>
 			
 			<div class="footer-inner section-inner">
 
-				<?php do_action( 'eksell_footer_inner_start' ); ?>
+				<?php 
+				do_action( 'eksell_footer_inner_start' ); 
+				?>
 
 				<div class="footer-credits">
 
@@ -18,13 +22,17 @@
 
 				</div><!-- .footer-credits -->
 
-				<?php eksell_the_social_menu(); ?>
+				<?php 
+				eksell_the_social_menu(); 
 
-				<?php do_action( 'eksell_footer_inner_end' ); ?>
+				do_action( 'eksell_footer_inner_end' ); 
+				?>
 
 			</div><!-- .footer-inner -->
 
-			<?php do_action( 'eksell_footer_end' ); ?>
+			<?php 
+			do_action( 'eksell_footer_end' ); 
+			?>
 
 		</footer><!-- #site-footer -->
 

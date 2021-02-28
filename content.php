@@ -1,9 +1,7 @@
 <article <?php post_class(); ?> id="post-<?php the_ID(); ?>">
 
 	<?php 
-
 	do_action( 'eksell_entry_article_start', $post->ID );
-
 	?>
 
 	<header class="entry-header section-inner mw-thin i-a a-fade-up">
@@ -116,7 +114,9 @@
 
 			<footer class="entry-footer color-secondary">
 
-				<?php do_action( 'eksell_entry_footer_start', $post->ID ); ?>
+				<?php 
+				do_action( 'eksell_entry_footer_start', $post->ID ); 
+				?>
 
 				<?php if ( $entry_time && ! is_page() ) : ?>
 					<p class="entry-meta-time"><?php printf( _x( 'Published %s', '%s = The date of the post', 'eksell' ), '<time><a href="' . get_permalink() . '">' . $entry_time . '</a></time>' ); ?></p>
@@ -134,7 +134,9 @@
 					<p class="edit-link"><a href="<?php echo esc_url( $edit_url ); ?>"><?php _e( 'Edit This', 'eksell' ); ?></a></p>
 				<?php endif; ?>
 
-				<?php do_action( 'eksell_entry_footer_end', $post->ID ); ?>
+				<?php 
+				do_action( 'eksell_entry_footer_end', $post->ID ); 
+				?>
 
 			</footer><!-- .entry-footer -->
 

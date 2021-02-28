@@ -46,7 +46,9 @@
 
 		<header id="site-header"<?php echo $header_class_attr; ?>>
 
-			<?php do_action( 'eksell_header_start' ); ?>
+			<?php 
+			do_action( 'eksell_header_start' );
+			?>
 
 			<div class="header-inner section-inner">
 
@@ -122,7 +124,9 @@
 
 			</div><!-- .header-inner -->
 
-			<?php do_action( 'eksell_header_end' ); ?>
+			<?php 
+			do_action( 'eksell_header_end' );
+			?>
 
 		</header><!-- #site-header -->
 

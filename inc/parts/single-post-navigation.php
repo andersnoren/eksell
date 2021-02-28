@@ -34,7 +34,9 @@ $nav_class = ( $nav['prev'] && $nav['next'] ) ? ' has-both' : ( ! $nav['prev'] ?
 
 				<a class="single-nav-item do-spot spot-fade-up<?php echo esc_attr( $link_classes ); ?>" href="<?php echo esc_url( get_permalink( $nav_post->ID ) ); ?>">
 
-					<?php do_action( 'eksell_single_nav_item_start', $nav_post, $slug ); ?>
+					<?php
+					do_action( 'eksell_single_nav_item_start', $nav_post, $slug );
+					?>
 
 					<figure class="single-nav-item-media">
 
@@ -63,13 +65,17 @@ $nav_class = ( $nav['prev'] && $nav['next'] ) ? ' has-both' : ( ! $nav['prev'] ?
 
 						<header class="single-nav-item-header contain-margins">
 
-							<?php do_action( 'eksell_single_nav_item_header_start', $nav_post, $slug ); ?>
+							<?php
+							do_action( 'eksell_single_nav_item_header_start', $nav_post, $slug );
+							?>
 
 							<h3 class="single-nav-item-title h4">
 								<?php echo $nav_post_title; ?>
 							</h3><!-- .single-nav-item-title -->
 
-							<?php do_action( 'eksell_single_nav_item_header_end', $nav_post, $slug ); ?>
+							<?php
+							do_action( 'eksell_single_nav_item_header_end', $nav_post, $slug );
+							?>
 
 						</header><!-- .single-nav-item-header -->
 

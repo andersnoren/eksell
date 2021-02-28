@@ -99,9 +99,6 @@
 
 					<?php 
 
-					/*
-					* @hooked eksell_output_previous_posts_link - 10
-					*/
 					do_action( 'eksell_posts_start' );
 
 					// Get the column classes, based on the settings in the Customizer
@@ -129,21 +126,29 @@
 
 					</div><!-- .posts-grid -->
 
-					<?php do_action( 'eksell_posts_end' ); ?>
+					<?php 
+					do_action( 'eksell_posts_end' ); 
+					?>
 				
 				</div><!-- .section-inner -->
 
 			</div><!-- .posts -->
 
-			<?php get_template_part( 'pagination' ); ?>
-
-		<?php elseif ( is_search() ) : ?>
+			<?php 
+			
+			get_template_part( 'pagination' ); 
+			
+		elseif ( is_search() ) : 
+		
+			?>
 
 			<div class="no-search-results-form section-inner contain-margins">
 				<?php get_search_form(); ?>
 			</div><!-- .no-search-results -->
 
-		<?php endif; ?>
+			<?php 
+		endif;
+		?>
 
 	</div><!-- .site-content-inner -->
 
