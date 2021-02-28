@@ -1157,8 +1157,9 @@ ul.social-icons li {
 
 .social-icons a:hover,
 .social-icons a:focus {
+	outline: none;
 	transform: scale( 1.15 );
-	text-decoration: none !important;
+	text-decoration: none;
 }
 
 .social-icons svg * {
@@ -1700,6 +1701,7 @@ ul.social-icons li {
 
 .main-menu a {
 	display: block;
+	outline: none;
 	padding: 2rem 0;
 	width: 100%;
 }

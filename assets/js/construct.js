@@ -697,33 +697,18 @@ eksell.focusManagement = {
 
 	init: function() {
 
-		// Add and remove a class from dropdown menu items on focus
-		eksell.focusManagement.dropdownFocus();
-
-		// If the visitor tabs out of the main menu, return focus to the navigation toggle
-		// Also, if the visitor tabs into a hidden element, move the focus to the element after the hidden element
+		// If the visitor tabs out of the search modal, return focus to the search field
 		eksell.focusManagement.focusLoop();
 
 	},
 
 	focusLoop: function() {
-		$( 'input, a, button' ).on( 'focus', function() {
-			if ( $( '.menu-modal' ).is( '.active' ) ) {
-				if ( ! $( this ).parents( '.menu-modal' ).length ) {
-					$( '.nav-untoggle' ).focus();
-				}
-			} else if ( $( '.search-modal' ).is( '.active' ) ) {
+		$( 'a' ).on( 'focus', function() {
+			if ( $( '.search-modal' ).is( '.active' ) ) {
 				if ( ! $( this ).parents( '.search-modal' ).length ) {
 					$( '.search-modal .search-field' ).focus();
 				}
 			}
-		} );
-	},
-
-	dropdownFocus: function() {
-		$( '.dropdown-menu a' ).on( 'blur focus', function( e ) {
-			$( this ).parents( 'li.menu-item-has-children' ).toggleClass( 'focus' );
-			if ( e.type == 'focus' ) $( this ).trigger( 'focus-applied' );
 		} );
 	}
 
