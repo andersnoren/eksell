@@ -882,11 +882,22 @@ h6 + h1, h6 + h2, h6 + h3, h6 + h4, h6 + h5, h6 + h6 {
 .editor-styles-wrapper .wp-block-pullquote__citation, 
 .editor-styles-wrapper .wp-block-pullquote cite, 
 .editor-styles-wrapper .wp-block-pullquote footer {
-	color: var( --eksell-accent-color );
 	font-size: 1.6rem;
 	font-weight: 700;
 	margin: 2rem 0 0;
 	text-transform: none;
+}
+
+.editor-styles-wrapper blockquote:not(.has-text-color) .wp-block-pullquote__citation, 
+.editor-styles-wrapper .wp-block-pullquote blockquote:not(.has-text-color) cite, 
+.editor-styles-wrapper .wp-block-pullquote blockquote:not(.has-text-color) footer {
+	color: var( --eksell-accent-color );
+}
+
+/* STYLE: DEFAULT */
+
+.editor-styles-wrapper .wp-block-pullquote.is-style-default {
+	background-color: transparent !important;
 }
 
 /* STYLE: SOLID COLOR */
@@ -1245,7 +1256,7 @@ h6 + h1, h6 + h2, h6 + h3, h6 + h4, h6 + h5, h6 + h6 {
 	/* BLOCK: SEPARATOR */
 
 	.editor-styles-wrapper hr.wp-block-separator {
-		margin: 4.8rem auto;
+		margin: 6.4rem auto;
 	}
 
 }
