@@ -129,6 +129,10 @@ if ( ! function_exists( 'eksell_register_scripts' ) ) :
 		// Built-in JS assets
 		$js_dependencies = array( 'jquery', 'imagesloaded', 'masonry' );
 
+		// CSS variables ponyfill
+		wp_register_script( 'eksell-css-vars-ponyfill', get_template_directory_uri() . '/assets/js/css-vars-ponyfill.min.js', array(), '3.6.0' );
+		$js_dependencies[] = 'eksell-css-vars-ponyfill';
+
 		// Filter the list of dependencies used by the eksell-construct JavaScript enqueue.
 		$js_dependencies = apply_filters( 'eksell_js_dependencies', $js_dependencies );
 

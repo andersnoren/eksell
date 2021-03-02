@@ -1,4 +1,4 @@
-/*---------------------------------------------------------------------------------
+/* ---------------------------------------------------------------------------------------------
 
 	Theme Name: Eksell
     Text Domain: eksell
@@ -16,35 +16,35 @@
 	All files, unless otherwise stated, are released under the GNU General Public License
 	version 2.0 (http://www.gnu.org/licenses/gpl-2.0.html)
 
------------------------------------------------------------------------------------
+/* ---------------------------------------------------------------------------------------------
 
 	0. 	CSS Variables
 	0. 	CSS Reset
 	1. 	Document Setup
 	2. 	Element Base
 	3. 	Helper Classes
-	4. 	Site Header
-	5. 	Modal: Menu
-	6. 	Modal: Search
-	7. 	Page Templates
-		a. 	Template: Only Content
-	8. Post: Archive
-	9. Post: Single
-	10. Blocks
-	11. Entry Content
-	12. Comments
-	13. Site Pagination
-	14. Error 404
-	15. WooCommerce
-	16. Site Footer
-	17. Media Queries
+	4.	Site Header
+	5. 	Site Aside
+	6. 	Modal: Menu
+	7. 	Modal: Search
+	8.	 Page Templates
+		a.	 Template: Only Content
+	9. 	Post: Archive
+	10.	 Post: Single
+	11.	 Blocks
+	12.	 Entry Content
+	13.	 Comments
+	14.	 Site Pagination
+	15.	 Error 404
+	16.	 Site Footer
+	17.	 Media Queries
 
------------------------------------------------------------------------------------ */
+/* --------------------------------------------------------------------------------------------- */
 
 
-/* -------------------------------------------------------------------------------- */
+/* --------------------------------------------------------------------------------------------- */
 /*	0. CSS Variables
-/* -------------------------------------------------------------------------------- */
+/* --------------------------------------------------------------------------------------------- */
 
 :root {
 	/* Typography */
@@ -83,9 +83,9 @@
 }
 
 
-/* -------------------------------------------------------------------------------- */
+/* --------------------------------------------------------------------------------------------- */
 /*	0. CSS Reset
-/* -------------------------------------------------------------------------------- */
+/* --------------------------------------------------------------------------------------------- */
 
 
 html, body {
@@ -258,6 +258,89 @@ path {
 @keyframes fade-up {
 	0% { 	opacity: 0.0; transform: translateY( 5rem ); }
 	100% { 	opacity: 1.0; transform: translateY( 0 ); }
+}
+
+/* NAVIGATION TOGGLE ANIMATIONS */
+
+@keyframes bars-fade-in {
+	from { 	opacity: 0; }
+	to { 	opacity: 1; }
+}
+
+/* State: Initial */
+
+@keyframes bar-one {
+	0% { 			transform: translateY( 0 ) rotate( 45deg );  }
+	0%, 50% {		width: 50%; transform-origin: center right; }
+	50%, 50.1% {	transform: translateY( 0 ) rotate( 0deg ); }
+	50.1%, 100% {	width: 100%; transform-origin: center; }
+	100% { 			transform: translateY( -.6rem ) rotate( 0deg ); }
+}
+
+@keyframes bar-three {
+	0% { 			transform: translateY( 0 ) rotate( -45deg ); }
+	0%, 50% { 		width: 50%; transform-origin: center right; }
+	50%, 50.1% { 	transform: translateY( 0 ) rotate( 0deg ); }
+	50.1%, 100% { 	width: 100%; transform-origin: center; }
+	100% { 			transform: translateY( .6rem ) rotate( 0deg ); }
+}
+
+/* State: Hover */
+
+@keyframes bar-one-hover {
+	0% { 			transform: translateY( -.6rem ) rotate( 0deg ); }
+	0%, 50% { 		width: 100%; transform-origin: center; }
+	50%, 50.1% { 	transform: translateY( .05rem ) rotate( 0deg ); }
+	50.1%, 100% { 	width: 50%; transform-origin: center right; }
+	100% { 			transform: translateY( .05rem ) rotate( 45deg ); }
+}
+
+@keyframes bar-three-hover {
+	0% { 			transform: translateY( .6rem ) rotate( 0deg ); }
+	0%, 50% { 		width: 100%; transform-origin: center; }
+	50%, 50.1% { 	transform: translateY( -.05rem ) rotate( 0deg ); }
+	50.1%, 100% { 	width: 50%; transform-origin: center right; }
+	100% { 			transform: translateY( -.05rem ) rotate( -45deg ); }
+}
+
+/* State: Active */
+
+@keyframes bar-one-active {
+	0% { 			transform: translateY( .05rem ) rotate( 45deg ); }
+	0%, 50% { 		width: 50%; transform-origin: center right; }
+	50%, 50.1% {	transform: translateY( 0 ) rotate( 0deg ); }
+	50.1%, 100% { 	width: 100%; transform-origin: center; }
+	100% {			transform: translateY( 0 ) rotate( 45deg ); }
+}
+
+@keyframes bar-two-active {
+	0%, 50% { 		opacity: 1; }
+	50.1%, 100% {	opacity: 0; }
+}
+
+@keyframes bar-three-active {
+	0% { 			transform: translateY( .05rem ) rotate( -45deg ); }
+	0%, 50% { 		width: 50%; transform-origin: center right; }
+	50%, 50.1% {	transform: translateY( 0 ) rotate( 0deg ); }
+	50.1%, 100% { 	width: 100%; transform-origin: center; }
+	100% {			transform: translateY( 0 ) rotate( -45deg ); }
+}
+
+/* DOT PULSE */
+
+@keyframes dotPulseBefore {
+	0%, 60%, 100% { box-shadow: 997.5rem 0 0 -.5rem currentColor; }
+	30% { 			box-shadow: 997.5rem 0 0 .2rem currentColor; }
+}
+
+@keyframes dotPulse {
+	0%, 60%, 100% { box-shadow: 999.9rem 0 0 -.5rem currentColor; }
+	30% { 			box-shadow: 999.9rem 0 0 .2rem currentColor; }
+}
+
+@keyframes dotPulseAfter {
+	0%, 60%, 100% { box-shadow: 1002.3rem 0 0 -.5rem currentColor; }
+	30% { 			box-shadow: 1002.3rem 0 0 .2rem currentColor; }
 }
 
 /* Accessibility Settings -------------------- */
@@ -1179,21 +1262,6 @@ ul.social-icons li {
 	box-shadow: 1002.3rem 0 0 -.5rem currentColor;
 }
 
-@keyframes dotPulseBefore {
-	0%, 60%, 100% { box-shadow: 997.5rem 0 0 -.5rem currentColor; }
-	30% { 			box-shadow: 997.5rem 0 0 .2rem currentColor; }
-}
-
-@keyframes dotPulse {
-	0%, 60%, 100% { box-shadow: 999.9rem 0 0 -.5rem currentColor; }
-	30% { 			box-shadow: 999.9rem 0 0 .2rem currentColor; }
-}
-
-@keyframes dotPulseAfter {
-	0%, 60%, 100% { box-shadow: 1002.3rem 0 0 -.5rem currentColor; }
-	30% { 			box-shadow: 1002.3rem 0 0 .2rem currentColor; }
-}
-
 /* CSS Animations ---------------------------- */
 
 .has-anim .i-a, .has-anim .will-be-spotted { 
@@ -1415,11 +1483,6 @@ ul.social-icons li {
 	animation: bars-fade-in .1s linear .3s both;
 }
 
-@keyframes bars-fade-in {
-	from { 	opacity: 0; }
-	to { 	opacity: 1; }
-}
-
 .nav-toggle .bars {
 	height: 1.4rem;
 	position: relative;
@@ -1443,72 +1506,22 @@ ul.social-icons li {
 /* STATE: INITIAL */
 
 .nav-toggle .bar:nth-child(1) { animation-name: bar-one; }
-@keyframes bar-one {
-	0% { 			transform: translateY( 0 ) rotate( 45deg );  }
-	0%, 50% {		width: 50%; transform-origin: center right; }
-	50%, 50.1% {	transform: translateY( 0 ) rotate( 0deg ); }
-	50.1%, 100% {	width: 100%; transform-origin: center; }
-	100% { 			transform: translateY( -.6rem ) rotate( 0deg ); }
-}
-
 .nav-toggle .bar:nth-child(3) { animation-name: bar-three; }
-@keyframes bar-three {
-	0% { 			transform: translateY( 0 ) rotate( -45deg ); }
-	0%, 50% { 		width: 50%; transform-origin: center right; }
-	50%, 50.1% { 	transform: translateY( 0 ) rotate( 0deg ); }
-	50.1%, 100% { 	width: 100%; transform-origin: center; }
-	100% { 			transform: translateY( .6rem ) rotate( 0deg ); }
-}
 
 /* STATE: HOVER */
 
 .nav-toggle:hover .bar:nth-child(1) { animation-name: bar-one-hover; }
-@keyframes bar-one-hover {
-	0% { 			transform: translateY( -.6rem ) rotate( 0deg ); }
-	0%, 50% { 		width: 100%; transform-origin: center; }
-	50%, 50.1% { 	transform: translateY( .05rem ) rotate( 0deg ); }
-	50.1%, 100% { 	width: 50%; transform-origin: center right; }
-	100% { 			transform: translateY( .05rem ) rotate( 45deg ); }
-}
-
 .nav-toggle:hover .bar:nth-child(3) { animation-name: bar-three-hover; }
-@keyframes bar-three-hover {
-	0% { 			transform: translateY( .6rem ) rotate( 0deg ); }
-	0%, 50% { 		width: 100%; transform-origin: center; }
-	50%, 50.1% { 	transform: translateY( -.05rem ) rotate( 0deg ); }
-	50.1%, 100% { 	width: 50%; transform-origin: center right; }
-	100% { 			transform: translateY( -.05rem ) rotate( -45deg ); }
-}
 
 /* STATE: ACTIVE */
 
 .nav-toggle.active .bar:nth-child(1) { animation-name: bar-one-active; }
-@keyframes bar-one-active {
-	0% { 			transform: translateY( .05rem ) rotate( 45deg ); }
-	0%, 50% { 		width: 50%; transform-origin: center right; }
-	50%, 50.1% {	transform: translateY( 0 ) rotate( 0deg ); }
-	50.1%, 100% { 	width: 100%; transform-origin: center; }
-	100% {			transform: translateY( 0 ) rotate( 45deg ); }
-}
-
 .nav-toggle.active .bar:nth-child(2) { animation-name: bar-two-active; }
-@keyframes bar-two-active {
-	0%, 50% { 		opacity: 1; }
-	50.1%, 100% {	opacity: 0; }
-}
-
 .nav-toggle.active .bar:nth-child(3) { animation-name: bar-three-active; }
-@keyframes bar-three-active {
-	0% { 			transform: translateY( .05rem ) rotate( -45deg ); }
-	0%, 50% { 		width: 50%; transform-origin: center right; }
-	50%, 50.1% {	transform: translateY( 0 ) rotate( 0deg ); }
-	50.1%, 100% { 	width: 100%; transform-origin: center; }
-	100% {			transform: translateY( 0 ) rotate( -45deg ); }
-}
 
 
 /* --------------------------------------------------------------------------------------------- */
-/*	5. Modal: Menu
+/*	6. Modal: Menu
 /* --------------------------------------------------------------------------------------------- */
 
 
@@ -1746,7 +1759,7 @@ a.sub-menu-toggle.active svg {
 
 
 /* --------------------------------------------------------------------------------------------- */
-/*	6. Modal: Search
+/*	7. Modal: Search
 /* --------------------------------------------------------------------------------------------- */
 
 
@@ -1871,7 +1884,7 @@ a.sub-menu-toggle.active svg {
 
 
 /* --------------------------------------------------------------------------------------------- */
-/*	7a. Template: Only Content
+/*	8a. Template: Only Content
 /* --------------------------------------------------------------------------------------------- */
 
 
@@ -1881,7 +1894,7 @@ a.sub-menu-toggle.active svg {
 
 
 /* --------------------------------------------------------------------------------------------- */
-/*	8. Post: Archive
+/*	9. Post: Archive
 /* --------------------------------------------------------------------------------------------- */
 
 
@@ -2013,7 +2026,7 @@ a.sub-menu-toggle.active svg {
 
 
 /* --------------------------------------------------------------------------------------------- */
-/*	9. Post: Single
+/*	10. Post: Single
 /* --------------------------------------------------------------------------------------------- */
 
 
@@ -2165,7 +2178,7 @@ h1.entry-title,
 
 
 /* --------------------------------------------------------------------------------------------- */
-/*	10. Blocks
+/*	11. Blocks
 /* --------------------------------------------------------------------------------------------- */
 
 
@@ -3122,7 +3135,7 @@ table.is-style-stripes tbody tr:nth-child( odd ),
 
 
 /* --------------------------------------------------------------------------------------------- */
-/*	11. Entry Content
+/*	12. Entry Content
 /* --------------------------------------------------------------------------------------------- */
 
 
@@ -3222,7 +3235,7 @@ table.is-style-stripes tbody tr:nth-child( odd ),
 
 
 /* -------------------------------------------------------------------------------- */
-/*	12. Comments
+/*	13. Comments
 /* -------------------------------------------------------------------------------- */
 
 
@@ -3512,7 +3525,7 @@ hr + .comment-reply-title {
 
 
 /* --------------------------------------------------------------------------------------------- */
-/*	13. Site Pagination
+/*	14. Site Pagination
 /* --------------------------------------------------------------------------------------------- */
 
 
@@ -3651,7 +3664,7 @@ hr + .comment-reply-title {
 
 
 /* --------------------------------------------------------------------------------------------- */
-/*	14. Error 404
+/*	15. Error 404
 /* --------------------------------------------------------------------------------------------- */
 
 
@@ -3681,7 +3694,7 @@ hr + .comment-reply-title {
 
 
 /* --------------------------------------------------------------------------------------------- */
-/*	17. Site Footer
+/*	16. Site Footer
 /* --------------------------------------------------------------------------------------------- */
 
 
@@ -3750,7 +3763,7 @@ hr + .comment-reply-title {
 
 
 /* --------------------------------------------------------------------------------------------- */
-/*	18. Media Queries
+/*	17. Media Queries
 /* --------------------------------------------------------------------------------------------- */
 
 
@@ -3764,18 +3777,18 @@ hr + .comment-reply-title {
 
 @media ( min-width: 700px ) {
 
-	/* Document Setup ------------------------ */
+	/* CSS Variables ------------------------- */
 
 	:root {
 		--eksell-aside-width: 6.4rem;
 		--eksell-inner-gutter: 9.6rem;
 	}
 
+	/* Document Setup ------------------------ */
+
 	body {
 		font-size: 1.8rem;
 	}
-
-	/* Document Setup ------------------------ */
 
 	#site-content {
 		min-height: calc( 100vh - 39.4rem );
@@ -3963,7 +3976,7 @@ hr + .comment-reply-title {
 	}
 
 	/* Modal: Search ------------------------- */
-	/* Sub Page ------------------------------ */
+	/* Template: Only Content ---------------- */
 	/* Post: Archive ------------------------- */
 
 	.archive-header {
@@ -4511,7 +4524,9 @@ hr + .comment-reply-title {
 
 @media ( min-width: 1000px ) {
 
+	/* CSS Variables ------------------------- */
 	/* Document Setup ------------------------ */
+	/* Element Base -------------------------- */
 	/* Helper Classes ------------------------ */
 
 	/* GRID STRUCTURE */
@@ -4533,7 +4548,7 @@ hr + .comment-reply-title {
 	/* Site Aside ---------------------------- */
 	/* Modal: Menu --------------------------- */
 	/* Modal: Search ------------------------- */
-	/* Sub Page ------------------------------ */
+	/* Template: Only Content ---------------- */
 	/* Post: Archive ------------------------- */
 
 	/* ARCHIVE HEADER */
@@ -4632,18 +4647,20 @@ hr + .comment-reply-title {
 	/* Site Pagination ----------------------- */
 	/* Error 404 ----------------------------- */
 	/* Site Footer --------------------------- */
+	/* Media Queries ------------------------- */
 
 }
 
 @media ( min-width: 1200px ) {
 
-	/* Document Setup ------------------------ */
+	/* CSS Variables ------------------------- */
 
 	:root {
 		--eksell-aside-width: 12rem;
 		--eksell-inner-gutter: 19.2rem;
 	}
 
+	/* Element Base -------------------------- */
 	/* Helper Classes ------------------------ */
 
 	/* GRID STRUCTURE */
@@ -4674,7 +4691,7 @@ hr + .comment-reply-title {
 	/* Site Aside ---------------------------- */
 	/* Modal: Menu --------------------------- */
 	/* Modal: Search ------------------------- */
-	/* Sub Page ------------------------------ */
+	/* Template: Only Content ---------------- */
 	/* Post: Archive ------------------------- */
 
 	.archive-header {
@@ -4712,17 +4729,21 @@ hr + .comment-reply-title {
 	
 	/* Error 404 ----------------------------- */
 	/* Site Footer --------------------------- */
+	/* Media Queries ------------------------- */
+	/* Site Footer --------------------------- */
 
 }
 
 @media ( min-width: 1600px ) {
 
-	/* Document Setup ------------------------ */
+	/* CSS Variables ------------------------- */
 
 	:root {
 		--eksell-aside-width: 16rem;
 	}
 
+	/* Document Setup ------------------------ */
+	/* Element Base -------------------------- */
 	/* Helper Classes ------------------------ */
 
 	/* GRID STRUCTURE */
@@ -4740,6 +4761,16 @@ hr + .comment-reply-title {
 	.cols-dl-11 > .col, :root .col-dl-11 { width: calc( 8.3333% * 11 ); }
 	.cols-dl-12 > .col, :root .col-dl-12 { width: calc( 8.3333% * 12 ); }
 
+	/* Site Header --------------------------- */
+	/* Site Aside ---------------------------- */
+	/* Modal: Menu --------------------------- */
+	/* Modal: Search ------------------------- */
+	/* Template: Only Content ---------------- */
+	/* Post: Archive ------------------------- */
+	/* Post: Single -------------------------- */
+	/* Blocks -------------------------------- */
+	/* Entry Content ------------------------- */
+	/* Comments ------------------------------ */
 	/* Site Pagination ----------------------- */
 
 	/* TYPE: BUTTON */
@@ -4748,5 +4779,9 @@ hr + .comment-reply-title {
 		font-size: 2.1rem;
 		padding: 3.75rem 4.5rem;
 	}
+
+	/* Error 404 ----------------------------- */
+	/* Site Footer --------------------------- */
+	/* Media Queries ------------------------- */
 
 }

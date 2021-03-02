@@ -1190,4 +1190,7 @@ $doc.ready( function() {
 	eksell.masonry.init();						// Masonry
 	eksell.dynamicHeights.init();				// Dynamic Heights
 
+	// Call css-vars-ponyfill
+	cssVars();
+
 } );

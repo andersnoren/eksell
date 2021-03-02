@@ -150,9 +150,9 @@ Public Sans font
 License: SIL Open Font License, 1.1, https://opensource.org/licenses/OFL-1.1
 Source: https://fonts.google.com/specimen/Public+Sans/
 
-Modernizr Code
+css-vars-ponyfill
 License: MIT License, https://opensource.org/licenses/MIT
-Source: https://modernizr.com/
+Source: https://github.com/jhildenbiddle/css-vars-ponyfill
 
 Dot Pulse Loading Animation
 License: MIT license, https://opensource.org/licenses/MIT
