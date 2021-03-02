@@ -129,10 +129,6 @@ if ( ! function_exists( 'eksell_register_scripts' ) ) :
 		// Built-in JS assets
 		$js_dependencies = array( 'jquery', 'imagesloaded', 'masonry' );
 
-		// Register the Modernizr JS check for touchevents (used to determine whether background-attachment should be active).
-		wp_register_script( 'eksell-modernizr', get_template_directory_uri() . '/assets/js/modernizr-touchevents.min.js', array(), '3.6.0' );
-		$js_dependencies[] = 'eksell-modernizr';
-
 		// Filter the list of dependencies used by the eksell-construct JavaScript enqueue.
 		$js_dependencies = apply_filters( 'eksell_js_dependencies', $js_dependencies );
 
