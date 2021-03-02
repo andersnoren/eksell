@@ -3,6 +3,7 @@
 
 /* ------------------------------------------------------------------------------------------------
    CUSTOM LOGO OUTPUT
+   Output the logo, reflecting the settings for the retina logo and the dark mode logo.
 --------------------------------------------------------------------------------------------------- */
 
 if ( ! function_exists( 'eksell_the_custom_logo' ) ) :
@@ -18,27 +19,27 @@ if ( ! function_exists( 'eksell_get_custom_logo' ) ) :
 
 		$has_logo = false;
 
-		// Get the logo, the dark mode logo, and the retina logo setting
+		// Get the logo, the dark mode logo, and the retina logo setting.
 		$logo_id 		= get_theme_mod( 'custom_logo', null );
 		$logo_dark_id 	= get_theme_mod( 'eksell_dark_mode_logo', null );
 		$retina_logo 	= get_theme_mod( 'eksell_retina_logo', false );
 
 		if ( ! $logo_id ) return;
 
-		// Build an array containing the regular and the dark mode logo, if set
+		// Build an array containing the regular and the dark mode logo, if set.
 		$logos = array();
 		if ( $logo_id ) $logos['regular'] = $logo_id;
 		if ( $logo_dark_id ) $logos['dark-mode'] = $logo_dark_id;
 
-		// The regular logo is required for output
+		// The regular logo is required for output.
 		if ( ! isset( $logos['regular'] ) ) return;
 
-		// If they are set to the same image, unset the dark modo logo
+		// If they are set to the same image, unset the dark modo logo.
 		if ( isset( $logos['dark-mode'] ) && $logos['dark-mode'] == $logos['regular'] ) {
 			unset( $logos['dark-mode'] );
 		}
 
-		// Record our output
+		// Record our output.
 		ob_start();
 
 		?>
@@ -46,7 +47,7 @@ if ( ! function_exists( 'eksell_get_custom_logo' ) ) :
 		<a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home" class="custom-logo-link custom-logo">
 			<?php 
 
-			// Loop over the (up to) two logos
+			// Loop over the (up to) two logos.
 			foreach ( $logos as $slug => $logo_id ) : 
 
 				$logo = wp_get_attachment_image_src( $logo_id, 'full' );
@@ -54,15 +55,15 @@ if ( ! function_exists( 'eksell_get_custom_logo' ) ) :
 				if ( ! $logo ) continue;
 				$has_logo = true;
 
-				// For clarity
+				// For clarity.
 				$logo_url 		= $logo[0];
 				$logo_width 	= $logo[1];
 				$logo_height 	= $logo[2];
 
-				// Get alt tag
+				// Get the meta value for the alt field.
 				$logo_alt = get_post_meta( $logo_id, '_wp_attachment_image_alt', TRUE );
 
-				// If the retina logo setting is active, reduce the width/height by half
+				// If the retina logo setting is active, reduce the width and height by half.
 				if ( $retina_logo ) {
 					$logo_width 	= floor( $logo_width / 2 );
 					$logo_height 	= floor( $logo_height / 2 );
@@ -79,21 +80,8 @@ if ( ! function_exists( 'eksell_get_custom_logo' ) ) :
 
 		<?php
 
-		// Return our output, if there are logos to output
+		// Return our output, if there's a logo to output.
 		return $has_logo ? ob_get_clean() : '';
-
-	}
-endif;
-
-	
-/* ---------------------------------------------------------------------------------------------
-   GET FALLBACK IMAGE
------------------------------------------------------------------------------------------------- */
-
-if ( ! function_exists( 'eksell_get_fallback_image_url' ) ) :
-	function eksell_get_fallback_image_url() {
-
-		return $fallback_image_url;
 
 	}
 endif;
@@ -101,6 +89,8 @@ endif;
 
 /* ---------------------------------------------------------------------------------------------
    OUTPUT AND RETURN FALLBACK IMAGE
+   Functions for getting and outputting the fallback image – either the default one 
+   (with one version for dark mode, and one for regular mode), or the user set one.
    --------------------------------------------------------------------------------------------- */
 
 if ( ! function_exists( 'eksell_the_fallback_image' ) ) :
