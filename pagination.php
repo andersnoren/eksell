@@ -1,36 +1,35 @@
 <?php
 
-// Set the type of pagination to use
-// Available types: button/links/scroll
-$pagination_type = get_theme_mod( 'eksell_pagination_type', 'button' );
-
-// Get the global $wp_query
 global $wp_query;
 
-// Combine the query with the query_vars into a single array
+// Set the type of pagination to use. Available types: button, links, and scroll.
+$pagination_type = get_theme_mod( 'eksell_pagination_type', 'button' );
+
+// Combine the query with the query_vars into a single array.
 $query_args = array_merge( $wp_query->query, $wp_query->query_vars );
 
-// If max_num_pages is not already set, add it
+// If max_num_pages is not already set, add it.
 if ( ! array_key_exists( 'max_num_pages', $query_args ) ) {
 	$query_args['max_num_pages'] = $wp_query->max_num_pages;
 }
 
-// If post_status is not already set, add it
+// If post_status is not already set, add it.
 if ( ! array_key_exists( 'post_status', $query_args ) ) {
 	$query_args['post_status'] = 'publish';
 }
 
-// Make sure the paged value exists and is at least 1
+// Make sure the paged value exists and is at least 1.
 if ( ! array_key_exists( 'paged', $query_args ) || 0 == $query_args['paged'] ) {
 	$query_args['paged'] = 1;
 }
 
-// Encode our modified query
+// Encode our modified query.
 $json_query_args = wp_json_encode( $query_args ); 
 
+// Set up the wrapper class.
 $wrapper_class = 'pagination-type-' . $pagination_type;
 
-// Indicate when we're loading into the last page, so the pagination can be hidden for the button and scroll types
+// Indicate when we're loading into the last page, so the pagination can be hidden for the button and scroll types.
 if ( ! ( $query_args['max_num_pages'] > $query_args['paged'] ) ) {
 	$wrapper_class .= ' last-page';
 } else {
@@ -60,7 +59,7 @@ if ( ! ( $query_args['max_num_pages'] > $query_args['paged'] ) ) {
 				</button>
 			<?php endif;
 
-			// The pagination links also work as a no-js fallback, so they always need to be output
+			// The pagination links also work as a no-js fallback, so they always need to be output.
 			$prev_link 	= get_previous_posts_link( '<span class="arrow stroke-cc">' . eksell_get_theme_svg( 'ui', 'arrow-left', 96, 49 ) . '</span><span class="screen-reader-text">' . __( 'Previous Page', 'eksell' ) . '</span></span>' );
 			$next_link 	= get_next_posts_link( '<span class="screen-reader-text">' . __( 'Next Page', 'eksell' ) . '</span></span><span class="arrow stroke-cc">' . eksell_get_theme_svg( 'ui', 'arrow-right', 96, 49 ) . '</span>' );
 

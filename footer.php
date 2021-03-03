@@ -1,7 +1,7 @@
 		<?php
 
 		// Don't output the site footer on the Blank Canvas page template.
-		// The filter can be enable the blank canvas in different circumstances.
+		// The filter can be used to enable the blank canvas in different circumstances.
 		$blank_canvas = apply_filters( 'eksell_blank_canvas', is_page_template( array( 'page-templates/template-blank-canvas.php' ) ) );
 
 		// Output the site footer if we're not doing a blank canvas.
@@ -26,7 +26,7 @@
 
 						<p class="theme-credits color-secondary">
 							<?php
-							/* Translators: $s = name of the theme developer */
+							// Translators: $s = name of the theme developer.
 							printf( esc_html_x( 'Theme by %s', 'Translators: $s = name of the theme developer', 'eksell' ), '<a href="https://www.andersnoren.se">' . esc_html__( 'Anders Nor&eacute;n', 'eksell' ) . '</a>' ); ?>
 						</p><!-- .theme-credits -->
 

@@ -56,12 +56,9 @@ if ( $comments ) :
 
 		if ( $comment_pagination ) :
 
-			// If we're only showing the "Next" link, add a class indicating so
-			if ( strpos( $comment_pagination, 'prev page-numbers' ) === false ) {
-				$pagination_classes = ' only-next';
-			} else {
-				$pagination_classes = '';
-			}
+			// If we're only showing the "Next" link, add a class indicating so.
+			$pagination_classes = ( strpos( $comment_pagination, 'prev page-numbers' ) === false ) ? ' only-next' : '';
+
 			?>
 
 			<nav class="comments-pagination pagination<?php echo esc_attr( $pagination_classes ); ?>">

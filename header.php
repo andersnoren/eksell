@@ -28,7 +28,7 @@
 		<?php 
 
 		// Don't output the site header, the site aside or the modals on the Blank Canvas page template.
-		// The filter can be enable the blank canvas in different circumstances.
+		// The filter can be used to enable the blank canvas in different circumstances.
 		$blank_canvas = apply_filters( 'eksell_blank_canvas', is_page_template( array( 'page-templates/template-blank-canvas.php' ) ) );
 
 		// If it's a blank canvas, output nothing past this point.
@@ -41,13 +41,13 @@
 		$enable_search = get_theme_mod( 'eksell_enable_search', true );
 
 		// Determine whether we have a sticky header.
-		$header_classes 	= get_theme_mod( 'eksell_enable_sticky_header', true ) ? 'stick-me' : '';
+		$header_classes = get_theme_mod( 'eksell_enable_sticky_header', true ) ? 'stick-me' : '';
 
 		// Make the header classes filterable.
-		$header_classes 	= apply_filters( 'eksell_header_classes', $header_classes );
+		$header_classes = apply_filters( 'eksell_header_classes', $header_classes );
 
-		// Build a class attribute out of the classes, if there are any.
-		$header_class_attr 	= $header_classes ? ' class="' . esc_attr( $header_classes ) . '"' : '';
+		// Build a class attribute out of the header classes, if there are any.
+		$header_class_attr = $header_classes ? ' class="' . esc_attr( $header_classes ) . '"' : '';
 		
 		?>
 

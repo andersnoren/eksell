@@ -1,10 +1,9 @@
 <?php
-/*
- * Generate a unique ID for each form and a string containing an aria-label
- * if one was passed to get_search_form() in the args array.
- */
-$uniq_id = wp_unique_id( 'search-form-' );
+
+// Generate a unique ID for each form and a string containing an aria-label if one was passed to get_search_form() in the args array.
+$uniq_id 	= wp_unique_id( 'search-form-' );
 $aria_label = ! empty( $args['aria_label'] ) ? 'aria-label="' . esc_attr( $args['aria_label'] ) . '"' : '';
+
 ?>
 <form role="search" <?php echo $aria_label; ?> method="get" class="search-form" action="<?php echo esc_url( home_url( '/' ) ); ?>">
 	<label class="screen-reader-text" for="<?php echo esc_attr( $uniq_id ); ?>"><?php _e( 'Search For&hellip;', 'eksell' ); ?></label>
