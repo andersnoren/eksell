@@ -2040,8 +2040,9 @@ a.sub-menu-toggle.active svg {
 }
 
 .preview.sticky .preview-media .sticky-note {
-	background-color: var( --eksell-primary-color );
-	color: var( --eksell-background-color );
+	/* On image = always white on black */
+	background-color: #1e2d32;
+	color: #fff;
 	font-size: 1.2rem;
 	font-weight: 700;
 	letter-spacing: normal;
