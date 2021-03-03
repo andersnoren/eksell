@@ -304,17 +304,10 @@ if ( ! function_exists( 'eksell_body_classes' ) ) :
 			$classes[] = 'customizer-preview';
 		}
 
-		// Check if posts have single pagination.
-		if ( is_single() && ( get_next_post() || get_previous_post() ) ) {
-			$classes[] = 'has-single-pagination';
-		} else {
-			$classes[] = 'has-no-pagination';
-		}
-
 		// Check if we're showing comments.
 		if ( is_singular() && ( ( comments_open() || get_comments_number() ) && ! post_password_required() ) ) {
 			$classes[] = 'showing-comments';
-		} else {
+		} else if ( is_singular() ) {
 			$classes[] = 'not-showing-comments';
 		}
 
