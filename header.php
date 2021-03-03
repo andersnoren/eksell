@@ -35,7 +35,7 @@
 		if ( $blank_canvas ) return;
 		
 		// Include the site aside, which contains the navigation toggle on desktop.
-		include( locate_template( 'inc/parts/site-aside.php' ) ); 
+		get_template_part( 'inc/parts/site-aside' );
 
 		// Check whether the header search is disabled in the customizer.
 		$enable_search = get_theme_mod( 'eksell_enable_search', true );

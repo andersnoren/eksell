@@ -409,7 +409,7 @@ if ( ! function_exists( 'eksell_get_the_archive_title_prefix' ) ) :
 				$tax    = get_taxonomy( $queried_object->taxonomy );
 				$prefix = sprintf(
 					/* translators: %s: Taxonomy singular name. */
-					_x( '%s:', 'taxonomy term archive title prefix' ),
+					_x( '%s:', 'taxonomy term archive title prefix', 'eksell' ),
 					$tax->labels->singular_name
 				);
 			}
@@ -569,6 +569,52 @@ if ( ! function_exists( 'eksell_filter_nav_menu_item_args' ) ) :
 
 	}
 	add_filter( 'nav_menu_item_args', 'eksell_filter_nav_menu_item_args', 10, 3 );
+endif;
+
+
+/*	-----------------------------------------------------------------------------------------------
+	IS COMMENT BY POST AUTHOR?
+	Check if the specified comment is written by the author of the post commented on.
+
+	@param obj $comment		The comment object.
+--------------------------------------------------------------------------------------------------- */
+
+if ( ! function_exists( 'eksell_is_comment_by_post_author' ) ) :
+	function eksell_is_comment_by_post_author( $comment = null ) {
+
+		if ( is_object( $comment ) && $comment->user_id > 0 ) {
+			$user = get_userdata( $comment->user_id );
+			$post = get_post( $comment->comment_post_ID );
+			if ( ! empty( $user ) && ! empty( $post ) ) {
+				return $comment->user_id === $post->post_author;
+			}
+		}
+		return false;
+
+	}
+endif;
+
+
+/* 	-----------------------------------------------------------------------------------------------
+	FILTER COMMENT TEXT
+	If the comment is by the post author, append an element which says so.
+
+	@param string          $comment_text Text of the current comment.
+	@param WP_Comment|null $comment      The comment object. Null if not found.
+	@param array           $args         An array of arguments.
+--------------------------------------------------------------------------------------------------- */
+
+if ( ! function_exists( 'eksell_filter_comment_text' ) ) :
+	function eksell_filter_comment_text( $comment_text, $comment, $args ) {
+
+		if ( eksell_is_comment_by_post_author( $comment ) ) {
+			$comment_text .= '<p class="by-post-author">' . __( 'By Post Author', 'eksell' ) . '</p>';
+		}
+
+		return $comment_text;
+
+	}
+	add_filter( 'comment_text', 'eksell_filter_comment_text', 10, 3 );
 endif;
 
 

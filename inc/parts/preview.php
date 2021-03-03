@@ -18,6 +18,10 @@
 				} else {
 					echo $fallback_image;
 				}
+
+				if ( is_sticky() ) {
+					echo '<div class="sticky-note">' . __( 'Featured', 'eksell' ) . '</div>';
+				}
 				?>
 			</figure><!-- .preview-media -->
 
