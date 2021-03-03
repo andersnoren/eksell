@@ -14,17 +14,17 @@ if ( ! class_exists( 'Eksell_Custom_CSS' ) ) :
 
 		public static function get_customizer_css() {
 
-			// Get the color options
-			// This array contains two sets of colors: regular and dark_mode
+			// Get the color options.
+			// This array contains two sets of colors: regular and dark_mode.
 			$color_options	= Eksell_Customizer::get_color_options();
 
-			// Determine if dark mode in enabled
+			// Determine if dark mode is enabled.
 			$dark_mode_enabled = get_theme_mod( 'eksell_enable_dark_mode_palette', true );
 
-			// Setup the array with the values for the CSS variables
+			// Setup the array with the values for the CSS variables.
 			$colors = array();
 
-			// Loop over them and construct an array for the editor-color-palette
+			// Loop over them and construct an array for the editor-color-palette.
 			if ( $color_options ) {
 				foreach ( $color_options as $group_name => $group_color_options ) {
 
@@ -123,7 +123,7 @@ if ( ! class_exists( 'Eksell_Custom_CSS' ) ) :
 
 		/*	-----------------------------------------------------------------------------------------------
 			HEX TO RGB
-			Convert hex colors to RGB colors
+			Convert hex colors to RGB colors.
 		--------------------------------------------------------------------------------------------------- */
 
 		public static function hex_to_rgb( $hex_color ) {
@@ -145,7 +145,7 @@ if ( ! class_exists( 'Eksell_Custom_CSS' ) ) :
 
 		/*	-----------------------------------------------------------------------------------------------
 			HEX TO P3
-			Convert hex colors to the P3 color gamut
+			Convert hex colors to the P3 color gamut.
 		--------------------------------------------------------------------------------------------------- */
 
 		public static function hex_to_p3( $hex_color ) {
@@ -163,7 +163,7 @@ if ( ! class_exists( 'Eksell_Custom_CSS' ) ) :
 
 		/*	-----------------------------------------------------------------------------------------------
 			FORMAT P3
-			Format P3 colors
+			Format P3 colors.
 		--------------------------------------------------------------------------------------------------- */
 
 		public static function format_p3( $p3_colors ) {

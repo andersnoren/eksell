@@ -277,7 +277,7 @@ if ( ! function_exists( 'eksell_body_classes' ) ) :
 		}
 
 		// Check whether the current page only has content.
-		if ( is_page_template( array( 'template-only-content.php' ) ) ) {
+		if ( is_page_template( array( 'page-templates/template-no-title.php', 'page-templates/template-blank-canvas.php' ) ) ) {
 			$classes[] = 'has-only-content';
 		}
 

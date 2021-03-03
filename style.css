@@ -28,7 +28,8 @@
 	6. 	Modal: Menu
 	7. 	Modal: Search
 	8.	 Page Templates
-		a.	 Template: Only Content
+		a.	 Template: No Title
+		b.	 Template: Blank Canvas
 	9. 	Post: Archive
 	10.	 Post: Single
 	11.	 Blocks
@@ -1884,12 +1885,27 @@ a.sub-menu-toggle.active svg {
 
 
 /* --------------------------------------------------------------------------------------------- */
-/*	8a. Template: Only Content
+/*	8a. Template: No Title
 /* --------------------------------------------------------------------------------------------- */
 
 
-.template-only-content #site-header {
+.template-no-title #site-header {
 	margin-bottom: 0;
+}
+
+
+/* --------------------------------------------------------------------------------------------- */
+/*	8b. Template: Blank Canvas
+/* --------------------------------------------------------------------------------------------- */
+
+
+.template-blank-canvas {
+	/* Layout */
+	--eksell-aside-width: 0;
+}
+
+.template-blank-canvas #site-content {
+	min-height: 100vh;
 }
 
 
@@ -3976,7 +3992,8 @@ hr + .comment-reply-title {
 	}
 
 	/* Modal: Search ------------------------- */
-	/* Template: Only Content ---------------- */
+	/* Template: No Title -------------------- */
+	/* Template: Blank Canvas ---------------- */
 	/* Post: Archive ------------------------- */
 
 	.archive-header {
@@ -4548,7 +4565,8 @@ hr + .comment-reply-title {
 	/* Site Aside ---------------------------- */
 	/* Modal: Menu --------------------------- */
 	/* Modal: Search ------------------------- */
-	/* Template: Only Content ---------------- */
+	/* Template: No Title -------------------- */
+	/* Template: Blank Canvas ---------------- */
 	/* Post: Archive ------------------------- */
 
 	/* ARCHIVE HEADER */
@@ -4691,7 +4709,8 @@ hr + .comment-reply-title {
 	/* Site Aside ---------------------------- */
 	/* Modal: Menu --------------------------- */
 	/* Modal: Search ------------------------- */
-	/* Template: Only Content ---------------- */
+	/* Template: No Title -------------------- */
+	/* Template: Blank Canvas ---------------- */
 	/* Post: Archive ------------------------- */
 
 	.archive-header {
@@ -4765,7 +4784,8 @@ hr + .comment-reply-title {
 	/* Site Aside ---------------------------- */
 	/* Modal: Menu --------------------------- */
 	/* Modal: Search ------------------------- */
-	/* Template: Only Content ---------------- */
+	/* Template: No Title -------------------- */
+	/* Template: Blank Canvas ---------------- */
 	/* Post: Archive ------------------------- */
 	/* Post: Single -------------------------- */
 	/* Blocks -------------------------------- */

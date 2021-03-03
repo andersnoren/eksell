@@ -41,7 +41,7 @@
 
 							if ( $archive_title ) :
 
-								// On home, where we're outputting the eksell_home_text Customizer value, output the title in a div to enable multiple paragraphs
+								// On home, where we're outputting the eksell_home_text Customizer value, output the title in a div to enable multiple paragraphs.
 								if ( is_home() && ! is_paged() ) : 
 									?>
 									<div class="archive-title contain-margins i-a a-fade-up"><?php echo wpautop( $archive_title ); ?></div>
@@ -101,7 +101,7 @@
 
 					do_action( 'eksell_posts_start' );
 
-					// Get the column classes, based on the settings in the Customizer
+					// Get the column classes, based on the settings in the Customizer.
 					$archive_columns_classes_array 	= eksell_get_archive_columns_classes();
 					$archive_columns_classes 		= $archive_columns_classes_array ? ' ' . implode( ' ', $archive_columns_classes_array ) : '';
 				

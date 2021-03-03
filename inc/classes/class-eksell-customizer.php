@@ -61,7 +61,7 @@ if ( ! class_exists( 'Eksell_Customizer' ) ) :
 
 			$color_options = self::get_color_options();
 
-			// Contains two groups of colors: regular and dark_mode
+			// Contains two groups of colors: regular and dark_mode.
 			$color_options_regular 		= isset( $color_options['regular'] ) ? $color_options['regular'] : array();
 			$color_options_dark_mode 	= isset( $color_options['dark_mode'] ) ? $color_options['dark_mode'] : array();
 
@@ -69,7 +69,7 @@ if ( ! class_exists( 'Eksell_Customizer' ) ) :
 
 			if ( $color_options_regular ) {
 
-				// First, loop over the regular color options and add them to the customizer
+				// First, loop over the regular color options and add them to the customizer.
 				foreach ( $color_options_regular as $color_option_name => $color_option ) {
 
 					$wp_customize->add_setting( $color_option_name, array(
@@ -117,7 +117,7 @@ if ( ! class_exists( 'Eksell_Customizer' ) ) :
 
 			if ( $color_options_dark_mode ) {
 
-				// Second, loop over the dark mode color options and add them to the customizer
+				// Second, loop over the dark mode color options and add them to the customizer.
 				foreach ( $color_options_dark_mode as $color_option_name => $color_option ) {
 
 					$wp_customize->add_setting( $color_option_name, array(
@@ -298,7 +298,7 @@ if ( ! class_exists( 'Eksell_Customizer' ) ) :
 
 			/* Number of Post Columns -------- */
 
-			// Store the different screen size options in an array for brevity
+			// Store the different screen size options in an array for brevity.
 			$post_column_option_sizes = Eksell_Customizer::get_archive_columns_options();
 
 			// Loop over each screen size option and register it
@@ -521,17 +521,17 @@ if ( ! class_exists( 'Eksell_Customizer' ) ) :
 
 		}
 
-		// Enqueue the Customizer JavaScript
+		// Enqueue the Customizer JavaScript.
 		public static function enqueue_customizer_javascript() {
 			wp_enqueue_script( 'eksell-customizer-javascript', get_template_directory_uri() . '/assets/js/customizer.js', array( 'jquery', 'customize-controls' ), '', true );
 		}
 
 	}
 
-	// Setup the Customizer settings and controls
+	// Setup the Customizer settings and controls.
 	add_action( 'customize_register', array( 'Eksell_Customizer', 'eksell_register' ) );
 
-	// Enqueue the Customizer JavaScript
+	// Enqueue the Customizer JavaScript.
 	add_action( 'customize_controls_enqueue_scripts', array( 'Eksell_Customizer', 'enqueue_customizer_javascript' ) );
 
 endif;

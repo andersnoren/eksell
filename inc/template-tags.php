@@ -261,7 +261,7 @@ endif;
 /* ------------------------------------------------------------------------------------------------
    GET POST GRID COLUMN CLASSES
    Gets the number of columns set in the Customizer, and returns the classes that should be used to
-   set the post grid to the number of columns specified
+   set the post grid to the number of columns specified.
 --------------------------------------------------------------------------------------------------- */
 
 if ( ! function_exists( 'eksell_get_archive_columns_classes' ) ) :
@@ -269,16 +269,16 @@ if ( ! function_exists( 'eksell_get_archive_columns_classes' ) ) :
 
 		$classes = array();
 
-		// Get the array holding all of the columns options
+		// Get the array holding all of the columns options.
 		$archive_columns_options = Eksell_Customizer::get_archive_columns_options();
 
-		// Loop over the array, and class value of each one to the array
+		// Loop over the array, and class value of each one to the array.
 		foreach ( $archive_columns_options as $setting_name => $setting_data ) {
 
-			// Get the value of the setting, or the default if none is set
+			// Get the value of the setting, or the default if none is set.
 			$value = get_theme_mod( $setting_name, $setting_data['default'] );
 
-			// Convert the number in the setting (1/2/3/4) to the class names used in our twelve column grid
+			// Convert the number in the setting (1/2/3/4) to the class names used in our twelve column grid.
 			switch ( $setting_name ) {
 				case 'eksell_post_grid_columns_mobile' : 
 					$classes['mobile'] = 'cols-' . ( 12 / $value );

@@ -15,12 +15,22 @@ License URI: https://www.gnu.org/licenses/gpl-2.0.html
 2. Activate the theme
 
 
-== How to Use the Only Content Template ==
+== How to Use the No Title Template ==
 
-The Only Content Template hides all elements in the content area of Eksell except the block editor content, allowing you to create completely custom layouts. The site header, footer and aside (with the navigation toggle) are still displayed.
+The Only Content Template hides all elements in the content area of Eksell except the block editor content, allowing you to create completely custom layouts. The site header, aside (with the navigation toggle) and footer are still displayed.
 
 1. Go to Pages → Add New or edit an existing page.
-2. In the righthand sidebar, expand the "Page Attributes" dropdown, click the "Template" dropdown, and select "Only Content Template" from the list.
+2. In the righthand sidebar, expand the "Page Attributes" dropdown, click the "Template" dropdown, and select "No Title Template" from the list.
+3. Add the block editor content you want to include on the page.
+4. When you're done, click the "Publish" or "Update" button to publish your changes.
+
+
+== How to Use the Blank Canvas Template ==
+
+The Blank Canvas template hides everything on the page except the block editor content, including the site header, aside (with the navigation toggle), footer, and modals.
+
+1. Go to Pages → Add New or edit an existing page.
+2. In the righthand sidebar, expand the "Page Attributes" dropdown, click the "Template" dropdown, and select "Blank Canvas Template" from the list.
 3. Add the block editor content you want to include on the page.
 4. When you're done, click the "Publish" or "Update" button to publish your changes.
 
