@@ -119,19 +119,19 @@
 				?>
 
 				<?php if ( $entry_time && ! is_page() ) : ?>
-					<p class="entry-meta-time"><?php printf( _x( 'Published %s', '%s = The date of the post', 'eksell' ), '<time><a href="' . get_permalink() . '">' . $entry_time . '</a></time>' ); ?></p>
+					<p class="entry-meta-time"><?php printf( esc_html_x( 'Published %s', '%s = The date of the post', 'eksell' ), '<time><a href="' . get_permalink() . '">' . $entry_time . '</a></time>' ); ?></p>
 				<?php endif; ?>
 
 				<?php if ( $entry_categories ) : ?>
-					<p class="entry-categories"><?php printf( _x( 'Posted in %s', '%s = The list of categories', 'eksell' ), $entry_categories ); ?></p>
+					<p class="entry-categories"><?php printf( esc_html_x( 'Posted in %s', '%s = The list of categories', 'eksell' ), $entry_categories ); ?></p>
 				<?php endif; ?>
 
 				<?php if ( $entry_tags ) : ?>
-					<p class="entry-tags"><?php printf( _x( 'Tagged %s', '%s = The list of tags', 'eksell' ), $entry_tags ); ?></p>
+					<p class="entry-tags"><?php printf( esc_html_x( 'Tagged %s', '%s = The list of tags', 'eksell' ), $entry_tags ); ?></p>
 				<?php endif; ?>
 
 				<?php if ( $edit_url ) : ?>
-					<p class="edit-link"><a href="<?php echo esc_url( $edit_url ); ?>"><?php _e( 'Edit This', 'eksell' ); ?></a></p>
+					<p class="edit-link"><a href="<?php echo esc_url( $edit_url ); ?>"><?php esc_html_e( 'Edit This', 'eksell' ); ?></a></p>
 				<?php endif; ?>
 
 				<?php 

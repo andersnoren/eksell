@@ -60,8 +60,8 @@ if ( ! ( $query_args['max_num_pages'] > $query_args['paged'] ) ) {
 			<?php endif;
 
 			// The pagination links also work as a no-js fallback, so they always need to be output.
-			$prev_link 	= get_previous_posts_link( '<span class="arrow stroke-cc">' . eksell_get_theme_svg( 'ui', 'arrow-left', 96, 49 ) . '</span><span class="screen-reader-text">' . __( 'Previous Page', 'eksell' ) . '</span></span>' );
-			$next_link 	= get_next_posts_link( '<span class="screen-reader-text">' . __( 'Next Page', 'eksell' ) . '</span></span><span class="arrow stroke-cc">' . eksell_get_theme_svg( 'ui', 'arrow-right', 96, 49 ) . '</span>' );
+			$prev_link 	= get_previous_posts_link( '<span class="arrow stroke-cc">' . eksell_get_theme_svg( 'ui', 'arrow-left', 96, 49 ) . '</span><span class="screen-reader-text">' . esc_html__( 'Previous Page', 'eksell' ) . '</span></span>' );
+			$next_link 	= get_next_posts_link( '<span class="screen-reader-text">' . esc_html__( 'Next Page', 'eksell' ) . '</span></span><span class="arrow stroke-cc">' . eksell_get_theme_svg( 'ui', 'arrow-right', 96, 49 ) . '</span>' );
 
 			if ( $prev_link || $next_link ) :
 				$pagination_class = ! $prev_link ? ' only-next' : ( ! $next_link ? ' only-previous' : '' );

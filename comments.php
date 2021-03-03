@@ -28,7 +28,7 @@ if ( $comments ) :
 		}
 
 		// Filter the comments title before output.
-		$comments_title = apply_filters( $comments_title, $comments_number, $post_type );
+		$comments_title = apply_filters( 'eksell_comments_title', $comments_title, $comments_number, $post_type );
 
 		if ( $comments_title ) : 
 			?>
@@ -50,8 +50,8 @@ if ( $comments ) :
 			'echo'      => false,
 			'end_size'  => 0,
 			'mid_size'  => 0,
-			'next_text' => '<span class="text"><span class="long">' . __( 'Newer Comments', 'eksell' ) . '</span><span class="short">' . __( 'Newer', 'eksell' ) . '</span></span><span class="arrow">&rarr;</span>',
-			'prev_text' => '<span class="arrow">&larr;</span><span class="text"><span class="long">' . __( 'Older Comments', 'eksell' ) . '</span><span class="short">' . __( 'Older', 'eksell' ) . '</span></span>',
+			'next_text' => '<span class="text"><span class="long">' . esc_html__( 'Newer Comments', 'eksell' ) . '</span><span class="short">' . esc_html__( 'Newer', 'eksell' ) . '</span></span><span class="arrow">&rarr;</span>',
+			'prev_text' => '<span class="arrow">&larr;</span><span class="text"><span class="long">' . esc_html__( 'Older Comments', 'eksell' ) . '</span><span class="short">' . esc_html__( 'Older', 'eksell' ) . '</span></span>',
 		) );
 
 		if ( $comment_pagination ) :

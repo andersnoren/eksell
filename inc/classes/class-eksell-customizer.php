@@ -17,8 +17,8 @@ if ( ! class_exists( 'Eksell_Customizer' ) ) :
 				'priority'       => 30,
 				'capability'     => 'edit_theme_options',
 				'theme_supports' => '',
-				'title'          => __( 'Theme Options', 'eksell' ),
-				'description'    => __( 'Options included in the Eksell theme.', 'eksell' ),
+				'title'          => esc_html__( 'Theme Options', 'eksell' ),
+				'description'    => esc_html__( 'Options included in the Eksell theme.', 'eksell' ),
 			) );
 
 			/* ------------------------------------------------------------------------
@@ -33,8 +33,8 @@ if ( ! class_exists( 'Eksell_Customizer' ) ) :
 			) );
 
 			$wp_customize->add_control( new WP_Customize_Media_Control( $wp_customize, 'eksell_dark_mode_logo', array(
-				'label'			=> __( 'Dark Mode Logo', 'eksell' ),
-				'description'	=> __( 'Used when a visitor views the site with dark mode active and the "Enable Dark Mode Color Palette" setting is enabled in Customizer → Colors.', 'eksell' ),
+				'label'			=> esc_html__( 'Dark Mode Logo', 'eksell' ),
+				'description'	=> esc_html__( 'Used when a visitor views the site with dark mode active and the "Enable Dark Mode Color Palette" setting is enabled in Customizer → Colors.', 'eksell' ),
 				'mime_type'		=> 'image',
 				'priority'		=> 9,
 				'section' 		=> 'title_tagline',
@@ -51,8 +51,8 @@ if ( ! class_exists( 'Eksell_Customizer' ) ) :
 				'type' 			=> 'checkbox',
 				'section' 		=> 'title_tagline',
 				'priority'		=> 9,
-				'label' 		=> __( 'Retina logo', 'eksell' ),
-				'description' 	=> __( 'Scales the logo to half its uploaded size, making it sharp on high-res screens.', 'eksell' ),
+				'label' 		=> esc_html__( 'Retina logo', 'eksell' ),
+				'description' 	=> esc_html__( 'Scales the logo to half its uploaded size, making it sharp on high-res screens.', 'eksell' ),
 			) );
 
 			/* ------------------------------------------------------------------------
@@ -109,8 +109,8 @@ if ( ! class_exists( 'Eksell_Customizer' ) ) :
 			$wp_customize->add_control( 'eksell_enable_dark_mode_palette', array(
 				'type' 			=> 'checkbox',
 				'section' 		=> 'colors',
-				'label' 		=> __( 'Enable Dark Mode Color Palette', 'eksell' ),
-				'description'	=> __( 'The palette is used when the visitor has set their operating system to a light-on-dark color scheme. The feature is supported by most modern OSs and browsers, but not all. Your OS needs to be set to a light-on-dark color scheme for you to preview the color palette.', 'eksell' ),
+				'label' 		=> esc_html__( 'Enable Dark Mode Color Palette', 'eksell' ),
+				'description'	=> esc_html__( 'The palette is used when the visitor has set their operating system to a light-on-dark color scheme. The feature is supported by most modern OSs and browsers, but not all. Your OS needs to be set to a light-on-dark color scheme for you to preview the color palette.', 'eksell' ),
 			) );
 
 			/* Dark Mode Colors -------------- */
@@ -127,7 +127,7 @@ if ( ! class_exists( 'Eksell_Customizer' ) ) :
 					) );
 
 					$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, $color_option_name, array(
-						'label' 		=> sprintf( _x( 'Dark Mode %s', 'Customizer option label. %s = Name of the color.', 'eksell' ), $color_option['label'] ),
+						'label' 		=> sprintf( esc_html_x( 'Dark Mode %s', 'Customizer option label. %s = Name of the color.', 'eksell' ), $color_option['label'] ),
 						'section' 		=> 'colors',
 						'settings' 		=> $color_option_name,
 						'priority' 		=> 10,
@@ -147,10 +147,10 @@ if ( ! class_exists( 'Eksell_Customizer' ) ) :
 			 * ------------------------------------------------------------------------ */
 
 			$wp_customize->add_section( 'eksell_general_options', array(
-				'title' 		=> __( 'General Options', 'eksell' ),
+				'title' 		=> esc_html__( 'General Options', 'eksell' ),
 				'priority' 		=> 10,
 				'capability' 	=> 'edit_theme_options',
-				'description' 	=> __( 'General theme options for Eksell.', 'eksell' ),
+				'description' 	=> esc_html__( 'General theme options for Eksell.', 'eksell' ),
 				'panel'			=> 'eksell_theme_options',
 			) );
 
@@ -166,8 +166,8 @@ if ( ! class_exists( 'Eksell_Customizer' ) ) :
 				'type' 			=> 'checkbox',
 				'section' 		=> 'eksell_general_options',
 				'priority'		=> 15,
-				'label' 		=> __( 'Disable Animations', 'eksell' ),
-				'description'	=> __( 'Check to disable animations and transitions in the theme.', 'eksell' ),
+				'label' 		=> esc_html__( 'Disable Animations', 'eksell' ),
+				'description'	=> esc_html__( 'Check to disable animations and transitions in the theme.', 'eksell' ),
 			) );
 
 			/* ------------------------------------------------------------------------
@@ -175,10 +175,10 @@ if ( ! class_exists( 'Eksell_Customizer' ) ) :
 			 * ------------------------------------------------------------------------ */
 
 			$wp_customize->add_section( 'eksell_site_header_options', array(
-				'title' 		=> __( 'Site Header', 'eksell' ),
+				'title' 		=> esc_html__( 'Site Header', 'eksell' ),
 				'priority' 		=> 20,
 				'capability' 	=> 'edit_theme_options',
-				'description' 	=> __( 'Settings for the site header.', 'eksell' ),
+				'description' 	=> esc_html__( 'Settings for the site header.', 'eksell' ),
 				'panel'			=> 'eksell_theme_options',
 			) );
 
@@ -194,8 +194,8 @@ if ( ! class_exists( 'Eksell_Customizer' ) ) :
 				'type' 			=> 'checkbox',
 				'section' 		=> 'eksell_site_header_options',
 				'priority'		=> 10,
-				'label' 		=> __( 'Enable Sticky Header', 'eksell' ),
-				'description' 	=> __( 'Determines whether to header should stick to the top of the screen when scrolling.', 'eksell' ),
+				'label' 		=> esc_html__( 'Enable Sticky Header', 'eksell' ),
+				'description' 	=> esc_html__( 'Determines whether to header should stick to the top of the screen when scrolling.', 'eksell' ),
 			) );
 
 			/* Enable Search ----------------- */
@@ -210,8 +210,8 @@ if ( ! class_exists( 'Eksell_Customizer' ) ) :
 				'type' 			=> 'checkbox',
 				'section' 		=> 'eksell_site_header_options',
 				'priority'		=> 10,
-				'label' 		=> __( 'Enable Search', 'eksell' ),
-				'description' 	=> __( 'Uncheck to disable the search button in the header, and the search form in the mobile menu.', 'eksell' ),
+				'label' 		=> esc_html__( 'Enable Search', 'eksell' ),
+				'description' 	=> esc_html__( 'Uncheck to disable the search button in the header, and the search form in the mobile menu.', 'eksell' ),
 			) );
 
 			/* ------------------------------------------------------------------------
@@ -219,10 +219,10 @@ if ( ! class_exists( 'Eksell_Customizer' ) ) :
 			 * ------------------------------------------------------------------------ */
 
 			$wp_customize->add_section( 'eksell_archive_pages_options', array(
-				'title' 		=> __( 'Archive Pages', 'eksell' ),
+				'title' 		=> esc_html__( 'Archive Pages', 'eksell' ),
 				'priority' 		=> 30,
 				'capability' 	=> 'edit_theme_options',
-				'description' 	=> __( 'Settings for archive pages.', 'eksell' ),
+				'description' 	=> esc_html__( 'Settings for archive pages.', 'eksell' ),
 				'panel'			=> 'eksell_theme_options',
 			) );
 
@@ -237,8 +237,8 @@ if ( ! class_exists( 'Eksell_Customizer' ) ) :
 			$wp_customize->add_control( 'eksell_home_text', array(
 				'type' 			=> 'textarea',
 				'section' 		=> 'eksell_archive_pages_options',
-				'label' 		=> __( 'Intro Text', 'eksell' ),
-				'description' 	=> __( 'Shown below the site title on the front page, when the front page is set to display latest posts.', 'eksell' ),
+				'label' 		=> esc_html__( 'Intro Text', 'eksell' ),
+				'description' 	=> esc_html__( 'Shown below the site title on the front page, when the front page is set to display latest posts.', 'eksell' ),
 			) );
 
 			/* Show Home Post Filter --------- */
@@ -252,8 +252,8 @@ if ( ! class_exists( 'Eksell_Customizer' ) ) :
 			$wp_customize->add_control( 'eksell_show_home_filter', array(
 				'type' 			=> 'checkbox',
 				'section' 		=> 'eksell_archive_pages_options',
-				'label' 		=> __( 'Show Filter', 'eksell' ),
-				'description' 	=> __( 'Whether to display the category filter on the post archive.', 'eksell' ),
+				'label' 		=> esc_html__( 'Show Filter', 'eksell' ),
+				'description' 	=> esc_html__( 'Whether to display the category filter on the post archive.', 'eksell' ),
 			) );
 
 			/* Separator --------------------- */
@@ -277,12 +277,12 @@ if ( ! class_exists( 'Eksell_Customizer' ) ) :
 			$wp_customize->add_control( 'eksell_pagination_type', array(
 				'type'			=> 'select',
 				'section' 		=> 'eksell_archive_pages_options',
-				'label'   		=> __( 'Pagination Type', 'eksell' ),
-				'description'	=> __( 'Determines how the pagination on archive pages should be displayed.', 'eksell' ),
+				'label'   		=> esc_html__( 'Pagination Type', 'eksell' ),
+				'description'	=> esc_html__( 'Determines how the pagination on archive pages should be displayed.', 'eksell' ),
 				'choices' 		=> array(
-					'button'		=> __( 'Load more button', 'eksell' ),
-					'scroll'		=> __( 'Load more on scroll', 'eksell' ),
-					'links'			=> __( 'Links', 'eksell' ),
+					'button'		=> esc_html__( 'Load more button', 'eksell' ),
+					'scroll'		=> esc_html__( 'Load more on scroll', 'eksell' ),
+					'links'			=> esc_html__( 'Links', 'eksell' ),
 				),
 			) );
 
@@ -315,10 +315,10 @@ if ( ! class_exists( 'Eksell_Customizer' ) ) :
 					'label'   		=> $data['label'],
 					'description'   => $data['description'],
 					'choices' 		=> array(
-						'1'				=> __( 'One', 'eksell' ),
-						'2'				=> __( 'Two', 'eksell' ),
-						'3'				=> __( 'Three', 'eksell' ),
-						'4'				=> __( 'Four', 'eksell' ),
+						'1'				=> esc_html__( 'One', 'eksell' ),
+						'2'				=> esc_html__( 'Two', 'eksell' ),
+						'3'				=> esc_html__( 'Three', 'eksell' ),
+						'4'				=> esc_html__( 'Four', 'eksell' ),
 					),
 				) );
 			}
@@ -328,10 +328,10 @@ if ( ! class_exists( 'Eksell_Customizer' ) ) :
 			 * ------------------------------------------------------------------------ */
 
 			$wp_customize->add_section( 'eksell_image_options', array(
-				'title' 		=> __( 'Images', 'eksell' ),
+				'title' 		=> esc_html__( 'Images', 'eksell' ),
 				'priority' 		=> 40,
 				'capability' 	=> 'edit_theme_options',
-				'description' 	=> __( 'Settings for images.', 'eksell' ),
+				'description' 	=> esc_html__( 'Settings for images.', 'eksell' ),
 				'panel'			=> 'eksell_theme_options',
 			) );
 
@@ -343,8 +343,8 @@ if ( ! class_exists( 'Eksell_Customizer' ) ) :
 			) );
 
 			$wp_customize->add_control( new WP_Customize_Media_Control( $wp_customize, 'eksell_fallback_image', array(
-				'label'			=> __( 'Fallback Image', 'eksell' ),
-				'description'	=> __( 'The selected image will be used on archive pages when a post is missing a featured image. A default fallback image included in the theme will be used if no image is set.', 'eksell' ),
+				'label'			=> esc_html__( 'Fallback Image', 'eksell' ),
+				'description'	=> esc_html__( 'The selected image will be used on archive pages when a post is missing a featured image. A default fallback image included in the theme will be used if no image is set.', 'eksell' ),
 				'mime_type'		=> 'image',
 				'section' 		=> 'eksell_image_options',
 			) ) );
@@ -387,44 +387,44 @@ if ( ! class_exists( 'Eksell_Customizer' ) ) :
 				'regular'		=> array(
 					'eksell_accent_color' => array(
 						'default'	=> '#d23c50',
-						'label'		=> __( 'Accent Color', 'eksell' ),
+						'label'		=> esc_html__( 'Accent Color', 'eksell' ),
 						'slug'		=> 'accent',
 						'palette'	=> true,
 					),
 					'eksell_primary_color' => array(
 						'default'	=> '#1e2d32',
-						'label'		=> __( 'Primary Text Color', 'eksell' ),
+						'label'		=> esc_html__( 'Primary Text Color', 'eksell' ),
 						'slug'		=> 'primary',
 						'palette'	=> true,
 					),
 					'eksell_secondary_color' => array(
 						'default'	=> '#707376',
-						'label'		=> __( 'Secondary Text Color', 'eksell' ),
+						'label'		=> esc_html__( 'Secondary Text Color', 'eksell' ),
 						'slug'		=> 'secondary',
 						'palette'	=> true,
 					),
 					'eksell_border_color' => array(
 						'default'	=> '#d6d5d4',
-						'label'		=> __( 'Border Color', 'eksell' ),
+						'label'		=> esc_html__( 'Border Color', 'eksell' ),
 						'slug'		=> 'border',
 						'palette'	=> true,
 					),
 					'eksell_light_background_color' => array(
 						'default'	=> '#f3efe9',
-						'label'		=> __( 'Light Background Color', 'eksell' ),
+						'label'		=> esc_html__( 'Light Background Color', 'eksell' ),
 						'slug'		=> 'light-background',
 						'palette'	=> true,
 					),
 					// Note: The body background color uses the built-in WordPress theme mod, which is why it isn't included in this array.
 					'eksell_menu_modal_text_color' => array(
 						'default'	=> '#ffffff',
-						'label'		=> __( 'Menu Modal Text Color', 'eksell' ),
+						'label'		=> esc_html__( 'Menu Modal Text Color', 'eksell' ),
 						'slug'		=> 'menu-modal-text',
 						'palette'	=> false,
 					),
 					'eksell_menu_modal_background_color' => array(
 						'default'	=> '#1e2d32',
-						'label'		=> __( 'Menu Modal Background Color', 'eksell' ),
+						'label'		=> esc_html__( 'Menu Modal Background Color', 'eksell' ),
 						'slug'		=> 'menu-modal-background',
 						'palette'	=> false,
 					),
@@ -432,49 +432,49 @@ if ( ! class_exists( 'Eksell_Customizer' ) ) :
 				'dark_mode'		=> array(
 					'eksell_dark_mode_background_color' => array(
 						'default'	=> '#1E2D32',
-						'label'		=> __( 'Background Color', 'eksell' ),
+						'label'		=> esc_html__( 'Background Color', 'eksell' ),
 						'slug'		=> 'background',
 						'palette'	=> false,
 					),
 					'eksell_dark_mode_accent_color' => array(
 						'default'	=> '#dc737d',
-						'label'		=> __( 'Accent Color', 'eksell' ),
+						'label'		=> esc_html__( 'Accent Color', 'eksell' ),
 						'slug'		=> 'accent',
 						'palette'	=> false,
 					),
 					'eksell_dark_mode_primary_color' => array(
 						'default'	=> '#ffffff',
-						'label'		=> __( 'Primary Text Color', 'eksell' ),
+						'label'		=> esc_html__( 'Primary Text Color', 'eksell' ),
 						'slug'		=> 'primary',
 						'palette'	=> false,
 					),
 					'eksell_dark_mode_secondary_color' => array(
 						'default'	=> '#939699',
-						'label'		=> __( 'Secondary Text Color', 'eksell' ),
+						'label'		=> esc_html__( 'Secondary Text Color', 'eksell' ),
 						'slug'		=> 'secondary',
 						'palette'	=> false,
 					),
 					'eksell_dark_mode_border_color' => array(
 						'default'	=> '#404C51',
-						'label'		=> __( 'Border Color', 'eksell' ),
+						'label'		=> esc_html__( 'Border Color', 'eksell' ),
 						'slug'		=> 'border',
 						'palette'	=> false,
 					),
 					'eksell_dark_mode_light_background_color' => array(
 						'default'	=> '#29373C',
-						'label'		=> __( 'Light Background Color', 'eksell' ),
+						'label'		=> esc_html__( 'Light Background Color', 'eksell' ),
 						'slug'		=> 'light-background',
 						'palette'	=> false,
 					),
 					'eksell_dark_mode_menu_modal_text_color' => array(
 						'default'	=> '#ffffff',
-						'label'		=> __( 'Menu Modal Text Color', 'eksell' ),
+						'label'		=> esc_html__( 'Menu Modal Text Color', 'eksell' ),
 						'slug'		=> 'menu-modal-text',
 						'palette'	=> false,
 					),
 					'eksell_dark_mode_menu_modal_background_color' => array(
 						'default'	=> '#344247',
-						'label'		=> __( 'Menu Modal Background Color', 'eksell' ),
+						'label'		=> esc_html__( 'Menu Modal Background Color', 'eksell' ),
 						'slug'		=> 'menu-modal-background',
 						'palette'	=> false,
 					),
@@ -493,29 +493,29 @@ if ( ! class_exists( 'Eksell_Customizer' ) ) :
 			// You can modify the columns options in the theme with the `eksell_archive_columns_options` filter.
 			return apply_filters( 'eksell_archive_columns_options', array(
 				'eksell_post_grid_columns_mobile'			=> array(
-					'label'			=> __( 'Columns on Mobile', 'eksell' ),
+					'label'			=> esc_html__( 'Columns on Mobile', 'eksell' ),
 					'default'		=> '1',
-					'description'	=> __( 'Screen width: 0px - 700px', 'eksell' ),
+					'description'	=> esc_html__( 'Screen width: 0px - 700px', 'eksell' ),
 				),
 				'eksell_post_grid_columns_tablet_portrait'	=> array(
-					'label'			=> __( 'Columns on Tablet Portrait', 'eksell' ),
+					'label'			=> esc_html__( 'Columns on Tablet Portrait', 'eksell' ),
 					'default'		=> '2',
-					'description'	=> __( 'Screen width: 700px - 1000px', 'eksell' ),
+					'description'	=> esc_html__( 'Screen width: 700px - 1000px', 'eksell' ),
 				),
 				'eksell_post_grid_columns_tablet_landscape'	=> array(
-					'label'			=> __( 'Columns on Tablet Landscape', 'eksell' ),
+					'label'			=> esc_html__( 'Columns on Tablet Landscape', 'eksell' ),
 					'default'		=> '3',
-					'description'	=> __( 'Screen width: 1000px - 1200px', 'eksell' ),
+					'description'	=> esc_html__( 'Screen width: 1000px - 1200px', 'eksell' ),
 				),
 				'eksell_post_grid_columns_desktop'			=> array(
-					'label'			=> __( 'Columns on Desktop', 'eksell' ),
+					'label'			=> esc_html__( 'Columns on Desktop', 'eksell' ),
 					'default'		=> '3',
-					'description'	=> __( 'Screen width: 1200px - 1600px', 'eksell' ),
+					'description'	=> esc_html__( 'Screen width: 1200px - 1600px', 'eksell' ),
 				),
 				'eksell_post_grid_columns_desktop_large'	=> array(
-					'label'			=> __( 'Columns on Large Desktop', 'eksell' ),
+					'label'			=> esc_html__( 'Columns on Large Desktop', 'eksell' ),
 					'default'		=> '4',
-					'description'	=> __( 'Screen width: > 1600px', 'eksell' ),
+					'description'	=> esc_html__( 'Screen width: > 1600px', 'eksell' ),
 				),
 			) );
 

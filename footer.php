@@ -22,7 +22,7 @@
 
 					<div class="footer-credits">
 
-						<p class="footer-copyright">&copy; <?php echo esc_html( date_i18n( __( 'Y', 'eksell' ) ) ); ?> <a href="<?php echo esc_url( home_url() ); ?>" rel="home"><?php echo bloginfo( 'name' ); ?></a></p>
+						<p class="footer-copyright">&copy; <?php echo esc_html( date_i18n( esc_html__( 'Y', 'eksell' ) ) ); ?> <a href="<?php echo esc_url( home_url() ); ?>" rel="home"><?php echo bloginfo( 'name' ); ?></a></p>
 
 						<p class="theme-credits color-secondary">
 							<?php

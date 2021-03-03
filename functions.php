@@ -57,26 +57,26 @@ if ( ! function_exists( 'eksell_theme_support' ) ) :
 		add_theme_support( 'editor-font-sizes',
 			array(
 				array(
-					'name'      => _x( 'Small', 'Name of the small font size in Gutenberg', 'eksell' ),
-					'shortName' => _x( 'S', 'Short name of the small font size in the Gutenberg editor.', 'eksell' ),
+					'name'      => esc_html_x( 'Small', 'Name of the small font size in Gutenberg', 'eksell' ),
+					'shortName' => esc_html_x( 'S', 'Short name of the small font size in the Gutenberg editor.', 'eksell' ),
 					'size'      => 16,
 					'slug'      => 'small',
 				),
 				array(
-					'name'      => _x( 'Regular', 'Name of the regular font size in Gutenberg', 'eksell' ),
-					'shortName' => _x( 'M', 'Short name of the regular font size in the Gutenberg editor.', 'eksell' ),
+					'name'      => esc_html_x( 'Regular', 'Name of the regular font size in Gutenberg', 'eksell' ),
+					'shortName' => esc_html_x( 'M', 'Short name of the regular font size in the Gutenberg editor.', 'eksell' ),
 					'size'      => 18,
 					'slug'      => 'normal',
 				),
 				array(
-					'name'      => _x( 'Large', 'Name of the large font size in Gutenberg', 'eksell' ),
-					'shortName' => _x( 'L', 'Short name of the large font size in the Gutenberg editor.', 'eksell' ),
+					'name'      => esc_html_x( 'Large', 'Name of the large font size in Gutenberg', 'eksell' ),
+					'shortName' => esc_html_x( 'L', 'Short name of the large font size in the Gutenberg editor.', 'eksell' ),
 					'size'      => 24,
 					'slug'      => 'large',
 				),
 				array(
-					'name'      => _x( 'Larger', 'Name of the larger font size in Gutenberg', 'eksell' ),
-					'shortName' => _x( 'XL', 'Short name of the larger font size in the Gutenberg editor.', 'eksell' ),
+					'name'      => esc_html_x( 'Larger', 'Name of the larger font size in Gutenberg', 'eksell' ),
+					'shortName' => esc_html_x( 'XL', 'Short name of the larger font size in the Gutenberg editor.', 'eksell' ),
 					'size'      => 32,
 					'slug'      => 'larger',
 				)
@@ -116,7 +116,7 @@ if ( ! function_exists( 'eksell_theme_support' ) ) :
 			// Add the background option.
 			$background_color = '#' . get_theme_mod( 'background_color', 'ffffff' );
 			$editor_color_palette[] = array(
-				'name'  => __( 'Background Color', 'eksell' ),
+				'name'  => esc_html__( 'Background Color', 'eksell' ),
 				'slug'  => 'body-background',
 				'color' => $background_color,
 			);
@@ -239,8 +239,8 @@ if ( ! function_exists( 'eksell_register_nav_menus' ) ) :
 	function eksell_register_nav_menus() {
 
 		register_nav_menus( array(
-			'main'   => __( 'Main Menu', 'eksell' ),
-			'social' => __( 'Social Menu', 'eksell' ),
+			'main'   => esc_html__( 'Main Menu', 'eksell' ),
+			'social' => esc_html__( 'Social Menu', 'eksell' ),
 		) );
 
 	}
@@ -386,19 +386,19 @@ if ( ! function_exists( 'eksell_get_the_archive_title_prefix' ) ) :
 		$prefix = '';
 
 		if ( is_search() ) {
-			$prefix = _x( 'Search Results', 'search archive title prefix', 'eksell' );
+			$prefix = esc_html_x( 'Search Results', 'search archive title prefix', 'eksell' );
 		} elseif ( is_category() ) {
-			$prefix = _x( 'Category', 'category archive title prefix', 'eksell' );
+			$prefix = esc_html_x( 'Category', 'category archive title prefix', 'eksell' );
 		} elseif ( is_tag() ) {
-			$prefix = _x( 'Tag', 'tag archive title prefix', 'eksell' );
+			$prefix = esc_html_x( 'Tag', 'tag archive title prefix', 'eksell' );
 		} elseif ( is_author() ) {
-			$prefix = _x( 'Author', 'author archive title prefix', 'eksell' );
+			$prefix = esc_html_x( 'Author', 'author archive title prefix', 'eksell' );
 		} elseif ( is_year() ) {
-			$prefix = _x( 'Year', 'date archive title prefix', 'eksell' );
+			$prefix = esc_html_x( 'Year', 'date archive title prefix', 'eksell' );
 		} elseif ( is_month() ) {
-			$prefix = _x( 'Month', 'date archive title prefix', 'eksell' );
+			$prefix = esc_html_x( 'Month', 'date archive title prefix', 'eksell' );
 		} elseif ( is_day() ) {
-			$prefix = _x( 'Day', 'date archive title prefix', 'eksell' );
+			$prefix = esc_html_x( 'Day', 'date archive title prefix', 'eksell' );
 		} elseif ( is_post_type_archive() ) {
 			// No prefix for post type archives.
 		} elseif ( is_tax( 'post_format' ) ) {
@@ -409,12 +409,12 @@ if ( ! function_exists( 'eksell_get_the_archive_title_prefix' ) ) :
 				$tax    = get_taxonomy( $queried_object->taxonomy );
 				$prefix = sprintf(
 					/* translators: %s: Taxonomy singular name. */
-					_x( '%s:', 'taxonomy term archive title prefix', 'eksell' ),
+					esc_html_x( '%s:', 'taxonomy term archive title prefix', 'eksell' ),
 					$tax->labels->singular_name
 				);
 			}
 		} elseif ( is_home() && is_paged() ) {
-			$prefix = _x( 'Archives', 'general archive title prefix', 'eksell' );
+			$prefix = esc_html_x( 'Archives', 'general archive title prefix', 'eksell' );
 		}
 
 		// Make the prefix filterable before returning it.
@@ -444,7 +444,7 @@ if ( ! function_exists( 'eksell_filter_archive_title' ) ) :
 			global $wp_query;
 			$paged 	= get_query_var( 'paged' ) ? get_query_var( 'paged' ) : 1;
 			$max 	= isset( $wp_query->max_num_pages ) ? $wp_query->max_num_pages : 1;
-			$title 	= sprintf( _x( 'Page %1$s of %2$s', '%1$s = Current page number, %2$s = Number of pages', 'eksell' ), $paged, $max );
+			$title 	= sprintf( esc_html_x( 'Page %1$s of %2$s', '%1$s = Current page number, %2$s = Number of pages', 'eksell' ), $paged, $max );
 		}
 
 		// On search, show the search query.
@@ -479,9 +479,9 @@ if ( ! function_exists( 'eksell_filter_archive_description' ) ) :
 			global $wp_query;
 			if ( $wp_query->found_posts ) {
 				/* Translators: %s = Number of results */
-				$description = sprintf( _nx( 'We found %s result for your search.', 'We found %s results for your search.',  $wp_query->found_posts, '%s = Number of results', 'eksell' ), $wp_query->found_posts );
+				$description = esc_html( sprintf( _nx( 'We found %s result for your search.', 'We found %s results for your search.',  $wp_query->found_posts, '%s = Number of results', 'eksell' ), $wp_query->found_posts ) );
 			} else {
-				$description = __( 'We could not find any results for your search. You can give it another try through the search form below.', 'eksell' );
+				$description = esc_html__( 'We could not find any results for your search. You can give it another try through the search form below.', 'eksell' );
 			}
 		}
 
@@ -556,7 +556,7 @@ if ( ! function_exists( 'eksell_filter_nav_menu_item_args' ) ) :
 				$toggle_target_string = '.menu-modal .menu-item-' . $item->ID . ' > .sub-menu';
 
 				// Add the sub menu toggle.
-				$args->after .= '<div class="sub-menu-toggle-wrapper"><a href="#" class="toggle sub-menu-toggle stroke-cc" data-toggle-target="' . $toggle_target_string . '" data-toggle-type="slidetoggle" data-toggle-duration="250"><span class="screen-reader-text">' . __( 'Show sub menu', 'eksell' ) . '</span>' . eksell_get_theme_svg( 'ui', 'chevron-down', 18, 10 ) . '</a></div>';
+				$args->after .= '<div class="sub-menu-toggle-wrapper"><a href="#" class="toggle sub-menu-toggle stroke-cc" data-toggle-target="' . $toggle_target_string . '" data-toggle-type="slidetoggle" data-toggle-duration="250"><span class="screen-reader-text">' . esc_html__( 'Show sub menu', 'eksell' ) . '</span>' . eksell_get_theme_svg( 'ui', 'chevron-down', 18, 10 ) . '</a></div>';
 
 			}
 
@@ -608,7 +608,7 @@ if ( ! function_exists( 'eksell_filter_comment_text' ) ) :
 	function eksell_filter_comment_text( $comment_text, $comment, $args ) {
 
 		if ( eksell_is_comment_by_post_author( $comment ) ) {
-			$comment_text .= '<p class="by-post-author">' . __( 'By Post Author', 'eksell' ) . '</p>';
+			$comment_text .= '<p class="by-post-author">' . esc_html__( 'By Post Author', 'eksell' ) . '</p>';
 		}
 
 		return $comment_text;

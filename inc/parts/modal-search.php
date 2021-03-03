@@ -8,10 +8,10 @@
 
 			<form role="search" method="get" class="modal-search-form" action="<?php echo esc_url( home_url( '/' ) ); ?>">
 				<label class="search-label stroke-cc" for="<?php echo esc_attr( $unique_id ); ?>">
-					<span class="screen-reader-text"><?php _e( 'Search For&hellip;', 'eksell' ); ?></span>
+					<span class="screen-reader-text"><?php esc_html_e( 'Search For&hellip;', 'eksell' ); ?></span>
 					<?php eksell_the_theme_svg( 'ui', 'search', 24, 24 ); ?>
 				</label>
-				<input type="search" id="<?php echo esc_attr( $unique_id ); ?>" class="search-field" placeholder="<?php esc_html_e( 'Search For&hellip;', 'eksell' ); ?>" value="<?php echo get_search_query(); ?>" name="s" />
+				<input type="search" id="<?php echo esc_attr( $unique_id ); ?>" class="search-field" placeholder="<?php esc_attr_e( 'Search For&hellip;', 'eksell' ); ?>" value="<?php echo get_search_query(); ?>" name="s" />
 				<button type="submit" class="search-submit"><?php echo esc_html_x( 'Search', 'Submit button', 'eksell' ); ?></button>
 			</form><!-- .search-form -->
 

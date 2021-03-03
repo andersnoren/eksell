@@ -358,7 +358,7 @@ if ( ! function_exists( 'eksell_the_archive_filter' ) ) :
 			<ul class="filter-list reset-list-style">
 
 				<?php if ( $home_url ) : ?>
-					<li><a class="filter-link active" data-filter-post-type="<?php echo esc_attr( $post_type ); ?>" href="<?php echo esc_url( $home_url ); ?>"><?php _e( 'Show All', 'eksell' ); ?></a></li>
+					<li><a class="filter-link active" data-filter-post-type="<?php echo esc_attr( $post_type ); ?>" href="<?php echo esc_url( $home_url ); ?>"><?php esc_html_e( 'Show All', 'eksell' ); ?></a></li>
 				<?php endif; ?>
 
 				<?php foreach ( $terms as $term ) : ?>

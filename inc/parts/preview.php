@@ -20,7 +20,7 @@
 				}
 
 				if ( is_sticky() ) {
-					echo '<div class="sticky-note">' . __( 'Featured', 'eksell' ) . '</div>';
+					echo '<div class="sticky-note">' . esc_html__( 'Featured', 'eksell' ) . '</div>';
 				}
 				?>
 			</figure><!-- .preview-media -->
