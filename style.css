@@ -2361,6 +2361,7 @@ h1.entry-title,
 .wp-block-audio.alignleft,
 .wp-block-audio.alignright {
 	min-width: 20rem;
+	width: 100%;
 }
 
 .wp-block-audio audio {
@@ -4352,7 +4353,6 @@ hr + .comment-reply-title {
 	.alignleft:not(.is-resized),
 	.alignright:not(.is-resized) {
 		max-width: min( 50%, 32rem );
-		width: 100%;
 	}
 
 	:root .alignleft { 
