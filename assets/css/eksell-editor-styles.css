@@ -259,15 +259,6 @@ html {
 :root .editor-styles-wrapper h5 { font-size: 1.9rem; }
 :root .editor-styles-wrapper h6 { font-size: 1em; }
 
-h1 + h1, h1 + h2, h1 + h3, h1 + h4, h1 + h5, h1 + h6,
-h2 + h1, h2 + h2, h2 + h3, h2 + h4, h2 + h5, h2 + h6,
-h3 + h1, h3 + h2, h3 + h3, h3 + h4, h3 + h5, h3 + h6,
-h4 + h1, h4 + h2, h4 + h3, h4 + h4, h4 + h5, h4 + h6,
-h5 + h1, h5 + h2, h5 + h3, h5 + h4, h5 + h5, h5 + h6,
-h6 + h1, h6 + h2, h6 + h3, h6 + h4, h6 + h5, h6 + h6 {
-	margin-top: -.8rem !important;
-}
-
 :root .editor-styles-wrapper p,
 :root .editor-styles-wrapper p.wp-block-paragraph {
 	line-height: 1.5;
@@ -412,7 +403,6 @@ h6 + h1, h6 + h2, h6 + h3, h6 + h4, h6 + h5, h6 + h6 {
 
 /* Shared Block Styles ----------------------- */
 
-.no-vertical-margin,
 .is-style-no-vertical-margin {
 	margin-top: 0 !important;
 	margin-bottom: 0 !important;
@@ -729,6 +719,17 @@ h6 + h1, h6 + h2, h6 + h3, h6 + h4, h6 + h5, h6 + h6 {
 :root [data-align="full"] > .has-background .wp-block-group > .wp-block-group__inner-container > .wp-block {
 	padding-left: 0;
 	padding-right: 0;
+}
+
+/* Block: Heading ---------------------------- */
+
+.editor-styles-wrapper h1.has-background, 
+.editor-styles-wrapper h2.has-background, 
+.editor-styles-wrapper h3.has-background, 
+.editor-styles-wrapper h4.has-background, 
+.editor-styles-wrapper h5.has-background, 
+.editor-styles-wrapper h6.has-background {
+	padding: calc( var( --eksell-inner-gutter ) / 2 );
 }
 
 /* Block: Image ------------------------------ */
@@ -1222,6 +1223,17 @@ h6 + h1, h6 + h2, h6 + h3, h6 + h4, h6 + h5, h6 + h6 {
 	/* BLOCK: GROUP */
 
 	:root .wp-block-group.has-background {
+		padding: 4.8rem;
+	}
+
+	/* BLOCK: HEADING */
+
+	.editor-styles-wrapper h1.has-background, 
+	.editor-styles-wrapper h2.has-background, 
+	.editor-styles-wrapper h3.has-background, 
+	.editor-styles-wrapper h4.has-background, 
+	.editor-styles-wrapper h5.has-background, 
+	.editor-styles-wrapper h6.has-background {
 		padding: 4.8rem;
 	}
 

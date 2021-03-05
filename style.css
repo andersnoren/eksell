@@ -390,15 +390,6 @@ h6, .h6 {
 	margin: 4.8rem 0 3.2rem;
 }
 
-h1 + h1, h1 + h2, h1 + h3, h1 + h4, h1 + h5, h1 + h6,
-h2 + h1, h2 + h2, h2 + h3, h2 + h4, h2 + h5, h2 + h6,
-h3 + h1, h3 + h2, h3 + h3, h3 + h4, h3 + h5, h3 + h6,
-h4 + h1, h4 + h2, h4 + h3, h4 + h4, h4 + h5, h4 + h6,
-h5 + h1, h5 + h2, h5 + h3, h5 + h4, h5 + h5, h5 + h6,
-h6 + h1, h6 + h2, h6 + h3, h6 + h4, h6 + h5, h6 + h6 {
-	margin-top: -.8rem;
-}
-
 h1, .h1 { font-size: 3.2rem; }
 h2, .h2 { font-size: 2.8rem; }
 h3, .h3 { font-size: 2.4rem; }
@@ -2306,7 +2297,6 @@ h1.entry-title,
 
 /* Shared Block Styles ----------------------- */
 
-.no-vertical-margin,
 .is-style-no-vertical-margin {
 	margin-top: 0 !important;
 	margin-bottom: 0 !important;
@@ -4229,7 +4219,14 @@ hr + .comment-reply-title {
 		margin: 4rem 0 2.4rem;
 	}
 
-	.wp-block-column > .wp-block-group.has-background {
+	.wp-block-column p.has-background,
+	.wp-block-column h1.has-background,
+	.wp-block-column h2.has-background,
+	.wp-block-column h3.has-background,
+	.wp-block-column h4.has-background,
+	.wp-block-column h5.has-background,
+	.wp-block-column h6.has-background,
+	.wp-block-column .wp-block-group.has-background {
 		padding: 3.2rem;
 	}
 
@@ -4834,6 +4831,13 @@ hr + .comment-reply-title {
 
 	/* BLOCK: COLUMNS */
 
+	.wp-block-column > p.has-background,
+	.wp-block-column > h1.has-background,
+	.wp-block-column > h2.has-background,
+	.wp-block-column > h3.has-background,
+	.wp-block-column > h4.has-background,
+	.wp-block-column > h5.has-background,
+	.wp-block-column > h6.has-background,
 	.wp-block-column > .wp-block-group.has-background {
 		padding: 4.8rem;
 	}
