@@ -2448,6 +2448,11 @@ h1.entry-title,
 .wp-block-column h4, .wp-block-column .h4 { font-size: 2.1rem; }
 .wp-block-column h5, .wp-block-column .h5 { font-size: 1.9rem; }
 
+.wp-block-column hr {
+	margin-bottom: 3.2rem;
+	margin-top: 3.2rem;
+}
+
 /* 
 	Note: Media queries match the structure in Core styles.
 */
@@ -2741,6 +2746,17 @@ section.wp-block-cover-image > h2 {
 	margin-left: auto;
 	margin-right: auto;
 	max-width: var( --eksell-inner-width-max );
+}
+
+/* Block: Heading ---------------------------- */
+
+h1.has-background, 
+h2.has-background, 
+h3.has-background, 
+h4.has-background, 
+h5.has-background, 
+h6.has-background {
+	padding: calc( var( --eksell-inner-gutter ) / 2 );
 }
 
 /* Block: HTML ------------------------------- */
@@ -4307,6 +4323,17 @@ hr + .comment-reply-title {
 	/* BLOCK: GROUP */
 
 	.wp-block-group.has-background {
+		padding: 4.8rem;
+	}
+
+	/* BLOCK: HEADING */
+
+	h1.has-background, 
+	h2.has-background, 
+	h3.has-background, 
+	h4.has-background, 
+	h5.has-background, 
+	h6.has-background {
 		padding: 4.8rem;
 	}
 
