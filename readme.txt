@@ -35,6 +35,17 @@ The Blank Canvas template hides everything on the page except the block editor c
 4. When you're done, click the "Publish" or "Update" button to publish your changes.
 
 
+== Block Styles ==
+
+Block styles allow you to set a specific style on a block in the block editor. These instructions are for the custom block styles included with Eksell. 
+
+You can select a block style in the Block → Styles tab in the right toolbar when you have a block selected in the block editor.
+
+=== No Vertical Margin ===
+
+The No Vertical Margin block style removes all vertical margins from the block the style is applied to. The style is available for the Columns, Cover, Embed, Group, and Image blocks. You can also apply the `.no-vertical-margin` CSS class to any block in the block editor to remove its vertical margins. You can add the class by selecting a block in the block editor, clicking the Block → Advanced tab in the right toolbar, and pasting "no-vertical-margin" in the field labeled "Additional CSS Classes". If the field already has a value, separate the existing value and the new class with a space.
+
+
 == Change Colors ==
 
 1. Log in to the administration panel of your site.

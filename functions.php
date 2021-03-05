@@ -703,12 +703,13 @@ endif;
 
 
 /*	-----------------------------------------------------------------------------------------------
-	EDITOR STYLES FOR THE BLOCK EDITOR
+	BLOCK EDITOR ASSETS
 --------------------------------------------------------------------------------------------------- */
 
 if ( ! function_exists( 'eksell_block_editor_styles' ) ) :
 	function eksell_block_editor_styles() {
 
+		$theme_version = wp_get_theme( 'eksell' )->get( 'Version' );
 		$css_dependencies = array();
 
 		// Retrieve and enqueue the URL for Google Fonts.
@@ -721,10 +722,13 @@ if ( ! function_exists( 'eksell_block_editor_styles' ) ) :
 		}
 
 		// Enqueue the editor styles.
-		wp_enqueue_style( 'eksell_block_editor_styles', get_theme_file_uri( 'assets/css/eksell-editor-styles.css' ), $css_dependencies, wp_get_theme( 'eksell' )->get( 'Version' ), 'all' );
+		wp_enqueue_style( 'eksell_block_editor_styles', get_theme_file_uri( 'assets/css/eksell-editor-styles.css' ), $css_dependencies, $theme_version, 'all' );
 
 		// Add inline style from the Customizer.
 		wp_add_inline_style( 'eksell_block_editor_styles', Eksell_Custom_CSS::get_customizer_css() );
+
+		// Enqueue the editor configuration JavaScript.
+		wp_enqueue_script( 'eksell_block_editor_javascript',  get_theme_file_uri( '/assets/js/eksell-editor-config.js' ), array( 'wp-blocks' ), $theme_version );
 
 	}
 	add_action( 'enqueue_block_editor_assets', 'eksell_block_editor_styles', 1, 1 );
