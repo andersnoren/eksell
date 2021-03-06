@@ -330,6 +330,7 @@ html {
 	color: var( --eksell-secondary-color );
 	font-size: 1.5rem;
 	font-weight: 400;
+	margin: .8rem auto 0 auto;
 	text-align: left;
 }
 
@@ -394,6 +395,7 @@ html {
 :root .wp-block-quote.is-style-large,
 :root .wp-block-search,
 :root .wp-block-social,
+:root .wp-block-table,
 :root .wp-block-tag-cloud,
 :root .wp-block-verse,
 :root .wp-block-video {
@@ -406,6 +408,41 @@ html {
 .is-style-no-vertical-margin {
 	margin-top: 0 !important;
 	margin-bottom: 0 !important;
+}
+
+/* Block: _Shared Table ---------------------- */
+
+.editor-styles-wrapper table {
+	border-color: var( --eksell-border-color );
+	border-collapse: collapse;
+    border-spacing: 0;
+	color: inherit;
+    empty-cells: show;
+    font-size: 1.6rem;
+	text-align: left;
+    width: 100%;
+}
+
+.editor-styles-wrapper table th,
+.editor-styles-wrapper table td,
+.editor-styles-wrapper table caption {
+	line-height: 1.4;
+	padding: 1.2rem;
+}
+
+.editor-styles-wrapper table * {
+	border-color: inherit;
+	color: inherit;
+}
+
+.editor-styles-wrapper table caption {
+	background-color: var( --eksell-border-color );
+	font-weight: 700;
+	text-align: center;
+}
+
+.editor-styles-wrapper .is-style-stripes tbody tr:nth-child(odd) {
+	background-color: var( --eksell-light-background-color );
 }
 
 /* Block: _Shared Lists ---------------------- */
@@ -511,6 +548,24 @@ html {
 	margin-right: 0;
 }
 
+/* Block: Calendar --------------------------- */
+
+.editor-styles-wrapper .wp-block-calendar table {
+	margin: 0;
+	text-align: center;
+}
+
+.editor-styles-wrapper .wp-block-calendar table th {
+	background-color: transparent;
+	font-weight: 700;
+}
+
+.editor-styles-wrapper .wp-calendar-nav {
+	display: flex;
+	justify-content: space-between;
+	margin: 1.6rem 0 0;
+}
+
 /* Block: Columns ---------------------------- */
 
 .wp-block-columns [data-align="full"] .wp-block-group > .wp-block-group__inner-container > .wp-block {
@@ -539,8 +594,6 @@ html {
 		margin: 0 0 0 4.8rem;
 	}
 }
-
-
 
 /* Block: Cover ------------------------------ */
 
@@ -1018,6 +1071,17 @@ html {
 	line-height: 1.5;
 }
 
+/* Block: RSS -------------------------------- */
+
+.editor-styles-wrapper .wp-block[data-type="core/rss"] {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.editor-styles-wrapper .wp-block-rss {
+	padding-left: 0;
+}
+
 /* Block: Separator -------------------------- */
 
 .editor-styles-wrapper hr.wp-block-separator {
@@ -1048,51 +1112,26 @@ html {
 
 /* Block: Table ------------------------------ */
 
-.editor-styles-wrapper table.wp-block-table {
-	border-color: var( --eksell-border-color );
-	border-collapse: collapse;
-    border-spacing: 0;
-    empty-cells: show;
-    font-size: 0.85em;
-    margin-bottom: 1.1em;
-    width: 100%;
-}
-
-.editor-styles-wrapper table.wp-block-table caption,
-.editor-styles-wrapper table.wp-block-table th,
-.editor-styles-wrapper table.wp-block-table td {
-	border-color: inherit;
+.editor-styles-wrapper .wp-block-calendar table caption, 
+.editor-styles-wrapper .wp-block-calendar table tbody {
 	color: inherit;
 }
 
-.editor-styles-wrapper .wp-block-table caption {
-	padding: 0;
-	text-align: center;
+/* STYLE: STRIPES */
+
+.editor-styles-wrapper .wp-block-table.is-style-stripes {
+	border: none;
 }
 
-.editor-styles-wrapper .wp-block-table th,
-.editor-styles-wrapper .wp-block-table td {
-	line-height: 1.4;
-	margin: 0;
-	overflow: visible;
-	padding: 0;
-}
+/* Block: Tag Cloud -------------------------- */
 
-.editor-styles-wrapper .wp-block-table .wp-block-table__cell-content {
-	padding: 1.2rem;
-}
-
-.editor-styles-wrapper .wp-block-table thead {
-	vertical-align: bottom;
-	white-space: nowrap;
-}
-
-.editor-styles-wrapper .wp-block-table th {
+.editor-styles-wrapper .wp-block-tag-cloud {
 	font-weight: 700;
 }
 
-.editor-styles-wrapper .wp-block-table.is-style-stripes tbody tr:nth-child(odd) {
-	background: var( --eksell-light-background-color );
+.editor-styles-wrapper .wp-block-tag-cloud a {
+	margin-right: .8rem;
+	text-decoration: none;
 }
 
 /* Block: Verse ------------------------------ */
@@ -1201,6 +1240,7 @@ html {
 	:root .wp-block-quote.is-style-large,
 	:root .wp-block-search,
 	:root .wp-block-social,
+	:root .wp-block-table,
 	:root .wp-block-tag-cloud,
 	:root .wp-block-verse,
 	:root .wp-block-video {

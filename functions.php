@@ -20,7 +20,7 @@ if ( ! function_exists( 'eksell_theme_support' ) ) :
 		// Set content-width.
 		global $content_width;
 		if ( ! isset( $content_width ) ) {
-			$content_width = 580;
+			$content_width = 652;
 		}
 
 		// Post thumbnails.
