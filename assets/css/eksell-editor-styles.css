@@ -441,6 +441,9 @@ html {
 	text-align: center;
 }
 
+.editor-styles-wrapper table thead { border-bottom-width: .2rem; }
+.editor-styles-wrapper table tfoot { border-top-width: .2rem; }
+
 .editor-styles-wrapper .is-style-stripes tbody tr:nth-child(odd) {
 	background-color: var( --eksell-light-background-color );
 }
