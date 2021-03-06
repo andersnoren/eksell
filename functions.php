@@ -485,6 +485,21 @@ if ( ! function_exists( 'eksell_filter_archive_description' ) ) :
 endif;
 
 
+/* 	-----------------------------------------------------------------------------------------------
+	FILTER THE EXCERPT SUFFIX
+	Replaces the default [...] with a &hellip; (three dots)
+--------------------------------------------------------------------------------------------------- */
+
+if ( ! function_exists( 'eksell_excerpt_more' ) ) :
+	function eksell_excerpt_more() {
+
+		return '&hellip;';
+
+	}
+	add_filter( 'excerpt_more', 'eksell_excerpt_more' );
+endif;
+
+
 /*	-----------------------------------------------------------------------------------------------
 	FILTER CLASSES OF WP_LIST_PAGES ITEMS TO MATCH MENU ITEMS
 	Filter the class applied to wp_list_pages() items with children to match the menu class, to simplify
