@@ -2471,6 +2471,10 @@ h1.entry-title,
 	padding: .8rem;
 }
 
+.wp-block-calendar td a {
+	font-weight: 700;
+}
+
 .wp-calendar-nav {
 	display: flex;
 	justify-content: space-between;
