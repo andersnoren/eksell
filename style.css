@@ -2424,26 +2424,45 @@ h1.entry-title,
 	border-color: var( --eksell-border-color );
 }
 
-:root .wp-block-calendar table {
-	margin: 0;
-}
-
 :root .wp-block-calendar * {
 	border-color: inherit;
 }
 
 .wp-block-calendar table {
 	font-family: inherit;
-	margin-bottom: 1rem;
+	margin: 0;
 }
 
-.wp-block-calendar table caption,
 .wp-block-calendar table tbody {
 	color: inherit;
 }
 
+:root .wp-block-calendar caption {
+	background-color: var( --eksell-primary-color );
+	color: var( --eksell-background-color );
+	position: relative;
+}
+
+:root .wp-block-calendar caption:after {
+	background-color: currentColor;
+	content: "";
+	display: block;
+	height: .1rem;
+	opacity: .2;
+	position: absolute;
+		bottom: 0;
+		left: 0;
+		right: 0;
+}
+
+.wp-block-calendar table thead {
+	border: none;
+}
+
 .wp-block-calendar table th {
-	background-color: transparent;
+	background-color: var( --eksell-primary-color );
+	border: none;
+	color: var( --eksell-background-color );
 	font-weight: 700;
 }
 
@@ -4245,6 +4264,30 @@ hr + .comment-reply-title {
 	.wp-block-video {
 		margin-bottom: 4.8rem;
 		margin-top: 4.8rem;
+	}
+
+	/* BLOCK: CALENDAR */
+
+	:root .wp-block-calendar:not(.alignleft):not(.alignright) table {
+		font-size: inherit;
+	}
+
+	:root .wp-block-calendar:not(.alignleft):not(.alignright) table caption,
+	:root .wp-block-calendar:not(.alignleft):not(.alignright) table th,
+	:root .wp-block-calendar:not(.alignleft):not(.alignright) table td {
+		padding: 1.6rem;
+	}
+
+	:root .wp-block-calendar:not(.alignleft):not(.alignright) table td {
+		font-size: 2.2rem;
+		height: 9.3rem;
+	}
+
+	@supports ( aspect-ratio: 1 / 1 ) {
+		:root .wp-block-calendar:not(.alignleft):not(.alignright) table td {
+			height: auto;
+			aspect-ratio: 1 / 1;
+		}
 	}
 
 	/* BLOCK: COLUMNS */

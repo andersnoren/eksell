@@ -558,6 +558,11 @@ html {
 	text-align: center;
 }
 
+.editor-styles-wrapper .wp-block-calendar caption {
+	background-color: var( --eksell-accent-color );
+	color: var( --eksell-background-color );
+}
+
 .editor-styles-wrapper .wp-block-calendar table th {
 	background-color: transparent;
 	font-weight: 700;
