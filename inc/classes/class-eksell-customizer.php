@@ -504,17 +504,17 @@ if ( ! class_exists( 'Eksell_Customizer' ) ) :
 				),
 				'eksell_post_grid_columns_tablet_landscape'	=> array(
 					'label'			=> esc_html__( 'Columns on Tablet Landscape', 'eksell' ),
-					'default'		=> '3',
+					'default'		=> '2',
 					'description'	=> esc_html__( 'Screen width: 1000px - 1200px', 'eksell' ),
 				),
 				'eksell_post_grid_columns_desktop'			=> array(
 					'label'			=> esc_html__( 'Columns on Desktop', 'eksell' ),
-					'default'		=> '3',
+					'default'		=> '2',
 					'description'	=> esc_html__( 'Screen width: 1200px - 1600px', 'eksell' ),
 				),
 				'eksell_post_grid_columns_desktop_large'	=> array(
 					'label'			=> esc_html__( 'Columns on Large Desktop', 'eksell' ),
-					'default'		=> '4',
+					'default'		=> '3',
 					'description'	=> esc_html__( 'Screen width: > 1600px', 'eksell' ),
 				),
 			) );

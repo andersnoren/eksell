@@ -194,6 +194,7 @@ Included as part of:
 - Eksell_SVG_Icons class
 - eksell_nav_menu_social_icons()
 - searchform.php
+- inc/block-patterns/contact-details.php
 
 
 == Changelog ==

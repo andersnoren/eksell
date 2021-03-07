@@ -140,6 +140,9 @@ endif;
 // Include custom template tags.
 require get_template_directory() . '/inc/template-tags.php';
 
+// Handle Block Patterns.
+require get_template_directory() . '/inc/classes/class-eksell-block-settings.php';
+
 // Handle SVG icons.
 require get_template_directory() . '/inc/classes/class-eksell-svg-icons.php';
 
@@ -737,13 +740,10 @@ if ( ! function_exists( 'eksell_block_editor_styles' ) ) :
 		}
 
 		// Enqueue the editor styles.
-		wp_enqueue_style( 'eksell_block_editor_styles', get_theme_file_uri( 'assets/css/eksell-editor-styles.css' ), $css_dependencies, $theme_version, 'all' );
+		wp_enqueue_style( 'eksell_block_editor_styles', 'get_theme_file_uri'( 'assets/css/eksell-editor-styles.css' ), $css_dependencies, $theme_version, 'all' );
 
 		// Add inline style from the Customizer.
 		wp_add_inline_style( 'eksell_block_editor_styles', Eksell_Custom_CSS::get_customizer_css() );
-
-		// Enqueue the editor configuration JavaScript.
-		wp_enqueue_script( 'eksell_block_editor_javascript',  get_theme_file_uri( '/assets/js/eksell-editor-config.js' ), array( 'wp-blocks' ), $theme_version );
 
 	}
 	add_action( 'enqueue_block_editor_assets', 'eksell_block_editor_styles', 1, 1 );
