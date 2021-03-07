@@ -41,9 +41,26 @@ Block styles allow you to set a specific style on a block in the block editor. T
 
 You can select a block style in the Block → Styles tab in the right toolbar when you have a block selected in the block editor.
 
-=== No Vertical Margin ===
+=== Shared: No Vertical Margin ===
 
 The No Vertical Margin block style removes all vertical margins from the block the style is applied to. The style is available for the Columns, Cover, Embed, Group, Heading, Image, and Paragraph blocks. You can also add the `.is-style-no-vertical-margin` CSS class to any block in the block editor to remove its vertical margins. You can add the class by selecting a block in the block editor, clicking the Block → Advanced tab in the right toolbar, and pasting "is-style-no-vertical-margin" in the field labeled "Additional CSS Classes". If the field already has a value, separate the existing value and the new class with a space.
+
+=== Social: Logos Only Monochrome ===
+
+Has the same styling as the Logos Only social style, but with the icon color inherited from the text color of the parent block. If there is no parent block with a text color set, the icons have the "Primary Color" set in the color settings in the Customizer.
+
+
+== Block Patterns ==
+
+Eksell includes a number of block patterns which can be used to quickly add combinations of blocks to your posts and pages. To add a block pattern, click the "Plus" icon in the top left of the block editor, select the "Patterns" tab, select "Eksell" in the dropdown, and click the pattern you want to add.
+
+The patterns included in Eksell are:
+
+* Call to Action: A large text paragraph followed by buttons.
+* Contact Details: Three columns with contact details and social media links.
+* Cover Header: Cover block with title, text, and a separator.
+* Featured Items: Row of columns with each item having an image, a title, a paragraph of text and buttons.
+* Stacked Full Groups: Three stacked groups with solid background color, each with two columns containing a heading and text.
 
 
 == Change Colors ==
