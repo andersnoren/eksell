@@ -1114,7 +1114,6 @@ eksell.masonry = {
 
 				$grid = $wrapper.masonry( {
 					columnWidth: 		'.grid-sizer',
-					horizontalOrder: 	true,
 					itemSelector: 		'.article-wrapper',
 					percentPosition: 	true,
 					stagger:			0,

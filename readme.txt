@@ -190,6 +190,7 @@ https://www.wikiart.org/en/wassily-kandinsky/munich-schwabing-with-the-church-of
 https://www.wikiart.org/en/wassily-kandinsky/on-white-ii-1923
 https://www.wikiart.org/en/wassily-kandinsky/composition-vi-1913
 https://www.wikiart.org/en/wassily-kandinsky/kochel-waterfall-i
+https://www.wikiart.org/en/wassily-kandinsky/composition-iv-1911
 
 Public Sans font
 License: SIL Open Font License, 1.1, https://opensource.org/licenses/OFL-1.1

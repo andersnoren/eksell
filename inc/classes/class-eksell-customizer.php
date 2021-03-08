@@ -437,7 +437,7 @@ if ( ! class_exists( 'Eksell_Customizer' ) ) :
 						'palette'	=> false,
 					),
 					'eksell_dark_mode_accent_color' => array(
-						'default'	=> '#dc737d',
+						'default'	=> '#d23c50',
 						'label'		=> esc_html__( 'Accent Color', 'eksell' ),
 						'slug'		=> 'accent',
 						'palette'	=> false,
