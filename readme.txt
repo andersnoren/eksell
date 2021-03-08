@@ -222,6 +222,10 @@ Included as part of:
 
 == Changelog ==
 
+Version 1.0.1 (2021-03-XX)
+-------------------------
+- Tweaked the bottom margin of the site header.
+
 Version 1.0.0 (2021-03-08)
 -------------------------
 - Initial version
