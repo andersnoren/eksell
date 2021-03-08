@@ -61,7 +61,7 @@ if ( ! class_exists( 'Eksell_Custom_CSS' ) ) :
 
 			/* Regular Colors ---------------- */
 
-			if ( $colors['regular'] ) {
+			if ( isset( $colors['regular'] ) && $colors['regular'] ) {
 				$css .= ':root {';
 					foreach ( $colors['regular'] as $color_name => $color_data ) {
 						$css .= $color_data['css_variable'] . ': ' . $color_data['color'] . ';';
@@ -87,7 +87,7 @@ if ( ! class_exists( 'Eksell_Custom_CSS' ) ) :
 			// want to disable this if you want the colors to be consistent between browsers and operating systems.
 			$output_p3 = apply_filters( 'eksell_custom_css_output_p3_colors', true );
 
-			if ( $output_p3 ) {
+			if ( $output_p3 && $colors ) {
 
 				$css .= '@supports ( color: color( display-p3 0 0 0 / 1 ) ) {';
 

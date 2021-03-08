@@ -222,10 +222,12 @@ Included as part of:
 
 == Changelog ==
 
-Version 1.0.1 (2021-03-XX)
+Version 1.0.1 (2021-03-09)
 -------------------------
 - Tweaked the bottom margin of the site header.
 - Adjusted the Masonry layout call.
+- Eksell_Custom_CSS::get_customizer_css(): Fixed a faulty conditional causing a warning when the custom colors aren't set.
+- Eksell_Custom_CSS::get_customizer_css(): Fixed the P3 color @supports CSS wrapper always being output.
 
 Version 1.0.0 (2021-03-08)
 -------------------------
