@@ -222,6 +222,6 @@ Included as part of:
 
 == Changelog ==
 
-Version 1.0.0 (2020-XX-XX)
+Version 1.0.0 (2021-03-08)
 -------------------------
 - Initial version
