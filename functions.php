@@ -290,7 +290,7 @@ if ( ! function_exists( 'eksell_body_classes' ) ) :
 		}
 
 		// Check for dark mode.
-		if ( get_theme_mod( 'eksell_enable_dark_mode_palette', true ) ) $classes[] = 'has-dark-mode-palette';
+		if ( get_theme_mod( 'eksell_enable_dark_mode_palette', false ) ) $classes[] = 'has-dark-mode-palette';
 
 		// Check for disabled animations.
 		$classes[] = get_theme_mod( 'eksell_disable_animations', false ) ? 'no-anim' : 'has-anim';

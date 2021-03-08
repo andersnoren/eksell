@@ -117,7 +117,7 @@ if ( ! function_exists( 'eksell_get_fallback_image' ) ) :
 		$fallback_image = '<img src="' . esc_attr( $fallback_image_url ) . '" class="fallback-featured-image fallback-image-regular" loading="lazy" />';
 
 		// If dark mode is enabled, return the dark mode fallback image as well, so it can be set to visible in CSS.
-		if ( get_theme_mod( 'eksell_enable_dark_mode_palette', true ) ) {
+		if ( get_theme_mod( 'eksell_enable_dark_mode_palette', false ) ) {
 			$fallback_image_dark_mode_url = get_template_directory_uri() . '/assets/images/default-fallback-image-dark-mode.png';
 			$fallback_image .= '<img src="' . esc_attr( $fallback_image_dark_mode_url ) . '" class="fallback-featured-image fallback-image-dark-mode" loading="lazy" />';
 		}

@@ -102,7 +102,7 @@ if ( ! class_exists( 'Eksell_Customizer' ) ) :
 
 			$wp_customize->add_setting( 'eksell_enable_dark_mode_palette', array(
 				'capability' 		=> 'edit_theme_options',
-				'default'			=> true,
+				'default'			=> false,
 				'sanitize_callback' => 'eksell_sanitize_checkbox'
 			) );
 

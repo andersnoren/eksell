@@ -19,7 +19,7 @@ if ( ! class_exists( 'Eksell_Custom_CSS' ) ) :
 			$color_options	= Eksell_Customizer::get_color_options();
 
 			// Determine if dark mode is enabled.
-			$dark_mode_enabled = get_theme_mod( 'eksell_enable_dark_mode_palette', true );
+			$dark_mode_enabled = get_theme_mod( 'eksell_enable_dark_mode_palette', false );
 
 			// Setup the array with the values for the CSS variables.
 			$colors = array();
