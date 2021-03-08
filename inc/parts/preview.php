@@ -1,4 +1,4 @@
-<article <?php post_class( 'preview do-spot spot-fade-up preview-' . get_post_type() ); ?> id="post-<?php the_ID(); ?>">
+<article <?php post_class( 'preview do-spot spot-fade-up a-del-200 preview-' . get_post_type() ); ?> id="post-<?php the_ID(); ?>">
 
 	<a class="preview-inner" href="<?php the_permalink(); ?>">
 
