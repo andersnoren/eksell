@@ -3,7 +3,7 @@ Contributors: Anlino
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=anders%40andersnoren%2ese&lc=US&item_name=Free%20WordPress%20Themes%20from%20Anders%20Noren&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted
 Requires at least: 4.5
 Requires PHP: 5.4
-Tested up to: 5.X
+Tested up to: 5.6.2
 Stable tag: trunk
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -170,19 +170,26 @@ The fallback image is used for posts that are missing a featured image. By defau
 
 == Licenses ==
 
-Eksell is derived from the Chaplin Theme, Copyright (c) 2019-2021 Anders Norén.
-Chaplin Theme is distributed under the terms of the GNU GPL version 2.0.
-
-Illustrations in screenshot.png by Anders Norén
-License: Public Domain
+Eksell is derived from the Chaplin theme, Copyright (c) 2019-2021 Anders Norén.
+Chaplin is distributed under the terms of the GNU GPL version 2.0.
 
 Icons in the "UI" group by Anders Norén
-License: Public Domain
+License: Creative Commons Zero (CC0), https://creativecommons.org/publicdomain/zero/1.0/
 
 Placeholder image by Anders Norén
-License: Public Domain
+License: Creative Commons Zero (CC0), https://creativecommons.org/publicdomain/zero/1.0/
 
 Eksell bundles the following third-party resources:
+
+Images
+Used in the featured images in screenshot.png
+Art by Wassily Kandinsky 1866-1944. Public domain.
+https://www.wikiart.org/en/wassily-kandinsky/picture-xvi-the-great-gate-of-kiev-stage-set-for-mussorgsky-s-pictures-at-an-exhibition-in-1928
+https://www.wikiart.org/en/wassily-kandinsky/park-of-st-cloud-with-horseman-1906
+https://www.wikiart.org/en/wassily-kandinsky/munich-schwabing-with-the-church-of-st-ursula-1908
+https://www.wikiart.org/en/wassily-kandinsky/on-white-ii-1923
+https://www.wikiart.org/en/wassily-kandinsky/composition-vi-1913
+https://www.wikiart.org/en/wassily-kandinsky/kochel-waterfall-i
 
 Public Sans font
 License: SIL Open Font License, 1.1, https://opensource.org/licenses/OFL-1.1
@@ -195,13 +202,6 @@ Source: https://github.com/jhildenbiddle/css-vars-ponyfill
 Dot Pulse Loading Animation
 License: MIT license, https://opensource.org/licenses/MIT
 Source: https://nzbin.github.io/three-dots/
-
-Code from Twenty Twenty
-Copyright (c) 2019-2021 WordPress.org
-License: GPLv2
-Source: https://wordpress.org/themes/twentytwenty/
-Included as part of:
-- Eksell_Custom_CSS class (kudos to @aristath)
 
 Code from Twenty Twenty-One
 Copyright (c) 2020-2021 WordPress.org

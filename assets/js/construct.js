@@ -968,6 +968,8 @@ eksell.filters = {
 
 		$doc.on( 'click', '.filter-link', function() {
 
+			if ( $( this ).hasClass( 'active' ) ) return false;
+
 			$( 'body' ).addClass( 'filtering-posts' );
 
 			var $link 		= $( this ),
