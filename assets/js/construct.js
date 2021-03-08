@@ -1106,11 +1106,11 @@ eksell.masonry = {
 
 	init: function() {
 
-		$wrapper = $( '.posts-grid' );
+		var $wrapper = $( '.posts-grid' );
 
-		if ( $wrapper.length ) {
+		if ( $wrapper ) {
 
-			$grid = $wrapper.imagesLoaded( function() {
+			$wrapper.imagesLoaded( function() {
 
 				$grid = $wrapper.masonry( {
 					columnWidth: 		'.grid-sizer',
@@ -1120,10 +1120,10 @@ eksell.masonry = {
 					transitionDuration: 0,
 				} );
 
-			} );
+				$grid.on( 'layoutComplete', function() {
+					$win.trigger( 'scroll' );
+				} );
 
-			$grid.on( 'layoutComplete', function() {
-				$win.trigger( 'scroll' );
 			} );
 
 		}
@@ -1177,21 +1177,27 @@ eksell.dynamicHeights = {
 
 $doc.ready( function() {
 
-	eksell.intervalScroll.init();				// Check for scroll on an interval
-	eksell.toggles.init();						// Handle toggles
-	eksell.coverModals.init();					// Handle cover modals
-	eksell.elementInView.init();				// Check if elements are in view
-	eksell.instrinsicRatioVideos.init();		// Retain aspect ratio of videos on window resize
-	eksell.stickMe.init();						// Stick elements on scroll
-	eksell.scrollLock.init();					// Scroll Lock
-	eksell.mainMenu.init();						// Main Menu
-	eksell.focusManagement.init();				// Focus Management
-	eksell.loadMore.init();						// Load More
-	eksell.filters.init();						// Filters
-	eksell.masonry.init();						// Masonry
-	eksell.dynamicHeights.init();				// Dynamic Heights
+	eksell.intervalScroll.init();			// Check for scroll on an interval
+	eksell.toggles.init();					// Handle toggles
+	eksell.coverModals.init();				// Handle cover modals
+	eksell.elementInView.init();			// Check if elements are in view
+	eksell.instrinsicRatioVideos.init();	// Retain aspect ratio of videos on window resize
+	eksell.stickMe.init();					// Stick elements on scroll
+	eksell.scrollLock.init();				// Scroll Lock
+	eksell.mainMenu.init();					// Main Menu
+	eksell.focusManagement.init();			// Focus Management
+	eksell.loadMore.init();					// Load More
+	eksell.filters.init();					// Filters
+	eksell.masonry.init();					// Masonry
+	eksell.dynamicHeights.init();			// Dynamic Heights
 
 	// Call css-vars-ponyfill
 	cssVars();
+
+} );
+
+$win.on( 'load', function() { 
+
+	eksell.masonry.init(); 						// Masonry
 
 } );

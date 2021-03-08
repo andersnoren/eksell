@@ -225,6 +225,7 @@ Included as part of:
 Version 1.0.1 (2021-03-XX)
 -------------------------
 - Tweaked the bottom margin of the site header.
+- Adjusted the Masonry layout call.
 
 Version 1.0.0 (2021-03-08)
 -------------------------
