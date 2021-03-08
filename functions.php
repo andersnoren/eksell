@@ -431,8 +431,8 @@ if ( ! function_exists( 'eksell_filter_archive_title' ) ) :
 	function eksell_filter_archive_title( $title ) {
 
 		// Home: Get the Customizer option for post archive text.
-		if ( is_home() && ! is_paged() && get_theme_mod( 'eksell_home_text' ) ) {
-			$title = get_theme_mod( 'eksell_home_text' );
+		if ( is_home() && ! is_paged() ) {
+			$title = get_theme_mod( 'eksell_home_text', '' );
 		}
 
 		// Home and paged: Output page number.
