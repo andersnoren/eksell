@@ -15,6 +15,11 @@ License URI: https://www.gnu.org/licenses/gpl-2.0.html
 2. Activate the theme
 
 
+== Browser Support ==
+
+Eksell supports all modern browsers. Due to the lack of support for CSS variables in older browsers (including Internet Explorer 11 and old versions of Microsoft Edge), some visual jank is to be expected when viewing the theme in those browsers.
+
+
 == How to Use the No Title Template ==
 
 The Only Content Template hides all elements in the content area of Eksell except the block editor content, allowing you to create completely custom layouts. The site header, aside (with the navigation toggle) and footer are still displayed.

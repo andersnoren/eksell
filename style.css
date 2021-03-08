@@ -67,7 +67,16 @@
 	--eksell-inner-width-medium: 104rem;
 	--eksell-inner-width-max: 205.2rem;
 	--eksell-inner-gutter: 4.8rem;
-	--eksell-aside-width: .4rem;
+	--eksell-aside-width: 6.4rem;
+}
+
+/* css-vars-ponyfill fix for only supporting initial values of CSS variables */
+@media ( max-width: 700px ) {
+
+	:root {
+		--eksell-aside-width: .4rem;
+	}
+
 }
 
 /* P3 Colors, where supported */
@@ -431,9 +440,11 @@ hr {
     background-size: .4rem .4rem;
 	border: none;
 	color: var( --eksell-border-color );
+	display: block;
 	height: 1rem;
 	image-rendering: pixelated;
 	margin: 3.2rem 0;
+	text-align: left;
 	width: 6.6rem;
 }
 
@@ -561,13 +572,16 @@ iframe {
 	max-width: 100%;
 }
 
-svg,
 img,
 embed,
 object {
 	display: block;
 	height: auto;
 	max-width: 100%;
+}
+
+svg {
+	display: block;
 }
 
 figcaption,
@@ -3199,6 +3213,7 @@ hr.wp-block-separator {
 	background-color: transparent !important;
 	margin-left: auto;
 	margin-right: auto;
+	text-align: center;
 }
 
 hr.wp-block-separator:not(.is-style-dots):not(.is-style-wide) {
@@ -3243,10 +3258,6 @@ hr.wp-block-separator:not(.is-style-dots):not(.is-style-wide) {
 
 .wp-block-social-links.alignright .wp-social-link {
 	margin: 0 0 1.2rem 1.2rem;
-}
-
-.wp-social-link svg {
-	max-width: none;
 }
 
 /* STYLE: ONLY LOGOS */
