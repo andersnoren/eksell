@@ -3373,7 +3373,7 @@ table.is-style-stripes tbody tr:nth-child(odd),
 .alignright,
 .alignwide,
 .alignfull {
-	margin: 3.2rem 0;
+	margin: 3.2rem auto;
 }
 
 .alignnone,
