@@ -257,6 +257,7 @@ html {
 	background-size: .4rem .4rem;
 }
 
+.editor-post-title__block .editor-post-title__input,
 :root .editor-styles-wrapper h1, 
 :root .editor-styles-wrapper h2,
 :root .editor-styles-wrapper h3,
@@ -269,6 +270,10 @@ html {
 	font-weight: 700;
 	line-height: 1.25;
 	margin: 4.8rem auto 3.2rem;
+}
+
+.editor-post-title__block .editor-post-title__input {
+	margin: 0;
 }
 
 .editor-post-title__block .editor-post-title__input,

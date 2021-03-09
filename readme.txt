@@ -224,11 +224,13 @@ Included as part of:
 
 Version 1.0.2 (2021-03-XX)
 -------------------------
-- Refresh the Masonry layout on an interval, to account for lazy loading of images and dynamic changes in markup.
-- Cleaned up the comment structure in construct.js, and remove a unused function.
+- Refresh the Masonry layout on a conditional interval, to account for lazy loading of images and dynamic changes in markup.
+- Cleaned up the comment structure in construct.js, and removed a unused function.
 - Removed the loading="lazy" attribute from the default fallback image.
 - Focused and simplified the sticky header JS and made the stickiness more immediate.
-- Adjusted spacing of the solid backgorund pullquote style.
+- Adjusted spacing of the solid background pullquote style.
+- Adjusted list and pre styles.
+- Editor styles: Adjusted the post title styles to better match front-end.
 
 Version 1.0.1 (2021-03-09)
 -------------------------
