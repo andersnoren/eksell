@@ -228,6 +228,7 @@ Version 1.0.2 (2021-03-XX)
 - Cleaned up the comment structure in construct.js, and remove a unused function.
 - Removed the loading="lazy" attribute from the default fallback image.
 - Focused and simplified the sticky header JS and made the stickiness more immediate.
+- Adjusted spacing of the solid backgorund pullquote style.
 
 Version 1.0.1 (2021-03-09)
 -------------------------

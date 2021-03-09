@@ -4547,13 +4547,23 @@ hr + .comment-reply-title {
 		line-height: 1.35;
 	}
 
+	.wp-block-pullquote.alignwide blockquote,
+	.wp-block-pullquote.alignfull blockquote {
+		font-size: 4rem;
+	}
+
+	/* Style: Solid Background Color */
+
 	.wp-block-pullquote.is-style-solid-color.has-background {
 		padding: 4.8rem;
 	}
 
-	.wp-block-pullquote.alignwide blockquote,
-	.wp-block-pullquote.alignfull blockquote {
-		font-size: 4rem;
+	.wp-block-pullquote.is-style-solid-color.has-background blockquote {
+		padding-top: 1.6em;
+	}
+
+	.wp-block-pullquote.is-style-solid-color.has-background cite {
+		margin-top: 2.4rem;
 	}
 
 	/* BLOCK: QUOTE */
