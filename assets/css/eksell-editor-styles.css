@@ -161,8 +161,8 @@ html {
 	margin-top: -3.2rem;
 }
 
-.editor-styles-wrapper *[data-align="wide"] [data-type="core/group"]:not([data-align="wide"]):not([data-align="full"]):not(.mw-small):not(.mw-medium):not(.mw-max),
-.editor-styles-wrapper *[data-align="full"] [data-type="core/group"]:not([data-align="wide"]):not([data-align="full"]):not(.mw-small):not(.mw-medium):not(.mw-max) {
+.editor-styles-wrapper *[data-align="wide"] .wp-block:not([data-align="wide"]):not([data-align="full"]) > [data-type="core/group"]:not(.mw-small):not(.mw-medium):not(.mw-max),
+.editor-styles-wrapper *[data-align="full"] .wp-block:not([data-align="wide"]):not([data-align="full"]) > [data-type="core/group"]:not(.mw-small):not(.mw-medium):not(.mw-max) {
 	max-width: var( --eksell-inner-width-thin );
 }
 
