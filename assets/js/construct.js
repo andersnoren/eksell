@@ -392,69 +392,38 @@ eksell.coverModals = {
 
 
 /*	-----------------------------------------------------------------------------------------------
-	Stick Me
+	Sticky Header
 --------------------------------------------------------------------------------------------------- */
 
-eksell.stickMe = {
+eksell.stickyHeader = {
 
 	init: function() {
 
-		var $stickyElement = $( '.stick-me' );
+		var $stickyElement = $( '#site-header.stick-me' );
 
 		if ( $stickyElement.length ) {
 
-			var stickyClass = 'is-sticky',
-				stickyOffset = $stickyElement.scrollTop();
-
-			// Our stand-in element for stickyElement while stickyElement is off on a scroll.
-			if ( ! $( '.sticky-adjuster' ).length ) {
-				$stickyElement.before( '<div class="sticky-adjuster"></div>' );
+			// Add our stand-in element for the sticky header.
+			if ( ! $( '.header-sticky-adjuster' ).length ) {
+				$stickyElement.before( '<div class="header-sticky-adjuster"></div>' );
 			}
 
-			// Stick it on resize, scroll and load.
-			$win.on( 'resize scroll load', function() {
-				var stickyOffset = $( '.sticky-adjuster' ).offset().top;
-				eksell.stickMe.stickIt( $stickyElement, stickyClass, stickyOffset );
+			// Stick the header.
+			$stickyElement.addClass( 'is-sticky' );
+
+			// Update the dimensions of our stand-in element on load and screen size change.
+			eksell.stickyHeader.updateStandIn( $stickyElement );
+
+			$win.on( 'resize orientationchange', function() {
+				eksell.stickyHeader.updateStandIn( $stickyElement );
 			} );
 
-			eksell.stickMe.stickIt( $stickyElement, stickyClass, stickyOffset );
-
 		}
 
 	},
 
-	// Check whether to stick the element.
-	stickIt: function ( $stickyElement, stickyClass, stickyOffset ) {
-
-		var winScroll = $win.scrollTop();
-
-		if ( $stickyElement.css( 'display' ) != 'none' && winScroll > stickyOffset ) {
-
-			// If a sticky edge element exists and we've scrolled past it, stick it.
-			if ( ! $stickyElement.hasClass( stickyClass ) ) {
-				$stickyElement.addClass( stickyClass );
-				$( '.sticky-adjuster' ).height( $stickyElement.outerHeight() ).css( 'margin-bottom', parseInt( $stickyElement.css( 'marginBottom' ) ) );
-				if ( $stickyElement.is( '.header-inner' ) ) {
-					$( 'body' ).addClass( 'header-is-sticky' );
-				}
-			}
-
-		// If not, remove class and sticky-adjuster properties.
-		} else {
-			eksell.stickMe.unstickIt( $stickyElement, stickyClass );
-		}
-
-	},
-
-	unstickIt: function( $stickyElement, stickyClass ) {
-
-		$stickyElement.removeClass( stickyClass );
-		$( '.sticky-adjuster' ).height( 0 ).css( 'margin-bottom', '0' );
-
-		if ( $stickyElement.is( '.header-inner' ) ) {
-			$( 'body' ).removeClass( 'header-is-sticky' );
-		}
-
+	updateStandIn: function ( $stickyElement ) {
+		$( '.header-sticky-adjuster' ).height( $stickyElement.outerHeight() ).css( 'margin-bottom', parseInt( $stickyElement.css( 'marginBottom' ) ) );
 	}
 
 } // Stick Me
@@ -1154,7 +1123,7 @@ $doc.ready( function() {
 	eksell.coverModals.init();				// Handle cover modals.
 	eksell.elementInView.init();			// Check if elements are in view.
 	eksell.instrinsicRatioVideos.init();	// Retain aspect ratio of videos on window resize.
-	eksell.stickMe.init();					// Stick elements on scroll.
+	eksell.stickyHeader.init();				// Stick the header.
 	eksell.scrollLock.init();				// Scroll Lock.
 	eksell.mainMenu.init();					// Main Menu.
 	eksell.focusManagement.init();			// Focus Management.
