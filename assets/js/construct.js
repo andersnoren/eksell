@@ -1108,8 +1108,9 @@ eksell.masonry = {
 
 		var $wrapper = $( '.posts-grid' );
 
-		if ( $wrapper ) {
+		if ( $wrapper.length ) {
 
+			// Layout when images are loaded.
 			$wrapper.imagesLoaded( function() {
 
 				$grid = $wrapper.masonry( {
@@ -1123,6 +1124,32 @@ eksell.masonry = {
 				$grid.on( 'layoutComplete', function() {
 					$win.trigger( 'scroll' );
 				} );
+
+				setInterval( function() {
+					$grid.masonry();
+				}, 1000 );
+
+				/*
+				// Layout when DOM changes are detected within the wrapper.
+				const eksellMasonryObserver = new MutationObserver( function( mutationsList, observer ) {
+					for ( const mutation of mutationsList ) {
+
+						// When the child tree is changed, or any of the specified attributes are updated.
+						if ( mutation.type === 'childList' || mutation.type === 'attributes' ) {
+							$grid.masonry();
+						}
+						
+					}
+				} );
+
+				// Start observing the target node for configured mutations.
+				eksellMasonryObserver.observe( wrapperNode, { 
+					attributeFilter: ['src', 'srcset', 'loading'],
+					childList: true, 
+					subtree: true 
+				} );
+
+				*/
 
 			} );
 
@@ -1193,11 +1220,5 @@ $doc.ready( function() {
 
 	// Call css-vars-ponyfill
 	cssVars();
-
-} );
-
-$win.on( 'load', function() { 
-
-	eksell.masonry.init(); 						// Masonry
 
 } );

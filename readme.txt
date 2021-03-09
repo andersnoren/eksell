@@ -222,6 +222,11 @@ Included as part of:
 
 == Changelog ==
 
+Version 1.0.2 (2021-03-XX)
+-------------------------
+- Added a Mutation Observer to the Masonry code, to account for lazy loading of images and dynamic changes in markup.
+- Removed the loading="lazy" attribute from the default fallback image.
+
 Version 1.0.1 (2021-03-09)
 -------------------------
 - Tweaked the bottom margin of the site header.
