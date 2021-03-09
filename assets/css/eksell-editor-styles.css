@@ -942,6 +942,11 @@ html {
 	padding: calc( var( --eksell-inner-gutter ) / 2 );
 }
 
+.wp-block-media-text__content > .wp-block-group:not(.alignwide):not(.alignfull),
+.wp-block-media-text__content > .wp-block:not([data-align="wide"]):not([data-align="full"]) > .wp-block-group {
+	max-width: var( --eksell-inner-width-thin );
+}
+
 /* Block: Paragraph -------------------------- */
 
 .editor-styles-wrapper p.has-background {
