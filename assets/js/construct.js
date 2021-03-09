@@ -71,17 +71,17 @@ eksell.intervalScroll = {
 
 		didScroll = false;
 
-		// Check for the scroll event
+		// Check for the scroll event.
 		$win.on( 'scroll load', function() {
 			didScroll = true;
 		} );
 
-		// Once every 250ms, check if we have scrolled, and if we have, do the intensive stuff
+		// Once every 250ms, check if we have scrolled, and if we have, do the intensive stuff.
 		setInterval( function() {
 			if ( didScroll ) {
 				didScroll = false;
 
-				// When this triggers, we know that we have scrolled
+				// When this triggers, we know that we have scrolled.
 				$win.trigger( 'did-interval-scroll' );
 
 			}
@@ -101,18 +101,18 @@ eksell.toggles = {
 
 	init: function() {
 
-		// Do the toggle
+		// Do the toggle.
 		eksell.toggles.toggle();
 
-		// Check for toggle/untoggle on resize
+		// Check for toggle/untoggle on resize.
 		eksell.toggles.resizeCheck();
 
-		// Check for untoggle on escape key press
+		// Check for untoggle on escape key press.
 		eksell.toggles.untoggleOnEscapeKeyPress();
 
 	},
 
-	// Do the toggle
+	// Do the toggle.
 	toggle: function() {
 
 		$( '*[data-toggle-target]' ).on( 'click', function( e ) {
@@ -122,19 +122,19 @@ eksell.toggles = {
 				targetString 	= $( this ).data( 'toggle-target' ),
 				$target 		= $( targetString );
 
-			// Trigger events on the toggle targets before they are toggled
+			// Trigger events on the toggle targets before they are toggled.
 			if ( $target.is( '.active' ) ) {
 				$target.trigger( 'toggle-target-before-active' );
 			} else {
 				$target.trigger( 'toggle-target-before-inactive' );
 			}
 
-			// For cover modals, set a short timeout duration so the class animations have time to play out
+			// For cover modals, set a short timeout duration so the class animations have time to play out.
 			var timeOutTime = $target.hasClass( 'cover-modal' ) ? 5 : 0;
 
 			setTimeout( function() {
 
-				// Toggle the target of the clicked toggle
+				// Toggle the target of the clicked toggle.
 				if ( $toggle.data( 'toggle-type' ) == 'slidetoggle' ) {
 					var duration = $toggle.data( 'toggle-duration' ) ? $toggle.data( 'toggle-duration' ) : 250;
 					if ( $( 'body' ).hasClass( 'has-anim' ) ) {
@@ -146,21 +146,21 @@ eksell.toggles = {
 					$target.toggleClass( 'active' );
 				}
 
-				// Toggle all toggles with this toggle target
+				// Toggle all toggles with this toggle target.
 				$( '*[data-toggle-target="' + targetString + '"]' ).toggleClass( 'active' );
 
-				// Toggle aria-expanded on the target
+				// Toggle aria-expanded on the target.
 				eksellToggleAttribute( $target, 'aria-expanded', 'true', 'false' );
 
-				// Toggle aria-pressed on the toggle
+				// Toggle aria-pressed on the toggle.
 				eksellToggleAttribute( $toggle, 'aria-pressed', 'true', 'false' );
 
-				// Toggle body class
+				// Toggle body class.
 				if ( $toggle.data( 'toggle-body-class' ) ) {
 					$( 'body' ).toggleClass( $toggle.data( 'toggle-body-class' ) );
 				}
 
-				// Check whether to lock the screen
+				// Check whether to lock the screen.
 				if ( $toggle.data( 'lock-screen' ) ) {
 					eksell.scrollLock.setTo( true );
 				} else if ( $toggle.data( 'unlock-screen' ) ) {
@@ -169,7 +169,7 @@ eksell.toggles = {
 					eksell.scrollLock.setTo();
 				}
 
-				// Check whether to set focus
+				// Check whether to set focus.
 				if ( $toggle.data( 'set-focus' ) ) {
 					var $focusElement = $( $toggle.data( 'set-focus' ) );
 					if ( $focusElement.length ) {
@@ -181,10 +181,10 @@ eksell.toggles = {
 					}
 				}
 
-				// Trigger the toggled event on the toggle target
+				// Trigger the toggled event on the toggle target.
 				$target.trigger( 'toggled' );
 
-				// Trigger events on the toggle targets after they are toggled
+				// Trigger events on the toggle targets after they are toggled.
 				if ( $target.is( '.active' ) ) {
 					$target.trigger( 'toggle-target-after-active' );
 				} else {
@@ -198,7 +198,7 @@ eksell.toggles = {
 		} );
 	},
 
-	// Check for toggle/untoggle on screen resize
+	// Check for toggle/untoggle on screen resize.
 	resizeCheck: function() {
 
 		if ( $( '*[data-untoggle-above], *[data-untoggle-below], *[data-toggle-above], *[data-toggle-below]' ).length ) {
@@ -243,7 +243,7 @@ eksell.toggles = {
 
 	},
 
-	// Close toggle on escape key press
+	// Close toggle on escape key press.
 	untoggleOnEscapeKeyPress: function() {
 
 		$doc.keyup( function( e ) {
@@ -273,26 +273,23 @@ eksell.coverModals = {
 
 		if ( $( '.cover-modal' ).length ) {
 
-			// Handle cover modals when they're toggled
+			// Handle cover modals when they're toggled.
 			eksell.coverModals.onToggle();
 
-			// When toggled, untoggle if visitor clicks on the wrapping element of the modal
+			// When toggled, untoggle if visitor clicks on the wrapping element of the modal.
 			eksell.coverModals.outsideUntoggle();
 
-			// Close on escape key press
+			// Close on escape key press.
 			eksell.coverModals.closeOnEscape();
 
-			// Show a cover modal on load, if the query string says so
-			eksell.coverModals.showOnLoadandClick();
-
-			// Hide and show modals before and after their animations have played out
+			// Hide and show modals before and after their animations have played out.
 			eksell.coverModals.hideAndShowModals();
 
 		}
 
 	},
 
-	// Handle cover modals when they're toggled
+	// Handle cover modals when they're toggled.
 	onToggle: function() {
 
 		$( '.cover-modal' ).on( 'toggled', function() {
@@ -314,7 +311,7 @@ eksell.coverModals = {
 
 	},
 
-	// Close modal on outside click
+	// Close modal on outside click.
 	outsideUntoggle: function() {
 
 		$doc.on( 'click', function( e ) {
@@ -332,7 +329,7 @@ eksell.coverModals = {
 
 	},
 
-	// Close modal on escape key press
+	// Close modal on escape key press.
 	closeOnEscape: function() {
 
 		$doc.keyup( function( e ) {
@@ -345,61 +342,18 @@ eksell.coverModals = {
 
 	},
 
-	// Show modals on load
-	showOnLoadandClick: function() {
-
-		var key = 'modal';
-
-		// Load based on query string
-		if ( window.location.search.indexOf( key ) !== -1 ) {
-				
-			var modalTargetString = getQueryStringValue( key ),
-				$modalTarget = $( '#' + modalTargetString + '-modal' );
-
-			if ( modalTargetString && $modalTarget.length ) {
-				setTimeout( function() {
-					$modalTarget.addClass( 'active' ).trigger( 'toggled' );
-					eksell.scrollLock.setTo( true );
-				}, 250 );
-			}
-		}
-
-		// Check for modal matching querystring when clicking a link
-		// Format: www.url.com?modal=modal-id
-		$( 'a' ).on( 'click', function() {
-
-			// Load based on query string
-			if ( $( this ).attr( 'href' ) && $( this ).attr( 'href' ).indexOf( key ) !== -1 ) {
-					
-				var modalTargetString = getQueryStringValue( key, $( this ).attr( 'href' ) ),
-					$modalTarget = $( '#' + modalTargetString );
-
-				if ( modalTargetString && $modalTarget.length ) {
-					
-					$modalTarget.addClass( 'active' ).trigger( 'toggled' );
-					eksell.scrollLock.setTo( true );
-
-					return false;
-
-				}
-			}
-
-		} );
-
-	},
-
-	// Hide and show modals before and after their animations have played out
+	// Hide and show modals before and after their animations have played out.
 	hideAndShowModals: function() {
 
 		var $modals = $( '.cover-modal' );
 
-		// Show the modal
+		// Show the modal.
 		$modals.on( 'toggle-target-before-inactive', function( e ) {
 			if ( e.target != this ) return;
 			$( this ).addClass( 'show-modal' );
 		} );
 
-		// Hide the modal after a delay, so animations have time to play out
+		// Hide the modal after a delay, so animations have time to play out.
 		$modals.on( 'toggle-target-after-inactive', function( e ) {
 			if ( e.target != this ) return;
 
@@ -411,23 +365,23 @@ eksell.coverModals = {
 
 	},
 
-	// Untoggle a modal
+	// Untoggle a modal.
 	untoggleModal: function( $modal ) {
 
 		$modalToggle = false;
 
-		// If the modal has specified the string (ID or class) used by toggles to target it, untoggle the toggles with that target string
-		// The modal-target-string must match the string toggles use to target the modal
+		// If the modal has specified the string (ID or class) used by toggles to target it, untoggle the toggles with that target string.
+		// The modal-target-string must match the string toggles use to target the modal.
 		if ( $modal.data( 'modal-target-string' ) ) {
 			var modalTargetClass = $modal.data( 'modal-target-string' ),
 				$modalToggle = $( '*[data-toggle-target="' + modalTargetClass + '"]' ).first();
 		}
 
-		// If a modal toggle exists, trigger it so all of the toggle options are included
+		// If a modal toggle exists, trigger it so all of the toggle options are included.
 		if ( $modalToggle && $modalToggle.length ) {
 			$modalToggle.trigger( 'click' );
 
-		// If one doesn't exist, just hide the modal
+		// If one doesn't exist, just hide the modal.
 		} else {
 			$modal.removeClass( 'active' );
 		}
@@ -452,13 +406,13 @@ eksell.stickMe = {
 			var stickyClass = 'is-sticky',
 				stickyOffset = $stickyElement.scrollTop();
 
-			// Our stand-in element for stickyElement while stickyElement is off on a scroll
+			// Our stand-in element for stickyElement while stickyElement is off on a scroll.
 			if ( ! $( '.sticky-adjuster' ).length ) {
 				$stickyElement.before( '<div class="sticky-adjuster"></div>' );
 			}
 
-			// Stick it on resize, scroll and load
-			$win.on( 'resize scroll load', function(){
+			// Stick it on resize, scroll and load.
+			$win.on( 'resize scroll load', function() {
 				var stickyOffset = $( '.sticky-adjuster' ).offset().top;
 				eksell.stickMe.stickIt( $stickyElement, stickyClass, stickyOffset );
 			} );
@@ -469,14 +423,14 @@ eksell.stickMe = {
 
 	},
 
-	// Check whether to stick the element
+	// Check whether to stick the element.
 	stickIt: function ( $stickyElement, stickyClass, stickyOffset ) {
 
 		var winScroll = $win.scrollTop();
 
 		if ( $stickyElement.css( 'display' ) != 'none' && winScroll > stickyOffset ) {
 
-			// If a sticky edge element exists and we've scrolled past it, stick it
+			// If a sticky edge element exists and we've scrolled past it, stick it.
 			if ( ! $stickyElement.hasClass( stickyClass ) ) {
 				$stickyElement.addClass( stickyClass );
 				$( '.sticky-adjuster' ).height( $stickyElement.outerHeight() ).css( 'margin-bottom', parseInt( $stickyElement.css( 'marginBottom' ) ) );
@@ -485,7 +439,7 @@ eksell.stickMe = {
 				}
 			}
 
-		// If not, remove class and sticky-adjuster properties
+		// If not, remove class and sticky-adjuster properties.
 		} else {
 			eksell.stickMe.unstickIt( $stickyElement, stickyClass );
 		}
@@ -517,9 +471,7 @@ eksell.instrinsicRatioVideos = {
 		eksell.instrinsicRatioVideos.makeFit();
 
 		$win.on( 'resize fit-videos', function() {
-
 			eksell.instrinsicRatioVideos.makeFit();
-
 		} );
 
 	},
@@ -534,23 +486,23 @@ eksell.instrinsicRatioVideos = {
 				$container = $video.parent(),
 				iTargetWidth = $container.width();
 
-			// Skip videos we want to ignore
+			// Skip videos we want to ignore.
 			if ( $video.hasClass( 'intrinsic-ignore' ) || $video.parent().hasClass( 'intrinsic-ignore' ) ) {
 				return true;
 			}
 
 			if ( ! $video.attr( 'data-origwidth' ) ) {
 
-				// Get the video element proportions
+				// Get the video element proportions.
 				$video.attr( 'data-origwidth', $video.attr( 'width' ) );
 				$video.attr( 'data-origheight', $video.attr( 'height' ) );
 
 			}
 
-			// Get ratio from proportions
+			// Get ratio from proportions.
 			var ratio = iTargetWidth / $video.attr( 'data-origwidth' );
 
-			// Scale based on ratio, thus retaining proportions
+			// Scale based on ratio, thus retaining proportions.
 			$video.css( 'width', iTargetWidth + 'px' );
 			$video.css( 'height', ( $video.attr( 'data-origheight' ) * ratio ) + 'px' );
 
@@ -569,7 +521,7 @@ eksell.scrollLock = {
 
 	init: function() {
 
-		// Init variables
+		// Initialize variables.
 		window.scrollLocked = false,
 		window.prevScroll = {
 			scrollLeft : $win.scrollLeft(),
@@ -582,12 +534,12 @@ eksell.scrollLock = {
 			'width'      : '100%'
 		};
 
-		// Instantiate cache in case someone tries to unlock before locking
+		// Instantiate cache in case someone tries to unlock before locking.
 		eksell.scrollLock.saveStyles();
 
 	},
 
-	// Save context's inline styles in cache
+	// Save context's inline styles in cache.
 	saveStyles: function() {
 
 		var styleAttr = $( 'html' ).attr( 'style' ),
@@ -617,7 +569,7 @@ eksell.scrollLock = {
 		$.extend( prevLockStyles, styleHash );
 	},
 
-	// Lock the scroll (do not call this directly)
+	// Lock the scroll
 	lock: function() {
 
 		var appliedLock = {};
@@ -634,13 +586,13 @@ eksell.scrollLock = {
 
 		eksell.scrollLock.saveStyles();
 
-		// Compose our applied CSS, with scroll state as styles
+		// Compose our applied CSS, with scroll state as styles.
 		$.extend( appliedLock, lockStyles, {
 			'left' : - prevScroll.scrollLeft + 'px',
 			'top'  : - prevScroll.scrollTop + 'px'
 		} );
 
-		// Then lock styles and state
+		// Then lock styles and state.
 		$( 'html' ).css( appliedLock );
 		$( 'html' ).addClass( 'scroll-locked' );
 		$( 'html' ).attr( 'scroll-lock-top', prevScroll.scrollTop );
@@ -649,14 +601,14 @@ eksell.scrollLock = {
 		window.scrollLocked = true;
 	},
 
-	// Unlock the scroll (do not call this directly)
+	// Unlock the scroll.
 	unlock: function() {
 
 		if ( ! window.scrollLocked ) {
 			return;
 		}
 
-		// Revert styles and state
+		// Revert styles and state.
 		$( 'html' ).attr( 'style', $( '<x>' ).css( prevLockStyles ).attr( 'style' ) || '' );
 		$( 'html' ).removeClass( 'scroll-locked' );
 		$( 'html' ).attr( 'scroll-lock-top', '' );
@@ -665,17 +617,17 @@ eksell.scrollLock = {
 		window.scrollLocked = false;
 	},
 
-	// Call this to lock or unlock the scroll
+	// Call this to lock or unlock the scroll.
 	setTo: function( on ) {
 
-		// If an argument is passed, lock or unlock accordingly
+		// If an argument is passed, lock or unlock accordingly.
 		if ( arguments.length ) {
 			if ( on ) {
 				eksell.scrollLock.lock();
 			} else {
 				eksell.scrollLock.unlock();
 			}
-			// If not, toggle to the inverse state
+			// If not, toggle to the inverse state.
 		} else {
 			if ( window.scrollLocked ) {
 				eksell.scrollLock.unlock();
@@ -697,7 +649,7 @@ eksell.focusManagement = {
 
 	init: function() {
 
-		// If the visitor tabs out of the search modal, return focus to the search field
+		// If the visitor tabs out of the search modal, return focus to the search field.
 		eksell.focusManagement.focusLoop();
 
 	},
@@ -723,12 +675,12 @@ eksell.mainMenu = {
 
 	init: function() {
 
-		// If the current menu item is in a sub level, expand all the levels higher up on load
+		// If the current menu item is in a sub level, expand all the levels higher up on load.
 		eksell.mainMenu.expandLevel();
 
 	},
 
-	// If the current menu item is in a sub level, expand all the levels higher up on load
+	// If the current menu item is in a sub level, expand all the levels higher up on load.
 	expandLevel: function() {
 		var $activeMenuItem = $( '.main-menu .current-menu-item' );
 
@@ -755,10 +707,10 @@ eksell.loadMore = {
 
 		var $pagination = $( '#pagination' );
 
-		// First, check that there's a pagination
+		// First, check that there's a pagination.
 		if ( $pagination.length ) {
 
-			// Default values for variables
+			// Default values for variables.
 			window.eksellIsLoading = false;
 			window.eksellIsLastPage = $( '.pagination-wrapper' ).hasClass( 'last-page' );
 
@@ -769,10 +721,10 @@ eksell.loadMore = {
 		// When the pagination query args are updated, reset the posts to reflect the new pagination
 		$win.on( 'reset-posts', function() {
 
-			// Fade out existing posts
+			// Fade out existing posts.
 			$( $pagination.data( 'load-more-target' ) ).find( '.article-wrapper' ).animate( { opacity: 0 }, 300, 'linear' );
 
-			// Reset posts
+			// Reset posts.
 			eksell.loadMore.prepare( $pagination, resetPosts = true );
 		} );
 
@@ -780,29 +732,29 @@ eksell.loadMore = {
 
 	prepare: function( $pagination, resetPosts ) {
 
-		// Default resetPosts to false
+		// Default resetPosts to false.
 		if ( typeof resetPosts === 'undefined' || ! resetPosts ) {
 			resetPosts = false;
 		}
 
-		// Get the query arguments from the pagination element
+		// Get the query arguments from the pagination element.
 		var queryArgs = JSON.parse( $pagination.attr( 'data-query-args' ) );
 
-		// If we're resetting posts, reset them
+		// If we're resetting posts, reset them.
 		if ( resetPosts ) {
 			eksell.loadMore.loadPosts( $pagination, resetPosts );
 		}
 
-		// If not, check the paged value against the max_num_pages
+		// If not, check the paged value against the max_num_pages.
 		else {
 			if ( queryArgs.paged == queryArgs.max_num_pages ) {
 				$( '.pagination-wrapper' ).addClass( 'last-page' );
 			}
 
-			// Get the load more type (button or scroll)
+			// Get the load more type (button or scroll).
 			var loadMoreType = $pagination.data( 'pagination-type' ) ? $pagination.data( 'pagination-type' ) : 'button';
 
-			// Do the appropriate load more detection, depending on the type
+			// Do the appropriate load more detection, depending on the type.
 			if ( loadMoreType == 'scroll' ) {
 				eksell.loadMore.detectScroll( $pagination );
 			} else if ( loadMoreType == 'button' ) {
@@ -817,7 +769,7 @@ eksell.loadMore = {
 
 		$win.on( 'did-interval-scroll', function() {
 
-			// If it's the last page, or we're already loading, we're done here
+			// If it's the last page, or we're already loading, we're done here.
 			if ( eksellIsLastPage || eksellIsLoading ) {
 				return;
 			}
@@ -825,7 +777,7 @@ eksell.loadMore = {
 			var paginationOffset 	= $pagination.offset().top,
 				winOffset 			= $win.scrollTop() + $win.outerHeight();
 
-			// If the bottom of the window is below the top of the pagination, start loading
+			// If the bottom of the window is below the top of the pagination, start loading.
 			if ( ( winOffset > paginationOffset ) ) {
 				eksell.loadMore.loadPosts( $pagination, query_args );
 			}
@@ -834,16 +786,14 @@ eksell.loadMore = {
 
 	},
 
-	// Load more on click
+	// Load more on click.
 	detectButtonClick: function( $pagination, query_args ) {
 
-		// Load on click
+		// Load on click.
 		$( '#load-more' ).on( 'click', function() {
 
-			// Make sure we aren't already loading
-			if ( eksellIsLoading ) {
-				return;
-			}
+			// Make sure we aren't already loading.
+			if ( eksellIsLoading ) return;
 
 			eksell.loadMore.loadPosts( $pagination, query_args );
 			return false;
@@ -854,29 +804,29 @@ eksell.loadMore = {
 	// Load the posts
 	loadPosts: function( $pagination, resetPosts ) {
 
-		// Default resetPosts to false
+		// Default resetPosts to false.
 		if ( typeof resetPosts === 'undefined' || ! resetPosts ) {
 			resetPosts = false;
 		}
 
-		// Get the query arguments
+		// Get the query arguments.
 		var queryArgs 			= $pagination.attr( 'data-query-args' ),
 			queryArgsParsed 	= JSON.parse( queryArgs ),
 			$paginationWrapper 	= $( '.pagination-wrapper' ),
 			$articleWrapper 	= $( $pagination.data( 'load-more-target' ) );
 
-		// We're now loading
+		// We're now loading.
 		eksellIsLoading = true;
 		$paginationWrapper.addClass( 'loading' );
 
-		// If we're not resetting posts, increment paged (reset = initial paged is correct)
+		// If we're not resetting posts, increment paged (reset = initial paged is correct).
 		if ( ! resetPosts ) {
 			queryArgsParsed.paged++;
 		} else {
 			queryArgsParsed.paged = 1;
 		}
 
-		// Prepare the query args for submission
+		// Prepare the query args for submission.
 		var jsonQueryArgs = JSON.stringify( queryArgsParsed );
 
 		$.ajax({
@@ -888,15 +838,15 @@ eksell.loadMore = {
 			},
 			success: function( result ) {
 
-				// Get the results
+				// Get the results.
 				var $result = $( result );
 
-				// If we're resetting posts, remove the existing posts
+				// If we're resetting posts, remove the existing posts.
 				if ( resetPosts ) {
 					$articleWrapper.find( '*:not(.grid-sizer)' ).remove();
 				}
 
-				// If there are no results, we're at the last page
+				// If there are no results, we're at the last page.
 				if ( ! $result.length ) {
 					eksellIsLoading = false;
 					$articleWrapper.addClass( 'no-results' );
@@ -907,36 +857,36 @@ eksell.loadMore = {
 
 					$articleWrapper.removeClass( 'no-results' );
 
-					// Add the paged attribute to the articles, used by updateHistoryOnScroll()
+					// Add the paged attribute to the articles, used by updateHistoryOnScroll().
 					$result.find( 'article' ).each( function() {
 						$( this ).attr( 'data-post-paged', queryArgsParsed.paged );
 					} );
 
-					// Wait for the images to load
+					// Wait for the images to load.
 					$result.imagesLoaded( function() {
 
-						// Append the results
+						// Append the results.
 						$articleWrapper.append( $result ).masonry( 'appended', $result ).masonry();
 
 						$win.trigger( 'ajax-content-loaded' );
 						$win.trigger( 'did-interval-scroll' );
 
-						// We're now finished with the loading
+						// We're now finished with the loading.
 						eksellIsLoading = false;
 						$paginationWrapper.removeClass( 'loading' );
 
-						// Update the pagination query args
+						// Update the pagination query args.
 						$pagination.attr( 'data-query-args', jsonQueryArgs );
 
 						$( 'body' ).removeClass( 'filtering-posts' );
 
-						// If that was the last page, make sure we don't check for more
+						// If that was the last page, make sure we don't check for more.
 						if ( queryArgsParsed.paged == queryArgsParsed.max_num_pages ) {
 							$paginationWrapper.addClass( 'last-page' );
 							eksellIsLastPage = true;
 							return;
 
-						// If not, make sure the pagination is visible again
+						// If not, make sure the pagination is visible again.
 						} else {
 							$paginationWrapper.removeClass( 'last-page' );
 							eksellIsLastPage = false;
@@ -990,13 +940,13 @@ eksell.filters = {
 				},
 				success: function( result ) {
 
-					// Add them to the pagination
+					// Add them to the pagination.
 					$( '#pagination' ).attr( 'data-query-args', result );
 
-					// Reset the posts
+					// Reset the posts.
 					$win.trigger( 'reset-posts' );
 
-					// Update active class
+					// Update active class.
 					$( '.filter-link' ).removeClass( 'pre-active active' );
 					$link.addClass( 'active' );
 	
@@ -1027,7 +977,7 @@ eksell.elementInView = {
 		$targets = $( 'body.has-anim .do-spot' );
 		eksell.elementInView.run( $targets );
 
-		// Rerun on AJAX content loaded
+		// Rerun on AJAX content loaded.
 		$win.on( 'ajax-content-loaded', function() {
 			$targets = $( 'body.has-anim .do-spot' );
 			eksell.elementInView.run( $targets );
@@ -1039,7 +989,7 @@ eksell.elementInView = {
 
 		if ( $targets.length ) {
 
-			// Add class indicating the elements will be spotted
+			// Add class indicating the elements will be spotted.
 			$targets.each( function() {
 				$( this ).addClass( 'will-be-spotted' );
 			} );
@@ -1056,7 +1006,7 @@ eksell.elementInView = {
 
 	handleFocus: function( $targets ) {
 
-		// Check for our targets
+		// Check for our targets.
 		$targets.each( function() {
 
 			var $this = $( this );
@@ -1069,7 +1019,7 @@ eksell.elementInView = {
 
 	},
 
-	// Determine whether the element is in view
+	// Determine whether the element is in view.
 	isVisible: function( $elem, checkAbove ) {
 
 		if ( typeof checkAbove === 'undefined' ) {
@@ -1084,18 +1034,17 @@ eksell.elementInView = {
 
 		var elemTop 				= $elem.offset().top;
 
-		// If checkAbove is set to true, which is default, return true if the browser has already scrolled past the element
+		// If checkAbove is set to true, which is default, return true if the browser has already scrolled past the element.
 		if ( checkAbove && ( elemTop <= docViewBottom ) ) {
 			return true;
 		}
 
-		// If not, check whether the scroll limit exceeds the element top
+		// If not, check whether the scroll limit exceeds the element top.
 		return ( docViewLimit >= elemTop );
 
 	}
 
 } // eksell.elementInView
-
 
 
 /*	-----------------------------------------------------------------------------------------------
@@ -1110,7 +1059,6 @@ eksell.masonry = {
 
 		if ( $wrapper.length ) {
 
-			// Layout when images are loaded.
 			$wrapper.imagesLoaded( function() {
 
 				$grid = $wrapper.masonry( {
@@ -1121,39 +1069,36 @@ eksell.masonry = {
 					transitionDuration: 0,
 				} );
 
+				// Trigger will-be-spotted elements.
 				$grid.on( 'layoutComplete', function() {
 					$win.trigger( 'scroll' );
 				} );
 
-				setInterval( function() {
-					$grid.masonry();
-				}, 1000 );
+				// Check for Masonry layout changes on an interval. Accounts for DOM changes caused by lazyloading plugins.
+				// The interval is cleared when all previews have been spotted.
+				eksell.masonry.intervalUpdate( $grid );
 
-				/*
-				// Layout when DOM changes are detected within the wrapper.
-				const eksellMasonryObserver = new MutationObserver( function( mutationsList, observer ) {
-					for ( const mutation of mutationsList ) {
-
-						// When the child tree is changed, or any of the specified attributes are updated.
-						if ( mutation.type === 'childList' || mutation.type === 'attributes' ) {
-							$grid.masonry();
-						}
-						
-					}
+				// Reinstate the interval when new content is loaded.
+				$win.on( 'ajax-content-loaded', function() {
+					eksell.masonry.intervalUpdate( $grid );
 				} );
-
-				// Start observing the target node for configured mutations.
-				eksellMasonryObserver.observe( wrapperNode, { 
-					attributeFilter: ['src', 'srcset', 'loading'],
-					childList: true, 
-					subtree: true 
-				} );
-
-				*/
 
 			} );
 
 		}
+
+	},
+
+	intervalUpdate: function( $grid ) {
+
+		var masonryLayoutInterval = setInterval( function() {
+
+			$grid.masonry();
+
+			// Clear the interval when all previews have been spotted.
+			if ( ! $( '.preview.do-spot:not(.spotted)' ).length ) clearInterval( masonryLayoutInterval );
+
+		}, 1000 );
 
 	}
 
@@ -1185,10 +1130,10 @@ eksell.dynamicHeights = {
 		var headerHeight = $header.outerHeight(),
 			contentHeight = $win.outerHeight() - headerHeight - parseInt( $header.css( 'marginBottom' ) ) - $footer.outerHeight() - parseInt( $footer.css( 'marginTop' ) );
 
-		// Set a min-height for the content
+		// Set a min-height for the content.
 		$content.css( 'min-height', contentHeight );
 
-		// Set the desktop navigation toggle and search modal field to match the header height, including line-height of pseudo (thanks, Firefox)
+		// Set the desktop navigation toggle and search modal field to match the header height, including line-height of pseudo (thanks, Firefox).
 		$( '#site-aside .nav-toggle-inner' ).css( 'height', headerHeight );
 		$( '.search-modal .search-field' ).css( 'height', headerHeight );
 		$( '<style>.modal-search-form .search-field::-moz-placeholder { line-height: ' + headerHeight + 'px }</style>' ).appendTo( 'head' );
@@ -1204,21 +1149,21 @@ eksell.dynamicHeights = {
 
 $doc.ready( function() {
 
-	eksell.intervalScroll.init();			// Check for scroll on an interval
-	eksell.toggles.init();					// Handle toggles
-	eksell.coverModals.init();				// Handle cover modals
-	eksell.elementInView.init();			// Check if elements are in view
-	eksell.instrinsicRatioVideos.init();	// Retain aspect ratio of videos on window resize
-	eksell.stickMe.init();					// Stick elements on scroll
-	eksell.scrollLock.init();				// Scroll Lock
-	eksell.mainMenu.init();					// Main Menu
-	eksell.focusManagement.init();			// Focus Management
-	eksell.loadMore.init();					// Load More
-	eksell.filters.init();					// Filters
-	eksell.masonry.init();					// Masonry
-	eksell.dynamicHeights.init();			// Dynamic Heights
+	eksell.intervalScroll.init();			// Check for scroll on an interval.
+	eksell.toggles.init();					// Handle toggles.
+	eksell.coverModals.init();				// Handle cover modals.
+	eksell.elementInView.init();			// Check if elements are in view.
+	eksell.instrinsicRatioVideos.init();	// Retain aspect ratio of videos on window resize.
+	eksell.stickMe.init();					// Stick elements on scroll.
+	eksell.scrollLock.init();				// Scroll Lock.
+	eksell.mainMenu.init();					// Main Menu.
+	eksell.focusManagement.init();			// Focus Management.
+	eksell.loadMore.init();					// Load More.
+	eksell.filters.init();					// Filters.
+	eksell.masonry.init();					// Masonry.
+	eksell.dynamicHeights.init();			// Dynamic Heights.
 
-	// Call css-vars-ponyfill
+	// Call css-vars-ponyfill.
 	cssVars();
 
 } );

@@ -224,7 +224,8 @@ Included as part of:
 
 Version 1.0.2 (2021-03-XX)
 -------------------------
-- Added a Mutation Observer to the Masonry code, to account for lazy loading of images and dynamic changes in markup.
+- Refresh the Masonry layout on an interval, to account for lazy loading of images and dynamic changes in markup.
+- Cleaned up the comment structure in construct.js, and remove a unused function.
 - Removed the loading="lazy" attribute from the default fallback image.
 
 Version 1.0.1 (2021-03-09)
