@@ -354,13 +354,13 @@ html {
 	text-align: left;
 }
 
-.editor-styles-wrapper .editor-block-list__layout figcaption a,
-.editor-styles-wrapper .block-editor-block-list__layout figcaption a {
+.editor-styles-wrapper .has-text-color figcaption {
 	color: inherit;
 }
 
-.editor-styles-wrapper *[data-align="full"] figcaption {
-	padding: 0 3.2rem;
+.editor-styles-wrapper .editor-block-list__layout figcaption a,
+.editor-styles-wrapper .block-editor-block-list__layout figcaption a {
+	color: inherit;
 }
 
 
