@@ -317,14 +317,9 @@ endif;
 
 if ( ! function_exists( 'eksell_the_archive_filter' ) ) :
 	function eksell_the_archive_filter() {
-
-		global $paged;
 		
-		// Whether to display the filter (defaults to on home or on Jetpack Portfolio CPT archive, and when set to active in the Customizer).
-		// The value can be filtered with eksell_show_home_filter.
-		$show_home_filter = apply_filters( 'eksell_show_home_filter', ( is_home() || is_post_type_archive( 'jetpack-portfolio' ) ) && $paged == 0 && get_theme_mod( 'eksell_show_home_filter', true ) );
-		
-		if ( ! $show_home_filter ) return;
+		// Check if we're showing the filter
+		if ( ! eksell_show_home_filter() ) return;
 
 		$filter_taxonomy = is_post_type_archive( 'jetpack-portfolio' ) ? 'jetpack-portfolio-type' : 'category';
 
@@ -372,4 +367,22 @@ if ( ! function_exists( 'eksell_the_archive_filter' ) ) :
 
 	}
 	add_action( 'eksell_archive_header_end', 'eksell_the_archive_filter' );
+endif;
+
+
+/*	-----------------------------------------------------------------------------------------------
+	SHOW HOME FILTER?
+	Helper function for determining whether to show the home filter. Defaults to on home or on 
+	Jetpack Portfolio CPT archive, and when set to active in the Customizer. The value can be 
+	filtered with eksell_show_home_filter.
+--------------------------------------------------------------------------------------------------- */
+
+if ( ! function_exists( 'eksell_show_home_filter' ) ) :
+	function eksell_show_home_filter() {
+
+		global $paged;
+
+		return apply_filters( 'eksell_show_home_filter', ( is_home() || is_post_type_archive( 'jetpack-portfolio' ) ) && $paged == 0 && get_theme_mod( 'eksell_show_home_filter', true ) );
+
+	}
 endif;

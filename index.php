@@ -12,7 +12,7 @@
 
 		do_action( 'eksell_before_archive_header' );
 		
-		if ( $archive_title || $archive_description ) : 
+		if ( $archive_title || $archive_description || ( eksell_show_home_filter() ) ) : 
 
 			// By default, only use the grid structure in the archive header if we have both a title and a description.
 			$use_header_grid = apply_filters( 'eksell_archive_header_use_grid', $archive_title && $archive_description );
@@ -68,6 +68,9 @@
 								<?php 
 							endif;
 					
+							/*
+							 * @hooked eksell_the_archive_filter - 10
+							 */
 							do_action( 'eksell_archive_header_end' ); 
 							
 							if ( $use_header_grid ) : 

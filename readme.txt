@@ -222,6 +222,10 @@ Included as part of:
 
 == Changelog ==
 
+Version 1.0.3 (2021-03-10)
+-------------------------
+- Fixed the category filter not being displayed when the Archive Pages → Intro Text setting in the Customizer is empty (thanks, @jeroenrotty).
+
 Version 1.0.2 (2021-03-10)
 -------------------------
 - Refresh the Masonry layout on a conditional interval, to account for lazy loading images and dynamic changes in markup.
