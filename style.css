@@ -2092,7 +2092,7 @@ a.sub-menu-toggle.active svg {
 	text-decoration: underline;
 }
 
-/* Column Specific Styles ---------------------- */
+/* Column Specific Styles -------------------- */
 
 @media ( max-width: 699px ) {
 	.posts-grid.cols-6 .preview-title { font-size: 1.6rem; }
