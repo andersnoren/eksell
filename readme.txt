@@ -222,16 +222,19 @@ Included as part of:
 
 == Changelog ==
 
-Version 1.0.2 (2021-03-XX)
+Version 1.0.2 (2021-03-10)
 -------------------------
-- Refresh the Masonry layout on a conditional interval, to account for lazy loading of images and dynamic changes in markup.
+- Refresh the Masonry layout on a conditional interval, to account for lazy loading images and dynamic changes in markup.
 - Cleaned up the comment structure in construct.js, and removed a unused function.
 - Removed the loading="lazy" attribute from the default fallback image.
 - Focused and simplified the sticky header JS and made the stickiness more immediate.
 - Adjusted spacing of the solid background pullquote style.
-- Adjusted list and pre styles.
-- Editor styles: Adjusted the post title styles to better match front-end.
-- Editor styles: Improved handling of groups nested in other blocks.
+- Adjusted the styles of list and pre elements.
+- Adjusted the theme description in style.css.
+- Editor styles: Adjusted the post title styles to better match the front-end display.
+- Editor styles: Unified handling of unaligned groups nested in other blocks.
+- Added column specific styles to the post grid, to make the previews scale better when more columns are used.
+- Adjusted the default number of columns at different screen sizes, and updated the Customizer option descriptions to state the recommended number of columns for each option.
 
 Version 1.0.1 (2021-03-09)
 -------------------------
