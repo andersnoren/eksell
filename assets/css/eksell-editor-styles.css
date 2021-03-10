@@ -161,11 +161,6 @@ html {
 	margin-top: -3.2rem;
 }
 
-.editor-styles-wrapper *[data-align="wide"] .wp-block:not([data-align="wide"]):not([data-align="full"]) > [data-type="core/group"]:not(.mw-small):not(.mw-medium):not(.mw-max),
-.editor-styles-wrapper *[data-align="full"] .wp-block:not([data-align="wide"]):not([data-align="full"]) > [data-type="core/group"]:not(.mw-small):not(.mw-medium):not(.mw-max) {
-	max-width: var( --eksell-inner-width-thin );
-}
-
 .editor-styles-wrapper *[data-align="full"] > [data-type="core/group"] {
 	max-width: none !important;
 }
@@ -638,15 +633,12 @@ html {
 	width: calc( 100% - 5rem );
 }
 
-.editor-styles-wrapper .wp-block-cover-image .wp-block,
-.editor-styles-wrapper .wp-block-cover .wp-block,
 .wp-block-cover-image .wp-block-cover-image-text, 
 .wp-block-cover-image .wp-block-cover-text, 
 .wp-block-cover-image h2, 
 .wp-block-cover .wp-block-cover-image-text, 
 .wp-block-cover .wp-block-cover-text, 
 .wp-block-cover h2 {
-	max-width: 100%;
 	padding: 0;
 }
 
@@ -789,6 +781,13 @@ html {
 
 :root .wp-block-group.has-background {
 	padding: calc( var( --eksell-inner-gutter ) / 2 );
+}
+
+[class*="__inner-container"] > .wp-block-group:not(.alignwide):not(.alignfull):not(.alignleft):not(.alignright):not(.mw-small):not(.mw-medium):not(.mw-max),
+[class*="__inner-container"] .wp-block:not([data-align="wide"]):not([data-align="full"]):not([data-align="left"]):not([data-align="right"]) > .wp-block-group:not(.mw-small):not(.mw-medium):not(.mw-max),
+.wp-block-media-text__content > .wp-block-group:not(.alignwide):not(.alignfull):not(.alignleft):not(.alignright):not(.mw-small):not(.mw-medium):not(.mw-max),
+.wp-block-media-text__content .wp-block:not([data-align="wide"]):not([data-align="full"]):not([data-align="left"]):not([data-align="right"]) > .wp-block-group:not(.mw-small):not(.mw-medium):not(.mw-max) {
+	max-width: var( --eksell-inner-width-thin );
 }
 
 .wp-block-group__inner-container {
@@ -945,11 +944,6 @@ html {
 
 .editor-styles-wrapper .wp-block-media-text .wp-block-media-text__content {
 	padding: calc( var( --eksell-inner-gutter ) / 2 );
-}
-
-.wp-block-media-text__content > .wp-block-group:not(.alignwide):not(.alignfull),
-.wp-block-media-text__content > .wp-block:not([data-align="wide"]):not([data-align="full"]) > .wp-block-group {
-	max-width: var( --eksell-inner-width-thin );
 }
 
 /* Block: Paragraph -------------------------- */

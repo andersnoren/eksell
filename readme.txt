@@ -231,6 +231,7 @@ Version 1.0.2 (2021-03-XX)
 - Adjusted spacing of the solid background pullquote style.
 - Adjusted list and pre styles.
 - Editor styles: Adjusted the post title styles to better match front-end.
+- Editor styles: Improved handling of groups nested in other blocks.
 
 Version 1.0.1 (2021-03-09)
 -------------------------
