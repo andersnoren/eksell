@@ -167,10 +167,10 @@ html {
 
 /* LAYOUT HELPERS */
 
-:root .mw-thin { max-width: var( --eksell-inner-width-thin ); }
-:root .mw-small { max-width: var( --eksell-inner-width-small ); }
-:root .mw-medium { max-width: var( --eksell-inner-width-medium ); }
-:root .mw-max { max-width: var( --eksell-inner-width-max ); }
+:root .mw-thin { max-width: var( --eksell-inner-width-thin ) !important; }
+:root .mw-small { max-width: var( --eksell-inner-width-small ) !important; }
+:root .mw-medium { max-width: var( --eksell-inner-width-medium ) !important; }
+:root .mw-max { max-width: var( --eksell-inner-width-max ) !important; }
 
 .center,
 .center-h {
@@ -950,6 +950,16 @@ html {
 	padding: calc( var( --eksell-inner-gutter ) / 2 );
 }
 
+:root .editor-styles-wrapper .wp-block-media-text__content > * {
+	margin-left: 0;
+	margin-right: 0;
+}
+
+:root .editor-styles-wrapper .wp-block-media-text__content > .wp-block-group {
+	margin-left: auto;
+	margin-right: auto;
+}
+
 /* Block: Paragraph -------------------------- */
 
 .editor-styles-wrapper p.has-background {
@@ -1414,6 +1424,11 @@ html {
 
 	.editor-styles-wrapper .wp-block-media-text .wp-block-media-text__content {
 		padding: 4.8rem;
+	}
+
+	.wp-block-media-text:not(.has-background) .wp-block-media-text__content {
+		padding-bottom: 0;
+		padding-top: 0;
 	}
 
 	/* BLOCK: PARAGRAPH */
