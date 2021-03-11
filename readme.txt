@@ -228,6 +228,7 @@ Version 1.0.4 (2021-03-XX)
 - Block Editor: Reduced the font size of the large and larger font sizes on mobile, and updated the block editor styles to match.
 - Adjusted buttons block margins on mobile, and fixed buttons margin inconsistencies when set to new alignment classes in WordPress 5.7.
 - Editor Styles: Updated Media & Text block content margins to match front-end.
+- Fixed Social Block margins being overwritten by new styles in 5.7.
 
 Version 1.0.3 (2021-03-10)
 -------------------------

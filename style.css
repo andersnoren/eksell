@@ -3332,7 +3332,7 @@ hr.wp-block-separator:not(.is-style-dots):not(.is-style-wide) {
 
 /* STYLE: ONLY LOGOS */
 
-.wp-block-social-links[class*="is-style-logos-only"] .wp-social-link { 
+:root .wp-block-social-links[class*="is-style-logos-only"] .wp-social-link { 
 	background: none;
 	height: 4rem;
 	margin: 0 1.6rem 1.6rem 0; 
