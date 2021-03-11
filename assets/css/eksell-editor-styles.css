@@ -319,8 +319,8 @@ html {
 
 .editor-styles-wrapper .has-small-font-size { font-size: .888em; }
 .editor-styles-wrapper .has-regular-font-size, :root .has-normal-font-size { font-size: 1em; }
-.editor-styles-wrapper .has-large-font-size { font-size: 1.166em; }
-.editor-styles-wrapper .has-larger-font-size { font-size: 1.333em; }
+.editor-styles-wrapper .has-large-font-size { font-size: 1.17647em; }
+.editor-styles-wrapper .has-larger-font-size { font-size: 1.29411em; }
 
 /* Drop Cap ---------------------------------- */
 
@@ -569,6 +569,10 @@ html {
 
 .editor-styles-wrapper .wp-block-buttons .wp-block-button:last-child {
 	margin-right: 0;
+}
+
+.wp-block-buttons.is-content-justification-right > .wp-block-button {
+	margin-left: 0;
 }
 
 /* Block: Calendar --------------------------- */
@@ -1288,6 +1292,11 @@ html {
 	.editor-styles-wrapper figcaption {
 		font-size: 1.6rem;
 	}
+
+	/* CUSTOM TEXT SIZES */
+
+	.editor-styles-wrapper .has-large-font-size { font-size: 1.333em; }
+	.editor-styles-wrapper .has-larger-font-size { font-size: 1.777em; }
 
 	/* Forms --------------------------------- */
 

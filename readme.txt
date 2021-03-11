@@ -222,6 +222,12 @@ Included as part of:
 
 == Changelog ==
 
+Version 1.0.4 (2021-03-XX)
+-------------------------
+- Adjusted the bottom margin of headings on mobile to match the site gutter.
+- Block Editor: Reduced the font size of the large and larger font sizes on mobile, and updated the block editor styles to match.
+- Adjusted buttons block margins on mobile, and fixed buttons margin inconsistencies when set to new alignment classes in WordPress 5.7.
+
 Version 1.0.3 (2021-03-10)
 -------------------------
 - Fixed the category filter not being displayed when the Archive Pages → Intro Text setting in the Customizer is empty (thanks, @jeroenrotty).
