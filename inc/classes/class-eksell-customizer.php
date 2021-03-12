@@ -57,7 +57,7 @@ if ( ! class_exists( 'Eksell_Customizer' ) ) :
 
 			/* Site Logo --------------------- */
 
-			// Make the core background_color setting use refresh transport, so we update the markup around the site logo element as well.
+			// Make the core custom_logo setting use refresh transport, so we update the markup around the site logo element as well.
 			$wp_customize->get_setting( 'custom_logo' )->transport = 'refresh';
 
 			/* ------------------------------------------------------------------------
