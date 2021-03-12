@@ -64,16 +64,16 @@
 					<?php
 
 					$logo 				= eksell_get_custom_logo();
-					$site_title 		= get_bloginfo( 'name' );
-					$site_description 	= get_bloginfo( 'description' );
-					$show_header_text	= get_theme_mod( 'header_text' );
+					$site_title 		= wp_kses_post( get_bloginfo( 'name' ) );
+					$site_description 	= wp_kses_post( get_bloginfo( 'description' ) );
+					$show_header_text	= get_theme_mod( 'header_text', true );
 
 					if ( $logo ) {
 						$site_title_class = 'site-logo';
-						$home_link_contents = $logo . '<span class="screen-reader-text">' . esc_html( $site_title ) . '</span>';
+						$home_link_contents = $logo . '<span class="screen-reader-text">' . $site_title . '</span>';
 					} else {
 						$site_title_class = 'site-title';
-						$home_link_contents = '<a href="' . esc_url( home_url( '/' ) ) . '" rel="home">' . wp_kses_post( $site_title ) . '</a>';
+						$home_link_contents = '<a href="' . esc_url( home_url( '/' ) ) . '" rel="home">' . $site_title . '</a>';
 					}
 
 					if ( is_front_page() && is_home() && ! is_paged() ) : ?>
@@ -93,13 +93,13 @@
 							 */
 							if ( $site_title ) :
 								?>
-								<div class="site-title" aria-hidden="true"><?php echo esc_html( $site_title ); ?></div>
+								<div class="site-title" aria-hidden="true"><?php echo $site_title; ?></div>
 								<?php
 							endif;
 
 							if ( $site_description ) : 
 								?>
-								<div class="site-description color-secondary"><?php echo wp_kses_post( $site_description ); ?></div>
+								<div class="site-description color-secondary"><?php echo $site_description; ?></div>
 								<?php
 							endif;
 							?>
@@ -108,7 +108,7 @@
 
 					<?php elseif ( $show_header_text && $site_description ) : ?>
 
-						<div class="site-description color-secondary"><?php echo wp_kses_post( $site_description ); ?></div>
+						<div class="site-description color-secondary"><?php echo $site_description; ?></div>
 
 					<?php endif; ?>
 
