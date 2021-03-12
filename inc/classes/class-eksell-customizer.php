@@ -55,6 +55,11 @@ if ( ! class_exists( 'Eksell_Customizer' ) ) :
 				'description' 	=> esc_html__( 'Scales the logo to half its uploaded size, making it sharp on high-res screens.', 'eksell' ),
 			) );
 
+			/* Site Logo --------------------- */
+
+			// Make the core background_color setting use refresh transport, so we update the markup around the site logo element as well.
+			$wp_customize->get_setting( 'custom_logo' )->transport = 'refresh';
+
 			/* ------------------------------------------------------------------------
 			 * Colors
 			 * ------------------------------------------------------------------------ */

@@ -66,23 +66,50 @@
 					$logo 				= eksell_get_custom_logo();
 					$site_title 		= get_bloginfo( 'name' );
 					$site_description 	= get_bloginfo( 'description' );
+					$show_header_text	= get_theme_mod( 'header_text' );
 
 					if ( $logo ) {
-						$home_link_contents = $logo . '<span class="screen-reader-text">' . esc_html( $site_title ) . '</span>';
 						$site_title_class = 'site-logo';
+						$home_link_contents = $logo . '<span class="screen-reader-text">' . esc_html( $site_title ) . '</span>';
 					} else {
 						$site_title_class = 'site-title';
 						$home_link_contents = '<a href="' . esc_url( home_url( '/' ) ) . '" rel="home">' . wp_kses_post( $site_title ) . '</a>';
 					}
 
 					if ( is_front_page() && is_home() && ! is_paged() ) : ?>
-						<h1 class="<?php echo esc_attr( $site_title_class ); ?>"><?php echo $home_link_contents; ?></h1>
+						<h1 class="<?php echo $site_title_class; ?>"><?php echo $home_link_contents; ?></h1>
 					<?php else : ?>
-						<div class="<?php echo esc_attr( $site_title_class ); ?>"><?php echo $home_link_contents; ?></div>
+						<div class="<?php echo $site_title_class; ?>"><?php echo $home_link_contents; ?></div>
 					<?php endif; ?>
 
-					<?php if ( $site_description ) : ?>
+					<?php if ( $logo && $show_header_text && ( $site_title || $site_description ) ) : ?>
+
+						<div class="header-logo-text">
+
+							<?php
+							/* 
+							 * The site title is included as screen reader text next to the logo (in the H1 element),
+							 * so it's hidden from screen readers here.
+							 */
+							if ( $site_title ) :
+								?>
+								<div class="site-title" aria-hidden="true"><?php echo esc_html( $site_title ); ?></div>
+								<?php
+							endif;
+
+							if ( $site_description ) : 
+								?>
+								<div class="site-description color-secondary"><?php echo wp_kses_post( $site_description ); ?></div>
+								<?php
+							endif;
+							?>
+
+						</div><!-- .header-logo-text -->
+
+					<?php elseif ( $show_header_text && $site_description ) : ?>
+
 						<div class="site-description color-secondary"><?php echo wp_kses_post( $site_description ); ?></div>
+
 					<?php endif; ?>
 
 				</div><!-- .header-titles -->
