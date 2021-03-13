@@ -231,7 +231,7 @@ html {
 	color: var( --eksell-accent-color );
 	text-decoration: underline;
 	text-decoration-thickness: .1rem;
-	text-underline-offset: .25em;
+	text-underline-offset: .18em;
 }
 
 .edit-post-visual-editor__post-title-wrapper .editor-post-title {

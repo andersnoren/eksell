@@ -3422,6 +3422,10 @@ table.is-style-stripes tbody tr:nth-child(odd),
 	line-height: 1.5;
 }
 
+.entry-content a {
+	text-underline-offset: .18em;
+}
+
 .has-accent-background-color a {
 	color: inherit;
 }
