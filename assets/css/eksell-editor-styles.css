@@ -558,13 +558,8 @@ html {
 
 /* Block: Buttons ---------------------------- */
 
-.editor-styles-wrapper .wp-block[data-type="core/buttons"] .wp-block[data-type="core/button"] {
-	margin-bottom: 0;
-	margin-top: 0;
-}
-
 .editor-styles-wrapper .wp-block-buttons .wp-block-button {
-	margin-bottom: 2.4rem;
+	margin-top: 2.4rem;
 	margin-right: 2.4rem;
 }
 
