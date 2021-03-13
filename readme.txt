@@ -222,6 +222,11 @@ Included as part of:
 
 == Changelog ==
 
+Version 1.0.5 (2021-03-XX)
+-------------------------
+- Tweaked letter spacing.
+- Adjusted H4 and H5 heading font sizes on desktop.
+
 Version 1.0.4 (2021-03-12)
 -------------------------
 - Adjusted the bottom margin of headings on mobile to match the site gutter.

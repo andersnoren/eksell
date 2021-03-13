@@ -40,7 +40,7 @@ html {
 }
 
 .editor-styles-wrapper * {
-	letter-spacing: -0.02em;
+	letter-spacing: -0.01em;
 }
 
 .editor-styles-wrapper > * {
@@ -263,6 +263,7 @@ html {
 	font-feature-settings: "lnum";
 	font-variant-numeric: lining-nums;
 	font-weight: 700;
+	letter-spacing: -0.02em;
 	line-height: 1.25;
 	margin: 4.8rem auto 3.2rem;
 }
