@@ -4460,7 +4460,8 @@ hr + .comment-reply-title {
 		padding: 3.2rem;
 	}
 
-	.wp-block-column .wp-block-buttons {
+	.wp-block-column .wp-block-cover,
+	.wp-block-column .wp-block-group {
 		margin-bottom: 3.2rem;
 		margin-top: 3.2rem;
 	}
