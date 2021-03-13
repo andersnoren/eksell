@@ -336,7 +336,7 @@ html {
 	margin: .09em 1rem .5rem 0;
 }
 
-.has-drop-cap.has-text-color:not(:focus):first-letter {
+.has-text-color .has-drop-cap:not(:focus):first-letter {
 	color: inherit;
 }
 
