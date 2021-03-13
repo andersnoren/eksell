@@ -2670,6 +2670,10 @@ h1.entry-title,
 	padding: 0;
 }
 
+.wp-block-cover hr.wp-block-separator:not(.has-background) {
+	color: inherit; /* Inherit unless set otherwise */
+}
+
 .wp-block-cover-image.alignleft, .wp-block-cover-image.alignright,
 .wp-block-cover.alignleft, .wp-block-cover.alignright {
     max-width: 30.5rem;

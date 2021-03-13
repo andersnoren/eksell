@@ -678,6 +678,10 @@ html {
 	color: inherit;
 }
 
+.editor-styles-wrapper .wp-block-cover hr.wp-block-separator:not(.has-background) {
+	color: inherit; /* Inherit unless set otherwise */
+}
+
 /* Block: Embed ------------------------------ */
 
 .editor-styles-wrapper .wp-block-embed {
