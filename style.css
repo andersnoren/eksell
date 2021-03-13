@@ -2298,6 +2298,7 @@ h1.entry-title,
 		left: 0;
 	transform: translateX( -3.2rem );
 }
+
 .single-nav-item:hover .single-nav-item-title {
 	text-decoration: underline;
 }
@@ -2594,6 +2595,11 @@ h1.entry-title,
 :root .wp-block-column > * {
 	margin-left: 0;
 	margin-right: 0;
+}
+
+:root .wp-block-column > hr.wp-block-separator {
+	margin-left: auto;
+	margin-right: auto;
 }
 
 .wp-block-column h1, .wp-block-column .h1 { font-size: 3.2rem; }
@@ -3288,11 +3294,6 @@ p.has-background {
 }
 
 /* Block: Separator -------------------------- */
-
-:root hr.wp-block-separator {
-	margin-left: auto;
-	margin-right: auto;
-}
 
 hr.wp-block-separator {
 	background-color: transparent !important;
