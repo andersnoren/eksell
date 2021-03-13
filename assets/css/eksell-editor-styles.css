@@ -450,8 +450,13 @@ html {
 
 /* Shared Block Styles ----------------------- */
 
-.is-style-no-vertical-margin {
+.is-style-no-vertical-margin,
+.is-style-no-top-margin {
 	margin-top: 0 !important;
+}
+
+.is-style-no-vertical-margin,
+.is-style-no-bottom-margin {
 	margin-bottom: 0 !important;
 }
 
@@ -1331,7 +1336,6 @@ html {
 	/* BLOCK: BASE MARGINS */
 
 	:root .wp-block-archives,
-	:root .wp-block-buttons,
 	:root .wp-block-calendar,
 	:root .wp-block-categories,
 	:root .wp-block-code,
@@ -1379,7 +1383,8 @@ html {
 		margin: 6.4rem auto 3.2rem;
 	}
 
-	.wp-block-column .wp-block-buttons {
+	.wp-block-column .wp-block-cover,
+	.wp-block-column .wp-block-group {
 		margin-bottom: 3.2rem;
 		margin-top: 3.2rem;
 	}

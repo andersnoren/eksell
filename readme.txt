@@ -230,6 +230,7 @@ Version 1.0.5 (2021-03-XX)
 - Adjusted block editor styles for button margins.
 - Improved handling of cover, group and media+text block nesting, and updated block editor styles to match.
 - Set the Block Appender Button to inherit its icon and border color from the text color of its parent blocks.
+- Added the .is-style-no-[top/bottom]-margin helper class to the front-end and block editor styles.
 
 Version 1.0.4 (2021-03-12)
 -------------------------

@@ -2390,15 +2390,22 @@ h1.entry-title,
 
 /* Shared Block Styles ----------------------- */
 
+.is-style-no-top-margin,
 .is-style-no-vertical-margin {
 	margin-top: 0 !important;
+}
+
+.is-style-no-bottom-margin,
+.is-style-no-vertical-margin {
 	margin-bottom: 0 !important;
 }
 
+.is-style-no-top-margin.wp-block-image > *:first-child,
 .is-style-no-vertical-margin.wp-block-image > *:first-child {
 	margin-top: 0 !important;
 }
 
+.is-style-no-bottom-margin.wp-block-image > *:last-child,
 .is-style-no-vertical-margin.wp-block-image > *:last-child {
 	margin-bottom: 0 !important;
 }
