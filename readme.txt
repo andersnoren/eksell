@@ -226,6 +226,7 @@ Version 1.0.5 (2021-03-XX)
 -------------------------
 - Tweaked letter spacing.
 - Adjusted H4 and H5 heading font sizes on desktop.
+- Adjusted block editor styles for headings to match front-end.
 
 Version 1.0.4 (2021-03-12)
 -------------------------

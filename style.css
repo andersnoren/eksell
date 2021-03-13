@@ -5221,8 +5221,8 @@ hr + .comment-reply-title {
 	.wp-block-column h1, .wp-block-column .h1 { font-size: 4.8rem; }
 	.wp-block-column h2, .wp-block-column .h2 { font-size: 4.0rem; }
 	.wp-block-column h3, .wp-block-column .h3 { font-size: 3.2rem; }
-	.wp-block-column h3, .wp-block-column .h4 { font-size: 2.8rem; }
-	.wp-block-column h3, .wp-block-column .h5 { font-size: 2.4rem; }
+	.wp-block-column h4, .wp-block-column .h4 { font-size: 2.8rem; }
+	.wp-block-column h5, .wp-block-column .h5 { font-size: 2.4rem; }
 
 	/* BLOCK: GALLERY */
 
