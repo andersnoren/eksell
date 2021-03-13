@@ -3446,7 +3446,7 @@ table.is-style-stripes tbody tr:nth-child(odd),
 	margin: .09em 1rem .5rem 0;
 }
 
-.has-text-color .has-drop-cap:not(:focus):first-letter {
+.has-drop-cap.has-text-color:not(:focus):first-letter {
 	color: inherit;
 }
 
