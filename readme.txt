@@ -228,6 +228,8 @@ Version 1.0.5 (2021-03-XX)
 - Adjusted H4 and H5 heading font sizes on desktop.
 - Adjusted block editor styles for headings to match front-end.
 - Adjusted block editor styles for button margins.
+- Improved handling of cover, group and media+text block nesting, and updated block editor styles to match.
+- Set the Block Appender Button to inherit its icon and border color from the text color of its parent blocks.
 
 Version 1.0.4 (2021-03-12)
 -------------------------
