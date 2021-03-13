@@ -3301,7 +3301,7 @@ hr.wp-block-separator {
 }
 
 hr.wp-block-separator:not(.is-style-dots):not(.is-style-wide) {
-	width: 16rem;
+	width: 12rem;
 }
 
 .wp-block-separator.is-style-wide {
@@ -4676,6 +4676,12 @@ hr + .comment-reply-title {
 
 	.wp-block-pullquote.is-style-solid-color.has-background cite {
 		margin-top: 2.4rem;
+	}
+
+	/* BLOCK: SEPARATOR */
+
+	hr.wp-block-separator:not(.is-style-dots):not(.is-style-wide) {
+		width: 16rem;
 	}
 
 	/* BLOCK: QUOTE */
