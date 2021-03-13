@@ -3297,6 +3297,8 @@ p.has-background {
 
 hr.wp-block-separator {
 	background-color: transparent !important;
+	margin-left: auto;
+	margin-right: auto;
 	text-align: center;
 }
 
