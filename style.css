@@ -2314,7 +2314,7 @@ h1.entry-title,
 
 /* Block Colors ------------------------------ */
 
-.has-text-color a {
+.has-text-color a:not(.wp-block-button__link) {
 	color: inherit;
 }
 
