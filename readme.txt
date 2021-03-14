@@ -222,6 +222,10 @@ Included as part of:
 
 == Changelog ==
 
+Version 1.0.6 (2021-03-XX)
+-------------------------
+- Block Editor styles: Updated margin of groups and covers nested inside columns to match front-end.
+
 Version 1.0.5 (2021-03-14)
 -------------------------
 - Adjusted letter spacing.
