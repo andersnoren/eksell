@@ -230,6 +230,7 @@ Version 1.0.5 (2021-03-14)
 - Adjusted the text decoration of preview titles.
 - Improved handling of cover, group, and media and text block nesting, and updated block editor styles to match.
 - Added the .is-style-no-[top/bottom]-margin helper class to the front-end and block editor styles.
+- Added missing focus styles.
 - Block editor styles: Adjusted headings to match front-end.
 - Block editor styles: Adjusted button margins.
 - Block editor styles: Set the Block Appender Button to inherit its icon and border color from the text color of its parent blocks.

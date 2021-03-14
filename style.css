@@ -2279,8 +2279,14 @@ h1.entry-title,
 	margin: 0;
 }
 
-.entry-meta-time a { text-decoration: none; }
-.entry-meta-time a:hover { text-decoration: underline; }
+.entry-meta-time a { 
+	text-decoration: none; 
+}
+
+.entry-meta-time a:hover,
+.entry-meta-time a:focus { 
+	text-decoration: underline; 
+}
 
 /* POST NAV LINKS */
 
@@ -2538,7 +2544,11 @@ h1.entry-title,
 .wp-block-archives li > a:hover,
 .wp-block-categories li > a:hover,
 .wp-block-latest-posts li > a:hover,
-.wp-block-latest-comments li > a:hover {
+.wp-block-latest-comments li > a:hover,
+.wp-block-archives li > a:focus,
+.wp-block-categories li > a:focus,
+.wp-block-latest-posts li > a:focus,
+.wp-block-latest-comments li > a:focus {
 	text-decoration: underline;
 }
 
@@ -3484,7 +3494,8 @@ table.is-style-stripes tbody tr:nth-child(odd),
 	text-decoration: none; 
 }
 
-.wp-block-tag-cloud a:hover { 
+.wp-block-tag-cloud a:hover,
+.wp-block-tag-cloud a:focus { 
 	text-decoration: underline; 
 }
 
@@ -3750,7 +3761,8 @@ hr + .comment-reply-title {
 	padding: .6rem .9rem;
 }
 
-.comment-body .reply a:hover {
+.comment-body .reply a:hover,
+.comment-body .reply a:focus {
 	background-color: var( --eksell-accent-color );
 	color: var( --eksell-background-color );
 }
@@ -4027,11 +4039,13 @@ hr + .comment-reply-title {
 	width: 6.4rem;
 }
 
-.link-pagination .previous-wrapper a:hover svg {
+.link-pagination .previous-wrapper a:hover svg,
+.link-pagination .previous-wrapper a:focus svg {
 	transform: translateX( -8.333% );
 }
 
-.link-pagination .next-wrapper a:hover svg {
+.link-pagination .next-wrapper a:hover svg,
+.link-pagination .next-wrapper a:focus svg {
 	transform: translateX( 8.333% );
 }
 
