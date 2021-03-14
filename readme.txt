@@ -222,17 +222,19 @@ Included as part of:
 
 == Changelog ==
 
-Version 1.0.5 (2021-03-XX)
+Version 1.0.5 (2021-03-14)
 -------------------------
-- Tweaked letter spacing.
+- Adjusted letter spacing.
 - Adjusted H4 and H5 heading font sizes on desktop.
-- Adjusted block editor styles for headings to match front-end.
-- Adjusted block editor styles for button margins.
-- Improved handling of cover, group and media+text block nesting, and updated block editor styles to match.
-- Set the Block Appender Button to inherit its icon and border color from the text color of its parent blocks.
-- Added the .is-style-no-[top/bottom]-margin helper class to the front-end and block editor styles.
-- Adjusted the width of the thin separator on mobile.
+- Adjusted the width of the thin separator block on mobile.
 - Adjusted the text decoration of preview titles.
+- Improved handling of cover, group, and media and text block nesting, and updated block editor styles to match.
+- Added the .is-style-no-[top/bottom]-margin helper class to the front-end and block editor styles.
+- Block editor styles: Adjusted headings to match front-end.
+- Block editor styles: Adjusted button margins.
+- Block editor styles: Set the Block Appender Button to inherit its icon and border color from the text color of its parent blocks.
+- Menu modal: Added a focus loop to improve keyboard navigation.
+- Menu modal: Improved focus styles.
 
 Version 1.0.4 (2021-03-12)
 -------------------------

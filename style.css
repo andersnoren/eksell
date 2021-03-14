@@ -161,6 +161,10 @@ body {
 	word-break: break-word;
 }
 
+*:focus:not(:focus-visible) {
+	outline: none;
+}
+
 ::selection {
 	background: var( --eksell-primary-color );
 	color: var( --eksell-background-color );
@@ -1210,16 +1214,35 @@ ul.social-icons li {
 	border-radius: 50%;
 	color: var( --eksell-primary-color );
 	display: flex;
+	height: 4rem;
 	justify-content: center;
 	margin: 1.2rem 0 0 1.2rem;
 	padding: 0;
-	height: 4rem;
+	position: relative;
 	width: 4rem;
 }
 
 .menu-modal .social-icons.circular a {
 	background-color: var( --eksell-menu-modal-text-color );
 	color: var( --eksell-menu-modal-background-color );
+}
+
+.menu-modal .social-icons.circular a:before {
+	border: .1rem solid currentColor;
+	border-radius: 50%;
+	content: "";
+	display: block;
+	opacity: 0;
+	position: absolute;
+		bottom: .2rem;
+		left: .2rem;
+		right: .2rem;
+		top: .2rem;
+	transition: opacity .15s linear;
+}
+
+.menu-modal .social-icons.circular a:focus:before {
+	opacity: 1;
 }
 
 /* Cover Modals ------------------------------ */
@@ -1503,6 +1526,27 @@ ul.social-icons li {
 	display: flex;
 	height: 12rem;
 	justify-content: center;
+	position: relative;
+}
+
+#site-aside .nav-toggle .nav-toggle-inner:before {
+	background: var( --eksell-menu-modal-text-color );
+	border-radius: 50%;
+	content: "";
+	display: block;
+	height: 4.4rem;
+	opacity: 0;
+	position: absolute;
+		left: 50%;
+		top: 50%;
+	transform: translate( -50%, -50% );
+	transition: opacity .15s linear;
+	width: 4.4rem;
+}
+
+#site-aside .nav-toggle.active:hover .nav-toggle-inner:before,
+#site-aside .nav-toggle.active:focus .nav-toggle-inner:before {
+	opacity: .1;
 }
 
 /* Navigation Toggle ------------------------- */
@@ -1524,7 +1568,7 @@ ul.social-icons li {
 	height: .2rem;
 	position: absolute;
 		right: 0;
-		top: 50%;
+		top: calc( 50% - .1rem );
 	width: 100%;
 }
 
@@ -1622,8 +1666,29 @@ ul.social-icons li {
 .menu-modal-toggles .nav-untoggle {
 	display: flex;
 	justify-content: flex-end;
+	outline: none;
 	padding: 3.2rem 0;
 	width: 100%;
+}
+
+.menu-modal-toggles .nav-untoggle:before {
+	background: var( --eksell-menu-modal-text-color );
+	border-radius: 50%;
+	content: "";
+	display: block;
+	height: 4.5rem;
+	opacity: 0;
+	position: absolute;
+		right: 0;
+		top: 50%;
+	transform: translate( 1.3rem, -50% );
+	transition: opacity .15s linear;
+	width: 4.5rem;
+}
+
+.menu-modal-toggles .nav-untoggle:hover:before,
+.menu-modal-toggles .nav-untoggle:focus:before {
+	opacity: .1;
 }
 
 /* Menu Modal Top ---------------------------- */
@@ -1677,6 +1742,11 @@ ul.social-icons li {
 .main-menu a:focus,
 .main-menu li.current-menu-item > .ancestor-wrapper > a {
 	text-decoration: underline;
+}
+
+.main-menu li.current-menu-item > .ancestor-wrapper > a:hover,
+.main-menu li.current-menu-item > .ancestor-wrapper > a:focus {
+	text-decoration: none;
 }
 
 .sub-menu-toggle-wrapper {
@@ -5122,6 +5192,12 @@ hr + .comment-reply-title {
 
 	/* Site Header --------------------------- */
 	/* Site Aside ---------------------------- */
+
+	#site-aside .nav-toggle .nav-toggle-inner:before {
+		height: 5rem;
+		width: 5rem;
+	}
+
 	/* Modal: Menu --------------------------- */
 	/* Modal: Search ------------------------- */
 	/* Template: No Title -------------------- */

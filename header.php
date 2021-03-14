@@ -33,9 +33,6 @@
 
 		// If it's a blank canvas, output nothing past this point.
 		if ( $blank_canvas ) return;
-		
-		// Include the site aside, which contains the navigation toggle on desktop.
-		get_template_part( 'inc/parts/site-aside' );
 
 		// Check whether the header search is disabled in the customizer.
 		$enable_search = get_theme_mod( 'eksell_enable_search', true );
@@ -136,7 +133,7 @@
 					$nav_toggle_class = $enable_search ? ' icon-menu-search' : ' icon-menu';
 					?>
 
-					<a href="#" class="nav-toggle mobile-nav-toggle toggle<?php echo $nav_toggle_class; ?>" data-toggle-target=".menu-modal" data-toggle-screen-lock="true" data-toggle-body-class="showing-menu-modal" data-set-focus=".menu-modal" aria-pressed="false">
+					<a href="#" class="nav-toggle mobile-nav-toggle toggle<?php echo $nav_toggle_class; ?>" data-toggle-target=".menu-modal" data-toggle-screen-lock="true" data-toggle-body-class="showing-menu-modal" data-set-focus=".menu-modal .nav-untoggle" aria-pressed="false">
 						<span class="screen-reader-text"><?php esc_html_e( 'Menu', 'eksell' ); ?></span>
 						<?php 
 						// Determine the menu icon based on whether search is disabled.
@@ -166,10 +163,13 @@
 
 		<?php
 
-		// Output the menu modal
+		// Include the site aside, which contains the navigation toggle on desktop.
+		get_template_part( 'inc/parts/site-aside' );
+
+		// Include the menu modal.
 		get_template_part( 'inc/parts/modal-menu' );
 
-		// Output the search modal (if it isn't deactivated in the customizer)
+		// Output the search modal (if it isn't deactivated in the customizer).
 		if ( $enable_search ) {
 			get_template_part( 'inc/parts/modal-search' );
 		}

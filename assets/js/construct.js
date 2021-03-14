@@ -618,20 +618,27 @@ eksell.focusManagement = {
 
 	init: function() {
 
-		// If the visitor tabs out of the search modal, return focus to the search field.
-		eksell.focusManagement.focusLoop();
+		// If the visitor tabs out of the modals, loop focus.
+		$( '*' ).on( 'focus', function() {
 
-	},
-
-	focusLoop: function() {
-		$( 'a' ).on( 'focus', function() {
-			if ( $( '.search-modal' ).is( '.active' ) ) {
+			// Search modal focus loop.
+			if ( $( '.search-modal' ).hasClass( 'active' ) ) {
 				if ( ! $( this ).parents( '.search-modal' ).length ) {
 					$( '.search-modal .search-field' ).focus();
 				}
 			}
+
+			// Menu modal focus loop.
+			else if ( $( '.menu-modal' ).hasClass( 'active' ) ) {
+				if ( ! ( $( this ).parents( '.menu-modal' ).length || $( this ).parents( '#site-aside' ).length ) ) {
+					var $focusDestination = ( $( '#site-aside .nav-toggle' ).is( ':visible' ) ) ? $( '#site-aside .nav-toggle' ) : $( '.menu-modal .nav-untoggle' );
+					$focusDestination.focus();
+				}
+			}
+
 		} );
-	}
+
+	},
 
 } // eksell.focusManagement
 
