@@ -225,6 +225,7 @@ Included as part of:
 Version 1.0.6 (2021-03-XX)
 -------------------------
 - Block Editor styles: Updated margin of groups and covers nested inside columns to match front-end.
+- Condensed the circular icons focus style code by using box-shadow instead of pseudo.
 
 Version 1.0.5 (2021-03-14)
 -------------------------

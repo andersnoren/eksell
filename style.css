@@ -1222,27 +1222,17 @@ ul.social-icons li {
 	width: 4rem;
 }
 
+.social-icons.circular a:focus {
+	box-shadow: inset 0 0 0 .2rem var( --eksell-background-color ), inset 0 0 0 .3rem currentColor;
+}
+
 .menu-modal .social-icons.circular a {
 	background-color: var( --eksell-menu-modal-text-color );
 	color: var( --eksell-menu-modal-background-color );
 }
 
-.menu-modal .social-icons.circular a:before {
-	border: .1rem solid currentColor;
-	border-radius: 50%;
-	content: "";
-	display: block;
-	opacity: 0;
-	position: absolute;
-		bottom: .2rem;
-		left: .2rem;
-		right: .2rem;
-		top: .2rem;
-	transition: opacity .15s linear;
-}
-
-.menu-modal .social-icons.circular a:focus:before {
-	opacity: 1;
+.menu-modal .social-icons.circular a:focus {
+	box-shadow: inset 0 0 0 .2rem var( --eksell-menu-modal-text-color ), inset 0 0 0 .3rem var( --eksell-menu-modal-background-color );
 }
 
 /* Cover Modals ------------------------------ */
