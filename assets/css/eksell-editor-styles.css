@@ -630,8 +630,8 @@ html {
 	padding-right: 0 !important;
 }
 
-.wp-block-columns .wp-block .wp-block-group,
-.wp-block-columns .wp-block .wp-block-cover {
+.wp-block-column .wp-block .wp-block-group,
+.wp-block-column .wp-block .wp-block-cover {
 	margin-left: auto;
 	margin-right: auto;
 }
