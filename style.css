@@ -156,6 +156,8 @@ body {
 	letter-spacing: -0.01em;
 	-moz-osx-font-smoothing: grayscale;
 	-webkit-font-smoothing: antialiased;
+	text-decoration-thickness: .1rem;
+	text-underline-offset: .25em;
 	word-break: break-word;
 }
 
@@ -451,8 +453,6 @@ hr {
 a {
 	color: var( --eksell-accent-color );
 	text-decoration: underline;
-	text-decoration-thickness: .1rem;
-	text-underline-offset: .25em;
 }
 
 a:hover,
@@ -2014,6 +2014,7 @@ a.sub-menu-toggle.active svg {
 }
 
 .filter-list a:hover,
+.filter-list a:focus,
 .filter-list a.pre-active,
 .filter-list a.active { 
 	text-decoration: underline;
@@ -2059,6 +2060,7 @@ a.sub-menu-toggle.active svg {
 .preview-inner {
 	color: inherit;
 	display: block;
+	outline: none;
 	text-decoration: none;
 }
 

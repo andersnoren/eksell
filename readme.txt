@@ -232,6 +232,7 @@ Version 1.0.5 (2021-03-XX)
 - Set the Block Appender Button to inherit its icon and border color from the text color of its parent blocks.
 - Added the .is-style-no-[top/bottom]-margin helper class to the front-end and block editor styles.
 - Adjusted the width of the thin separator on mobile.
+- Adjusted the text decoration of preview titles.
 
 Version 1.0.4 (2021-03-12)
 -------------------------
