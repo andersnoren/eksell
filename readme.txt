@@ -229,7 +229,7 @@ Version 1.0.6 (2021-03-XX)
 - Adjusted the global text-decoration-offet, and fixed text-decoration of the last line of the tallest single post navigation item not being visible.
 - Adjusted the vertical margin of separators on desktop, and updated editor styles to match.
 - Block editor styles: Updated margin of groups and covers nested inside columns to match front-end.
-- Block editor Styles: Updated horizontal margin of direct descendants to the Media and Text block to match front-end.
+- Block editor styles: Updated horizontal margin of direct descendants to the Media and Text block to match front-end.
 - Block editor styles: Fixed margin issue with the social block.
 - Block patterns: Changed the pattern titles to not use capitalised words, to match the Core block patterns.
 - Block patterns: Fleshed out and modified the structure of the "Three columns with featured items" pattern.
@@ -260,13 +260,13 @@ Version 1.0.5 (2021-03-14)
 Version 1.0.4 (2021-03-12)
 -------------------------
 - Adjusted the bottom margin of headings on mobile to match the site gutter.
-- Block Editor: Reduced the font size of the large and larger font sizes on mobile, and updated the block editor styles to match.
 - Adjusted buttons block margins on mobile, and fixed buttons margin inconsistencies when set to new alignment classes in WordPress 5.7.
-- Editor Styles: Updated Media & Text block content margins to match front-end.
 - Fixed Social Block margins being overwritten by new styles in 5.7.
 - Updated site logo/title/description output to better match the "Display Site Title and Tagline" setting.
 - Improved styles of site logo and title when used in combination on small screens.
 - Changed the custom_logo Customizer setting to use refresh transport, so the Customizer preview reflects changes in markup around the site logo element.
+- Block editor styles: Reduced the font size of the large and larger font sizes on mobile, and updated the block editor styles to match.
+- Block editor styles: Updated Media & Text block content margins to match front-end.
 
 Version 1.0.3 (2021-03-10)
 -------------------------
@@ -281,10 +281,10 @@ Version 1.0.2 (2021-03-10)
 - Adjusted spacing of the solid background pullquote style.
 - Adjusted the styles of list and pre elements.
 - Adjusted the theme description in style.css.
-- Editor styles: Adjusted the post title styles to better match the front-end display.
-- Editor styles: Unified handling of unaligned groups nested in other blocks.
 - Added column specific styles to the post grid, to make the previews scale better when more columns are used.
 - Adjusted the default number of columns at different screen sizes, and updated the Customizer option descriptions to state the recommended number of columns for each option.
+- Block editor styles: Adjusted the post title styles to better match the front-end display.
+- Block editor styles: Unified handling of unaligned groups nested in other blocks.
 
 Version 1.0.1 (2021-03-09)
 -------------------------
