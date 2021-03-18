@@ -224,9 +224,23 @@ Included as part of:
 
 Version 1.0.6 (2021-03-XX)
 -------------------------
-- Block Editor styles: Updated margin of groups and covers nested inside columns to match front-end.
-- Condensed the circular icons focus style code by using box-shadow instead of pseudo.
+- Condensed the circular icons focus style code by using box-shadow instead of a pseudo element.
 - Better focus styles for the social icons and header toggles.
+- Adjusted the global text-decoration-offet, and fixed text-decoration of the last line of the tallest single post navigation item not being visible.
+- Adjusted the vertical margin of separators on desktop, and updated editor styles to match.
+- Block editor styles: Updated margin of groups and covers nested inside columns to match front-end.
+- Block editor Styles: Updated horizontal margin of direct descendants to the Media and Text block to match front-end.
+- Block editor styles: Fixed margin issue with the social block.
+- Block patterns: Changed the pattern titles to not use capitalised words, to match the Core block patterns.
+- Block patterns: Fleshed out and modified the structure of the "Three columns with featured items" pattern.
+- Block patterns: Added seven new patterns to the theme (thanks for the nudge, Justin):
+	- Big call to action
+	- Three columns with images and text
+	- Three columns with headings, images, and text: Heading, Image, and Text
+	- Three columns with text, an image, and a pullquote
+	- Three stacked galleries
+	- Two columns with images and text
+	– Two columns with text and a pullquote
 
 Version 1.0.5 (2021-03-14)
 -------------------------

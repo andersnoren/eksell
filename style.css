@@ -157,7 +157,7 @@ body {
 	-moz-osx-font-smoothing: grayscale;
 	-webkit-font-smoothing: antialiased;
 	text-decoration-thickness: .1rem;
-	text-underline-offset: .25em;
+	text-underline-offset: .175em;
 	word-break: break-word;
 }
 
@@ -173,7 +173,6 @@ body {
 #site-content {
 	align-items: center;
 	display: flex;
-	overflow: hidden;
 	min-height: calc( 100vh - 31.8rem );
 }
 
@@ -2686,11 +2685,6 @@ h1.entry-title,
 .wp-block-column h4, .wp-block-column .h4 { font-size: 2.1rem; }
 .wp-block-column h5, .wp-block-column .h5 { font-size: 1.9rem; }
 
-.wp-block-column hr {
-	margin-bottom: 3.2rem;
-	margin-top: 3.2rem;
-}
-
 /* 
 	Note: Media queries match the structure in Core styles.
 */
@@ -4199,7 +4193,7 @@ hr + .comment-reply-title {
 	}
 
 	hr {
-		margin: 6.4rem 0;
+		margin: 4.8rem 0;
 	}
 
 	/* VANILLA GALLERIES */
