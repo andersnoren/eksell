@@ -228,6 +228,7 @@ Version 1.0.6 (2021-03-XX)
 - Better focus styles for the social icons and header toggles.
 - Adjusted the global text-decoration-offet, and fixed text-decoration of the last line of the tallest single post navigation item not being visible.
 - Adjusted the vertical margin of separators on desktop, and updated editor styles to match.
+- Block editor styles: Updated heading margins to reflect front-end at 700px and up, including headings nested in columns.
 - Block editor styles: Updated margin of groups and covers nested inside columns to match front-end.
 - Block editor styles: Updated horizontal margin of direct descendants to the Media and Text block to match front-end.
 - Block editor styles: Fixed margin issue with the social block.

@@ -1325,6 +1325,15 @@ html {
 		margin: 4.5rem auto;
 	}
 
+	:root .editor-styles-wrapper h1, 
+	:root .editor-styles-wrapper h2,
+	:root .editor-styles-wrapper h3,
+	:root .editor-styles-wrapper h4,
+	:root .editor-styles-wrapper h5,
+	:root .editor-styles-wrapper h6 {
+		margin-top: 6.4rem;
+	}
+
 	.editor-post-title__block .editor-post-title__input,
 	:root .editor-styles-wrapper h1 { font-size: 4.8rem; }
 	:root .editor-styles-wrapper h2 { font-size: 4.0rem; }
@@ -1400,7 +1409,8 @@ html {
 	:root .wp-block-column h4, 
 	:root .wp-block-column h5, 
 	:root .wp-block-column h6 {
-		margin: 6.4rem auto 3.2rem;
+		margin-bottom: 2.4rem;
+		margin-top: 4rem;
 	}
 
 	.wp-block-column .wp-block-cover,
