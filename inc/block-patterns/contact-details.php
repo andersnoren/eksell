@@ -10,7 +10,7 @@
 <!-- wp:columns {"className":"is-style-no-vertical-margin"} -->
 <div class="wp-block-columns is-style-no-vertical-margin"><!-- wp:column -->
 <div class="wp-block-column"><!-- wp:paragraph -->
-<p><a href="mailto:#"><?php echo esc_html( _x( 'example@example.com', 'Block pattern demo content', 'eksell' ) ); ?><br></a>08-1234567890</p>
+<p><a href="mailto:#"><?php echo esc_html( _x( 'example@example.com', 'Block pattern demo content', 'eksell' ) ); ?><br></a><?php echo esc_html( _x( '08-1234567890', 'Block pattern demo content', 'eksell' ) ); ?></p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:column -->
 

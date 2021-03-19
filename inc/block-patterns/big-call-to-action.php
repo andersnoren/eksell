@@ -17,7 +17,7 @@
 
 <!-- wp:group -->
 <div class="wp-block-group"><div class="wp-block-group__inner-container"><!-- wp:paragraph -->
-<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+<p><?php echo esc_html( $lorem_short_1 ); ?></p>
 <!-- /wp:paragraph -->
 
 <!-- wp:buttons -->

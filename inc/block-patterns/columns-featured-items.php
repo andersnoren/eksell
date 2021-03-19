@@ -19,7 +19,7 @@
 
 <!-- wp:group {"className":"is-style-no-vertical-margin"} -->
 <div class="wp-block-group is-style-no-vertical-margin"><div class="wp-block-group__inner-container"><!-- wp:paragraph -->
-<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.</p>
+<p><?php echo esc_html( $lorem_short_1 ); ?></p>
 <!-- /wp:paragraph -->
 
 <!-- wp:buttons -->
@@ -55,7 +55,7 @@
 
 <!-- wp:group {"className":"is-style-no-vertical-margin"} -->
 <div class="wp-block-group is-style-no-vertical-margin"><div class="wp-block-group__inner-container"><!-- wp:paragraph -->
-<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.</p>
+<p><?php echo esc_html( $lorem_short_2 ); ?></p>
 <!-- /wp:paragraph -->
 
 <!-- wp:buttons -->
@@ -91,7 +91,7 @@
 
 <!-- wp:group {"className":"is-style-no-vertical-margin"} -->
 <div class="wp-block-group is-style-no-vertical-margin"><div class="wp-block-group__inner-container"><!-- wp:paragraph -->
-<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.</p>
+<p><?php echo esc_html( $lorem_short_1 ); ?></p>
 <!-- /wp:paragraph -->
 
 <!-- wp:buttons -->

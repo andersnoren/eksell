@@ -3378,6 +3378,9 @@ hr.wp-block-separator {
 	text-align: center;
 }
 
+hr.wp-block-separator.is-style-left-aligned { margin-left: 0; }
+hr.wp-block-separator.is-style-right-aligned { margin-right: 0; }
+
 hr.wp-block-separator:not(.is-style-dots):not(.is-style-wide) {
 	width: 12rem;
 }
@@ -4194,6 +4197,7 @@ hr + .comment-reply-title {
 
 	hr {
 		margin: 4.8rem 0;
+		width: 8rem;
 	}
 
 	/* VANILLA GALLERIES */

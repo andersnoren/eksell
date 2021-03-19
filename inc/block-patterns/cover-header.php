@@ -5,7 +5,7 @@
 <!-- /wp:heading -->
 
 <!-- wp:paragraph {"align":"center","textColor":"body-background","fontSize":"large"} -->
-<p class="has-text-align-center has-body-background-color has-text-color has-large-font-size">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.</p>
+<p class="has-text-align-center has-body-background-color has-text-color has-large-font-size"><?php echo esc_html( $lorem_short_1 ); ?></p>
 <!-- /wp:paragraph -->
 
 <!-- wp:separator {"color":"accent"} -->

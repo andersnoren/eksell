@@ -629,6 +629,29 @@ if ( ! function_exists( 'eksell_filter_comment_text' ) ) :
 endif;
 
 
+/* 	-----------------------------------------------------------------------------------------------
+	MAYBE DISABLE GOOGLE FONTS
+	Check whether to disable Google Fonts based on the setting in the Customizer.
+--------------------------------------------------------------------------------------------------- */
+
+if ( ! function_exists( 'eksell_maybe_disable_google_fonts' ) ) :
+	function eksell_maybe_disable_google_fonts( $url ) {
+
+		// If the Customizer setting is set to disable, return false.
+		$disable_google_fonts = get_theme_mod( 'eksell_disable_google_fonts' );
+
+		if ( $disable_google_fonts ) {
+			return false;
+		}
+		
+		// If not, return the Google Fonts URL.
+		return $url;
+
+	}
+	add_filter( 'eksell_google_fonts_url', 'eksell_maybe_disable_google_fonts' );
+endif;
+
+
 /*	-----------------------------------------------------------------------------------------------
 	AJAX LOAD MORE
 	Called in construct.js when the the pagination is triggered to load more posts.

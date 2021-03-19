@@ -181,7 +181,7 @@ Chaplin is distributed under the terms of the GNU GPL version 2.0.
 Icons in the "UI" group by Anders Norén
 License: Creative Commons Zero (CC0), https://creativecommons.org/publicdomain/zero/1.0/
 
-Placeholder image by Anders Norén
+Placeholder images by Anders Norén
 License: Creative Commons Zero (CC0), https://creativecommons.org/publicdomain/zero/1.0/
 
 Eksell bundles the following third-party resources:
@@ -228,20 +228,27 @@ Version 1.0.6 (2021-03-XX)
 - Better focus styles for the social icons and header toggles.
 - Adjusted the global text-decoration-offet, and fixed text-decoration of the last line of the tallest single post navigation item not being visible.
 - Adjusted the vertical margin of separators on desktop, and updated editor styles to match.
+- Customizer: Added a setting for disabling Google Fonts.
+- Block styles: Added "Left aligned" and "Right aligned" styles to the separator block.
 - Block editor styles: Updated heading margins to reflect front-end at 700px and up, including headings nested in columns.
 - Block editor styles: Updated margin of groups and covers nested inside columns to match front-end.
 - Block editor styles: Updated horizontal margin of direct descendants to the Media and Text block to match front-end.
 - Block editor styles: Fixed margin issue with the social block.
+- Block editor styles: Fixed margin beneath inline-block image resizing element.
+- Block editor styles: Compensated bottom margins on buttons block when it's the last child, matching front-end styles.
+- Block editor styles: Updated columns structure to match front-end between 600px - 781px.
 - Block patterns: Changed the pattern titles to not use capitalised words, to match the Core block patterns.
 - Block patterns: Fleshed out and modified the structure of the "Three columns with featured items" pattern.
+- Block patterns: Made the "Lorem ipsum" placeholder text translateable (thanks, @williampatton!).
+- Block patterns: Updated some block patterns will square or tall placeholder images.
 - Block patterns: Added seven new patterns to the theme (thanks for the nudge, Justin):
-	- Big call to action
-	- Three columns with images and text
-	- Three columns with headings, images, and text: Heading, Image, and Text
-	- Three columns with text, an image, and a pullquote
-	- Three stacked galleries
-	- Two columns with images and text
-	– Two columns with text and a pullquote
+	- Big call to action.
+	- Three columns with images and text.
+	- Three columns with headings, images, and text: Heading, Image, and Text.
+	- Three columns with text, an image, and a pullquote.
+	- Three stacked galleries.
+	- Two columns with images and text.
+	– Two columns with text and a pullquote.
 
 Version 1.0.5 (2021-03-14)
 -------------------------

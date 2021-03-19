@@ -4,7 +4,7 @@
 <!-- /wp:separator -->
 
 <!-- wp:paragraph {"align":"center","style":{"typography":{"fontSize":21}}} -->
-<p class="has-text-align-center" style="font-size:21px">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi.</p>
+<p class="has-text-align-center" style="font-size:21px"><?php echo esc_html( $lorem_short_2 ); ?></p>
 <!-- /wp:paragraph -->
 
 <!-- wp:buttons {"align":"center"} -->

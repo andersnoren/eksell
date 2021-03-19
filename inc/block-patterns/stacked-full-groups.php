@@ -9,7 +9,7 @@
 <!-- wp:column -->
 <div class="wp-block-column"><!-- wp:group -->
 <div class="wp-block-group"><div class="wp-block-group__inner-container"><!-- wp:paragraph -->
-<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+<p><?php echo esc_html( $lorem_short_1 ); ?></p>
 <!-- /wp:paragraph --></div></div>
 <!-- /wp:group --></div>
 <!-- /wp:column --></div>
@@ -27,7 +27,7 @@
 <!-- wp:column -->
 <div class="wp-block-column"><!-- wp:group -->
 <div class="wp-block-group"><div class="wp-block-group__inner-container"><!-- wp:paragraph -->
-<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+<p><?php echo esc_html( $lorem_short_2 ); ?></p>
 <!-- /wp:paragraph --></div></div>
 <!-- /wp:group --></div>
 <!-- /wp:column --></div>
@@ -45,7 +45,7 @@
 <!-- wp:column -->
 <div class="wp-block-column"><!-- wp:group -->
 <div class="wp-block-group"><div class="wp-block-group__inner-container"><!-- wp:paragraph -->
-<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+<p><?php echo esc_html( $lorem_short_1 ); ?></p>
 <!-- /wp:paragraph --></div></div>
 <!-- /wp:group --></div>
 <!-- /wp:column --></div>

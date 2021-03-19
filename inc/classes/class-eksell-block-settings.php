@@ -34,6 +34,20 @@ if ( ! class_exists( 'Eksell_Block_Settings' ) ) :
 				) );
 			}
 
+			// Separator: Left aligned.
+			register_block_style( 'core/separator', array(
+					'label' => esc_html__( 'Left Aligned', 'eksell' ),
+					'name'  => 'left-aligned',
+				)
+			);
+
+			// Separator: Right aligned.
+			register_block_style( 'core/separator', array(
+					'label' => esc_html__( 'Right Aligned', 'eksell' ),
+					'name'  => 'right-aligned',
+				)
+			);
+
 			// Social icons: Logos Only Monochrome.
 			register_block_style( 'core/social-links', array(
 					'label' => esc_html__( 'Logos Only Monochrome', 'eksell' ),
@@ -175,6 +189,14 @@ if ( ! class_exists( 'Eksell_Block_Settings' ) ) :
 		--------------------------------------------------------------------------------------------------- */
 
 		public static function get_block_pattern_markup( $path ) {
+
+			// Define shared block pattern placeholder content, to minimize cluttering up of the polyglot list.
+			$lorem_short_1 = _x( 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.', 'Block pattern demo content', 'eksell' );
+			$lorem_short_2 = _x( 'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.', 'Block pattern demo content', 'eksell' );
+
+			$lorem_long_1 = $lorem_short_1 . ' ' . $lorem_short_2;
+			$lorem_long_2 =  _x( 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.', 'Block pattern demo content', 'eksell' );
+			$lorem_long_3 =  _x( 'At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.', 'Block pattern demo content', 'eksell' );
 
 			if ( ! locate_template( $path ) ) return;
 
