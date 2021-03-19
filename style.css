@@ -595,7 +595,7 @@ figcaption,
 	font-size: 1.5rem;
 	font-weight: 400;
 	line-height: 1.5;
-	margin-top: .8rem;
+	margin-top: 1rem;
 }
 
 figcaption a {
@@ -2788,7 +2788,7 @@ section.wp-block-cover-image > h2 {
 
 .wp-block-embed figcaption {
 	margin-bottom: 0;
-	margin-top: .8rem;
+	margin-top: 1rem;
 }
 
 :root .wp-block-embed.alignleft .wp-block-embed__wrapper, 
@@ -3021,7 +3021,7 @@ h6.has-background {
 
 .wp-block-image figcaption {
 	margin-bottom: 0;
-	margin-top: .8rem;
+	margin-top: 1rem;
 }
 
 /* Block: Latest Comments -------------------- */

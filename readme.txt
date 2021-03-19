@@ -230,6 +230,7 @@ Version 1.0.6 (2021-03-XX)
 - Adjusted the vertical margin of separators on desktop, and updated editor styles to match.
 - Customizer: Added a setting for disabling Google Fonts.
 - Tweaked the width of the separator outside of entry content on desktop.
+- Tweaked the top margin of figure captions.
 - Block styles: Added "Left aligned" and "Right aligned" styles to the separator block.
 - Block editor styles: Updated heading margins to reflect front-end at 700px and up, including headings nested in columns.
 - Block editor styles: Updated margin of groups and covers nested inside columns to match front-end.
