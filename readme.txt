@@ -222,7 +222,7 @@ Included as part of:
 
 == Changelog ==
 
-Version 1.0.6 (2021-03-XX)
+Version 1.0.6 (2021-03-19)
 -------------------------
 - Condensed the circular icons focus style code by using box-shadow instead of a pseudo element.
 - Better focus styles for the social icons and header toggles.
