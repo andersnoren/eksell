@@ -10,14 +10,8 @@ var eksell = eksell || {},
 	Global variables
 --------------------------------------------------------------------------------------------------- */
 
-var $doc = $( document ),
-    $win = $( window ),
-    winHeight = $win.height(),
-    winWidth = $win.width();
-
-var viewport = {};
-	viewport.top = $win.scrollTop();
-	viewport.bottom = viewport.top + $win.height();
+var $eksellDoc = $( document ),
+    $eksellwin = $( window );
 
 
 /*	-----------------------------------------------------------------------------------------------
@@ -72,7 +66,7 @@ eksell.intervalScroll = {
 		didScroll = false;
 
 		// Check for the scroll event.
-		$win.on( 'scroll load', function() {
+		$eksellwin.on( 'scroll load', function() {
 			didScroll = true;
 		} );
 
@@ -82,7 +76,7 @@ eksell.intervalScroll = {
 				didScroll = false;
 
 				// When this triggers, we know that we have scrolled.
-				$win.trigger( 'did-interval-scroll' );
+				$eksellwin.trigger( 'did-interval-scroll' );
 
 			}
 
@@ -203,9 +197,9 @@ eksell.toggles = {
 
 		if ( $( '*[data-untoggle-above], *[data-untoggle-below], *[data-toggle-above], *[data-toggle-below]' ).length ) {
 
-			$win.on( 'resize', function() {
+			$eksellwin.on( 'resize', function() {
 
-				var winWidth = $win.width(),
+				var winWidth = $eksellwin.width(),
 					$toggles = $( '.toggle' );
 
 				$toggles.each( function() {
@@ -246,7 +240,7 @@ eksell.toggles = {
 	// Close toggle on escape key press.
 	untoggleOnEscapeKeyPress: function() {
 
-		$doc.keyup( function( e ) {
+		$eksellDoc.keyup( function( e ) {
 			if ( e.key === "Escape" ) {
 
 				$( '*[data-untoggle-on-escape].active' ).each( function() {
@@ -314,7 +308,7 @@ eksell.coverModals = {
 	// Close modal on outside click.
 	outsideUntoggle: function() {
 
-		$doc.on( 'click', function( e ) {
+		$eksellDoc.on( 'click', function( e ) {
 
 			var $target = $( e.target ),
 				modal = '.cover-modal.active';
@@ -332,7 +326,7 @@ eksell.coverModals = {
 	// Close modal on escape key press.
 	closeOnEscape: function() {
 
-		$doc.keyup( function( e ) {
+		$eksellDoc.keyup( function( e ) {
 			if ( e.key === "Escape" ) {
 				$( '.cover-modal.active' ).each( function() {
 					eksell.coverModals.untoggleModal( $( this ) );
@@ -414,7 +408,7 @@ eksell.stickyHeader = {
 			// Update the dimensions of our stand-in element on load and screen size change.
 			eksell.stickyHeader.updateStandIn( $stickyElement );
 
-			$win.on( 'resize orientationchange', function() {
+			$eksellwin.on( 'resize orientationchange', function() {
 				eksell.stickyHeader.updateStandIn( $stickyElement );
 			} );
 
@@ -439,7 +433,7 @@ eksell.instrinsicRatioVideos = {
 
 		eksell.instrinsicRatioVideos.makeFit();
 
-		$win.on( 'resize fit-videos', function() {
+		$eksellwin.on( 'resize fit-videos', function() {
 			eksell.instrinsicRatioVideos.makeFit();
 		} );
 
@@ -493,8 +487,8 @@ eksell.scrollLock = {
 		// Initialize variables.
 		window.scrollLocked = false,
 		window.prevScroll = {
-			scrollLeft : $win.scrollLeft(),
-			scrollTop  : $win.scrollTop()
+			scrollLeft : $eksellwin.scrollLeft(),
+			scrollTop  : $eksellwin.scrollTop()
 		},
 		window.prevLockStyles = {},
 		window.lockStyles = {
@@ -549,8 +543,8 @@ eksell.scrollLock = {
 
 		// Save scroll state and styles
 		prevScroll = {
-			scrollLeft : $win.scrollLeft(),
-			scrollTop  : $win.scrollTop()
+			scrollLeft : $eksellwin.scrollLeft(),
+			scrollTop  : $eksellwin.scrollTop()
 		};
 
 		eksell.scrollLock.saveStyles();
@@ -565,7 +559,7 @@ eksell.scrollLock = {
 		$( 'html' ).css( appliedLock );
 		$( 'html' ).addClass( 'scroll-locked' );
 		$( 'html' ).attr( 'scroll-lock-top', prevScroll.scrollTop );
-		$win.scrollLeft( 0 ).scrollTop( 0 );
+		$eksellwin.scrollLeft( 0 ).scrollTop( 0 );
 
 		window.scrollLocked = true;
 	},
@@ -581,7 +575,7 @@ eksell.scrollLock = {
 		$( 'html' ).attr( 'style', $( '<x>' ).css( prevLockStyles ).attr( 'style' ) || '' );
 		$( 'html' ).removeClass( 'scroll-locked' );
 		$( 'html' ).attr( 'scroll-lock-top', '' );
-		$win.scrollLeft( prevScroll.scrollLeft ).scrollTop( prevScroll.scrollTop );
+		$eksellwin.scrollLeft( prevScroll.scrollLeft ).scrollTop( prevScroll.scrollTop );
 
 		window.scrollLocked = false;
 	},
@@ -618,23 +612,57 @@ eksell.focusManagement = {
 
 	init: function() {
 
+		$prevFocus = $();
+
+		// Update focus correctly when tabbing out of the focused #site-aside navigation toggle.
+		$eksellDoc.keydown( function( e ) {
+
+			var $focusElement = $( ':focus' );
+
+			if ( e.keyCode == 9 && $focusElement.is( '#site-aside .nav-toggle.active' ) ) {
+				var $destination = e.shiftKey ? $( '.menu-modal a:visible' ).last() : $( '.menu-modal a:visible' ).first();
+				$destination.focus();
+				return false;
+			}
+		} );
+
 		// If the visitor tabs out of the modals, loop focus.
-		$( '*' ).on( 'focus', function() {
+		$( 'a, button, input' ).on( 'focus', function() {
 
 			// Search modal focus loop.
 			if ( $( '.search-modal' ).hasClass( 'active' ) ) {
 				if ( ! $( this ).parents( '.search-modal' ).length ) {
-					$( '.search-modal .search-field' ).focus();
+
+					// If the previously focused item weas the search-untoggle, loop around to the search field.
+					if ( $prevFocus && $prevFocus.hasClass( 'search-untoggle' ) ) {
+						$( '.search-modal .search-field' ).focus();
+
+					// If not, loop around to the search untoggle.
+					} else {
+						$( '.search-untoggle' ).focus();
+					}
 				}
 			}
 
 			// Menu modal focus loop.
 			else if ( $( '.menu-modal' ).hasClass( 'active' ) ) {
 				if ( ! ( $( this ).parents( '.menu-modal' ).length || $( this ).parents( '#site-aside' ).length ) ) {
-					var $focusDestination = ( $( '#site-aside .nav-toggle' ).is( ':visible' ) ) ? $( '#site-aside .nav-toggle' ) : $( '.menu-modal .nav-untoggle' );
-					$focusDestination.focus();
+
+					var $firstModalItem = ( $( '#site-aside .nav-toggle' ).is( ':visible' ) ) ? $( '#site-aside .nav-toggle' ) : $( '.menu-modal .nav-untoggle' ),
+						$lastModalItem 	= $( '.menu-modal a:visible' ).last();
+
+					// If the previously focused item was the mobile navigation untoggle, loop around to the last item.
+					if ( $prevFocus && $prevFocus.hasClass( 'nav-untoggle' ) ) {
+						$lastModalItem.focus();
+					
+					// If not, loop around to the first.
+					} else {
+						$firstModalItem.focus();
+					}
 				}
 			}
+
+			$prevFocus = $( this );
 
 		} );
 
@@ -695,7 +723,7 @@ eksell.loadMore = {
 		}
 
 		// When the pagination query args are updated, reset the posts to reflect the new pagination
-		$win.on( 'reset-posts', function() {
+		$eksellwin.on( 'reset-posts', function() {
 
 			// Fade out existing posts.
 			$( $pagination.data( 'load-more-target' ) ).find( '.article-wrapper' ).animate( { opacity: 0 }, 300, 'linear' );
@@ -743,7 +771,7 @@ eksell.loadMore = {
 	// Load more on scroll
 	detectScroll: function( $pagination, query_args ) {
 
-		$win.on( 'did-interval-scroll', function() {
+		$eksellwin.on( 'did-interval-scroll', function() {
 
 			// If it's the last page, or we're already loading, we're done here.
 			if ( eksellIsLastPage || eksellIsLoading ) {
@@ -751,7 +779,7 @@ eksell.loadMore = {
 			}
 
 			var paginationOffset 	= $pagination.offset().top,
-				winOffset 			= $win.scrollTop() + $win.outerHeight();
+				winOffset 			= $eksellwin.scrollTop() + $eksellwin.outerHeight();
 
 			// If the bottom of the window is below the top of the pagination, start loading.
 			if ( ( winOffset > paginationOffset ) ) {
@@ -844,8 +872,8 @@ eksell.loadMore = {
 						// Append the results.
 						$articleWrapper.append( $result ).masonry( 'appended', $result ).masonry();
 
-						$win.trigger( 'ajax-content-loaded' );
-						$win.trigger( 'did-interval-scroll' );
+						$eksellwin.trigger( 'ajax-content-loaded' );
+						$eksellwin.trigger( 'did-interval-scroll' );
 
 						// We're now finished with the loading.
 						eksellIsLoading = false;
@@ -892,7 +920,7 @@ eksell.filters = {
 
 	init: function() {
 
-		$doc.on( 'click', '.filter-link', function() {
+		$eksellDoc.on( 'click', '.filter-link', function() {
 
 			if ( $( this ).hasClass( 'active' ) ) return false;
 
@@ -920,7 +948,7 @@ eksell.filters = {
 					$( '#pagination' ).attr( 'data-query-args', result );
 
 					// Reset the posts.
-					$win.trigger( 'reset-posts' );
+					$eksellwin.trigger( 'reset-posts' );
 
 					// Update active class.
 					$( '.filter-link' ).removeClass( 'pre-active active' );
@@ -954,7 +982,7 @@ eksell.elementInView = {
 		eksell.elementInView.run( $targets );
 
 		// Rerun on AJAX content loaded.
-		$win.on( 'ajax-content-loaded', function() {
+		$eksellwin.on( 'ajax-content-loaded', function() {
 			$targets = $( 'body.has-anim .do-spot' );
 			eksell.elementInView.run( $targets );
 		} );
@@ -972,7 +1000,7 @@ eksell.elementInView = {
 
 			eksell.elementInView.handleFocus( $targets );
 
-			$win.on( 'load resize orientationchange did-interval-scroll', function() {
+			$eksellwin.on( 'load resize orientationchange did-interval-scroll', function() {
 				eksell.elementInView.handleFocus( $targets );
 			} );
 
@@ -1002,9 +1030,9 @@ eksell.elementInView = {
 			checkAbove = false;
 		}
 
-		var winHeight 				= $win.height();
+		var winHeight 				= $eksellwin.height();
 
-		var docViewTop 				= $win.scrollTop(),
+		var docViewTop 				= $eksellwin.scrollTop(),
 			docViewBottom			= docViewTop + winHeight,
 			docViewLimit 			= docViewBottom - 50;
 
@@ -1047,7 +1075,7 @@ eksell.masonry = {
 
 				// Trigger will-be-spotted elements.
 				$grid.on( 'layoutComplete', function() {
-					$win.trigger( 'scroll' );
+					$eksellwin.trigger( 'scroll' );
 				} );
 
 				// Check for Masonry layout changes on an interval. Accounts for DOM changes caused by lazyloading plugins.
@@ -1055,7 +1083,7 @@ eksell.masonry = {
 				eksell.masonry.intervalUpdate( $grid );
 
 				// Reinstate the interval when new content is loaded.
-				$win.on( 'ajax-content-loaded', function() {
+				$eksellwin.on( 'ajax-content-loaded', function() {
 					eksell.masonry.intervalUpdate( $grid );
 				} );
 
@@ -1091,7 +1119,7 @@ eksell.dynamicHeights = {
 
 		eksell.dynamicHeights.resize();
 
-		$win.on( 'resize orientationchange', function() {
+		$eksellwin.on( 'resize orientationchange', function() {
 			eksell.dynamicHeights.resize();
 		} );
 
@@ -1104,7 +1132,7 @@ eksell.dynamicHeights = {
 			$content 	= $( '#site-content' )
 			
 		var headerHeight = $header.outerHeight(),
-			contentHeight = $win.outerHeight() - headerHeight - parseInt( $header.css( 'marginBottom' ) ) - $footer.outerHeight() - parseInt( $footer.css( 'marginTop' ) );
+			contentHeight = $eksellwin.outerHeight() - headerHeight - parseInt( $header.css( 'marginBottom' ) ) - $footer.outerHeight() - parseInt( $footer.css( 'marginTop' ) );
 
 		// Set a min-height for the content.
 		$content.css( 'min-height', contentHeight );
@@ -1123,7 +1151,7 @@ eksell.dynamicHeights = {
 	Function Calls
 --------------------------------------------------------------------------------------------------- */
 
-$doc.ready( function() {
+$eksellDoc.ready( function() {
 
 	eksell.intervalScroll.init();			// Check for scroll on an interval.
 	eksell.toggles.init();					// Handle toggles.

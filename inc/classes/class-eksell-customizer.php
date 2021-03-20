@@ -234,7 +234,7 @@ if ( ! class_exists( 'Eksell_Customizer' ) ) :
 			) );
 
 			/* ------------------------------------------------------------------------
-			 * Posts
+			 * Archive Pages
 			 * ------------------------------------------------------------------------ */
 
 			$wp_customize->add_section( 'eksell_archive_pages_options', array(
@@ -342,6 +342,50 @@ if ( ! class_exists( 'Eksell_Customizer' ) ) :
 				) );
 			}
 
+			/* Separator --------------------- */
+
+			$wp_customize->add_setting( 'eksell_archive_pages_options_sep_3', array(
+				'sanitize_callback' => 'wp_filter_nohtml_kses',
+			) );
+
+			$wp_customize->add_control( new Eksell_Separator_Control( $wp_customize, 'eksell_archive_pages_options_sep_3', array(
+				'section'			=> 'eksell_archive_pages_options',
+			) ) );
+
+			/* Post Meta --------------------- */
+
+			// Get an array with the post types that support the post meta Customizer setting.
+			$post_types_with_post_meta = self::get_post_types_with_post_meta();
+
+			foreach ( $post_types_with_post_meta as $post_type => $post_type_settings ) {
+
+				// Only output for registered post types.
+				if ( ! post_type_exists( $post_type ) ) continue;
+
+				// Get the post type name for inclusion in the label and description.
+				$post_type_obj 	= get_post_type_object( $post_type );
+				$post_type_name	= isset( $post_type_obj->labels->name ) ? $post_type_obj->labels->name : $post_type;
+
+				// Parse the arguments of the post type.
+				$post_type_settings = wp_parse_args( $post_type_settings, array(
+					'default'	=> array(),
+				) );
+
+				$wp_customize->add_setting( 'eksell_post_meta_' . $post_type, array(
+					'capability' 		=> 'edit_theme_options',
+					'default'           => $post_type_settings['default'],
+					'sanitize_callback' => 'eksell_sanitize_multiple_checkboxes',
+				) );
+
+				$wp_customize->add_control( new Eksell_Customize_Control_Checkbox_Multiple( $wp_customize, 'eksell_post_meta_' . $post_type, array(
+					'section' 		=> 'eksell_archive_pages_options',
+					'label'   		=> sprintf( esc_html_x( 'Post Meta for %s', 'Customizer setting name. %s = Post type plural name', 'eksell' ), $post_type_name ),
+					'description'	=> sprintf( esc_html_x( 'Select which post meta to display for %s on archive pages.', 'Customizer setting description. %s = Post type plural name', 'eksell' ), strtolower( $post_type_name ) ),
+					'choices' 		=> self::get_post_meta_options( $post_type ),
+				) ) );
+
+			}
+
 			/* ------------------------------------------------------------------------
 			 * Fallback Image Options
 			 * ------------------------------------------------------------------------ */
@@ -378,6 +422,13 @@ if ( ! class_exists( 'Eksell_Customizer' ) ) :
 				return ( ( isset( $checked ) && true == $checked ) ? true : false );
 			}
 
+			/* Sanitize Multiple Checkboxes -- */
+
+			function eksell_sanitize_multiple_checkboxes( $values ) {
+				$multi_values = ! is_array( $values ) ? explode( ',', $values ) : $values;
+				return ! empty( $multi_values ) ? array_map( 'sanitize_text_field', $multi_values ) : array();
+			}
+
 			/* Sanitize Select --------------- */
 
 			function eksell_sanitize_select( $input, $setting ) {
@@ -388,6 +439,47 @@ if ( ! class_exists( 'Eksell_Customizer' ) ) :
 
 		}
 
+
+		/*	-----------------------------------------------------------------------------------------------
+			RETURN POST META OPTIONS
+			Contains the post meta options available on the site. The list can be modified by hooking into 
+			the eksell_post_meta_options filter. Note that any additional options also need to added to the 
+			action in eksell_maybe_output_post_meta(), which handles output.
+		--------------------------------------------------------------------------------------------------- */
+
+		public static function get_post_meta_options( $post_type ) {
+
+			return apply_filters( 'eksell_post_meta_options', array(
+				'author'		=> esc_html__( 'Author', 'eksell' ),
+				'categories'	=> esc_html__( 'Categories', 'eksell' ),
+				'comments'		=> esc_html__( 'Comments', 'eksell' ),
+				'date'			=> esc_html__( 'Date', 'eksell' ),
+				'edit-link'		=> esc_html__( 'Edit link (for logged in users)', 'eksell' ),
+				'tags'			=> esc_html__( 'Tags', 'eksell' ),
+			), $post_type );
+			
+		}
+
+
+		/*	-----------------------------------------------------------------------------------------------
+			RETURN POST TYPES WITH POST META
+			Specifies which post types should have post meta options in the Customizer. Any post types set 
+			here are also checked against post_type_exists() before the setting are output in the Customizer.
+			The list can be modified by hooking into the eksell_post_types_with_post_meta filter.
+		--------------------------------------------------------------------------------------------------- */
+
+		public static function get_post_types_with_post_meta() {
+
+			return apply_filters( 'eksell_post_types_with_post_meta', array( 
+				'post' 				=> array(
+					'default'			=> array(),
+				), 
+				'jetpack-portfolio' => array(
+					'default'			=> array(),
+				)
+			) );
+			
+		}
 
 		/*	-----------------------------------------------------------------------------------------------
 			RETURN SITEWIDE COLOR OPTIONS

@@ -152,6 +152,9 @@ require get_template_directory() . '/inc/classes/class-eksell-customizer.php';
 // Custom CSS class.
 require get_template_directory() . '/inc/classes/class-eksell-custom-css.php';
 
+// Custom Customizer control for multiple checkboxes.
+require get_template_directory() . '/inc/classes/class-eksell-customize-control-checkbox-multiple.php';
+
 
 /*	-----------------------------------------------------------------------------------------------
 	REGISTER STYLES
@@ -397,8 +400,10 @@ if ( ! function_exists( 'eksell_get_the_archive_title_prefix' ) ) :
 			$prefix = esc_html_x( 'Day', 'date archive title prefix', 'eksell' );
 		} elseif ( is_post_type_archive() ) {
 			// No prefix for post type archives.
+			$prefix = '';
 		} elseif ( is_tax( 'post_format' ) ) {
 			// No prefix for post format archives.
+			$prefix = '';
 		} elseif ( is_tax() ) {
 			$queried_object = get_queried_object();
 			if ( $queried_object ) {
@@ -591,7 +596,7 @@ endif;
 --------------------------------------------------------------------------------------------------- */
 
 if ( ! function_exists( 'eksell_is_comment_by_post_author' ) ) :
-	function eksell_is_comment_by_post_author( $comment = null ) {
+	function eksell_is_comment_by_post_author( $comment ) {
 
 		if ( is_object( $comment ) && $comment->user_id > 0 ) {
 			$user = get_userdata( $comment->user_id );

@@ -2,7 +2,7 @@
 <div class="wp-block-group alignfull has-light-background-background-color has-background"><div class="wp-block-group__inner-container"><!-- wp:columns -->
 <div class="wp-block-columns"><!-- wp:column -->
 <div class="wp-block-column"><!-- wp:heading {"level":3} -->
-<h3><?php echo esc_html( _x( 'Subheading', 'Block pattern demo content', 'eksell' ) ); ?></h3>
+<h3><?php echo esc_html_x( 'Subheading', 'Block pattern demo content', 'eksell' ); ?></h3>
 <!-- /wp:heading --></div>
 <!-- /wp:column -->
 
@@ -20,7 +20,7 @@
 <div class="wp-block-group alignfull has-body-background-color has-accent-background-color has-text-color has-background"><div class="wp-block-group__inner-container"><!-- wp:columns -->
 <div class="wp-block-columns"><!-- wp:column -->
 <div class="wp-block-column"><!-- wp:heading {"level":3} -->
-<h3><?php echo esc_html( _x( 'Subheading', 'Block pattern demo content', 'eksell' ) ); ?></h3>
+<h3><?php echo esc_html_x( 'Subheading', 'Block pattern demo content', 'eksell' ); ?></h3>
 <!-- /wp:heading --></div>
 <!-- /wp:column -->
 
@@ -38,7 +38,7 @@
 <div class="wp-block-group alignfull has-body-background-color has-primary-background-color has-text-color has-background"><div class="wp-block-group__inner-container"><!-- wp:columns -->
 <div class="wp-block-columns"><!-- wp:column -->
 <div class="wp-block-column"><!-- wp:heading {"level":3} -->
-<h3><?php echo esc_html( _x( 'Subheading', 'Block pattern demo content', 'eksell' ) ); ?></h3>
+<h3><?php echo esc_html_x( 'Subheading', 'Block pattern demo content', 'eksell' ); ?></h3>
 <!-- /wp:heading --></div>
 <!-- /wp:column -->
 

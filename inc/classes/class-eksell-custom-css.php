@@ -26,6 +26,7 @@ if ( ! class_exists( 'Eksell_Custom_CSS' ) ) :
 
 			// Loop over them and construct an array for the editor-color-palette.
 			if ( $color_options ) {
+				
 				foreach ( $color_options as $group_name => $group_color_options ) {
 
 					if ( $group_name == 'dark_mode' && ! $dark_mode_enabled ) continue;

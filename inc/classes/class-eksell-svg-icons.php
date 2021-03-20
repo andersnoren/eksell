@@ -27,6 +27,7 @@ class Eksell_SVG_Icons {
 		'arrow-right'	=> '<svg viewBox="0 0 98 50" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M72 1L96 25L72 49" stroke-width="2"></path><path d="M96 25H0" stroke-width="2"></path></svg>',
 		'chevron-down'	=> '<svg viewBox="0 0 18 11" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M17 1L9 9L1 1" stroke-width="2"></path></svg>',
 		'close'			=> '<svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1L19 19" stroke-width="2"></path><path d="M1 19L19 1.00003" stroke-width="2"></path></svg>',
+		'link'			=> '<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="m7.88225 10.6274-2.74517 2.7452c-1.51611 1.5161-1.51611 3.9742 0 5.4903 1.51612 1.5161 3.97422 1.5161 5.49032 0l2.7452-2.7452m-2.7452-8.23545 2.7452-2.74517c1.5161-1.51611 3.9742-1.51611 5.4903 0 1.5161 1.51612 1.5161 3.97422 0 5.49032l-2.7452 2.7452m-6.86287 1.3726 5.49037-5.49037" stroke-width="2"/></svg>',
 		'menu'			=> '<svg viewBox="0 0 25 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 1H24.5" stroke-width="2"></path><path d="M0.5 9H24.5" stroke-width="2"></path><path d="M0.5 17H24.5" stroke-width="2"></path></svg>',
 		'menu-search'	=> '<svg viewBox="0 0 27 19" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 18H24" stroke-width="2"></path><path d="M0 10H10" stroke-width="2"></path><path d="M0 2H10" stroke-width="2"></path><circle cx="19" cy="6" r="5" stroke-width="2"></circle><path d="M26.0001 13.0001L22.0278 9.02783" stroke-width="2"></path></svg>',
 		'search'		=> '<svg viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="8" cy="8" r="7" stroke-width="2"></circle><path d="M18 18L12.5 12.5" stroke-width="2"></path></svg>',
@@ -157,7 +158,7 @@ class Eksell_SVG_Icons {
 
 		$svg = '';
 		if ( array_key_exists( $icon, $arr ) ) {
-			$repl = sprintf( '<svg class="svg-icon" width="%d" height="%d" aria-hidden="true" role="img" focusable="false" ', $width, $height );
+			$repl = sprintf( '<svg class="svg-icon icon-' . esc_attr( $icon ) . '" width="%d" height="%d" aria-hidden="true" role="img" focusable="false" ', $width, $height );
 
 			$svg = preg_replace( '/^<svg /', $repl, trim( $arr[ $icon ] ) ); // Add extra attributes to SVG code.
 		}
@@ -205,10 +206,11 @@ class Eksell_SVG_Icons {
 		}
 		foreach ( $regex_map as $icon => $regex ) {
 			if ( preg_match( $regex, $uri ) ) {
-
 				return self::get_svg( 'social', $icon, $size ) . '<span class="screen-reader-text">';
 			}
 		}
+		// If we don't get a match, return a generic link icon.
+		return self::get_svg( 'ui', 'link', $size ) . '<span class="screen-reader-text">';
 		return null;
 	}
 

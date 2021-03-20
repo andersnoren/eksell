@@ -222,6 +222,30 @@ Included as part of:
 
 == Changelog ==
 
+Version 1.1.0 (2021-03-20)
+-------------------------
+- Customizer: Added a setting for which post meta to display for different post types on archive pages, with filterable lists of supported post types (defaults to post and jetpack-portfolio) and supported post meta values.
+- Customizer: Added the Eksell_Customize_Control_Checkbox_Multiple class with the multiple checkbox Customizer control, used by the new post meta setting.
+- Added output of the post meta setting in chaplin_maybe_output_post_meta(), with an action for outputting custom post meta and filters for modifying the output.
+- Removed the inner wrapping link in previews, and added separate links to the featured media and title, in order to support links in post meta and custom preview output.
+- Improved handling of line breaks in the header by allowing the header toggles (and social icons) to shrink.
+- Removed duplicate function eksell_is_comment_by_post_author(), and made the $comment argument required.
+- Replaced all instances of esc_html( _x() ) with esc_html_x().
+- Updated readme.txt to mention the new setting for post meta.
+- Updated Eksell_SVG_Icons::get_svg() to include the icon name (formatted icon-[name]) as part of the SVG class attribute.
+- Added a generic link icon to the UI group, used for social menu items missing a matching SVG.
+- WordPress.org theme review updates (thanks, @acosmin):
+	- Updated the <link rel="profile" href="//gmpg.org/xfn/11"> in header.php to use // instead of http://.
+	- Fixed empty elseif statements in eksell_get_the_archive_title_prefix().
+	- Fixed whitespace before the PHP open tag in footer.php.
+	- Prefixed variables with global scrope in construct.js, and removed unused global variables.
+	- Keyboard navigation:
+		- Moved the site aside navigation toggle to be focused before the site title/logo, and updated the focusLoop JS function to account for the new order.
+		- Made the menu modal and search modal focus loop backwards and forwards depending on the tabbing direction.
+		- Removed removal of outlines from inputs, including the search modal field.
+		- Removed removal of outline from the mobile navigation toggle.
+		- Updated focus event listener in focusManagement() to listen for a subset of elements, preventing issues with SVGs and SVG children being focusable in Chrome.
+
 Version 1.0.6 (2021-03-19)
 -------------------------
 - Condensed the circular icons focus style code by using box-shadow instead of a pseudo element.

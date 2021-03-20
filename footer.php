@@ -1,4 +1,4 @@
-		<?php
+<?php
 
 		// Don't output the site footer on the Blank Canvas page template.
 		// The filter can be used to enable the blank canvas in different circumstances.

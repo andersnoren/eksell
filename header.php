@@ -7,7 +7,7 @@
 		<meta http-equiv="content-type" content="<?php bloginfo( 'html_type' ); ?>" charset="<?php bloginfo( 'charset' ); ?>" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-		<link rel="profile" href="http://gmpg.org/xfn/11">
+		<link rel="profile" href="//gmpg.org/xfn/11">
 
 		<?php wp_head(); ?>
 
@@ -33,6 +33,9 @@
 
 		// If it's a blank canvas, output nothing past this point.
 		if ( $blank_canvas ) return;
+
+		// Include the site aside, which contains the navigation toggle on desktop.
+		get_template_part( 'inc/parts/site-aside' );
 
 		// Check whether the header search is disabled in the customizer.
 		$enable_search = get_theme_mod( 'eksell_enable_search', true );
@@ -162,9 +165,6 @@
 		</header><!-- #site-header -->
 
 		<?php
-
-		// Include the site aside, which contains the navigation toggle on desktop.
-		get_template_part( 'inc/parts/site-aside' );
 
 		// Include the menu modal.
 		get_template_part( 'inc/parts/modal-menu' );

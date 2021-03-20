@@ -6,7 +6,7 @@
 <!-- /wp:spacer -->
 
 <!-- wp:heading {"textAlign":"center","textColor":"body-background","className":"h1 is-style-no-vertical-margin"} -->
-<h2 class="has-text-align-center h1 is-style-no-vertical-margin has-body-background-color has-text-color"><?php echo esc_html( _x( 'Subheading', 'Block pattern demo content', 'eksell' ) ); ?></h2>
+<h2 class="has-text-align-center h1 is-style-no-vertical-margin has-body-background-color has-text-color"><?php echo esc_html_x( 'Subheading', 'Block pattern demo content', 'eksell' ); ?></h2>
 <!-- /wp:heading -->
 
 <!-- wp:spacer {"height":30} -->
@@ -22,7 +22,7 @@
 <!-- /wp:spacer -->
 
 <!-- wp:heading {"textAlign":"center","textColor":"secondary","className":"is-style-no-vertical-margin"} -->
-<h2 class="has-text-align-center is-style-no-vertical-margin has-secondary-color has-text-color"><?php echo esc_html( _x( 'Subheading', 'Block pattern demo content', 'eksell' ) ); ?></h2>
+<h2 class="has-text-align-center is-style-no-vertical-margin has-secondary-color has-text-color"><?php echo esc_html_x( 'Subheading', 'Block pattern demo content', 'eksell' ); ?></h2>
 <!-- /wp:heading -->
 
 <!-- wp:spacer {"height":48} -->

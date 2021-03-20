@@ -235,29 +235,6 @@ if ( ! function_exists( 'eksell_get_social_menu_args' ) ) :
 endif;
 
 
-/*	-----------------------------------------------------------------------------------------------
-	IS COMMENT BY POST AUTHOR?
-	Check if the specified comment is written by the author of the post commented on.
-
-	@param obj $comment		The comment object.
---------------------------------------------------------------------------------------------------- */
-
-if ( ! function_exists( 'eksell_is_comment_by_post_author' ) ) :
-	function eksell_is_comment_by_post_author( $comment = null ) {
-
-		if ( is_object( $comment ) && $comment->user_id > 0 ) {
-			$user = get_userdata( $comment->user_id );
-			$post = get_post( $comment->comment_post_ID );
-			if ( ! empty( $user ) && ! empty( $post ) ) {
-				return $comment->user_id === $post->post_author;
-			}
-		}
-		return false;
-
-	}
-endif;
-
-
 /* ------------------------------------------------------------------------------------------------
    GET POST GRID COLUMN CLASSES
    Gets the number of columns set in the Customizer, and returns the classes that should be used to
@@ -331,20 +308,20 @@ if ( ! function_exists( 'eksell_the_archive_filter' ) ) :
 
 		if ( ! $terms ) return;
 
-		$home_url = '';
-		$post_type = '';
+		$home_url 	= '';
+		$post_type 	= '';
 
 		// Determine the correct home URL to link to.
 		if ( is_home() ) {
-			$home_url = home_url();
-			$post_type = 'post';
+			$post_type 	= 'post';
+			$home_url 	= home_url();
 		} elseif ( is_post_type_archive() ) {
-			$post_type = get_post_type();
-			$home_url = get_post_type_archive_link( $post_type );
+			$post_type 	= get_post_type();
+			$home_url 	= get_post_type_archive_link( $post_type );
 		}
 
-		// Make the home_url filterable. If you change the taxonomy of the filtration with `eksell_home_filter_get_terms_args`,
-		// you'll probably want to filter this to make sure it points to the correct URL as well.
+		// Make the home URL filterable. If you change the taxonomy of the filtration with `eksell_home_filter_get_terms_args`,
+		// you might want to filter this to make sure it points to the correct URL as well (or maybe remove it altogether).
 		$home_url = apply_filters( 'eksell_filter_home_url', $home_url );
 	
 		?>
@@ -383,6 +360,252 @@ if ( ! function_exists( 'eksell_show_home_filter' ) ) :
 		global $paged;
 
 		return apply_filters( 'eksell_show_home_filter', ( is_home() || is_post_type_archive( 'jetpack-portfolio' ) ) && $paged == 0 && get_theme_mod( 'eksell_show_home_filter', true ) );
+
+	}
+endif;
+
+
+/* ------------------------------------------------------------------------------------------------
+   OUTPUT & GET POST META
+   If it's a single post, output the post meta values specified in the Customizer settings.
+
+   @param	$post_id int		The ID of the post we're outputting post meta for.
+--------------------------------------------------------------------------------------------------- */
+
+if ( ! function_exists( 'eksell_maybe_output_post_meta' ) ) :
+	function eksell_maybe_output_post_meta() {
+
+		// Escaped in eksell_get_post_meta().
+		echo eksell_get_post_meta( get_queried_object_id() );
+
+	}
+	add_action( 'eksell_preview_end', 'eksell_maybe_output_post_meta' );
+endif;
+
+if ( ! function_exists( 'eksell_get_post_meta' ) ) :
+	function eksell_get_post_meta( $post_id ) {
+
+		// Get our post type.
+		$post_type = get_post_type( $post_id );
+
+		// Get the list of the post types that support post meta, and only proceed if the current post type is supported.
+		$post_type_has_post_meta 	= false;
+		$post_types_with_post_meta 	= Eksell_Customizer::get_post_types_with_post_meta();
+
+		foreach ( $post_types_with_post_meta as $post_type_with_post_meta => $data ) {
+			if ( $post_type == $post_type_with_post_meta ) {
+				$post_type_has_post_meta = true;
+				break;
+			}
+		}
+
+		if ( ! $post_type_has_post_meta ) return;
+
+		// Get the default post meta for this post type.
+		$post_meta_default = isset( $post_types_with_post_meta[$post_type]['default'] ) ? $post_types_with_post_meta[$post_type]['default'] : array();
+
+		// Get the post meta for this post type from the Customizer setting.
+		$post_meta = get_theme_mod( 'eksell_post_meta_' . $post_type, $post_meta_default );
+
+		// If we have post meta, sort it.
+		if ( $post_meta && ! in_array( 'empty', $post_meta ) ) {
+
+			// Set the output order of the post meta.
+			$post_meta_order = array( 'date', 'author', 'categories', 'tags', 'comments', 'edit-link' );
+
+			/**
+			 * Filter for the output order of the post meta.
+			 * 
+			 * Allows child themes to modify the output order of the post meta. Any post meta items 
+			 * added with the eksell_post_meta_items filter will not be affected by this sorting, 
+			 * so you'll have to provide your own sorting when you filter the post meta items.
+			 * 
+			 * @param array 	$post_meta_order 	Order of the post meta items.
+			 * @param int 		$post_id 			ID of the post.
+			 */
+			$post_meta_order = apply_filters( 'eksell_post_meta_order', $post_meta_order, $post_id );
+
+			// Store any custom post meta items in a separate array, so we can append them after sorting.
+			$post_meta_custom = array_diff( $post_meta, $post_meta_order );
+
+			// Loop over the intended order, and sort $post_meta_reordered accordingly.
+			$post_meta_reordered = array();
+			foreach ( $post_meta_order as $i => $post_meta_name ) {
+				$original_i = array_search( $post_meta_name, $post_meta );
+				if ( $original_i === false ) continue;
+				$post_meta_reordered[$i] = $post_meta[$original_i];
+			}
+
+			// Reassign the reordered post meta with custom post meta items appended, and update the indexes.
+			$post_meta = array_values( array_merge( $post_meta_reordered, $post_meta_custom ) );
+
+		}
+
+		/**
+		 * Filter the post meta.
+		 * 
+		 * Allows child themes to add, remove and modify post meta items.
+		 * 
+		 * @param array 	$post_meta 	Post meta items to include in the post meta.
+		 * @param int 		$post_id 	ID of the post.
+		 */
+
+		$post_meta = apply_filters( 'eksell_post_meta_items', $post_meta, $post_id );
+
+		// If the post meta setting has the value 'empty' at this point, it's explicitly empty and the default post meta shouldn't be output.
+		if ( ! $post_meta || ( $post_meta && in_array( 'empty', $post_meta ) ) ) return;
+
+		/**
+		 * Filter for the post meta CSS classes.
+		 * 
+		 * Allows child themes to filter the classes on the post meta wrapper elements.
+		 * 
+		 * @param array 	$classes 	CSS classes of the element.
+		 * @param int		$post_id 	ID of the post.
+		 * @param array		$post_meta 	Post meta items set for the post type.
+		 */
+
+		$post_meta_wrapper_classes 	= apply_filters( 'eksell_post_meta_wrapper_classes', array( 'post-meta-wrapper' ), $post_id, $post_meta );
+		$post_meta_classes 			= apply_filters( 'eksell_post_meta_classes', array( 'post-meta' ), $post_id, $post_meta );
+
+		// Convert the class arrays to strings for output.
+		$post_meta_wrapper_classes_str 	= implode( ' ', $post_meta_wrapper_classes );
+		$post_meta_classes_str 			= implode( ' ', $post_meta_classes );
+
+		// Enable the $eksell_has_meta variable to be modified in actions.
+		global $eksell_has_meta;
+
+		// Default it to false, to make sure we don't output an empty container.
+		$eksell_has_meta = false;
+
+		global $post;
+		$post = get_post( $post_id );
+		setup_postdata( $post );
+
+		// Record out output.
+		ob_start();
+		?>
+
+		<div class="<?php echo esc_attr( $post_meta_wrapper_classes_str ); ?>">
+			<ul class="<?php echo esc_attr( $post_meta_classes_str ); ?>">
+
+				<?php
+
+				foreach ( $post_meta as $post_meta_item ) :
+
+					switch ( $post_meta_item ) {
+
+						case 'date' : 
+							$eksell_has_meta = true;
+							?>
+							<li class="date">
+								<a href="<?php the_permalink(); ?>">
+									<?php the_time( get_option( 'date_format' ) ); ?>
+								</a>
+							</li>
+							<?php
+							break;
+
+						case 'author' : 
+							$eksell_has_meta = true;
+							?>
+							<li class="author">
+								<?php 
+								// Translators: %s = the author name
+								printf( esc_html_x( 'By %s', '%s = author name', 'eksell' ), '<a href="' . esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ) . '">' . esc_html( get_the_author_meta( 'display_name' ) ) . '</a>' ); ?>
+							</li>
+							<?php
+							break;
+
+						case 'categories' : 
+
+							// Determine which taxonomy to use for categories. This defaults to jetpack-portfolio-type for the jetpack-portfolio post type, and to categories for posts.
+							$category_taxonomy = ( $post_type == 'jetpack-portfolio' ) ? 'jetpack-portfolio-type' : 'category';
+							$category_taxonomy = apply_filters( 'eksell_post_meta_category_taxonomy', $category_taxonomy, $post_id );
+
+							if ( ! has_term( '', $category_taxonomy, $post_id ) ) break;
+							$eksell_has_meta = true;
+							?>
+							<li class="categories">
+								<?php the_terms( $post_id, $category_taxonomy, esc_html__( 'In', 'eksell' ) . ' ', ', ' ); ?>
+							</li>
+							<?php
+							break;
+
+						case 'comments' : 
+							if ( post_password_required() || ! comments_open() || ! get_comments_number() ) break;
+							$eksell_has_meta = true;
+							?>
+							<li class="comments">
+								<?php comments_popup_link(); ?>
+							</li>
+							<?php
+							break;
+
+						case 'edit-link' : 
+							if ( ! current_user_can( 'edit_post', $post_id ) ) break;
+							$eksell_has_meta = true;
+							?>
+							<li class="edit">
+								<a href="<?php echo esc_url( get_edit_post_link() ); ?>">
+									<?php esc_html_e( 'Edit', 'eksell' ); ?>
+								</a>
+							</li>
+							<?php
+							break;
+
+						case 'tags' : 
+
+							// Determine which taxonomy to use for tags. This defaults to jetpack-portfolio-tag for the jetpack-portfolio post type, and to post_tag for posts.
+							$tag_taxonomy = ( $post_type == 'jetpack-portfolio' ) ? 'jetpack-portfolio-tag' : 'post_tag';
+							$tag_taxonomy = apply_filters( 'eksell_post_meta_tag_taxonomy', $tag_taxonomy, $post_id );
+
+							if ( ! has_term( '', $tag_taxonomy, $post_id ) ) break;
+							$eksell_has_meta = true;
+							?>
+							<li class="tags">
+								<?php the_terms( $post_id, $tag_taxonomy, esc_html__( 'Tagged', 'eksell' ) . ' ', ', ' ); ?>
+							</li>
+							<?php
+							break;
+						
+						default : 
+
+							/**
+							 * Action for handling of custom post meta items.
+							 * 
+							 * This action gets called if the post meta looped over doesn't match 
+							 * any of the types supported out of the box in Eksell. If you've 
+							 * added a custom post meta type in a child theme, you can output it 
+							 * here by hooking into eksell_post_meta_[your-post-meta-key].
+							 * 
+							 * Note: If you add any output to this action, make sure you include 
+							 * $eksell_has_meta as a global variable and set it to true. This will 
+							 * tell eksell_get_post_meta() that there's post meta to output.
+							 * 
+							 * @param int 	$post_id 	ID of the post.
+							 */
+
+							do_action( 'eksell_post_meta_' . $post_meta_item, $post_id );
+
+					} // End switch
+
+				endforeach;
+
+				?>
+
+			</ul>
+		</div>
+
+		<?php
+
+		wp_reset_postdata();
+
+		// Get the recorded output.
+		$meta_output = ob_get_clean();
+
+		// If there is post meta, return it.
+		return ( $eksell_has_meta && $meta_output ) ? $meta_output : '';
 
 	}
 endif;

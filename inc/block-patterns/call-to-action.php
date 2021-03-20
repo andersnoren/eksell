@@ -9,11 +9,11 @@
 
 <!-- wp:buttons {"align":"center"} -->
 <div class="wp-block-buttons aligncenter"><!-- wp:button -->
-<div class="wp-block-button"><a class="wp-block-button__link" href="https://wordpress.org/themes/eksell/"><?php echo esc_html( _x( 'Download', 'Block pattern demo content', 'eksell' ) ); ?></a></div>
+<div class="wp-block-button"><a class="wp-block-button__link" href="https://wordpress.org/themes/eksell/"><?php echo esc_html_x( 'Download', 'Block pattern demo content', 'eksell' ); ?></a></div>
 <!-- /wp:button -->
 
 <!-- wp:button {"className":"is-style-outline"} -->
-<div class="wp-block-button is-style-outline"><a class="wp-block-button__link" href="https://andersnoren.se/teman/eksell-wordpress-theme/"><?php echo esc_html( _x( 'Read More', 'Block pattern demo content', 'eksell' ) ); ?></a></div>
+<div class="wp-block-button is-style-outline"><a class="wp-block-button__link" href="https://andersnoren.se/teman/eksell-wordpress-theme/"><?php echo esc_html_x( 'Read More', 'Block pattern demo content', 'eksell' ); ?></a></div>
 <!-- /wp:button --></div>
 <!-- /wp:buttons --></div></div>
 <!-- /wp:group -->

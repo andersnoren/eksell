@@ -10,13 +10,13 @@
 <!-- wp:columns {"className":"is-style-no-vertical-margin"} -->
 <div class="wp-block-columns is-style-no-vertical-margin"><!-- wp:column -->
 <div class="wp-block-column"><!-- wp:paragraph -->
-<p><a href="mailto:#"><?php echo esc_html( _x( 'example@example.com', 'Block pattern demo content', 'eksell' ) ); ?><br></a><?php echo esc_html( _x( '08-1234567890', 'Block pattern demo content', 'eksell' ) ); ?></p>
+<p><a href="mailto:#"><?php echo esc_html_x( 'example@example.com', 'Block pattern demo content', 'eksell' ); ?><br></a><?php echo esc_html_x( '08-1234567890', 'Block pattern demo content', 'eksell' ); ?></p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:column -->
 
 <!-- wp:column -->
 <div class="wp-block-column"><!-- wp:paragraph -->
-<p><?php echo esc_html( _x( 'Street Name 123', 'Block pattern demo content', 'eksell' ) ); ?><br><?php echo esc_html( _x( '121 48 City', 'Block pattern demo content', 'eksell' ) ); ?></p>
+<p><?php echo esc_html_x( 'Street Name 123', 'Block pattern demo content', 'eksell' ); ?><br><?php echo esc_html_x( '121 48 City', 'Block pattern demo content', 'eksell' ); ?></p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:column -->
 

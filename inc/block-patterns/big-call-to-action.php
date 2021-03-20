@@ -8,11 +8,11 @@
 
 <!-- wp:column {"verticalAlignment":"center"} -->
 <div class="wp-block-column is-vertically-aligned-center"><!-- wp:heading {"level":3,"className":"is-style-no-vertical-margin"} -->
-<h3 class="is-style-no-vertical-margin"><?php echo esc_html( _x( 'Subheading', 'Block pattern demo content', 'eksell' ) ); ?></h3>
+<h3 class="is-style-no-vertical-margin"><?php echo esc_html_x( 'Subheading', 'Block pattern demo content', 'eksell' ); ?></h3>
 <!-- /wp:heading -->
 
 <!-- wp:heading {"level":3,"textColor":"accent","className":"is-style-no-vertical-margin"} -->
-<h3 class="is-style-no-vertical-margin has-accent-color has-text-color"><?php echo esc_html( _x( '$1,299', 'Block pattern demo content', 'eksell' ) ); ?></h3>
+<h3 class="is-style-no-vertical-margin has-accent-color has-text-color"><?php echo esc_html_x( '$1,299', 'Block pattern demo content', 'eksell' ); ?></h3>
 <!-- /wp:heading -->
 
 <!-- wp:group -->
@@ -22,7 +22,7 @@
 
 <!-- wp:buttons -->
 <div class="wp-block-buttons"><!-- wp:button {"className":"is-style-fill"} -->
-<div class="wp-block-button is-style-fill"><a class="wp-block-button__link"><?php echo esc_html( _x( 'Learn More', 'Block pattern demo content', 'eksell' ) ); ?></a></div>
+<div class="wp-block-button is-style-fill"><a class="wp-block-button__link"><?php echo esc_html_x( 'Learn More', 'Block pattern demo content', 'eksell' ); ?></a></div>
 <!-- /wp:button --></div>
 <!-- /wp:buttons --></div></div>
 <!-- /wp:group --></div>
