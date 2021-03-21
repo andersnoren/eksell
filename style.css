@@ -2,7 +2,7 @@
 
 	Theme Name: Eksell
     Text Domain: eksell
-	Version: 1.1.0
+	Version: 1.1.1
 	Description: Eksell is a feature-rich portfolio and blog theme, with deep support for the block editor and full color settings. It includes extensive block styles and multiple prebuilt block patterns, and it styles the block editor to match the front-end of your site so you always have a good idea of what the end result will look like when you’re creating your content. Visitors can filter your posts and Jetpack Portfolio items without reloading the page with the lazyloading category filter, and full color settings in the Customizer give you easy control over all of the colors used in the theme, including the option to set a separate dark mode color scheme for devices that support it. Eksell also features a Blank Canvas page template that only outputs the content you add in the block editor, infinite scroll on archive pages, an optional search overlay, a sticky header setting, a social menu with icons, custom logo support, options for what post meta to display on archive pages, a lightweight construction for fast load times, and developer friendly code. Demo: https://andersnoren.se/themes/eksell/
 	Tags: blog, portfolio, grid-layout, one-column, two-columns, three-columns, four-columns, custom-background, custom-colors, custom-logo, custom-menu, editor-style, featured-images, sticky-post, theme-options, threaded-comments, translation-ready, block-styles, wide-blocks
 	Author: Anders Norén
@@ -216,8 +216,7 @@ body {
 
 /* Base Transitions -------------------------- */
 
-a,
-path {
+a {
 	transition: all .15s linear;
 }
 
@@ -1181,6 +1180,7 @@ ul.social-icons li {
 
 .social-icons a {
 	align-items: center;
+	border-radius: .8rem;
 	color: inherit;
 	display: flex;
 	justify-content: center;
@@ -1212,6 +1212,10 @@ ul.social-icons li {
 	margin: -1.2rem 0 0 -1.2rem;
 }
 
+.social-icons.circular li {
+	margin: 1.2rem 0 0 1.2rem;
+}
+
 .social-icons.circular a {
 	align-items: center;
 	background-color: var( --eksell-background-color );
@@ -1220,7 +1224,6 @@ ul.social-icons li {
 	display: flex;
 	height: 4rem;
 	justify-content: center;
-	margin: 1.2rem 0 0 1.2rem;
 	padding: 0;
 	position: relative;
 	width: 4rem;
@@ -1454,6 +1457,7 @@ ul.social-icons li {
 }
 
 .header-toggles a {
+	border-radius: .8rem;
 	padding: 1rem;	
 }
 
@@ -1478,6 +1482,10 @@ ul.social-icons li {
 .header-toggles .search-toggle {
 	justify-content: center;
 	width: 4.4rem;
+}
+
+.header-toggles .search-toggle svg {
+	transform: translateX( -.1rem );
 }
 
 .header-toggles .nav-toggle.icon-menu-search svg {
@@ -1664,6 +1672,7 @@ ul.social-icons li {
 .menu-modal-toggles .nav-untoggle {
 	display: flex;
 	justify-content: flex-end;
+	outline: none;
 	padding: 3.2rem 0;
 	width: 100%;
 }
@@ -1910,17 +1919,29 @@ a.sub-menu-toggle.active svg {
 	transition: transform .25s ease-in-out, box-shadow .1s .25s linear;
 }
 
-.search-untoggle {
+.search-untoggle,
+.search-untoggle-inner {
 	align-items: center;
 	display: flex;
-	flex-shrink: 0;
 	justify-content: center;
+}
+
+.search-untoggle {
+	flex-shrink: 0;
 	margin-right: -2.5rem;
-	padding: 0 2.5rem;
+	outline: none;
+	padding: 0 1.2rem;
 }
 
 .search-modal.active .search-untoggle {
 	animation: popIn both .3s .2s;
+}
+
+.search-untoggle-inner {
+	border-radius: 50%;
+	height: 4.4rem;
+	transition: color .1s linear, background-color .1s linear;
+	width: 4.4rem;
 }
 
 .search-untoggle svg {
@@ -1929,6 +1950,11 @@ a.sub-menu-toggle.active svg {
 
 .search-untoggle:hover svg {
 	transform: scale( 1.15 );
+}
+
+.search-untoggle:focus .search-untoggle-inner {
+	background-color: var( --eksell-primary-color );
+	color: var( --eksell-background-color );
 }
 
 /* Modal Search Form ------------------------- */
@@ -1947,17 +1973,31 @@ a.sub-menu-toggle.active svg {
 		bottom: 0;
 		left: 0;
 		top: 0;
+	transition: color .15s linear;
+}
+
+.modal-search-form .search-label svg {
+	transition: transform .15s linear;
+}
+
+.modal-search-form .search-field:focus + label {
+	color: var( --eksell-accent-color );
+}
+
+.modal-search-form .search-field:focus + label svg {
+	transform: scale( 1.1 );
 }
 
 .modal-search-form .search-field {
 	background: none;
 	border: none;
-	border-radius: 0;
+	border-radius: .8rem;
 	color: inherit;
 	font-size: 2.4rem;
 	height: 12rem;
-	padding: 0 0 0 4.8rem;
-	width: 100%;
+	outline: none;
+	padding: 0 2.4rem 0 4.8rem;
+	width: calc( 100% - 9rem );
 }
 
 .modal-search-form .search-field::-webkit-input-placeholder { color: inherit; }
@@ -2073,6 +2113,7 @@ a.sub-menu-toggle.active svg {
 
 .filter-list a { 
 	color: inherit;
+	outline: none;
 	text-decoration: none;
 }
 
@@ -2085,6 +2126,10 @@ a.sub-menu-toggle.active svg {
 .filter-list a.pre-active,
 .filter-list a.active { 
 	text-decoration: underline;
+}
+
+.filter-list a.active:focus {
+	text-decoration: none;
 }
 
 /* Post Grid --------------------------------- */
@@ -2169,6 +2214,7 @@ a.sub-menu-toggle.active svg {
 
 .preview-title a:hover,
 .preview-title a:focus {
+	outline: none;
 	text-decoration: underline;
 }
 
@@ -2191,6 +2237,7 @@ a.sub-menu-toggle.active svg {
 
 .post-meta a:hover,
 .post-meta a:focus {
+	outline: none;
 	text-decoration: underline;
 }
 
@@ -2307,6 +2354,7 @@ h1.entry-title,
 
 .entry-footer a {
 	color: inherit;
+	outline: none;
 }
 
 .entry-footer p {
@@ -2382,6 +2430,7 @@ h1.entry-title,
 .single-nav a {
 	color: inherit;
 	display: block;
+	outline: none;
 	text-decoration: none;
 }
 
@@ -2411,7 +2460,8 @@ h1.entry-title,
 	transform: translateX( -3.2rem );
 }
 
-.single-nav-item:hover .single-nav-item-title {
+.single-nav-item:hover .single-nav-item-title,
+.single-nav-item:focus .single-nav-item-title {
 	text-decoration: underline;
 }
 
@@ -4150,6 +4200,7 @@ hr + .comment-reply-title {
 
 .footer-credits a {
 	color: inherit;
+	outline: none;
 	text-decoration: none;
 }
 
@@ -4178,6 +4229,10 @@ hr + .comment-reply-title {
 
 #site-footer .social-menu {
 	margin: 0 -1.2rem;
+}
+
+#site-footer .social-menu a:focus {
+	box-shadow: inset 0 0 0 .2rem var( --eksell-border-color );	
 }
 
 
@@ -4346,16 +4401,13 @@ hr + .comment-reply-title {
 		justify-content: flex-end;
 	}
 
-	.header-toggles a {
-		border-radius: 50%;
-	}
-
 	.header-toggles .toggle {
 		outline: none;
 	}
 
+	.header-toggles .social-menu a:focus,
 	.header-toggles .toggle:focus {
-		box-shadow: inset 0 0 0 .1rem currentColor;
+		box-shadow: inset 0 0 0 .2rem var( --eksell-border-color );
 	}
 
 	/* Site Aside ---------------------------- */
@@ -4510,10 +4562,12 @@ hr + .comment-reply-title {
 	}
 
 	.single-nav .prev-post .arrow { 				transform: translateX( 1.6rem ); }
-	.has-anim .single-nav .prev-post:hover .arrow { transform: translateX( calc( 1.6rem - .8rem ) ); }
+	.has-anim .single-nav .prev-post:hover .arrow,
+	.has-anim .single-nav .prev-post:focus .arrow { transform: translateX( calc( 1.6rem - .8rem ) ); }
 
 	.single-nav .next-post .arrow { 				transform: translateX( -1.6rem ); }
-	.has-anim .single-nav .next-post:hover .arrow { transform: translateX( calc( -1.6rem + .8rem ) ); }
+	.has-anim .single-nav .next-post:hover .arrow,
+	.has-anim .single-nav .next-post:focus .arrow { transform: translateX( calc( -1.6rem + .8rem ) ); }
 
 	/* Blocks -------------------------------- */
 
@@ -5135,10 +5189,12 @@ hr + .comment-reply-title {
 	/* SINGLE NAVIGATION */
 
 	.single-nav .prev-post .arrow { 				transform: translateX( 50% ); }
-	.has-anim .single-nav .prev-post:hover .arrow { transform: translateX( calc( 50% - .8rem ) ); }
+	.has-anim .single-nav .prev-post:hover .arrow,
+	.has-anim .single-nav .prev-post:focus .arrow { transform: translateX( calc( 50% - .8rem ) ); }
 
 	.single-nav .next-post .arrow { 				transform: translateX( -50% ); }
-	.has-anim .single-nav .next-post:hover .arrow { transform: translateX( calc( -50% + .8rem ) ); }
+	.has-anim .single-nav .next-post:hover .arrow,
+	.has-anim .single-nav .next-post:focus .arrow { transform: translateX( calc( -50% + .8rem ) ); }
 
 	/* Blocks -------------------------------- */
 

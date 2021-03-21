@@ -222,6 +222,14 @@ Included as part of:
 
 == Changelog ==
 
+Version 1.1.1 (2021-03-21)
+-------------------------
+- Updated the JS focus loop to only use one event (keydown), and simplified and condensed the code.
+- Removed outline: none styles for some elements with clear text decoration changes on focus.
+- Adjusted focus styles for the header toggles and header/footer social links.
+- Updated focus styles in the search modal.
+- Social icons: Resized the feed icon to be more consistent other icons.
+
 Version 1.1.0 (2021-03-20)
 -------------------------
 - Customizer: Added a setting for which post meta to display for different post types on archive pages, with filterable lists of supported post types (defaults to post and jetpack-portfolio) and supported post meta values.

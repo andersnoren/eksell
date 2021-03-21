@@ -612,61 +612,58 @@ eksell.focusManagement = {
 
 	init: function() {
 
-		$prevFocus = $();
+		// Focus loops.
+		eksell.focusManagement.focusLoops();
 
-		// Update focus correctly when tabbing out of the focused #site-aside navigation toggle.
+	},
+
+	focusLoops: function() {
+
+		// Add focus loops for the menu modal (which includes the #site-aside navigation toggle on desktop) and search modal.
 		$eksellDoc.keydown( function( e ) {
 
 			var $focusElement = $( ':focus' );
 
-			if ( e.keyCode == 9 && $focusElement.is( '#site-aside .nav-toggle.active' ) ) {
-				var $destination = e.shiftKey ? $( '.menu-modal a:visible' ).last() : $( '.menu-modal a:visible' ).first();
-				$destination.focus();
-				return false;
+			if ( e.keyCode == 9 ) {
+
+				var $destination = false;
+
+				// Tabbing backwards.
+				if ( e.shiftKey ) {
+
+					if ( $focusElement.is( '#site-aside .nav-toggle.active' ) ) {
+						$destination = $( '.menu-modal a:visible:last' );
+					} else if ( $focusElement.is( '.menu-modal a:visible:first' ) ) {
+						$destination = $( '#site-aside .nav-toggle' ).is( ':visible' ) ? $( '#site-aside .nav-toggle' ) : $( '.menu-modal a:visible:last' );
+					} else if ( $focusElement.is( '.search-modal .search-field' ) ) {
+						$destination = $( '.search-untoggle' );
+					}
+
+				} 
+				
+				// Tabbing forwards.
+				else {
+
+					if ( $focusElement.is( '.menu-modal a:visible:last' ) ) {
+						$destination = $( '#site-aside .nav-toggle' ).is( ':visible' ) ? $( '#site-aside .nav-toggle' ) : $( '.menu-modal a:visible:first' );
+					} else if ( $focusElement.is( '#site-aside .nav-toggle.active' ) ) {
+						$destination = $( '.menu-modal a:visible:first' );
+					} else if ( $focusElement.is( '.search-untoggle' ) ) {
+						$destination = $( '.search-modal .search-field' );
+					}
+
+				}
+
+				// If a destination is set, change focus.
+				if ( $destination ) {
+					$destination.focus();
+					return false;
+				}
+				
 			}
 		} );
 
-		// If the visitor tabs out of the modals, loop focus.
-		$( 'a, button, input' ).on( 'focus', function() {
-
-			// Search modal focus loop.
-			if ( $( '.search-modal' ).hasClass( 'active' ) ) {
-				if ( ! $( this ).parents( '.search-modal' ).length ) {
-
-					// If the previously focused item weas the search-untoggle, loop around to the search field.
-					if ( $prevFocus && $prevFocus.hasClass( 'search-untoggle' ) ) {
-						$( '.search-modal .search-field' ).focus();
-
-					// If not, loop around to the search untoggle.
-					} else {
-						$( '.search-untoggle' ).focus();
-					}
-				}
-			}
-
-			// Menu modal focus loop.
-			else if ( $( '.menu-modal' ).hasClass( 'active' ) ) {
-				if ( ! ( $( this ).parents( '.menu-modal' ).length || $( this ).parents( '#site-aside' ).length ) ) {
-
-					var $firstModalItem = ( $( '#site-aside .nav-toggle' ).is( ':visible' ) ) ? $( '#site-aside .nav-toggle' ) : $( '.menu-modal .nav-untoggle' ),
-						$lastModalItem 	= $( '.menu-modal a:visible' ).last();
-
-					// If the previously focused item was the mobile navigation untoggle, loop around to the last item.
-					if ( $prevFocus && $prevFocus.hasClass( 'nav-untoggle' ) ) {
-						$lastModalItem.focus();
-					
-					// If not, loop around to the first.
-					} else {
-						$firstModalItem.focus();
-					}
-				}
-			}
-
-			$prevFocus = $( this );
-
-		} );
-
-	},
+	}
 
 } // eksell.focusManagement
 
