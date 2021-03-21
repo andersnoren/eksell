@@ -1658,8 +1658,8 @@ html {
 	/* Setup --------------------------------- */
 
 	:root {
-		--eksell-inner-gutter: 19.2rem;
-		--eksell-inner-gutter-compensated: 17.2rem;
+		--eksell-inner-gutter: 12.8rem;
+		--eksell-inner-gutter-compensated: 10.8rem;
 	}
 
 	/* Blocks -------------------------------- */
@@ -1681,6 +1681,13 @@ html {
 }
 
 @media ( min-width: 1600px ) {
+
+	/* Setup --------------------------------- */
+
+	:root {
+		--eksell-inner-gutter: 19.2rem;
+		--eksell-inner-gutter-compensated: 17.2rem;
+	}
 
 	/* Blocks -------------------------------- */
 

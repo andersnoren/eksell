@@ -222,6 +222,10 @@ Included as part of:
 
 == Changelog ==
 
+Version 1.1.2 (2021-03-XX)
+-------------------------
+- Block editor styles: Fixed a section inner width inconsitency with the front end between 1200 - 1600px.
+
 Version 1.1.1 (2021-03-21)
 -------------------------
 - Updated the JS focus loop to only use one event (keydown), and simplified and condensed the code.
