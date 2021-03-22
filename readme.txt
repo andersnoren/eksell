@@ -222,9 +222,10 @@ Included as part of:
 
 == Changelog ==
 
-Version 1.1.2 (2021-03-XX)
+Version 1.1.2 (2021-03-22)
 -------------------------
 - Block editor styles: Fixed a section inner width inconsitency with the front end between 1200 - 1600px.
+- A11y: Improved the menu modal focus loop to work with more focusable elements, and fixed a loop bug when the search form was the last element in the modal.
 
 Version 1.1.1 (2021-03-21)
 -------------------------

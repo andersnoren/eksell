@@ -628,13 +628,18 @@ eksell.focusManagement = {
 
 				var $destination = false;
 
+				// Get the first and last visible focusable elements in the menu modal, for comparison against the focused element.
+				var $menuModalFocusable = $( '.menu-modal' ).find( 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])' ).filter( ':visible' ),
+					$menuModalFirst = $menuModalFocusable.first(),
+					$menuModalLast = $menuModalFocusable.last();
+
 				// Tabbing backwards.
 				if ( e.shiftKey ) {
 
 					if ( $focusElement.is( '#site-aside .nav-toggle.active' ) ) {
 						$destination = $( '.menu-modal a:visible:last' );
-					} else if ( $focusElement.is( '.menu-modal a:visible:first' ) ) {
-						$destination = $( '#site-aside .nav-toggle' ).is( ':visible' ) ? $( '#site-aside .nav-toggle' ) : $( '.menu-modal a:visible:last' );
+					} else if ( $focusElement.is( $menuModalFirst ) ) {
+						$destination = $( '#site-aside .nav-toggle' ).is( ':visible' ) ? $( '#site-aside .nav-toggle' ) : $menuModalLast;
 					} else if ( $focusElement.is( '.search-modal .search-field' ) ) {
 						$destination = $( '.search-untoggle' );
 					}
@@ -644,10 +649,10 @@ eksell.focusManagement = {
 				// Tabbing forwards.
 				else {
 
-					if ( $focusElement.is( '.menu-modal a:visible:last' ) ) {
-						$destination = $( '#site-aside .nav-toggle' ).is( ':visible' ) ? $( '#site-aside .nav-toggle' ) : $( '.menu-modal a:visible:first' );
+					if ( $focusElement.is( $menuModalLast ) ) {
+						$destination = $( '#site-aside .nav-toggle' ).is( ':visible' ) ? $( '#site-aside .nav-toggle' ) : $menuModalFirst;
 					} else if ( $focusElement.is( '#site-aside .nav-toggle.active' ) ) {
-						$destination = $( '.menu-modal a:visible:first' );
+						$destination = $menuModalFirst;
 					} else if ( $focusElement.is( '.search-untoggle' ) ) {
 						$destination = $( '.search-modal .search-field' );
 					}
