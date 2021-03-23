@@ -13,7 +13,7 @@
 			<a href="<?php the_permalink(); ?>" class="preview-media-link">
 				<?php 
 				if ( has_post_thumbnail() && ! post_password_required() ) {
-					the_post_thumbnail( $post->ID, 'eksell_preview_image' );
+					the_post_thumbnail( 'eksell_preview_image' );
 				} else {
 					echo $fallback_image;
 				}

@@ -222,6 +222,14 @@ Included as part of:
 
 == Changelog ==
 
+Version 1.1.3 (2021-03-23)
+-------------------------
+- Adjusted the size and spacing of the elements in the footer to allow for more content without line breaks.
+– Category filter: Fade out the pagination while updating the post grid.
+- Slight improvements to the styling of Jetpack Comments.
+- Fixed single post navigation images not always filling the available horizontal space.
+- Fixed incorrect order of arguments passed to the_post_thumbnail() in preview.php, resulting in the wrong image size being used.
+
 Version 1.1.2 (2021-03-22)
 -------------------------
 - Block editor styles: Fixed a section inner width inconsitency with the front end between 1200 - 1600px.

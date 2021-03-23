@@ -727,8 +727,8 @@ eksell.loadMore = {
 		// When the pagination query args are updated, reset the posts to reflect the new pagination
 		$eksellwin.on( 'reset-posts', function() {
 
-			// Fade out existing posts.
-			$( $pagination.data( 'load-more-target' ) ).find( '.article-wrapper' ).animate( { opacity: 0 }, 300, 'linear' );
+			// Fade out the pagination and existing posts.
+			$pagination.add( $( $pagination.data( 'load-more-target' ) ).find( '.article-wrapper' ) ).animate( { opacity: 0 }, 300, 'linear' );
 
 			// Reset posts.
 			eksell.loadMore.prepare( $pagination, resetPosts = true );
@@ -823,7 +823,9 @@ eksell.loadMore = {
 
 		// We're now loading.
 		eksellIsLoading = true;
-		$paginationWrapper.addClass( 'loading' );
+		if ( ! resetPosts ) {
+			$paginationWrapper.addClass( 'loading' );
+		}
 
 		// If we're not resetting posts, increment paged (reset = initial paged is correct).
 		if ( ! resetPosts ) {
@@ -884,7 +886,13 @@ eksell.loadMore = {
 						// Update the pagination query args.
 						$pagination.attr( 'data-query-args', jsonQueryArgs );
 
-						$( 'body' ).removeClass( 'filtering-posts' );
+						// Reset the resetting of posts.
+						if ( resetPosts ) {
+							setTimeout( function() {
+								$pagination.animate( { opacity: 1 }, 600, 'linear' );
+							}, 400 );
+							$( 'body' ).removeClass( 'filtering-posts' );
+						}
 
 						// If that was the last page, make sure we don't check for more.
 						if ( queryArgsParsed.paged == queryArgsParsed.max_num_pages ) {
