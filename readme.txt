@@ -229,6 +229,7 @@ Version 1.1.3 (2021-03-23)
 - Slight improvements to the styling of Jetpack Comments.
 - Fixed single post navigation images not always filling the available horizontal space.
 - Fixed incorrect order of arguments passed to the_post_thumbnail() in preview.php, resulting in the wrong image size being used.
+- Removed default-fallback-image-tall-dark-mode.png and default-fallback-image-square-dark-mode.png, since they weren't being used.
 
 Version 1.1.2 (2021-03-22)
 -------------------------
