@@ -125,7 +125,7 @@
 					if ( $enable_search ) : 
 						?>
 
-						<a href="#" class="search-toggle toggle" data-toggle-target=".search-modal" data-toggle-screen-lock="true" data-toggle-body-class="showing-search-modal" data-set-focus=".search-modal .search-field" aria-pressed="false" data-untoggle-below="700">
+						<a href="#" class="search-toggle toggle" data-toggle-target=".search-modal" data-toggle-screen-lock="true" data-toggle-body-class="showing-search-modal" data-set-focus=".search-modal .search-field" aria-pressed="false" role="button" role="button" data-untoggle-below="700">
 							<span class="screen-reader-text"><?php esc_html_e( 'Search', 'eksell' ); ?></span>
 							<?php eksell_the_theme_svg( 'ui', 'search', 18, 18 ); ?>
 						</a>
@@ -136,7 +136,7 @@
 					$nav_toggle_class = $enable_search ? ' icon-menu-search' : ' icon-menu';
 					?>
 
-					<a href="#" class="nav-toggle mobile-nav-toggle toggle<?php echo $nav_toggle_class; ?>" data-toggle-target=".menu-modal" data-toggle-screen-lock="true" data-toggle-body-class="showing-menu-modal" data-set-focus=".menu-modal .nav-untoggle" aria-pressed="false">
+					<a href="#" class="nav-toggle mobile-nav-toggle toggle<?php echo $nav_toggle_class; ?>" data-toggle-target=".menu-modal" data-toggle-screen-lock="true" data-toggle-body-class="showing-menu-modal" data-set-focus=".menu-modal .nav-untoggle" aria-pressed="false" role="button">
 						<span class="screen-reader-text"><?php esc_html_e( 'Menu', 'eksell' ); ?></span>
 						<?php 
 						// Determine the menu icon based on whether search is disabled.

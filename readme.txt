@@ -222,6 +222,11 @@ Included as part of:
 
 == Changelog ==
 
+Version 1.1.4 (2021-03-XX)
+-------------------------
+- Added role="button" to all elements with the aria-pressed attribute, to make sure the aria-pressed attribute is supported for those elements.
+- Removed the aria-pressed attribute from the menu-modal-cover-untoggle element (the element catching clicks outside the modal which closes the modal when clicked), since that element isn't visible to screen readers.
+
 Version 1.1.3 (2021-03-23)
 -------------------------
 - Adjusted the size and spacing of the elements in the footer to allow for more content without line breaks.
