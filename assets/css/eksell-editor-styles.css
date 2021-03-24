@@ -13,6 +13,7 @@
 	/* Typography */
 	--eksell-body-font: 'Public Sans', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, sans-serif;
 	--eksell-headings-font: 'Public Sans', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, sans-serif;
+	--eksell-headings-weight: 700;
 	/* Colors */
 	--eksell-accent-color: #d23c50;
 	--eksell-primary-color: #1e2d32;
@@ -268,7 +269,7 @@ html {
 	font-family: var( --eksell-headings-font );
 	font-feature-settings: "lnum";
 	font-variant-numeric: lining-nums;
-	font-weight: 700;
+	font-weight: var( --eksell-headings-weight );
 	letter-spacing: -0.02em;
 	line-height: 1.25;
 	margin: 4.8rem auto 3.2rem;
@@ -523,7 +524,7 @@ html {
 .editor-styles-wrapper .wp-block-categories li > a,
 .editor-styles-wrapper .wp-block-latest-posts li > a {
 	font-size: 1.25em;
-	font-weight: 700;
+	font-weight: var( --eksell-headings-weight );
 	text-decoration: none;
 }
 
@@ -913,7 +914,7 @@ html {
 }
 
 .editor-styles-wrapper .wp-block-latest-comments__comment-meta {
-	font-weight: 700;
+	font-weight: var( --eksell-headings-weight );
 }
 
 .editor-styles-wrapper .wp-block-latest-comments__comment-meta a {
