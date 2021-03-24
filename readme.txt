@@ -222,10 +222,12 @@ Included as part of:
 
 == Changelog ==
 
-Version 1.1.4 (2021-03-XX)
+Version 1.1.4 (2021-03-24)
 -------------------------
 - Added role="button" to all elements with the aria-pressed attribute, to make sure the aria-pressed attribute is supported for those elements.
 - Removed the aria-pressed attribute from the menu-modal-cover-untoggle element (the element catching clicks outside the modal which closes the modal when clicked), since that element isn't visible to screen readers.
+- Set the row with the social icons and search toggle in the header to not line break.
+- Set post thumbnails of the image/gif mime type to always use the full image size, to include animations.
 
 Version 1.1.3 (2021-03-23)
 -------------------------

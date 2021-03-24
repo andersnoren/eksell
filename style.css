@@ -4401,10 +4401,6 @@ hr + .comment-reply-title {
 
 	/* HEADER TOGGLES */
 
-	.header-toggles {
-		flex-shrink: 1;
-	}
-
 	.header-toggles .nav-toggle {
 		display: none;
 	}

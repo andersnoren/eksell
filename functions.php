@@ -642,6 +642,31 @@ endif;
 
 
 /* 	-----------------------------------------------------------------------------------------------
+	FILTER IMAGE SIZE FOR GIF POST THUMBNAILS
+	Set post thumbnails of the GIF file type to always use the `full` size, so they include animations.
+
+	@param string|int[] $size		Requested image size. Can be any registered image size name, or 
+									an array of width and height values in pixels (in that order).
+    @param int 			$post_id 	The post ID.
+--------------------------------------------------------------------------------------------------- */
+
+if ( ! function_exists( 'eksell_filter_post_thumbnail_size' ) ) :
+	function eksell_filter_post_thumbnail_size( $size, $post_id ) {
+
+		$mime_type = get_post_mime_type( get_post_thumbnail_id( $post_id ) );
+
+		if ( $mime_type && $mime_type === 'image/gif' ) {
+			return 'full';
+		}
+
+		return $size;
+
+	}
+	add_filter( 'post_thumbnail_size', 'eksell_filter_post_thumbnail_size', 10, 3 );
+endif;
+
+
+/* 	-----------------------------------------------------------------------------------------------
 	MAYBE DISABLE GOOGLE FONTS
 	Check whether to disable Google Fonts based on the setting in the Customizer.
 --------------------------------------------------------------------------------------------------- */
