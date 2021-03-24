@@ -116,6 +116,8 @@ html {
 }
 
 .editor-styles-wrapper .block-editor-block-list__layout.is-root-container > *:not([data-align="full"]) {
+	margin-left: auto;
+	margin-right: auto;
 	width: calc( 100% - var( --eksell-inner-gutter-compensated ) );
 }
 
@@ -969,6 +971,11 @@ html {
 .editor-styles-wrapper .wp-block-latest-posts__post-excerpt {
 	line-height: 1.4;
 	margin: 1.2rem 0 0;
+}
+
+.editor-styles-wrapper .wp-block-latest-posts__featured-image:not(.aligncenter) a,
+.editor-styles-wrapper .wp-block-latest-posts__featured-image:not(.aligncenter) img {
+	width: 100%;
 }
 
 /* STYLE: LIST */

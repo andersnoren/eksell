@@ -2,7 +2,7 @@
 
 	Theme Name: Eksell
     Text Domain: eksell
-	Version: 1.1.4
+	Version: 1.1.5
 	Description: Eksell is a feature-rich portfolio and blog theme, with deep support for the block editor and full color settings. It includes extensive block styles and multiple prebuilt block patterns, and it styles the block editor to match the front-end of your site so you always have a good idea of what the end result will look like when you’re creating your content. Visitors can filter your posts and Jetpack Portfolio items without reloading the page with the lazyloading category filter, and full color settings in the Customizer give you easy control over all of the colors used in the theme, including the option to set a separate dark mode color scheme for devices that support it. Eksell also features a Blank Canvas page template that only outputs the content you add in the block editor, infinite scroll on archive pages, an optional search overlay, a sticky header setting, a social menu with icons, custom logo support, options for what post meta to display on archive pages, a lightweight construction for fast load times, and developer friendly code. Demo: https://andersnoren.se/themes/eksell/
 	Tags: blog, portfolio, grid-layout, one-column, two-columns, three-columns, four-columns, custom-background, custom-colors, custom-logo, custom-menu, editor-style, featured-images, sticky-post, theme-options, threaded-comments, translation-ready, block-styles, wide-blocks
 	Author: Anders Norén
@@ -2601,8 +2601,8 @@ h1.entry-title,
 
 .wp-block-archives li,
 .wp-block-categories li,
-.wp-block-latest-posts li,
-.wp-block-latest-comments li {
+.wp-block-latest-posts > li,
+.wp-block-latest-comments > li {
 	line-height: 1.2;
 	margin: 2.4rem 0 0 0;
 }
@@ -2615,15 +2615,14 @@ h1.entry-title,
 }
 
 .wp-block-archives li li,
-.wp-block-categories li li,
-.wp-block-latest-posts li li {
+.wp-block-categories li li {
 	margin-left: 2.4rem;
 }
 
 .wp-block-archives li > a,
 .wp-block-categories li > a,
-.wp-block-latest-posts li > a,
-.wp-block-latest-comments li > a {
+.wp-block-latest-posts > li > a,
+.wp-block-latest-comments > li > a {
 	font-size: 2.1rem;
 	font-weight: 700;
 	text-decoration: none;
@@ -2631,12 +2630,12 @@ h1.entry-title,
 
 .wp-block-archives li > a:hover,
 .wp-block-categories li > a:hover,
-.wp-block-latest-posts li > a:hover,
-.wp-block-latest-comments li > a:hover,
+.wp-block-latest-posts > li > a:hover,
+.wp-block-latest-comments > li > a:hover,
 .wp-block-archives li > a:focus,
 .wp-block-categories li > a:focus,
-.wp-block-latest-posts li > a:focus,
-.wp-block-latest-comments li > a:focus {
+.wp-block-latest-posts > li > a:focus,
+.wp-block-latest-comments > li > a:focus {
 	text-decoration: underline;
 }
 
@@ -3172,7 +3171,7 @@ h6.has-background {
 	width: 100%;
 }
 
-.wp-block-latest-posts .wp-block-latest-posts__featured-image img {
+.wp-block-latest-posts .wp-block-latest-posts__featured-image:not(.aligncenter) img {
 	width: 100%;
 }
 
@@ -3193,18 +3192,18 @@ h6.has-background {
 /* STYLE: LIST */
 /* STYLE: GRID */
 
-.wp-block-latest-posts.is-grid li {
+.wp-block-latest-posts.is-grid > li {
 	border-top: .1rem solid var( --eksell-border-color );
     margin: 0 0 2.4rem 0;
 	padding-top: 1.2rem;
     width: 100%;
 }
 
-.wp-block-latest-posts.columns-2 li:nth-child(2n),
-.wp-block-latest-posts.columns-3 li:nth-child(3n),
-.wp-block-latest-posts.columns-4 li:nth-child(4n),
-.wp-block-latest-posts.columns-5 li:nth-child(5n),
-.wp-block-latest-posts.columns-6 li:nth-child(6n) { 
+.wp-block-latest-posts.columns-2 > li:nth-child(2n),
+.wp-block-latest-posts.columns-3 > li:nth-child(3n),
+.wp-block-latest-posts.columns-4 > li:nth-child(4n),
+.wp-block-latest-posts.columns-5 > li:nth-child(5n),
+.wp-block-latest-posts.columns-6 > li:nth-child(6n) { 
 	margin-right: 0 !important;
 }
 
@@ -3214,15 +3213,28 @@ h6.has-background {
 
 @media ( min-width: 600px ) {
 
-	.wp-block-latest-posts.is-grid li {
+	.wp-block-latest-posts.is-grid > li {
 		margin: 1.6rem 2.4rem 1.6rem 0;
 	}
 
-    .wp-block-latest-posts.columns-2 li { width: calc( 50% - ( 1 * 2.4rem ) / 2 ); }
-    .wp-block-latest-posts.columns-3 li { width: calc( 33.33333% - ( 2 * 2.4rem ) / 3 ); }
-    .wp-block-latest-posts.columns-4 li { width: calc( 25% - ( 3 * 2.4rem ) / 4 ); }
-    .wp-block-latest-posts.columns-5 li { width: calc( 20% - ( 4 * 2.4rem ) / 5 ); }
-    .wp-block-latest-posts.columns-6 li { width: calc( 16.66667% - ( 5 * 2.4rem ) / 6 ); }
+	.wp-block-latest-posts.columns-1 > li {
+		margin-right: 0 !important;
+	}
+
+	.wp-block-latest-posts.columns-1 > li:nth-child(-n+1),
+	.wp-block-latest-posts.columns-2 > li:nth-child(-n+2),
+	.wp-block-latest-posts.columns-3 > li:nth-child(-n+3),
+	.wp-block-latest-posts.columns-4 > li:nth-child(-n+4),
+	.wp-block-latest-posts.columns-5 > li:nth-child(-n+5),
+	.wp-block-latest-posts.columns-6 > li:nth-child(-n+6) {
+		margin-top: 0 !important;
+	}
+
+    .wp-block-latest-posts.columns-2 > li { width: calc( 50% - ( 1 * 2.4rem ) / 2 ); }
+    .wp-block-latest-posts.columns-3 > li { width: calc( 33.33333% - ( 2 * 2.4rem ) / 3 ); }
+    .wp-block-latest-posts.columns-4 > li { width: calc( 25% - ( 3 * 2.4rem ) / 4 ); }
+    .wp-block-latest-posts.columns-5 > li { width: calc( 20% - ( 4 * 2.4rem ) / 5 ); }
+    .wp-block-latest-posts.columns-6 > li { width: calc( 16.66667% - ( 5 * 2.4rem ) / 6 ); }
 }
 
 /* Block: List ------------------------------- */
@@ -4806,7 +4818,7 @@ hr + .comment-reply-title {
 
 	/* BLOCK: LATEST POSTS */
 
-	.wp-block-latest-posts li {
+	.wp-block-latest-posts > li {
 		margin-top: 3.2rem;
 	}
 
@@ -4823,7 +4835,7 @@ hr + .comment-reply-title {
 	.wp-block-latest-posts .wp-block-latest-posts__featured-image.alignleft:not(.is-resized) { margin-right: 1.6rem; }
 	.wp-block-latest-posts .wp-block-latest-posts__featured-image.alignright:not(.is-resized) { margin-left: 1.6rem; }
 
-	.wp-block-latest-posts li > a {
+	.wp-block-latest-posts > li > a {
 		font-size: 2.4rem;
 	}
 
@@ -4839,7 +4851,7 @@ hr + .comment-reply-title {
 
 	/* Style: Grid */
 
-	.wp-block-latest-posts.is-grid li {
+	.wp-block-latest-posts.is-grid > li {
 		padding-top: 1.6rem;
 	}
 
@@ -5276,22 +5288,22 @@ hr + .comment-reply-title {
 
 	/* BLOCK: LATEST POSTS */
 
-	.wp-block-latest-posts.alignwide.is-grid li,
-	.wp-block-latest-posts.alignfull.is-grid li {
+	.wp-block-latest-posts.alignwide.is-grid > li,
+	.wp-block-latest-posts.alignfull.is-grid > li {
 		margin: 1.6rem 3.2rem 1.6rem 0;
 		padding-top: 2.4rem;
 	}
 
-	.wp-block-latest-posts.alignfull.columns-2 li,
-	.wp-block-latest-posts.alignwide.columns-2 li { width: calc( 50% - ( 1 * 3.2rem ) / 2 ); }
-	.wp-block-latest-posts.alignfull.columns-3 li,
-	.wp-block-latest-posts.alignwide.columns-3 li { width: calc( 33.33333% - ( 2 * 3.2rem ) / 3 ); }
-	.wp-block-latest-posts.alignfull.columns-4 li,
-	.wp-block-latest-posts.alignwide.columns-4 li { width: calc( 25% - ( 3 * 3.2rem ) / 4 ); }
-	.wp-block-latest-posts.alignfull.columns-5 li,
-	.wp-block-latest-posts.alignwide.columns-5 li { width: calc( 20% - ( 4 * 3.2rem ) / 5 ); }
-	.wp-block-latest-posts.alignfull.columns-6 li,
-	.wp-block-latest-posts.alignwide.columns-6 li { width: calc( 16.66667% - ( 5 * 3.2rem ) / 6 ); }
+	.wp-block-latest-posts.alignfull.columns-2 > li,
+	.wp-block-latest-posts.alignwide.columns-2 > li { width: calc( 50% - ( 1 * 3.2rem ) / 2 ); }
+	.wp-block-latest-posts.alignfull.columns-3 > li,
+	.wp-block-latest-posts.alignwide.columns-3 > li { width: calc( 33.33333% - ( 2 * 3.2rem ) / 3 ); }
+	.wp-block-latest-posts.alignfull.columns-4 > li,
+	.wp-block-latest-posts.alignwide.columns-4 > li { width: calc( 25% - ( 3 * 3.2rem ) / 4 ); }
+	.wp-block-latest-posts.alignfull.columns-5 > li,
+	.wp-block-latest-posts.alignwide.columns-5 > li { width: calc( 20% - ( 4 * 3.2rem ) / 5 ); }
+	.wp-block-latest-posts.alignfull.columns-6 > li,
+	.wp-block-latest-posts.alignwide.columns-6 > li { width: calc( 16.66667% - ( 5 * 3.2rem ) / 6 ); }
 
 	.wp-block-latest-posts.alignwide.is-grid .wp-block-latest-posts__featured-image,
 	.wp-block-latest-posts.alignfull.is-grid .wp-block-latest-posts__featured-image {
@@ -5522,21 +5534,21 @@ hr + .comment-reply-title {
 
 	/* BLOCK: LATEST POSTS */
 
-	.wp-block-latest-posts.alignwide.is-grid li,
-	.wp-block-latest-posts.alignfull.is-grid li {
+	.wp-block-latest-posts.alignwide.is-grid > li,
+	.wp-block-latest-posts.alignfull.is-grid > li {
 		margin: 2.4rem 4.8rem 2.4rem 0;
 	}
 
-	.wp-block-latest-posts.alignfull.columns-2 li,
-	.wp-block-latest-posts.alignwide.columns-2 li { width: calc( 50% - ( 1 * 4.8rem ) / 2 ); }
-	.wp-block-latest-posts.alignfull.columns-3 li,
-	.wp-block-latest-posts.alignwide.columns-3 li { width: calc( 33.33333% - ( 2 * 4.8rem ) / 3 ); }
-	.wp-block-latest-posts.alignfull.columns-4 li,
-	.wp-block-latest-posts.alignwide.columns-4 li { width: calc( 25% - ( 3 * 4.8rem ) / 4 ); }
-	.wp-block-latest-posts.alignfull.columns-5 li,
-	.wp-block-latest-posts.alignwide.columns-5 li { width: calc( 20% - ( 4 * 4.8rem ) / 5 ); }
-	.wp-block-latest-posts.alignfull.columns-6 li,
-	.wp-block-latest-posts.alignwide.columns-6 li { width: calc( 16.66667% - ( 5 * 4.8rem ) / 6 ); }
+	.wp-block-latest-posts.alignfull.columns-2 > li,
+	.wp-block-latest-posts.alignwide.columns-2 > li { width: calc( 50% - ( 1 * 4.8rem ) / 2 ); }
+	.wp-block-latest-posts.alignfull.columns-3 > li,
+	.wp-block-latest-posts.alignwide.columns-3 > li { width: calc( 33.33333% - ( 2 * 4.8rem ) / 3 ); }
+	.wp-block-latest-posts.alignfull.columns-4 > li,
+	.wp-block-latest-posts.alignwide.columns-4 > li { width: calc( 25% - ( 3 * 4.8rem ) / 4 ); }
+	.wp-block-latest-posts.alignfull.columns-5 > li,
+	.wp-block-latest-posts.alignwide.columns-5 > li { width: calc( 20% - ( 4 * 4.8rem ) / 5 ); }
+	.wp-block-latest-posts.alignfull.columns-6 > li,
+	.wp-block-latest-posts.alignwide.columns-6 > li { width: calc( 16.66667% - ( 5 * 4.8rem ) / 6 ); }
 
 	/* Entry Content ------------------------- */
 	/* Comments ------------------------------ */

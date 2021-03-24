@@ -222,10 +222,20 @@ Included as part of:
 
 == Changelog ==
 
+Version 1.1.5 (2021-03-XX)
+-------------------------
+- Block editor styles: Fixed misalignment issue causing the Latest Posts block to have excessive right margin when set to no alignment.
+- Block editor styles: Set the Latest Posts block featured images to fill available width, to match the front-end.
+- Latest posts block: Don't make the featured image fill available width if the images are set to centered alignment.
+- Latest posts block: Updated CSS targeting to reduce risk of breaking things down the road.
+- Latest posts block: Remove top margin from the items in the first row of the grid.
+- Latest posts block: Fixed margin of grid items when set to single column.
+- Screenshot: Updated the site title and description, and changed the image format from JPG to PNG to reduce file size (from 290 KB to 147 KB).
+
 Version 1.1.4 (2021-03-24)
 -------------------------
-- Added role="button" to all elements with the aria-pressed attribute, to make sure the aria-pressed attribute is supported for those elements.
-- Removed the aria-pressed attribute from the menu-modal-cover-untoggle element (the element catching clicks outside the modal which closes the modal when clicked), since that element isn't visible to screen readers.
+- A11y: Added role="button" to all elements with the aria-pressed attribute, to make sure the aria-pressed attribute is supported for those elements.
+- A11y: Removed the aria-pressed attribute from the menu-modal-cover-untoggle element (the element catching clicks outside the modal which closes the modal when clicked), since that element isn't visible to screen readers.
 - Set the row with the social icons and search toggle in the header to not line break.
 - Set post thumbnails of the image/gif mime type to always use the full image size, to include animations.
 
