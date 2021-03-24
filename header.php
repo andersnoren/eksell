@@ -93,7 +93,7 @@
 							 */
 							if ( $site_title ) :
 								?>
-								<div class="site-title" aria-hidden="true"><?php echo $site_title; ?></div>
+								<div class="site-title" aria-hidden="true"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php echo $site_title; ?></a></div>
 								<?php
 							endif;
 
