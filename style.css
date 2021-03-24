@@ -1322,11 +1322,6 @@ ul.social-icons li {
 .has-anim .a-fade-in-scale, .has-anim .spot-fade-in-scale.spotted { animation-name: fade-in-scale; }
 .has-anim .a-fade-up, .has-anim .spot-fade-up.spotted { animation-name: fade-up; }
 
-/* STATE: NO JS */
-
-.no-js .a-fade-in-scale, .no-js .spot-fade-in-scale,
-.no-js .a-fade-up, .no-js .spot-fade-up { opacity: 1.0; transform: none; }
-
 /* HELPER CLASSES */
 
 :root .a-del-100 { animation-delay: .1s; }

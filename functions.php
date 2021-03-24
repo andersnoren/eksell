@@ -359,6 +359,31 @@ endif;
 
 
 /*	-----------------------------------------------------------------------------------------------
+	NOSCRIPT STYLES
+	Unset CSS animations triggered in JavaScript within a noscript element, to prevent the flash of 
+	unstyled animation elements that occurs when using the .no-js class.
+--------------------------------------------------------------------------------------------------- */
+
+if ( ! function_exists( 'eksell_noscript_styles' ) ) :
+	function eksell_noscript_styles() {
+
+		?>
+		<noscript>
+			<style>
+				.spot-fade-in-scale, .no-js .spot-fade-up { 
+					opacity: 1.0 !important; 
+					transform: none !important;
+				}
+			</style>
+		</noscript>
+		<?php
+
+	}
+	add_action( 'wp_head', 'eksell_noscript_styles', 0 );
+endif;
+
+
+/*	-----------------------------------------------------------------------------------------------
 	ADD EXCERPT SUPPORT TO PAGES
 	Enables the excerpt subheading output in the page header on pages as well as posts.
 --------------------------------------------------------------------------------------------------- */
