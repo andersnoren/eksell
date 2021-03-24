@@ -232,6 +232,8 @@ Version 1.1.5 (2021-03-XX)
 - Latest posts block: Fixed margin of grid items when set to single column.
 - Screenshot: Updated the site title and description, and changed the image format from JPG to PNG to reduce file size (from 290 KB to 147 KB).
 - Added the new --eksell-headings-weight CSS variable, to make it easier to modify headings weight in child themes and custom CSS.
+- JS: Camelcased the $eksellwin global variable.
+- Increased priority of the function modifying the no-js html class, so it is updated as early as possible.
 
 Version 1.1.4 (2021-03-24)
 -------------------------

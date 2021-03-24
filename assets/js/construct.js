@@ -11,7 +11,7 @@ var eksell = eksell || {},
 --------------------------------------------------------------------------------------------------- */
 
 var $eksellDoc = $( document ),
-    $eksellwin = $( window );
+    $eksellWin = $( window );
 
 
 /*	-----------------------------------------------------------------------------------------------
@@ -66,7 +66,7 @@ eksell.intervalScroll = {
 		didScroll = false;
 
 		// Check for the scroll event.
-		$eksellwin.on( 'scroll load', function() {
+		$eksellWin.on( 'scroll load', function() {
 			didScroll = true;
 		} );
 
@@ -76,7 +76,7 @@ eksell.intervalScroll = {
 				didScroll = false;
 
 				// When this triggers, we know that we have scrolled.
-				$eksellwin.trigger( 'did-interval-scroll' );
+				$eksellWin.trigger( 'did-interval-scroll' );
 
 			}
 
@@ -197,9 +197,9 @@ eksell.toggles = {
 
 		if ( $( '*[data-untoggle-above], *[data-untoggle-below], *[data-toggle-above], *[data-toggle-below]' ).length ) {
 
-			$eksellwin.on( 'resize', function() {
+			$eksellWin.on( 'resize', function() {
 
-				var winWidth = $eksellwin.width(),
+				var winWidth = $eksellWin.width(),
 					$toggles = $( '.toggle' );
 
 				$toggles.each( function() {
@@ -408,7 +408,7 @@ eksell.stickyHeader = {
 			// Update the dimensions of our stand-in element on load and screen size change.
 			eksell.stickyHeader.updateStandIn( $stickyElement );
 
-			$eksellwin.on( 'resize orientationchange', function() {
+			$eksellWin.on( 'resize orientationchange', function() {
 				eksell.stickyHeader.updateStandIn( $stickyElement );
 			} );
 
@@ -433,7 +433,7 @@ eksell.instrinsicRatioVideos = {
 
 		eksell.instrinsicRatioVideos.makeFit();
 
-		$eksellwin.on( 'resize fit-videos', function() {
+		$eksellWin.on( 'resize fit-videos', function() {
 			eksell.instrinsicRatioVideos.makeFit();
 		} );
 
@@ -487,8 +487,8 @@ eksell.scrollLock = {
 		// Initialize variables.
 		window.scrollLocked = false,
 		window.prevScroll = {
-			scrollLeft : $eksellwin.scrollLeft(),
-			scrollTop  : $eksellwin.scrollTop()
+			scrollLeft : $eksellWin.scrollLeft(),
+			scrollTop  : $eksellWin.scrollTop()
 		},
 		window.prevLockStyles = {},
 		window.lockStyles = {
@@ -543,8 +543,8 @@ eksell.scrollLock = {
 
 		// Save scroll state and styles
 		prevScroll = {
-			scrollLeft : $eksellwin.scrollLeft(),
-			scrollTop  : $eksellwin.scrollTop()
+			scrollLeft : $eksellWin.scrollLeft(),
+			scrollTop  : $eksellWin.scrollTop()
 		};
 
 		eksell.scrollLock.saveStyles();
@@ -559,7 +559,7 @@ eksell.scrollLock = {
 		$( 'html' ).css( appliedLock );
 		$( 'html' ).addClass( 'scroll-locked' );
 		$( 'html' ).attr( 'scroll-lock-top', prevScroll.scrollTop );
-		$eksellwin.scrollLeft( 0 ).scrollTop( 0 );
+		$eksellWin.scrollLeft( 0 ).scrollTop( 0 );
 
 		window.scrollLocked = true;
 	},
@@ -575,7 +575,7 @@ eksell.scrollLock = {
 		$( 'html' ).attr( 'style', $( '<x>' ).css( prevLockStyles ).attr( 'style' ) || '' );
 		$( 'html' ).removeClass( 'scroll-locked' );
 		$( 'html' ).attr( 'scroll-lock-top', '' );
-		$eksellwin.scrollLeft( prevScroll.scrollLeft ).scrollTop( prevScroll.scrollTop );
+		$eksellWin.scrollLeft( prevScroll.scrollLeft ).scrollTop( prevScroll.scrollTop );
 
 		window.scrollLocked = false;
 	},
@@ -725,7 +725,7 @@ eksell.loadMore = {
 		}
 
 		// When the pagination query args are updated, reset the posts to reflect the new pagination
-		$eksellwin.on( 'reset-posts', function() {
+		$eksellWin.on( 'reset-posts', function() {
 
 			// Fade out the pagination and existing posts.
 			$pagination.add( $( $pagination.data( 'load-more-target' ) ).find( '.article-wrapper' ) ).animate( { opacity: 0 }, 300, 'linear' );
@@ -773,7 +773,7 @@ eksell.loadMore = {
 	// Load more on scroll
 	detectScroll: function( $pagination, query_args ) {
 
-		$eksellwin.on( 'did-interval-scroll', function() {
+		$eksellWin.on( 'did-interval-scroll', function() {
 
 			// If it's the last page, or we're already loading, we're done here.
 			if ( eksellIsLastPage || eksellIsLoading ) {
@@ -781,7 +781,7 @@ eksell.loadMore = {
 			}
 
 			var paginationOffset 	= $pagination.offset().top,
-				winOffset 			= $eksellwin.scrollTop() + $eksellwin.outerHeight();
+				winOffset 			= $eksellWin.scrollTop() + $eksellWin.outerHeight();
 
 			// If the bottom of the window is below the top of the pagination, start loading.
 			if ( ( winOffset > paginationOffset ) ) {
@@ -876,8 +876,8 @@ eksell.loadMore = {
 						// Append the results.
 						$articleWrapper.append( $result ).masonry( 'appended', $result ).masonry();
 
-						$eksellwin.trigger( 'ajax-content-loaded' );
-						$eksellwin.trigger( 'did-interval-scroll' );
+						$eksellWin.trigger( 'ajax-content-loaded' );
+						$eksellWin.trigger( 'did-interval-scroll' );
 
 						// We're now finished with the loading.
 						eksellIsLoading = false;
@@ -958,7 +958,7 @@ eksell.filters = {
 					$( '#pagination' ).attr( 'data-query-args', result );
 
 					// Reset the posts.
-					$eksellwin.trigger( 'reset-posts' );
+					$eksellWin.trigger( 'reset-posts' );
 
 					// Update active class.
 					$( '.filter-link' ).removeClass( 'pre-active active' );
@@ -992,7 +992,7 @@ eksell.elementInView = {
 		eksell.elementInView.run( $targets );
 
 		// Rerun on AJAX content loaded.
-		$eksellwin.on( 'ajax-content-loaded', function() {
+		$eksellWin.on( 'ajax-content-loaded', function() {
 			$targets = $( 'body.has-anim .do-spot' );
 			eksell.elementInView.run( $targets );
 		} );
@@ -1010,7 +1010,7 @@ eksell.elementInView = {
 
 			eksell.elementInView.handleFocus( $targets );
 
-			$eksellwin.on( 'load resize orientationchange did-interval-scroll', function() {
+			$eksellWin.on( 'load resize orientationchange did-interval-scroll', function() {
 				eksell.elementInView.handleFocus( $targets );
 			} );
 
@@ -1040,11 +1040,11 @@ eksell.elementInView = {
 			checkAbove = false;
 		}
 
-		var winHeight 				= $eksellwin.height();
+		var winHeight 				= $eksellWin.height();
 
-		var docViewTop 				= $eksellwin.scrollTop(),
+		var docViewTop 				= $eksellWin.scrollTop(),
 			docViewBottom			= docViewTop + winHeight,
-			docViewLimit 			= docViewBottom - 50;
+			docViewLimit 			= docViewBottom;
 
 		var elemTop 				= $elem.offset().top;
 
@@ -1085,7 +1085,7 @@ eksell.masonry = {
 
 				// Trigger will-be-spotted elements.
 				$grid.on( 'layoutComplete', function() {
-					$eksellwin.trigger( 'scroll' );
+					$eksellWin.trigger( 'scroll' );
 				} );
 
 				// Check for Masonry layout changes on an interval. Accounts for DOM changes caused by lazyloading plugins.
@@ -1093,7 +1093,7 @@ eksell.masonry = {
 				eksell.masonry.intervalUpdate( $grid );
 
 				// Reinstate the interval when new content is loaded.
-				$eksellwin.on( 'ajax-content-loaded', function() {
+				$eksellWin.on( 'ajax-content-loaded', function() {
 					eksell.masonry.intervalUpdate( $grid );
 				} );
 
@@ -1129,7 +1129,7 @@ eksell.dynamicHeights = {
 
 		eksell.dynamicHeights.resize();
 
-		$eksellwin.on( 'resize orientationchange', function() {
+		$eksellWin.on( 'resize orientationchange', function() {
 			eksell.dynamicHeights.resize();
 		} );
 
@@ -1142,7 +1142,7 @@ eksell.dynamicHeights = {
 			$content 	= $( '#site-content' )
 			
 		var headerHeight = $header.outerHeight(),
-			contentHeight = $eksellwin.outerHeight() - headerHeight - parseInt( $header.css( 'marginBottom' ) ) - $footer.outerHeight() - parseInt( $footer.css( 'marginTop' ) );
+			contentHeight = $eksellWin.outerHeight() - headerHeight - parseInt( $header.css( 'marginBottom' ) ) - $footer.outerHeight() - parseInt( $footer.css( 'marginTop' ) );
 
 		// Set a min-height for the content.
 		$content.css( 'min-height', contentHeight );

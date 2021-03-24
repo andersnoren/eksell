@@ -354,7 +354,7 @@ if ( ! function_exists( 'eksell_no_js_class' ) ) :
 		<?php
 
 	}
-	add_action( 'wp_head', 'eksell_no_js_class' );
+	add_action( 'wp_head', 'eksell_no_js_class', 0 );
 endif;
 
 
