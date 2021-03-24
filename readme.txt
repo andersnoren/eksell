@@ -222,7 +222,7 @@ Included as part of:
 
 == Changelog ==
 
-Version 1.1.5 (2021-03-XX)
+Version 1.1.5 (2021-03-24)
 -------------------------
 - Block editor styles: Fixed misalignment issue causing the Latest Posts block to have excessive right margin when set to no alignment.
 - Block editor styles: Set the Latest Posts block featured images to fill available width, to match the front-end.
@@ -232,8 +232,8 @@ Version 1.1.5 (2021-03-XX)
 - Latest posts block: Fixed margin of grid items when set to single column.
 - Screenshot: Updated the site title and description, and changed the image format from JPG to PNG to reduce file size (from 290 KB to 147 KB).
 - Added the new --eksell-headings-weight CSS variable, to make it easier to modify headings weight in child themes and custom CSS.
-- JS: Camelcased the $eksellwin global variable.
-- Increased priority of the function updating the no-js html class, so it is updated as early as possible.
+- JS: Camelcased the $eksellWin global variable, to match $eksellDoc.
+- Increased priority of the function updating the no-js html class, so it's called as early as possible.
 - Unset CSS animations triggered in JavaScript within a noscript element, to prevent the flash of unstyled animation elements that occurs when using the .no-js class.
 - Added a home link to the site title when displaying both a custom logo and the site title.
 
