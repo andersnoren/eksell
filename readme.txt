@@ -222,6 +222,10 @@ Included as part of:
 
 == Changelog ==
 
+Version 1.1.6 (2021-03-26)
+-------------------------
+- Fixed the "greater than" character (>) closing elements on some server configurations when used in HTML attributes.
+
 Version 1.1.5 (2021-03-24)
 -------------------------
 - Block editor styles: Fixed misalignment issue causing the Latest Posts block to have excessive right margin when set to no alignment.
