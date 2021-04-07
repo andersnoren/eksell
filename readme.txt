@@ -222,6 +222,10 @@ Included as part of:
 
 == Changelog ==
 
+Version 1.1.7 (2021-04-07)
+-------------------------
+- Set the #site-content element to overflow: hidden to prevent issues with content overflow and viewport units in browsers on Windows 10 (thanks, @lucienlapidus).
+
 Version 1.1.6 (2021-03-26)
 -------------------------
 - Fixed the "greater than" character (>) closing elements on some server configurations when used in HTML attributes.
