@@ -29,13 +29,20 @@
 
 		// Don't output the site header, the site aside or the modals on the Blank Canvas page template.
 		// The filter can be used to enable the blank canvas in different circumstances.
-		$blank_canvas = apply_filters( 'eksell_blank_canvas', is_page_template( array( 'page-templates/template-blank-canvas.php' ) ) );
+		$blank_canvas 				= apply_filters( 'eksell_blank_canvas', is_page_template( array( 'page-templates/template-blank-canvas.php' ) ) );
+		$blank_canvas_with_aside 	= apply_filters( 'eksell_blank_canvas_with_aside', is_page_template( array( 'page-templates/template-blank-canvas-with-aside.php' ) ) );
 
 		// If it's a blank canvas, output nothing past this point.
 		if ( $blank_canvas ) return;
 
 		// Include the site aside, which contains the navigation toggle on desktop.
 		get_template_part( 'inc/parts/site-aside' );
+
+		// Include the menu modal.
+		get_template_part( 'inc/parts/modal-menu' );
+
+		// If it's a blank canvas with the aside, output nothing past this point.
+		if ( $blank_canvas_with_aside ) return;
 
 		// Check whether the header search is disabled in the customizer.
 		$enable_search = get_theme_mod( 'eksell_enable_search', true );
@@ -163,16 +170,10 @@
 			?>
 
 		</header><!-- #site-header -->
-
+		
 		<?php
-
-		// Include the menu modal.
-		get_template_part( 'inc/parts/modal-menu' );
 
 		// Output the search modal (if it isn't deactivated in the customizer).
 		if ( $enable_search ) {
 			get_template_part( 'inc/parts/modal-search' );
 		}
-
-		?>
-		

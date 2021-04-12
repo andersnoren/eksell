@@ -32,10 +32,20 @@ The Only Content Template hides all elements in the content area of Eksell excep
 
 == How to Use the Blank Canvas Template ==
 
-The Blank Canvas template hides everything on the page except the block editor content, including the site header, aside (with the navigation toggle), footer, and modals.
+The Blank Canvas Template hides everything on the page except the block editor content, including the site header, aside (with the navigation toggle), footer, and modals.
 
 1. Go to Pages → Add New or edit an existing page.
 2. In the righthand sidebar, expand the "Page Attributes" dropdown, click the "Template" dropdown, and select "Blank Canvas Template" from the list.
+3. Add the block editor content you want to include on the page.
+4. When you're done, click the "Publish" or "Update" button to publish your changes.
+
+
+== How to Use the Blank Canvas with Menu Template ==
+
+The Blank Canvas with Menu Template hides everything on the page except the block editor content and the aside (with the navigation toggle) on the left side of the screen. On mobile, the navigation toggle is displayed at the top of the screen when using this template.
+
+1. Go to Pages → Add New or edit an existing page.
+2. In the righthand sidebar, expand the "Page Attributes" dropdown, click the "Template" dropdown, and select "Blank Canvas with Menu Template" from the list.
 3. Add the block editor content you want to include on the page.
 4. When you're done, click the "Publish" or "Update" button to publish your changes.
 
@@ -221,6 +231,12 @@ Included as part of:
 
 
 == Changelog ==
+
+Version 1.2.0 (2021-04-12)
+-------------------------
+- Added the Blank Canvas with Menu Template. It works the same as the Blank Canvas Template, but with the navigation toggle visible to the left of the content on desktop, and above the content on mobile.
+- Jetpack Portfolio: Added a Customizer option for what text to display on the Jetpack Portfolio archive page.
+- Post Navigation Links: Set the list of page numbers on paginated posts/pages to wrap, to prevent layout issues on pages with lots of "Next Page" blocks.
 
 Version 1.1.7 (2021-04-07)
 -------------------------

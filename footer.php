@@ -2,10 +2,11 @@
 
 		// Don't output the site footer on the Blank Canvas page template.
 		// The filter can be used to enable the blank canvas in different circumstances.
-		$blank_canvas = apply_filters( 'eksell_blank_canvas', is_page_template( array( 'page-templates/template-blank-canvas.php' ) ) );
+		$blank_canvas 				= apply_filters( 'eksell_blank_canvas', is_page_template( array( 'page-templates/template-blank-canvas.php' ) ) );
+		$blank_canvas_with_aside 	= apply_filters( 'eksell_blank_canvas_with_aside', is_page_template( array( 'page-templates/template-blank-canvas-with-aside.php' ) ) );
 
 		// Output the site footer if we're not doing a blank canvas.
-		if ( ! $blank_canvas ) :
+		if ( ! ( $blank_canvas || $blank_canvas_with_aside ) ) :
 			?>
 		
 			<footer id="site-footer">

@@ -260,6 +260,26 @@ if ( ! class_exists( 'Eksell_Customizer' ) ) :
 				'description' 	=> esc_html__( 'Shown below the site title on the front page, when the front page is set to display latest posts.', 'eksell' ),
 			) );
 
+			/* Portfolio Archive Text -------- */
+
+			// Only show this option if Jetpack is installed and the Jetpack Portfolio module is activated.
+			if ( post_type_exists( 'jetpack-portfolio' ) ) {
+
+				$wp_customize->add_setting( 'eksell_jetpack_portfolio_archive_text', array(
+					'capability' 		=> 'edit_theme_options',
+					'default'			=> '',
+					'sanitize_callback' => 'sanitize_textarea_field',
+				) );
+
+				$wp_customize->add_control( 'eksell_jetpack_portfolio_archive_text', array(
+					'type' 			=> 'textarea',
+					'section' 		=> 'eksell_archive_pages_options',
+					'label' 		=> esc_html__( 'Portfolio Intro Text', 'eksell' ),
+					'description' 	=> esc_html__( 'Shown below the site title on the Jetpack Portfolio archive. If left empty, the default Jetpack Portfolio archive title is shown.', 'eksell' ),
+				) );
+
+			}
+
 			/* Show Home Post Filter --------- */
 
 			$wp_customize->add_setting( 'eksell_show_home_filter', array(

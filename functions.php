@@ -283,7 +283,7 @@ if ( ! function_exists( 'eksell_body_classes' ) ) :
 		}
 
 		// Check whether the current page only has content.
-		if ( is_page_template( array( 'page-templates/template-no-title.php', 'page-templates/template-blank-canvas.php' ) ) ) {
+		if ( is_page_template( array( 'page-templates/template-no-title.php', 'page-templates/template-blank-canvas.php', 'page-templates/template-blank-canvas-with-aside.php' ) ) ) {
 			$classes[] = 'has-only-content';
 		}
 
@@ -478,6 +478,11 @@ if ( ! function_exists( 'eksell_filter_archive_title' ) ) :
 			$paged 	= get_query_var( 'paged' ) ? get_query_var( 'paged' ) : 1;
 			$max 	= isset( $wp_query->max_num_pages ) ? $wp_query->max_num_pages : 1;
 			$title 	= sprintf( esc_html_x( 'Page %1$s of %2$s', '%1$s = Current page number, %2$s = Number of pages', 'eksell' ), $paged, $max );
+		}
+
+		// Jetpack Portfolio archive: Get the Customizer option for the Jetpack Portfolio archive title, if it is set and isn't empty.
+		elseif ( is_post_type_archive( 'jetpack-portfolio' ) && ! is_paged() && get_theme_mod( 'eksell_jetpack_portfolio_archive_text', '' ) ) {
+			$title = get_theme_mod( 'eksell_jetpack_portfolio_archive_text', '' );
 		}
 
 		// On search, show the search query.
