@@ -50,6 +50,22 @@ The Blank Canvas with Menu Template hides everything on the page except the bloc
 4. When you're done, click the "Publish" or "Update" button to publish your changes.
 
 
+== Show Jetpack Portfolio Archive on the Front Page ==
+
+Make sure you have the Jetpack plugin installed, and the "Portfolio" module activated.
+
+1. Log in to the administration panel of your site.
+2. Go to Pages → Add New.
+2. In the righthand sidebar, expand the "Page Attributes" dropdown, click the "Template" dropdown, and select "Portfolio Template" from the list.
+3. The title of the page and the content in the block editor will be used as the title and description of the page.
+4. When you're done, click the "Publish" button to publish your changes.
+5. Go to Settings → Reading. 
+6. Next to the "Your homepage displays" setting, select "A static page" and select the page you just created in the "Homepage" dropdown. Select a "Posts page" if you want to have a archive page for your regular blog posts.
+7. Click the "Save Changes" button. Your front page will now display your most recent projects.
+
+You can change the number of projects per page by going to Settings → Writing, where you modify the value in the "Portfolio pages display at most" input.
+
+
 == Block Styles ==
 
 Block styles allow you to set a specific style on a block in the block editor. These instructions are for the custom block styles included with Eksell. 
@@ -231,6 +247,14 @@ Included as part of:
 
 
 == Changelog ==
+
+Version 1.3.0 (2021-04-14)
+-------------------------
+- Added the new Portfolio Template, which mimics the Jetpack Portfolio archive page and can be set to be displayed on the front page of the site.
+- Readme: Added a description of the new Portfolio Template.
+- Archives: Output the previous page link on the last page of an archive as well.
+- Portfolio Archive Filter: When resetting the project grid, set posts per page to the value of the `jetpack_portfolio_posts_per_page` option.
+- Preview: Moved the "Hooked" comment for eksell_maybe_output_post_meta to the right action.
 
 Version 1.2.0 (2021-04-12)
 -------------------------

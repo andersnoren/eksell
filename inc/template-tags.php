@@ -298,7 +298,7 @@ if ( ! function_exists( 'eksell_the_archive_filter' ) ) :
 		// Check if we're showing the filter
 		if ( ! eksell_show_home_filter() ) return;
 
-		$filter_taxonomy = is_post_type_archive( 'jetpack-portfolio' ) ? 'jetpack-portfolio-type' : 'category';
+		$filter_taxonomy = ( is_post_type_archive( 'jetpack-portfolio' ) || is_page_template( 'page-templates/template-portfolio.php' ) ) ? 'jetpack-portfolio-type' : 'category';
 
 		// Use the eksell_home_filter_get_terms_args filter to modify which taxonomy is used for the filtration.
 		$terms = get_terms( apply_filters( 'eksell_home_filter_get_terms_args', array(
@@ -317,6 +317,9 @@ if ( ! function_exists( 'eksell_the_archive_filter' ) ) :
 			$home_url 	= home_url();
 		} elseif ( is_post_type_archive() ) {
 			$post_type 	= get_post_type();
+			$home_url 	= get_post_type_archive_link( $post_type );
+		} else if ( is_page_template( 'page-templates/template-portfolio.php' ) ) {
+			$post_type 	= 'jetpack-portfolio';
 			$home_url 	= get_post_type_archive_link( $post_type );
 		}
 
@@ -357,9 +360,9 @@ endif;
 if ( ! function_exists( 'eksell_show_home_filter' ) ) :
 	function eksell_show_home_filter() {
 
-		global $paged;
+		$paged = get_query_var( 'paged' ) ? get_query_var( 'paged' ) : ( get_query_var( 'page' ) ? get_query_var( 'page' ) : 1 );
 
-		return apply_filters( 'eksell_show_home_filter', ( is_home() || is_post_type_archive( 'jetpack-portfolio' ) ) && $paged == 0 && get_theme_mod( 'eksell_show_home_filter', true ) );
+		return apply_filters( 'eksell_show_home_filter', ( is_home() || is_page_template( 'page-templates/template-portfolio.php' ) || is_post_type_archive( 'jetpack-portfolio' ) ) && $paged == 1 && get_theme_mod( 'eksell_show_home_filter', true ) );
 
 	}
 endif;
@@ -375,8 +378,10 @@ endif;
 if ( ! function_exists( 'eksell_maybe_output_post_meta' ) ) :
 	function eksell_maybe_output_post_meta() {
 
+		global $post;
+
 		// Escaped in eksell_get_post_meta().
-		echo eksell_get_post_meta( get_queried_object_id() );
+		echo eksell_get_post_meta( $post->ID );
 
 	}
 	add_action( 'eksell_preview_end', 'eksell_maybe_output_post_meta' );

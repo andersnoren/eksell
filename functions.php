@@ -781,6 +781,10 @@ if ( ! function_exists( 'eksell_ajax_filters' ) ) :
 			'post_type'				=> $post_type,
 		);
 
+		if ( $post_type == 'jetpack-portfolio' ) {
+			$args['posts_per_page'] = get_option( 'jetpack_portfolio_posts_per_page', get_option( 'posts_per_page', 10 ) );
+		}
+
 		if ( $term_id && $taxonomy ) {
 			$args['tax_query'] = array(
 				array(
@@ -807,6 +811,25 @@ if ( ! function_exists( 'eksell_ajax_filters' ) ) :
 	}
 	add_action( 'wp_ajax_nopriv_eksell_ajax_filters', 'eksell_ajax_filters' );
 	add_action( 'wp_ajax_eksell_ajax_filters', 'eksell_ajax_filters' );
+endif;
+
+
+/*	-----------------------------------------------------------------------------------------------
+	CONDITIONAL PAGE TEMPLATES
+--------------------------------------------------------------------------------------------------- */
+
+if ( ! function_exists( 'eksell_conditional_page_templates' ) ) :
+	function eksell_conditional_page_templates( $page_templates ) {
+
+		// If Jetpack Portfolio doesn't exist, remove the portfolio page template.
+		if ( ! post_type_exists( 'jetpack-portfolio' ) && isset( $page_templates['page-templates/template-portfolio.php'] ) ) {
+			unset( $page_templates['page-templates/template-portfolio.php'] );
+		}
+
+		return $page_templates;
+		
+	}
+	add_filter( 'theme_page_templates', 'eksell_conditional_page_templates' );
 endif;
 
 

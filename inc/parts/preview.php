@@ -37,16 +37,16 @@
 
 			the_title( '<h2 class="preview-title h4"><a href="' . esc_url( get_permalink() ) . '">', '</a></h2>' ); 
 
-			/*
-			 * @hooked eksell_maybe_output_post_meta - 10
-			 */
 			do_action( 'eksell_preview_header_end' );
 			?>
 		</header><!-- .preview-header -->
 
 		<?php
 	endif;
-	
+
+	/*
+	 * @hooked eksell_maybe_output_post_meta - 10
+	 */	
 	do_action( 'eksell_preview_end' );
 
 	?>
