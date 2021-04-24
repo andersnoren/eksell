@@ -248,6 +248,12 @@ Included as part of:
 
 == Changelog ==
 
+Version 1.3.1 (2021-04-24)
+-------------------------
+- Set alignnone blocks to align to the left.
+- Removed removal of horizontal auto margins on direct descendants of column blocks.
+- Force alignleft and alignright not to float until 700px, and force overwrites of block specific alignleft/alignright margins in Core.
+
 Version 1.3.0 (2021-04-14)
 -------------------------
 - Added the new Portfolio Template, which mimics the Jetpack Portfolio archive page and can be set to be displayed on the front page of the site.
