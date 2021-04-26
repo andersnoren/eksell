@@ -233,6 +233,22 @@ if ( ! class_exists( 'Eksell_Customizer' ) ) :
 				'description' 	=> esc_html__( 'Uncheck to disable the search button in the header, and the search form in the mobile menu.', 'eksell' ),
 			) );
 
+			/* Enable Menu Button Labels ----- */
+
+			$wp_customize->add_setting( 'eksell_enable_menu_button_labels', array(
+				'capability' 		=> 'edit_theme_options',
+				'default'			=> false,
+				'sanitize_callback' => 'eksell_sanitize_checkbox',
+			) );
+
+			$wp_customize->add_control( 'eksell_enable_menu_button_labels', array(
+				'type' 			=> 'checkbox',
+				'section' 		=> 'eksell_site_header_options',
+				'priority'		=> 10,
+				'label' 		=> esc_html__( 'Enable Menu Button Labels', 'eksell' ),
+				'description' 	=> esc_html__( 'Check to display text labels for the menu buttons in the header and sidebar.', 'eksell' ),
+			) );
+
 			/* ------------------------------------------------------------------------
 			 * Archive Pages
 			 * ------------------------------------------------------------------------ */

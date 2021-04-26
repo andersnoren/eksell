@@ -3,7 +3,7 @@ Contributors: Anlino
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=anders%40andersnoren%2ese&lc=US&item_name=Free%20WordPress%20Themes%20from%20Anders%20Noren&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted
 Requires at least: 4.5
 Requires PHP: 5.4
-Tested up to: 5.7
+Tested up to: 5.7.1
 Stable tag: trunk
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -144,6 +144,14 @@ By default, Eksell will animate some elements in the theme when they first becom
 4. Uncheck the "Enable Search" checkbox, and click the blue "Publish" button to save your changes.
 
 
+== Enable Menu Button Labels ==
+
+1. Log in to the administration panel of your site.
+2. Go to Appearance → Customize.
+3. Click the "Theme Options" panel, and then the "Site Header" panel.
+4. Check the "Enable Menu Button Labels" checkbox, and click the blue "Publish" button to save your changes.
+
+
 == Add Intro Text to the Front Page ==
 
 1. Log in to the administration panel of your site.
@@ -247,6 +255,13 @@ Included as part of:
 
 
 == Changelog ==
+
+Version 1.4.0 (2021-04-26)
+-------------------------
+- New "Enable Menu Button Labels" setting in the Customizer, which displays text labels next to the menu buttons (Menu/Close), and added documentation to the readme.
+- Moved the header toggle hover styles to 700px, when the search toggle and social icons are first displayed.
+- Updated the "Author URI" and "Theme URI" style.css fields to remove www.
+- Updated "Tested up to" to 5.7.1.
 
 Version 1.3.1 (2021-04-24)
 -------------------------

@@ -9,8 +9,15 @@
 			<div class="menu-modal-toggles">
 
 				<a href="#" class="toggle nav-untoggle" data-toggle-target=".menu-modal" data-toggle-screen-lock="true" data-toggle-body-class="showing-menu-modal" aria-pressed="false" role="button" data-set-focus="#site-aside .nav-toggle">
-					<span class="screen-reader-text"><?php esc_html_e( 'Close', 'eksell' ); ?></span>
+					
+					<?php if ( get_theme_mod( 'eksell_enable_menu_button_labels', false ) ) : ?>
+						<span class="nav-untoggle-text"><?php esc_html_e( 'Close', 'eksell' ); ?></span>
+					<?php else : ?>
+						<span class="screen-reader-text"><?php esc_html_e( 'Close', 'eksell' ); ?></span>
+					<?php endif; ?>
+
 					<?php eksell_the_theme_svg( 'ui', 'close', 18, 18 ); ?>
+
 				</a><!-- .nav-untoggle -->
 
 			</div><!-- .menu-modal-toggles -->

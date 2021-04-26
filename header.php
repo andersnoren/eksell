@@ -144,8 +144,14 @@
 					?>
 
 					<a href="#" class="nav-toggle mobile-nav-toggle toggle<?php echo $nav_toggle_class; ?>" data-toggle-target=".menu-modal" data-toggle-screen-lock="true" data-toggle-body-class="showing-menu-modal" data-set-focus=".menu-modal .nav-untoggle" aria-pressed="false" role="button">
-						<span class="screen-reader-text"><?php esc_html_e( 'Menu', 'eksell' ); ?></span>
-						<?php 
+
+						<?php if ( get_theme_mod( 'eksell_enable_menu_button_labels', false ) ) : ?>
+							<span class="mobile-nav-toggle-text"><?php esc_html_e( 'Menu', 'eksell' ); ?></span>
+						<?php else : ?>
+							<span class="screen-reader-text"><?php esc_html_e( 'Menu', 'eksell' ); ?></span>
+						<?php endif; ?>
+
+						<?php
 						// Determine the menu icon based on whether search is disabled.
 						if ( $enable_search ) {
 							eksell_the_theme_svg( 'ui', 'menu-search', 26, 24 );
@@ -153,6 +159,7 @@
 							eksell_the_theme_svg( 'ui', 'menu', 24, 24 );
 						}
 						?>
+						
 					</a>
 
 					<?php
