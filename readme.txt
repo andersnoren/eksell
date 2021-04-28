@@ -256,6 +256,10 @@ Included as part of:
 
 == Changelog ==
 
+Version 1.4.1 (2021-04-28)
+-------------------------
+- Removed base transitions on links to prevent P3 color gamut hover issue in Safari 13 (thanks, @adrianb).
+
 Version 1.4.0 (2021-04-26)
 -------------------------
 - New "Enable Menu Button Labels" setting in the Customizer, which displays text labels next to the menu buttons (Menu/Close), and added documentation to the readme.
