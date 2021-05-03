@@ -182,7 +182,7 @@ if ( ! function_exists( 'eksell_register_styles' ) ) :
 		wp_enqueue_style( 'eksell-style', get_template_directory_uri() . '/style.css', $css_dependencies, $theme_version, 'all' );
 
 		// Add output of Customizer settings as inline style.
-		wp_add_inline_style( 'eksell-style', Eksell_Custom_CSS::get_customizer_css() );
+		wp_add_inline_style( 'eksell-style', Eksell_Custom_CSS::get_customizer_css( 'front-end' ) );
 
 		// Enqueue the print styles stylesheet.
 		wp_enqueue_style( 'eksell-print-styles', get_template_directory_uri() . '/assets/css/print.css', false, $theme_version, 'print' );
@@ -856,7 +856,7 @@ if ( ! function_exists( 'eksell_block_editor_styles' ) ) :
 		wp_enqueue_style( 'eksell_block_editor_styles', 'get_theme_file_uri'( 'assets/css/eksell-editor-styles.css' ), $css_dependencies, $theme_version, 'all' );
 
 		// Add inline style from the Customizer.
-		wp_add_inline_style( 'eksell_block_editor_styles', Eksell_Custom_CSS::get_customizer_css() );
+		wp_add_inline_style( 'eksell_block_editor_styles', Eksell_Custom_CSS::get_customizer_css( 'editor' ) );
 
 	}
 	add_action( 'enqueue_block_editor_assets', 'eksell_block_editor_styles', 1, 1 );

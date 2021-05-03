@@ -1,7 +1,5 @@
 /* ---------------------------------------------------------------------------------------------
-
-	Eksell Editor Styles — Block Editor
-
+	Eksell Editor Styles
 ------------------------------------------------------------------------------------------------ */
 
 
@@ -34,7 +32,8 @@ html {
 	font-size: 62.5%; /* 1rem = 10px */
 }
 
-.editor-styles-wrapper {
+:root .editor-styles-wrapper {
+	background-color: var( --eksell-background-color );
 	color: var( --eksell-primary-color );
 	-moz-osx-font-smoothing: grayscale;
 	-webkit-font-smoothing: antialiased;

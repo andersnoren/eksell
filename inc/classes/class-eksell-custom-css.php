@@ -12,7 +12,7 @@ if ( ! class_exists( 'Eksell_Custom_CSS' ) ) :
 			GET CUSTOMIZER CSS
 		--------------------------------------------------------------------------------------------------- */
 
-		public static function get_customizer_css() {
+		public static function get_customizer_css( $view = 'front-end' ) {
 
 			// Get the color options.
 			// This array contains two sets of colors: regular and dark_mode.
@@ -29,7 +29,8 @@ if ( ! class_exists( 'Eksell_Custom_CSS' ) ) :
 				
 				foreach ( $color_options as $group_name => $group_color_options ) {
 
-					if ( $group_name == 'dark_mode' && ! $dark_mode_enabled ) continue;
+					// If we're outputting CSS for the editor styles, or if dark mode isn't enabled, skip the dark mode group.
+					if ( $group_name == 'dark_mode' && ( $view == 'editor' || ! $dark_mode_enabled ) ) continue;
 
 					foreach ( $group_color_options as $color_option_name => $color_option ) {
 

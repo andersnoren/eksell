@@ -256,6 +256,13 @@ Included as part of:
 
 == Changelog ==
 
+Version 1.4.2 (2021-05-03)
+-------------------------
+- Fixed alignright blocks not having any lefthand margin since 1.3.1 (thanks, @nicholasyeo).
+- Editor styles: Fixed the primary color not being applied as the base color (dito).
+- Editor styles: Fixed the background color not being applied as the background color (dito).
+- Editor styles: Fixed the dark mode colors being applied to the editor styles, when they shouldn't be (dito).
+
 Version 1.4.1 (2021-04-28)
 -------------------------
 - Removed base transitions on links to prevent P3 color gamut hover issue in Safari 13 (thanks, @adrianb).
