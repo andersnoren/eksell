@@ -256,6 +256,10 @@ Included as part of:
 
 == Changelog ==
 
+Version 1.4.3 (2021-05-04)
+-------------------------
+- Fixed the background image being set in the Customizer being overwritten by the theme styles (thanks, @ilovewpcom).
+
 Version 1.4.2 (2021-05-03)
 -------------------------
 - Fixed alignright blocks not having any lefthand margin since 1.3.1 (thanks, @nicholasyeo).
