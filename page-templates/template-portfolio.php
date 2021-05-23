@@ -4,6 +4,12 @@
 Template Name: Portfolio Template
 */
 
+/*
+ * Matches the structure of index.php when it's used to output Jetpack Portfolio items. The page template
+ * can be used to display the Jetpack Portfolio archive as the front page. If the Jetpack Portfolio post type 
+ * doesn't exist, this page template is unlisted by eksell_conditional_page_templates().
+ */
+
 get_header(); ?>
 
 <main id="site-content" role="main">
@@ -146,7 +152,7 @@ get_header(); ?>
 			</div><!-- .posts -->
 
 			<?php 
-			include( locate_template( 'pagination.php' ) ); 
+			get_template_part( 'pagination' );
 		endif;
 		?>
 

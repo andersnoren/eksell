@@ -306,7 +306,7 @@ if ( ! function_exists( 'eksell_the_archive_filter' ) ) :
 			'taxonomy'	=> $filter_taxonomy,
 		) ) );
 
-		if ( ! $terms ) return;
+		if ( is_wp_error( $terms ) || ! $terms ) return;
 
 		$home_url 	= '';
 		$post_type 	= '';
@@ -371,8 +371,6 @@ endif;
 /* ------------------------------------------------------------------------------------------------
    OUTPUT & GET POST META
    If it's a single post, output the post meta values specified in the Customizer settings.
-
-   @param	$post_id int		The ID of the post we're outputting post meta for.
 --------------------------------------------------------------------------------------------------- */
 
 if ( ! function_exists( 'eksell_maybe_output_post_meta' ) ) :

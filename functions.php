@@ -3,7 +3,7 @@
 
 /*	-----------------------------------------------------------------------------------------------
 	THEME SUPPORTS
-	Default setup, some features excluded
+	Define the theme features.
 --------------------------------------------------------------------------------------------------- */
 
 if ( ! function_exists( 'eksell_theme_support' ) ) :
@@ -699,6 +699,8 @@ endif;
 /* 	-----------------------------------------------------------------------------------------------
 	MAYBE DISABLE GOOGLE FONTS
 	Check whether to disable Google Fonts based on the setting in the Customizer.
+
+	@param string 		$url		The Google Fonts URL.
 --------------------------------------------------------------------------------------------------- */
 
 if ( ! function_exists( 'eksell_maybe_disable_google_fonts' ) ) :
@@ -781,17 +783,22 @@ if ( ! function_exists( 'eksell_ajax_filters' ) ) :
 			'post_type'				=> $post_type,
 		);
 
+		// Get the posts per page setting for Jetpack Portfolio.
 		if ( $post_type == 'jetpack-portfolio' ) {
 			$args['posts_per_page'] = get_option( 'jetpack_portfolio_posts_per_page', get_option( 'posts_per_page', 10 ) );
 		}
 
+		// Add the tax query, if set.
 		if ( $term_id && $taxonomy ) {
-			$args['tax_query'] = array(
-				array(
-					'taxonomy'	=> $taxonomy,
-					'terms'		=> $term_id,
-				)
-			);
+			$args['tax_query'] = array( array(
+				'taxonomy'	=> $taxonomy,
+				'terms'		=> $term_id,
+			) );
+
+		// If a taxonomy isn't set, and we're loading posts, make sure we include the sticky post in the results.
+		// The custom argument is used to prepend the latest sticky post with eksell_filter_posts_results().
+		} elseif ( $post_type == 'post' ) {
+			$args['eksell_prepend_sticky_post'] = true;
 		}
 
 		$custom_query = new WP_Query( $args );
@@ -804,7 +811,7 @@ if ( ! function_exists( 'eksell_ajax_filters' ) ) :
 			$query_args['max_num_pages'] = $custom_query->max_num_pages;
 		}
 
-		// Format and return.
+		// Format and return the query arguments.
 		echo json_encode( $query_args );
 
 		wp_die();
@@ -815,7 +822,44 @@ endif;
 
 
 /*	-----------------------------------------------------------------------------------------------
+	FILTER POSTS RESULTS
+	Filter the posts_results to include the sticky post when "Show All" is clicked in the taxonomy filter.
+
+	@param WP_Post[]	$posts Array of post objects.
+	@param WP_Query		$query The WP_Query instance.
+--------------------------------------------------------------------------------------------------- */
+
+if ( ! function_exists( 'eksell_filter_posts_results' ) ) :
+	function eksell_filter_posts_results( $posts, $query ) {
+
+		/*
+		 * If the custom eksell_prepend_sticky_post argument is present (added by eksell_ajax_filters()), 
+		 * and we're showing the first page, prepend the sticky post to the array of post objects.
+		 * This is done to include the sticky post when the "Show All" link is clicked in the taxonomy filter.
+		 */
+
+		if ( isset( $query->query['eksell_prepend_sticky_post'] ) && ! empty( $query->query_vars['paged'] ) && $query->query_vars['paged'] == 1 ) {
+			$sticky = get_option( 'sticky_posts' );
+			if ( $sticky ) {
+				$sticky_post = get_post( $sticky[0] );
+				if ( $sticky_post ) {
+					array_unshift( $posts, $sticky_post );
+				}
+			}
+		}
+
+		return $posts;
+		
+	}
+	add_filter( 'posts_results', 'eksell_filter_posts_results', 10, 2 );
+endif;
+
+
+/*	-----------------------------------------------------------------------------------------------
 	CONDITIONAL PAGE TEMPLATES
+	Conditional inclusion of page templates in Eksell.
+
+	@param array	$page_templates Array of page templates.
 --------------------------------------------------------------------------------------------------- */
 
 if ( ! function_exists( 'eksell_conditional_page_templates' ) ) :
@@ -830,6 +874,28 @@ if ( ! function_exists( 'eksell_conditional_page_templates' ) ) :
 		
 	}
 	add_filter( 'theme_page_templates', 'eksell_conditional_page_templates' );
+endif;
+
+
+/*	-----------------------------------------------------------------------------------------------
+	CONDITIONAL LOADING OF TEMPLATE
+	In certain cases, filter which template file is used for the current page.
+
+	@param string	$template	The path of the template to include.
+--------------------------------------------------------------------------------------------------- */
+
+if ( ! function_exists( 'eksell_conditional_template_include' ) ) :
+	function eksell_conditional_template_include( $template ) {
+
+		// If we're set to load the portfolio template, and Jetpack Portfolio doesn't exist, load singular.php instead.
+		if ( $template == locate_template( 'page-templates/template-portfolio.php' ) && ! post_type_exists( 'jetpack-portfolio' ) ) {
+			$template = locate_template( 'singular.php' );
+		}
+
+		return $template;
+		
+	}
+	add_filter( 'template_include', 'eksell_conditional_template_include' );
 endif;
 
 

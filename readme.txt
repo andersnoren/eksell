@@ -3,7 +3,7 @@ Contributors: Anlino
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=anders%40andersnoren%2ese&lc=US&item_name=Free%20WordPress%20Themes%20from%20Anders%20Noren&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted
 Requires at least: 4.5
 Requires PHP: 5.4
-Tested up to: 5.7.1
+Tested up to: 5.7.2
 Stable tag: trunk
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -255,6 +255,16 @@ Included as part of:
 
 
 == Changelog ==
+
+Version 1.4.4 (2021-05-23)
+-------------------------
+- Added is_wp_error() check to the results of get_terms() in the taxonomy filter.
+- If the Jetpack portfolio post type doesn't exist, filter template_include to load singular.php when the portfolio page template is displayed.
+- Added missing parameter listing for functions in functions.php.
+- Replaced include( locate_template() ) with get_template_part(), where possible.
+- Make sure the latest sticky post is included when "Show All" is clicked in the taxonomy filter, to match the initial display on page load.
+- Added an explainer to page-templates/template-portfolio.php.
+- Bumped "Tested up to" to 5.7.2.
 
 Version 1.4.3 (2021-05-04)
 -------------------------
