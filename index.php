@@ -44,7 +44,7 @@
 								// If we're outputting the home text or the Jetpack Portfolio archive text (in the latter case, only when a text is set), output the title in a div to enable multiple paragraphs.
 								if ( ( is_home() && ! is_paged() ) || ( is_post_type_archive( 'jetpack-portfolio' ) && ! is_paged() && get_theme_mod( 'eksell_jetpack_portfolio_archive_text', '' ) ) ) : 
 									?>
-									<div class="archive-title contain-margins i-a a-fade-up"><?php echo wpautop( $archive_title ); ?></div>
+									<div class="archive-title has-paragraphs contain-margins i-a a-fade-up"><?php echo wpautop( $archive_title ); ?></div>
 									<?php
 								else : 
 									?>

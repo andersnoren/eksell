@@ -369,24 +369,63 @@ endif;
 
 
 /* ------------------------------------------------------------------------------------------------
-   OUTPUT & GET POST META
-   If it's a single post, output the post meta values specified in the Customizer settings.
+   MAYBE OUTPUT POST META
+   Output the post meta markup on archive pages and single posts, if there's post meta set. The 
+   context param passed to eksell_get_post_meta() determines which Customizer setting to retrieve.
 --------------------------------------------------------------------------------------------------- */
 
-if ( ! function_exists( 'eksell_maybe_output_post_meta' ) ) :
-	function eksell_maybe_output_post_meta() {
+if ( ! function_exists( 'eksell_maybe_output_post_meta_archive' ) ) :
+	function eksell_maybe_output_post_meta_archive() {
 
 		global $post;
 
 		// Escaped in eksell_get_post_meta().
-		echo eksell_get_post_meta( $post->ID );
+		echo eksell_get_post_meta( $post->ID, 'archive' );
 
 	}
-	add_action( 'eksell_preview_end', 'eksell_maybe_output_post_meta' );
+	add_action( 'eksell_preview_end', 'eksell_maybe_output_post_meta_archive' );
 endif;
 
+/* 
+ * The eksell_entry_footer_start is only hooked into if there's post meta to output.
+ * This allows us to use the has_action() check before outputting the entry footer wrapper in content.php.
+ */
+
+if ( ! function_exists( 'eksell_register_maybe_output_post_meta_single' ) ) :
+	function eksell_register_maybe_output_post_meta_single() {
+
+		global $post;
+
+		if ( $post && eksell_get_post_meta( $post->ID, 'single' ) ) {
+			add_action( 'eksell_entry_footer_start', 'eksell_maybe_output_post_meta_single' );
+		}
+		
+	}
+	add_action( 'wp_head', 'eksell_register_maybe_output_post_meta_single' );
+endif;
+
+if ( ! function_exists( 'eksell_maybe_output_post_meta_single' ) ) :
+	function eksell_maybe_output_post_meta_single() {
+
+		global $post;
+
+		// Escaped in eksell_get_post_meta().
+		echo eksell_get_post_meta( $post->ID, 'single' );
+
+	}
+endif;
+
+
+/* ------------------------------------------------------------------------------------------------
+   GET POST META
+   Returns the post meta markup for a given post and context.
+
+	@param int 		$post_id 	ID of the post.
+	@param string 	$context 	Whether to return the post meta for the single or archive context.
+--------------------------------------------------------------------------------------------------- */
+
 if ( ! function_exists( 'eksell_get_post_meta' ) ) :
-	function eksell_get_post_meta( $post_id ) {
+	function eksell_get_post_meta( $post_id, $context = 'archive' ) {
 
 		// Get our post type.
 		$post_type = get_post_type( $post_id );
@@ -405,10 +444,14 @@ if ( ! function_exists( 'eksell_get_post_meta' ) ) :
 		if ( ! $post_type_has_post_meta ) return;
 
 		// Get the default post meta for this post type.
-		$post_meta_default = isset( $post_types_with_post_meta[$post_type]['default'] ) ? $post_types_with_post_meta[$post_type]['default'] : array();
+		$post_meta_default = isset( $post_types_with_post_meta[$post_type]['default'][$context] ) ? $post_types_with_post_meta[$post_type]['default'][$context] : array();
+
+		// Determine the Customizer setting name based on post type and context.
+		$theme_mod_name = 'eksell_post_meta_' . $post_type;
+		if ( $context == 'single' ) $theme_mod_name .= '_single';
 
 		// Get the post meta for this post type from the Customizer setting.
-		$post_meta = get_theme_mod( 'eksell_post_meta_' . $post_type, $post_meta_default );
+		$post_meta = get_theme_mod( $theme_mod_name, $post_meta_default );
 
 		// If we have post meta, sort it.
 		if ( $post_meta && ! in_array( 'empty', $post_meta ) ) {
@@ -500,11 +543,19 @@ if ( ! function_exists( 'eksell_get_post_meta' ) ) :
 
 						case 'date' : 
 							$eksell_has_meta = true;
+
+							$entry_time 	= get_the_time( get_option( 'date_format' ) );
+							$entry_time_str = '<time><a href="' . get_permalink() . '">' . $entry_time . '</a></time>';
+
 							?>
 							<li class="date">
-								<a href="<?php the_permalink(); ?>">
-									<?php the_time( get_option( 'date_format' ) ); ?>
-								</a>
+								<?php 
+								if ( $context == 'single' ) {
+									printf( esc_html_x( 'Published %s', '%s = The date of the post', 'eksell' ), $entry_time_str );	
+								} else {
+									echo $entry_time_str;
+								}
+								?>
 							</li>
 							<?php
 							break;
@@ -524,13 +575,24 @@ if ( ! function_exists( 'eksell_get_post_meta' ) ) :
 
 							// Determine which taxonomy to use for categories. This defaults to jetpack-portfolio-type for the jetpack-portfolio post type, and to categories for posts.
 							$category_taxonomy = ( $post_type == 'jetpack-portfolio' ) ? 'jetpack-portfolio-type' : 'category';
+
+							/**
+							 * Filter for which post meta category taxonomy to use.
+							 * 
+							 * Allows child themes to filter a specific category taxonomy to be used instead of category or jetpack-portfolio-type.
+							 * 
+							 * @param string 	$category_taxonomy 	The name of the taxonomy.
+							 * @param int		$post_id 			ID of the post.
+							 */
+
 							$category_taxonomy = apply_filters( 'eksell_post_meta_category_taxonomy', $category_taxonomy, $post_id );
 
 							if ( ! has_term( '', $category_taxonomy, $post_id ) ) break;
 							$eksell_has_meta = true;
+							$prefix = ( $context == 'single' ) ? esc_html__( 'Posted in', 'eksell' ) : esc_html__( 'In', 'eksell' );
 							?>
 							<li class="categories">
-								<?php the_terms( $post_id, $category_taxonomy, esc_html__( 'In', 'eksell' ) . ' ', ', ' ); ?>
+								<?php the_terms( $post_id, $category_taxonomy, $prefix . ' ', ', ' ); ?>
 							</li>
 							<?php
 							break;
@@ -561,6 +623,16 @@ if ( ! function_exists( 'eksell_get_post_meta' ) ) :
 
 							// Determine which taxonomy to use for tags. This defaults to jetpack-portfolio-tag for the jetpack-portfolio post type, and to post_tag for posts.
 							$tag_taxonomy = ( $post_type == 'jetpack-portfolio' ) ? 'jetpack-portfolio-tag' : 'post_tag';
+
+							/**
+							 * Filter for which post meta tag taxonomy to use.
+							 * 
+							 * Allows child themes to filter a specific tag taxonomy to be used instead of category or jetpack-portfolio-type.
+							 * 
+							 * @param string 	$tag_taxonomy 	The name of the taxonomy.
+							 * @param int		$post_id 		ID of the post.
+							 */
+
 							$tag_taxonomy = apply_filters( 'eksell_post_meta_tag_taxonomy', $tag_taxonomy, $post_id );
 
 							if ( ! has_term( '', $tag_taxonomy, $post_id ) ) break;

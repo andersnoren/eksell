@@ -404,12 +404,15 @@ if ( ! class_exists( 'Eksell_Customizer' ) ) :
 
 				// Parse the arguments of the post type.
 				$post_type_settings = wp_parse_args( $post_type_settings, array(
-					'default'	=> array(),
+					'default'	=> array(
+						'archive'		=> array(),
+						'single'		=> array(),
+					),
 				) );
 
 				$wp_customize->add_setting( 'eksell_post_meta_' . $post_type, array(
 					'capability' 		=> 'edit_theme_options',
-					'default'           => $post_type_settings['default'],
+					'default'           => $post_type_settings['default']['archive'],
 					'sanitize_callback' => 'eksell_sanitize_multiple_checkboxes',
 				) );
 
@@ -417,6 +420,52 @@ if ( ! class_exists( 'Eksell_Customizer' ) ) :
 					'section' 		=> 'eksell_archive_pages_options',
 					'label'   		=> sprintf( esc_html_x( 'Post Meta for %s', 'Customizer setting name. %s = Post type plural name', 'eksell' ), $post_type_name ),
 					'description'	=> sprintf( esc_html_x( 'Select which post meta to display for %s on archive pages.', 'Customizer setting description. %s = Post type plural name', 'eksell' ), strtolower( $post_type_name ) ),
+					'choices' 		=> self::get_post_meta_options( $post_type ),
+				) ) );
+
+			}
+			/* ------------------------------------------------------------------------
+			 * Single Posts
+			 * ------------------------------------------------------------------------ */
+
+			$wp_customize->add_section( 'eksell_single_options', array(
+				'title' 		=> esc_html__( 'Single Posts', 'eksell' ),
+				'priority' 		=> 30,
+				'capability' 	=> 'edit_theme_options',
+				'description' 	=> esc_html__( 'Settings for single posts.', 'eksell' ),
+				'panel'			=> 'eksell_theme_options',
+			) );
+
+			/* Post Meta --------------------- */
+
+			// Loop over the post types that support the post meta Customizer setting.
+			foreach ( $post_types_with_post_meta as $post_type => $post_type_settings ) {
+
+				// Only output for registered post types.
+				if ( ! post_type_exists( $post_type ) ) continue;
+
+				// Get the post type name for inclusion in the label and description.
+				$post_type_obj 	= get_post_type_object( $post_type );
+				$post_type_name	= isset( $post_type_obj->labels->name ) ? $post_type_obj->labels->name : $post_type;
+
+				// Parse the arguments of the post type.
+				$post_type_settings = wp_parse_args( $post_type_settings, array(
+					'default'	=> array(
+						'archive'		=> array(),
+						'single'		=> array(),
+					),
+				) );
+
+				$wp_customize->add_setting( 'eksell_post_meta_' . $post_type . '_single', array(
+					'capability' 		=> 'edit_theme_options',
+					'default'           => $post_type_settings['default']['single'],
+					'sanitize_callback' => 'eksell_sanitize_multiple_checkboxes',
+				) );
+
+				$wp_customize->add_control( new Eksell_Customize_Control_Checkbox_Multiple( $wp_customize, 'eksell_post_meta_' . $post_type . '_single', array(
+					'section' 		=> 'eksell_single_options',
+					'label'   		=> sprintf( esc_html_x( 'Post Meta for %s', 'Customizer setting name. %s = Post type plural name', 'eksell' ), $post_type_name ),
+					'description'	=> sprintf( esc_html_x( 'Select which post meta to display on single %s.', 'Customizer setting description. %s = Post type plural name', 'eksell' ), strtolower( $post_type_name ) ),
 					'choices' 		=> self::get_post_meta_options( $post_type ),
 				) ) );
 
@@ -508,10 +557,16 @@ if ( ! class_exists( 'Eksell_Customizer' ) ) :
 
 			return apply_filters( 'eksell_post_types_with_post_meta', array( 
 				'post' 				=> array(
-					'default'			=> array(),
+					'default'			=> array(
+						'archive'			=> array(),
+						'single'			=> array( 'categories', 'date', 'tags', 'edit-link' ),
+					),
 				), 
 				'jetpack-portfolio' => array(
-					'default'			=> array(),
+					'default'			=> array(
+						'archive'			=> array(),
+						'single'			=> array( 'categories', 'date', 'tags', 'edit-link' ),
+					),
 				)
 			) );
 			

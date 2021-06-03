@@ -2,8 +2,8 @@
 
 	Theme Name: Eksell
     Text Domain: eksell
-	Version: 1.4.4
-	Description: Eksell is a feature-rich portfolio and blog theme, with deep support for the block editor and full color settings. It includes extensive block styles and multiple prebuilt block patterns, and it styles the block editor to match the front-end of your site so you always have a good idea of what the end result will look like when you’re creating your content. Visitors can filter your posts and Jetpack Portfolio items without reloading the page with the lazyloading category filter, and full color settings in the Customizer give you easy control over all of the colors used in the theme, including the option to set a separate dark mode color scheme for devices that support it. Eksell also features a Blank Canvas page template that only outputs the content you add in the block editor, infinite scroll on archive pages, an optional search overlay, a sticky header setting, a social menu with icons, custom logo support, options for what post meta to display on archive pages, a lightweight construction for fast load times, and developer friendly code. Demo: https://andersnoren.se/themes/eksell/
+	Version: 1.5.0
+	Description: Eksell is a feature-rich portfolio and blog theme, with deep support for the block editor and full color settings. It includes extensive block styles and multiple prebuilt block patterns, and it styles the block editor to match the front-end of your site so you always have a good idea of what the end result will look like when you’re creating your content. Visitors can filter your posts and Jetpack Portfolio items without reloading the page with the lazyloading category filter, and full color settings in the Customizer give you easy control over all of the colors used in the theme, including the option to set a separate dark mode color scheme for devices that support it. Eksell also features a Blank Canvas page template that only outputs the content you add in the block editor, infinite scroll on archive pages, an optional search overlay, a sticky header setting, a social menu with icons, custom logo support, options for what post meta to display, a lightweight construction for fast load times, and developer friendly code. Demo: https://andersnoren.se/themes/eksell/
 	Tags: blog, portfolio, grid-layout, one-column, two-columns, three-columns, four-columns, custom-background, custom-colors, custom-logo, custom-menu, editor-style, featured-images, sticky-post, theme-options, threaded-comments, translation-ready, block-styles, wide-blocks
 	Author: Anders Norén
 	Author URI: https://andersnoren.se
@@ -134,6 +134,16 @@ html {
 /* Fix for the admin bar */
 @media ( max-width: 599px ) {
 	html.scroll-locked { margin: 0 !important; }
+}
+
+html {
+	background-image: repeating-linear-gradient(
+		90deg,
+		var( --eksell-menu-modal-background-color ),
+		var( --eksell-menu-modal-background-color ) var( --eksell-aside-width ),
+		var( --eksell-background-color ) var( --eksell-aside-width ),
+		var( --eksell-background-color ) 100%
+	);
 }
 
 body {
@@ -444,7 +454,7 @@ hr {
 	display: block;
 	height: 1rem;
 	image-rendering: pixelated;
-	margin: 3.2rem 0;
+	margin: 4rem 0;
 	text-align: left;
 	width: 6.6rem;
 }
@@ -508,7 +518,7 @@ blockquote {
 	border-width: 0 0 0 .2rem;
 	color: inherit;
 	font-size: 1em;
-	margin: 3.2rem 0;
+	margin: 4rem 0;
 	padding: 0 0 0 2rem;
 }
 
@@ -549,7 +559,7 @@ samp {
 pre {
 	border: .1rem solid var( --eksell-border-color );
 	line-height: 1.5;
-	margin: 3.2rem 0;
+	margin: 4rem 0;
 	overflow: auto;
 	padding: 2.4rem;
 	text-align: left;
@@ -830,7 +840,7 @@ table {
 	border-spacing: 0;
 	empty-cells: show;
 	font-size: 1.6rem;
-	margin: 3.2rem auto;
+	margin: 4rem auto;
 	max-width: 100%;
 	overflow: hidden;
 	width: 100%;
@@ -1725,7 +1735,7 @@ ul.social-icons li {
 /* Main Menu --------------------------------- */
 
 .main-menu {
-	font-size: 2.4rem;
+	font-size: 2.1rem;
 }
 
 .main-menu li {
@@ -2094,6 +2104,10 @@ a.sub-menu-toggle.active svg {
 		animation: none;
 	}
 
+	.template-blank-canvas-with-aside #site-aside .nav-toggle-text {
+		display: none;
+	}
+
 }
 
 
@@ -2127,11 +2141,15 @@ a.sub-menu-toggle.active svg {
 }
 
 .archive-title {
-	font-size: 2.4rem;
+	font-size: 2.8rem;
 	font-weight: var( --eksell-headings-weight );
 	line-height: 1.3;
 	max-width: var( --eksell-inner-width-small );
 	margin: 0;
+}
+
+.archive-title.has-paragraphs {
+	font-size: 2.4rem;
 }
 
 .archive-title p {
@@ -2279,13 +2297,17 @@ a.sub-menu-toggle.active svg {
 }
 
 .post-meta {
+	list-style: none;
+	margin: 0;
+}
+
+.preview .post-meta {
 	display: flex;
 	flex-wrap: wrap;
-	list-style: none;
 	margin: -.25em 0 0 -1em;
 }
 
-.post-meta li {
+.preview .post-meta li {
 	margin: .25em 0 0 1em;
 }
 
@@ -2408,19 +2430,23 @@ h1.entry-title,
 
 .entry-footer a {
 	color: inherit;
-	outline: none;
 }
 
-.entry-footer p {
+.entry-footer a:hover,
+.entry-footer a:focus {
+	text-decoration: none;
+}
+
+.entry-footer .post-meta li {
 	margin: 0;
 }
 
-.entry-meta-time a { 
+.entry-footer .date a { 
 	text-decoration: none; 
 }
 
-.entry-meta-time a:hover,
-.entry-meta-time a:focus { 
+.entry-footer .date a:hover,
+.entry-footer .date a:focus { 
 	text-decoration: underline; 
 }
 
@@ -2597,8 +2623,8 @@ h1.entry-title,
 .wp-block-table,
 .wp-block-verse,
 .wp-block-video {
-	margin-bottom: 3.2rem;
-	margin-top: 3.2rem;
+	margin-bottom: 4rem;
+	margin-top: 4rem;
 }
 
 /* Block: Shared Nesting Alignment Resets ---- */
@@ -2736,7 +2762,7 @@ h1.entry-title,
 	margin: 0 .8rem 1.6rem .8rem;
 }
 
-:root .wp-block-button:last-child {
+:root .wp-block-buttons:not( .is-content-justification-center ) .wp-block-button:last-child {
 	margin-right: 0 !important;
 }
 
@@ -3053,7 +3079,7 @@ section.wp-block-cover-image > h2 {
 	border-radius: .4rem;
 	bottom: .8rem;
 	color: #fff;
-	font-size: 1.4rem;
+	font-size: 1.2rem;
 	left: auto;
 	max-height: calc( 100% - 1.6rem );
 	max-width: calc( 100% - 1.6rem );
@@ -3130,13 +3156,13 @@ h6.has-background {
 .wp-block-image:not(:first-child):not(.alignwide):not(.alignfull):not(.alignnone) figure:not(.alignleft):not(.alignright):not(.aligncenter),
 .wp-block-image:not(:first-child):not(.alignwide):not(.alignfull):not(.alignnone) > img:first-child,
 .wp-block-image:not(:first-child):not(.alignwide):not(.alignfull):not(.alignnone) > img:only-child {
-	margin-top: 3.2rem;
+	margin-top: 4rem;
 }
 
 .wp-block-image:not(:last-child):not(.alignwide):not(.alignfull):not(.alignnone) figure:not(.alignleft):not(.alignright):not(.aligncenter),
 .wp-block-image:not(:last-child):not(.alignwide):not(.alignfull):not(.alignnone) > figcaption:last-child,
 .wp-block-image:not(:last-child):not(.alignwide):not(.alignfull):not(.alignnone) > img:only-child {
-	margin-bottom: 3.2rem;
+	margin-bottom: 4rem;
 }
 
 .wp-block-image.alignwide img,
@@ -3679,7 +3705,7 @@ table.is-style-stripes tbody tr:nth-child(odd),
 .aligncenter,
 .alignwide,
 .alignfull {
-	margin: 3.2rem 0;
+	margin: 4rem 0;
 }
 
 .alignnone,
@@ -3697,7 +3723,7 @@ table.is-style-stripes tbody tr:nth-child(odd),
 .alignleft,
 .alignright {
 	float: none !important;
-	margin: 3.2rem 0 !important;
+	margin: 4rem 0 !important;
 }
 
 .aligncenter,
@@ -3733,7 +3759,7 @@ table.is-style-stripes tbody tr:nth-child(odd),
 .alignfull.wp-block-cover + .alignfull.has-background,
 .alignfull.has-background + .alignfull.wp-block-cover,
 .alignfull.has-background + .alignfull.has-background {
-	margin-top: -3.2rem;
+	margin-top: -4rem;
 }
 
 /* Entry Media ------------------------------- */
@@ -4537,6 +4563,10 @@ hr + .comment-reply-title {
 		display: none;
 	}
 
+	.main-menu {
+		font-size: 2.4rem;
+	}
+
 	/* Modal: Search ------------------------- */
 	/* Template: No Title -------------------- */
 	/* Template: Blank Canvas ---------------- */
@@ -4550,7 +4580,8 @@ hr + .comment-reply-title {
 		font-size: 1.8rem;
 	}
 
-	.archive-title {
+	.archive-title,
+	.archive-title.has-paragraphs {
 		font-size: 3.2rem;
 	}
 
@@ -4834,6 +4865,7 @@ hr + .comment-reply-title {
 	.wp-block-gallery .blocks-gallery-image figcaption, 
 	.wp-block-gallery .blocks-gallery-item figcaption {
 		bottom: 1.6rem;
+		font-size: 1.4rem;
 		max-height: calc( 100% - 3.2rem );
 		max-width: calc( 100% - 3.2rem );
 	}

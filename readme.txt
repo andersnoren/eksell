@@ -256,6 +256,20 @@ Included as part of:
 
 == Changelog ==
 
+Version 1.5.0 (2021-06-03)
+-------------------------
+- New: Added a post meta setting for single posts.
+- Updated the structure of the Eksell_Customizer::get_post_types_with_post_meta() array to support different defaults for single/archive for each post type. Child themes using the eksell_post_types_with_post_meta filter will need to be updated.
+- Updated the theme description to account for the change in post meta settings.
+- Reduced the mobile main menu font size.
+- Reduced the mobile font size of the gallery block image captions.
+- Increased the mobile archive title font size when not outputting paragraphs (e.g. archive title for taxonomy/author/date archives).
+- Updated the body background styles to prevent clipping of the menu bar background color when rubberband scrolling in Safari and on iOS (scrolling above the top or below the bottom of the site content).
+- Added missing apply_filters() comment blocks for eksell_post_meta_category_taxonomy and eksell_post_meta_tag_taxonomy.
+- Bumped the base vertical margin on mobile from 32 pixels to 40 pixels.
+- Blank Canvas with Menu Template: Fixed misbehaving navigation toggle text on mobile.
+- Buttons block: Fixed alignment issue with stacked buttons set to centered justification.
+
 Version 1.4.4 (2021-05-23)
 -------------------------
 - Added is_wp_error() check to the results of get_terms() in the taxonomy filter.

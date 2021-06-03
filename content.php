@@ -86,28 +86,8 @@
 
 		<?php 
 
-		$entry_time 		= get_the_time( get_option( 'date_format' ) );
-		$edit_url 			= get_edit_post_link();
-
-		// Determine which category and which tag taxonomy to display, depending on post type.
-		if ( is_singular( 'post' ) ) {
-			$entry_category_tax	= 'category';
-			$entry_tag_tax		= 'post_tag';
-		} else if ( is_singular( 'jetpack-portfolio' ) ) {
-			$entry_category_tax	= 'jetpack-portfolio-type';
-			$entry_tag_tax		= 'jetpack-portfolio-tag';
-		}
-
-		// You can use these filters in a child theme to change which taxonomy to use.
-		$entry_category_tax = apply_filters( 'eksell_entry_meta_category_tax', isset( $entry_category_tax ) ? $entry_category_tax : '' );
-		$entry_tag_tax 		= apply_filters( 'eksell_entry_meta_tag_tax', isset( $entry_tag_tax ) ? $entry_tag_tax : '' );
-
-		// Get the markup for the categories and tags.
-		$entry_categories 	= $entry_category_tax 	? get_the_term_list( $post->ID, $entry_category_tax, '', ', ' ) 	: '';
-		$entry_tags 		= $entry_tag_tax 		? get_the_term_list( $post->ID, $entry_tag_tax, '', ', ' ) 		: '';
-
-		// Show the entry footer if there is meta, or if set to display it with the filter.
-		$show_entry_footer 	= apply_filters( 'eksell_show_entry_footer', ( ( $entry_time && ! is_page() ) || $edit_url || $entry_categories || $entry_tags ) );
+		// Show the entry footer if we have actions, or if it's set to be displayed with the filter.
+		$show_entry_footer 	= apply_filters( 'eksell_show_entry_footer', ( has_action( 'eksell_entry_footer_start' ) || has_action( 'eksell_entry_footer_end' ) ) );
 
 		if ( $show_entry_footer ) : 
 			?>
@@ -116,25 +96,6 @@
 
 				<?php 
 				do_action( 'eksell_entry_footer_start', $post->ID ); 
-				?>
-
-				<?php if ( $entry_time && ! is_page() ) : ?>
-					<p class="entry-meta-time"><?php printf( esc_html_x( 'Published %s', '%s = The date of the post', 'eksell' ), '<time><a href="' . get_permalink() . '">' . $entry_time . '</a></time>' ); ?></p>
-				<?php endif; ?>
-
-				<?php if ( $entry_categories ) : ?>
-					<p class="entry-categories"><?php printf( esc_html_x( 'Posted in %s', '%s = The list of categories', 'eksell' ), $entry_categories ); ?></p>
-				<?php endif; ?>
-
-				<?php if ( $entry_tags ) : ?>
-					<p class="entry-tags"><?php printf( esc_html_x( 'Tagged %s', '%s = The list of tags', 'eksell' ), $entry_tags ); ?></p>
-				<?php endif; ?>
-
-				<?php if ( $edit_url ) : ?>
-					<p class="edit-link"><a href="<?php echo esc_url( $edit_url ); ?>"><?php esc_html_e( 'Edit This', 'eksell' ); ?></a></p>
-				<?php endif; ?>
-
-				<?php 
 				do_action( 'eksell_entry_footer_end', $post->ID ); 
 				?>
 
