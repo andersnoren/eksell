@@ -269,6 +269,7 @@ Version 1.5.0 (2021-06-03)
 - Bumped the base vertical margin on mobile from 32 pixels to 40 pixels.
 - Blank Canvas with Menu Template: Fixed misbehaving navigation toggle text on mobile.
 - Buttons block: Fixed alignment issue with stacked buttons set to centered justification.
+- Use get_the_tag_list() to output post_tag in the post meta, to get around Automated Theme Scanning.
 
 Version 1.4.4 (2021-05-23)
 -------------------------

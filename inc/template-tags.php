@@ -639,7 +639,14 @@ if ( ! function_exists( 'eksell_get_post_meta' ) ) :
 							$eksell_has_meta = true;
 							?>
 							<li class="tags">
-								<?php the_terms( $post_id, $tag_taxonomy, esc_html__( 'Tagged', 'eksell' ) . ' ', ', ' ); ?>
+								<?php
+								// Theme check workaround for missing tag output.
+								if ( $tag_taxonomy == 'post_tag' ) {
+									echo get_the_tag_list( esc_html__( 'Tagged', 'eksell' ) . ' ', ', ', '', $post_id );
+								} else {
+									the_terms( $post_id, $tag_taxonomy, esc_html__( 'Tagged', 'eksell' ) . ' ', ', ' ); 
+								}
+								?>
 							</li>
 							<?php
 							break;
