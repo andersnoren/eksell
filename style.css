@@ -213,6 +213,8 @@ body {
 
 :root .contain-margins > *:first-child,
 :root .entry-content > *:first-child,
+:root .wp-site-blocks > *:first-child,
+:root .wp-site-blocks > .skip-link + *,
 :root .comment-content > *:first-child,
 :root *[class*="_inner-container"] > *:first-child,
 :root fieldset > *:first-child,
@@ -223,6 +225,7 @@ body {
 }
 
 :root .contain-margins > *:last-child,
+:root .wp-site-blocks > *:last-child,
 :root .entry-content > *:last-child,
 :root .comment-content > *:last-child,
 :root *[class*="_inner-container"] > *:last-child,
@@ -2123,6 +2126,23 @@ a.sub-menu-toggle.active svg {
 	width: calc( 100% - var( --eksell-inner-gutter ) );
 }
 
+.wp-block-post-content > * {
+	margin-left: auto;
+	margin-right: auto;
+	max-width: var( --eksell-inner-width-thin );
+}
+
+.wp-block-post-content.alignfull > * {
+	width: calc( 100% - var( --eksell-inner-gutter ) - var( --eksell-aside-width ) );
+}
+
+.wp-block-post-content > .alignfull { max-width: none; }
+.wp-block-post-content > .alignwide { max-width: var( --eksell-inner-width-max ); }
+
+.wp-block-post-content .wp-block .wp-block {
+	max-width: 100%;
+}
+
 
 /* --------------------------------------------------------------------------------------------- */
 /*	9. Post: Archive
@@ -3596,6 +3616,17 @@ hr.wp-block-separator:not(.is-style-dots):not(.is-style-wide) {
     padding-left: 1.5em;
 }
 
+/* Block: Site Title ------------------------- */
+
+.wp-block-site-title a {
+	text-decoration: none;
+}
+
+.wp-block-site-title a:hover,
+.wp-block-site-title a:focus {
+	text-decoration: underline;
+}
+
 /* Block: Social ----------------------------- */
 
 .wp-block-social-links .wp-social-link {
@@ -3622,8 +3653,7 @@ hr.wp-block-separator:not(.is-style-dots):not(.is-style-wide) {
 
 :root .wp-block-social-links[class*="is-style-logos-only"] .wp-social-link { 
 	background: none;
-	height: 4rem;
-	margin: 0 1.6rem 1.6rem 0; 
+	margin: .8rem 1.6rem .8rem 0;
 	padding: 0;
 }
 
