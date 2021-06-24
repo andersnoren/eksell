@@ -934,7 +934,7 @@ if ( ! function_exists( 'eksell_meta_theme_color' ) ) :
 
 		$dark_mode 		= get_theme_mod( 'eksell_enable_dark_mode_palette', false );
 
-		$light_color 	= apply_filters( 'eksell_theme_color_light', get_theme_mod( 'eksell_menu_modal_background_color', '1e2d32' ) );
+		$light_color 	= apply_filters( 'eksell_theme_color_light', get_theme_mod( 'eksell_menu_modal_background_color', '#1e2d32' ) );
 		$dark_color 	= apply_filters( 'eksell_theme_color_dark', $dark_mode ? get_theme_mod( 'eksell_dark_mode_menu_modal_background_color' ) : '' );
 
 		if ( ! ( $light_color || $dark_color ) ) return;
