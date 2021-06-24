@@ -55,6 +55,13 @@ if ( ! class_exists( 'Eksell_Block_Settings' ) ) :
 				)
 			);
 
+			// Gallery: No Gutter.
+			register_block_style( 'core/gallery', array(
+					'label' => esc_html__( 'No Gutter', 'eksell' ),
+					'name'  => 'no-gutter',
+				)
+			);
+
 		}
 
 

@@ -26,6 +26,9 @@ if ( ! function_exists( 'eksell_theme_support' ) ) :
 		// Post thumbnails.
 		add_theme_support( 'post-thumbnails' );
 
+		// Editor styles.
+		add_theme_support( 'editor-styles' );
+
 		// Set post thumbnail size.
 		set_post_thumbnail_size( 2240, 9999 );
 
@@ -52,6 +55,9 @@ if ( ! function_exists( 'eksell_theme_support' ) ) :
 
 		// Alignwide and alignfull classes in the block editor.
 		add_theme_support( 'align-wide' );
+
+		// Block templates.
+		add_theme_support( 'block-templates' );
 
 		// Block Editor font sizes.
 		add_theme_support( 'editor-font-sizes',
@@ -648,6 +654,23 @@ if ( ! function_exists( 'eksell_is_comment_by_post_author' ) ) :
 endif;
 
 
+/*	-----------------------------------------------------------------------------------------------
+	HAS ASIDE?
+	Checks whether the current page should output the aside element.
+--------------------------------------------------------------------------------------------------- */
+
+if ( ! function_exists( 'eksell_has_aside' ) ) :
+	function eksell_has_aside() {
+
+		$is_blank_canvas 	= apply_filters( 'eksell_blank_canvas', is_page_template( array( 'page-templates/template-blank-canvas.php' ) ) );
+		$has_aside			= apply_filters( 'eksell_has_aside', ! $is_blank_canvas );
+
+		return $has_aside;
+
+	}
+endif;
+
+
 /* 	-----------------------------------------------------------------------------------------------
 	FILTER COMMENT TEXT
 	If the comment is by the post author, append an element which says so.
@@ -900,30 +923,110 @@ endif;
 
 
 /*	-----------------------------------------------------------------------------------------------
-	BLOCK EDITOR ASSETS
+	META TAG: THEME COLOR
+	Outputs a meta tag for theme color, used on Android and for the address bar in Safari 15.
+	The colors default to the values of the background color settings, but can be filtered by hooking 
+	into the filters added below.
+--------------------------------------------------------------------------------------------------- */
+
+if ( ! function_exists( 'eksell_meta_theme_color' ) ) :
+	function eksell_meta_theme_color() {
+
+		$dark_mode 		= get_theme_mod( 'eksell_enable_dark_mode_palette', false );
+
+		$light_color 	= apply_filters( 'eksell_theme_color_light', get_theme_mod( 'eksell_menu_modal_background_color', '1e2d32' ) );
+		$dark_color 	= apply_filters( 'eksell_theme_color_dark', $dark_mode ? get_theme_mod( 'eksell_dark_mode_menu_modal_background_color' ) : '' );
+
+		if ( ! ( $light_color || $dark_color ) ) return;
+
+		if ( $light_color ) {
+			$media_attr = $dark_color ? ' media="(prefers-color-scheme: light)"' : '';
+			echo '<meta name="theme-color" content="' . esc_attr( $light_color ) . '"' . $media_attr . '>';
+		}
+
+		if ( $dark_color ) {
+			echo '<meta name="theme-color" content="' . esc_attr( $dark_color ) . '" media="(prefers-color-scheme: dark)">';
+		}
+
+	}
+	add_action( 'wp_head', 'eksell_meta_theme_color' );
+endif;
+
+
+/*	-----------------------------------------------------------------------------------------------
+	EDITOR STYLES
+	Enqueue Block Editor styles.
 --------------------------------------------------------------------------------------------------- */
 
 if ( ! function_exists( 'eksell_block_editor_styles' ) ) :
 	function eksell_block_editor_styles() {
 
-		$theme_version = wp_get_theme( 'eksell' )->get( 'Version' );
-		$css_dependencies = array();
+		// The URL for Google Fonts. You can modify or remove it by filtering `eksell_google_fonts_url`.
+		$google_fonts_url = apply_filters( 'eksell_google_fonts_url', 'https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap' );
 
-		// Retrieve and enqueue the URL for Google Fonts.
-		// You can remove the Google Fonts enqueue by filtering `eksell_google_fonts_url`.
-		$google_fonts_url = apply_filters( 'eksell_google_fonts_url', '//fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap' );
+		// This URL is filtered by eksell_pre_http_request_block_editor_customizer_styles to load dynamic CSS as inline styles.
+		$inline_styles_url = 'https://eksell-inline-editor-styles';
 
-		if ( $google_fonts_url ) {
-			wp_register_style( 'eksell_google_fonts', $google_fonts_url, false, 1.0, 'all' );
-			$css_dependencies[] = 'eksell_google_fonts';
-		}
+		// Build a filterable array of the editor styles to load.
+		$eksell_editor_styles = apply_filters( 'eksell_editor_styles', array(
+			'assets/css/eksell-editor-styles.css',
+			$google_fonts_url,
+			$inline_styles_url
+		) );
 
-		// Enqueue the editor styles.
-		wp_enqueue_style( 'eksell_block_editor_styles', 'get_theme_file_uri'( 'assets/css/eksell-editor-styles.css' ), $css_dependencies, $theme_version, 'all' );
-
-		// Add inline style from the Customizer.
-		wp_add_inline_style( 'eksell_block_editor_styles', Eksell_Custom_CSS::get_customizer_css( 'editor' ) );
+		// Load the editor styles.
+		add_editor_style( $eksell_editor_styles );
 
 	}
-	add_action( 'enqueue_block_editor_assets', 'eksell_block_editor_styles', 1, 1 );
+	add_action( 'after_setup_theme', 'eksell_block_editor_styles' );
+endif;
+
+
+/*	-----------------------------------------------------------------------------------------------
+	INLINE EDITOR STYLES WORKAROUND
+	This function filters the request for https://eksell-inline-editor-styles, which is added with 
+	add_editor_style() in eksell_block_editor_styles(), and returns the dynamic Customizer CSS for 
+	the editor styles.
+
+	This workaround for adding inline styles to the editor styles was suggested by @anastis, here: 
+	https://github.com/WordPress/gutenberg/issues/18571#issuecomment-618932161
+--------------------------------------------------------------------------------------------------- */
+
+if ( ! function_exists( 'eksell_pre_http_request_block_editor_customizer_styles' ) ) : 
+	function eksell_pre_http_request_block_editor_customizer_styles( $response, $parsed_args, $url ) {
+
+		if ( $url === 'https://eksell-inline-editor-styles' ) {
+			$response = array(
+				'body'		=> Eksell_Custom_CSS::get_customizer_css( 'editor' ),
+				'headers'	=> new Requests_Utility_CaseInsensitiveDictionary(),
+				'response'	=> array(
+					'code'		=> 200,
+					'message'	=> 'OK',
+				),
+				'cookies'	=> array(),
+				'filename'	=> null,
+			);
+		}
+
+		return $response;
+	}
+	add_filter( 'pre_http_request', 'eksell_pre_http_request_block_editor_customizer_styles', 10, 3 );
+endif;
+
+
+/*	-----------------------------------------------------------------------------------------------
+	SET DEFAULT BLOCK TEMPLATE
+	Specify a custom block template default for the Block Template editor introduced in WordPress 5.8.
+
+	@param array	$settings	Default editor settings.
+--------------------------------------------------------------------------------------------------- */
+
+if ( ! function_exists( 'eksell_block_template_settings' ) ) :
+	function eksell_block_template_settings( $settings ) {
+
+		$settings['defaultBlockTemplate'] = file_get_contents( get_theme_file_path( 'inc/block-template-default.html' ) );
+		return $settings;
+
+	}
+	add_filter( 'block_editor_settings_all', 'eksell_block_template_settings' );
 endif;

@@ -333,11 +333,11 @@ if ( ! function_exists( 'eksell_the_archive_filter' ) ) :
 			<ul class="filter-list reset-list-style">
 
 				<?php if ( $home_url ) : ?>
-					<li><a class="filter-link active" data-filter-post-type="<?php echo esc_attr( $post_type ); ?>" href="<?php echo esc_url( $home_url ); ?>"><?php esc_html_e( 'Show All', 'eksell' ); ?></a></li>
+					<li class="filter-show-all"><a class="filter-link active" data-filter-post-type="<?php echo esc_attr( $post_type ); ?>" href="<?php echo esc_url( $home_url ); ?>"><?php esc_html_e( 'Show All', 'eksell' ); ?></a></li>
 				<?php endif; ?>
 
 				<?php foreach ( $terms as $term ) : ?>
-					<li><a class="filter-link" data-filter-term-id="<?php echo esc_attr( $term->term_id ); ?>" data-filter-taxonomy="<?php echo esc_attr( $term->taxonomy ); ?>" data-filter-post-type="<?php echo esc_attr( $post_type ); ?>" href="<?php echo esc_url( get_term_link( $term ) ); ?>"><?php echo $term->name; ?></a></li>
+					<li class="filter-term-<?php echo esc_attr( $term->slug ); ?>"><a class="filter-link" data-filter-term-id="<?php echo esc_attr( $term->term_id ); ?>" data-filter-taxonomy="<?php echo esc_attr( $term->taxonomy ); ?>" data-filter-post-type="<?php echo esc_attr( $post_type ); ?>" href="<?php echo esc_url( get_term_link( $term ) ); ?>"><?php echo $term->name; ?></a></li>
 				<?php endforeach; ?>
 				
 			</ul><!-- .filter-list -->

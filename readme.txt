@@ -256,6 +256,23 @@ Included as part of:
 
 == Changelog ==
 
+Version 1.6.0 (2021-06-24)
+-------------------------
+- New: Added support for the Block Templates feature in WordPress 5.8, and updated the theme description to mention it.
+- New: Added a default Block Templates template (inc/block-template-default.html).
+- New: Added the "No Gutter" style to the Gallery block.
+- New: Output of the theme-color meta tag, based on the color values set in the Customizer, to adjust the color of the browser address bar in Safari 15.
+- New: Reworked the editor styles to use add_editor_style() instead of the enqueue_block_editor_assets action. This change was required to get the dynamic styles (colors, mostly) to work in the new Block Templates editor. Underlying changes:
+	- Updated eksell-editor-styles.css to use pixels units instead of rems, to make the units work with Core styles.
+	- Added eksell_pre_http_request_block_editor_customizer_styles(), which contains the workaround for adding dynamic styles to add_editor_style().
+	- Editor style tweaks to handle Core modifications to styles added with add_editor_style().
+- Added a conditional, filterable has-aside class to the HTML element, used to determine whether to output the aside element on the current page. This fixes it being unintentionally visible in some cases in 1.5.0.
+- Fixed a slight style issue with separators in WordPress 5.8.
+- Block Editor styles: Removed the styles modifying gallery gutters, sacrificing a little bit of front-end/back-end accuracy to simplify the editor styles.
+- Block Editor styles: Fixed the base vertical margins of the gallery block.
+- Updated the archive filter to include the slug of each term as a list item class, to make specific term links easier to hide.
+- Adjusted Gallery caption margins.
+
 Version 1.5.0 (2021-06-03)
 -------------------------
 - New: Added a post meta setting for single posts.

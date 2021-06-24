@@ -2,8 +2,8 @@
 
 	Theme Name: Eksell
     Text Domain: eksell
-	Version: 1.5.0
-	Description: Eksell is a feature-rich portfolio and blog theme, with deep support for the block editor and full color settings. It includes extensive block styles and multiple prebuilt block patterns, and it styles the block editor to match the front-end of your site so you always have a good idea of what the end result will look like when you’re creating your content. Visitors can filter your posts and Jetpack Portfolio items without reloading the page with the lazyloading category filter, and full color settings in the Customizer give you easy control over all of the colors used in the theme, including the option to set a separate dark mode color scheme for devices that support it. Eksell also features a Blank Canvas page template that only outputs the content you add in the block editor, infinite scroll on archive pages, an optional search overlay, a sticky header setting, a social menu with icons, custom logo support, options for what post meta to display, a lightweight construction for fast load times, and developer friendly code. Demo: https://andersnoren.se/themes/eksell/
+	Version: 1.6.0
+	Description: Eksell is a feature-rich portfolio and blog theme, with deep support for the block editor and full color settings. It includes extensive block styles and multiple prebuilt block patterns, and it styles the block editor to match the front-end of your site so you always have a good idea of what the end result will look like when you’re creating your content. Visitors can filter your posts and Jetpack Portfolio items without reloading the page with the lazyloading category filter, and full color settings in the Customizer give you easy control over all of the colors used in the theme, including the option to set a separate dark mode color scheme for devices that support it. Eksell also features a Blank Canvas page template that only outputs the content you add in the block editor, infinite scroll on archive pages, an optional search overlay, a sticky header setting, a social menu with icons, custom logo support, options for what post meta to display, support for the Block Templates editor, a lightweight construction for fast load times, and developer friendly code. Demo: https://andersnoren.se/themes/eksell/
 	Tags: blog, portfolio, grid-layout, one-column, two-columns, three-columns, four-columns, custom-background, custom-colors, custom-logo, custom-menu, editor-style, featured-images, sticky-post, theme-options, threaded-comments, translation-ready, block-styles, wide-blocks
 	Author: Anders Norén
 	Author URI: https://andersnoren.se
@@ -31,6 +31,7 @@
 		a.	 Template: No Title
 		b.	 Template: Blank Canvas
 		c.	 Template: Blank Canvas with Menu
+		d.	 Template: Block Templates
 	9. 	Post: Archive
 	10.	 Post: Single
 	11.	 Blocks
@@ -136,7 +137,7 @@ html {
 	html.scroll-locked { margin: 0 !important; }
 }
 
-html {
+html.has-aside {
 	background-image: repeating-linear-gradient(
 		90deg,
 		var( --eksell-menu-modal-background-color ),
@@ -144,6 +145,11 @@ html {
 		var( --eksell-background-color ) var( --eksell-aside-width ),
 		var( --eksell-background-color ) 100%
 	);
+}
+
+html:not(.has-aside) {
+	/* Layout */
+	--eksell-aside-width: 0rem;
 }
 
 body {
@@ -601,7 +607,7 @@ figcaption,
 	font-size: 1.5rem;
 	font-weight: 400;
 	line-height: 1.5;
-	margin-top: 1rem;
+	margin-top: 1.2rem;
 }
 
 figcaption a {
@@ -2062,11 +2068,6 @@ a.sub-menu-toggle.active svg {
 /* --------------------------------------------------------------------------------------------- */
 
 
-.template-blank-canvas {
-	/* Layout */
-	--eksell-aside-width: 0rem;
-}
-
 .template-blank-canvas #site-content,
 .template-blank-canvas-with-aside #site-content {
 	min-height: 100vh;
@@ -2108,6 +2109,18 @@ a.sub-menu-toggle.active svg {
 		display: none;
 	}
 
+}
+
+
+/* --------------------------------------------------------------------------------------------- */
+/*	8d. Template: Block Templates
+/* --------------------------------------------------------------------------------------------- */
+
+
+.wp-site-blocks {
+	margin: 0 auto;
+	max-width: var( --eksell-inner-width-thin );
+	width: calc( 100% - var( --eksell-inner-gutter ) );
 }
 
 
@@ -2951,7 +2964,7 @@ section.wp-block-cover-image > h2 {
 
 .wp-block-embed figcaption {
 	margin-bottom: 0;
-	margin-top: 1rem;
+	margin-top: 1.2rem;
 }
 
 :root .wp-block-embed.alignleft .wp-block-embed__wrapper, 
@@ -3100,7 +3113,7 @@ section.wp-block-cover-image > h2 {
 	}
 
 	.wp-block-gallery > figcaption {
-		margin-top: .8rem;
+		margin-top: 1.2rem;
 	}
 
 	.wp-block-gallery > .blocks-gallery-grid { 
@@ -3119,6 +3132,14 @@ section.wp-block-cover-image > h2 {
 	.wp-block-gallery.columns-7 .blocks-gallery-item { 	width: calc( 14.28571% - ( ( 2.4rem * 6 ) / 7 ) ); }
 	.wp-block-gallery.columns-8 .blocks-gallery-item { 	width: calc( 12.5% - ( ( 2.4rem * 7 ) / 8 ) ); }
 
+}
+
+/* STYLE: NO GUTTER */
+
+.wp-block-gallery.is-style-no-gutter .blocks-gallery-grid,
+.wp-block-gallery.is-style-no-gutter .blocks-gallery-image, 
+.wp-block-gallery.is-style-no-gutter .blocks-gallery-item {
+	margin: 0 !important;
 }
 
 /* Block: Group ------------------------------ */
@@ -3174,7 +3195,7 @@ h6.has-background {
 
 .wp-block-image figcaption {
 	margin-bottom: 0;
-	margin-top: 1rem;
+	margin-top: 1.2rem;
 }
 
 /* Block: Latest Comments -------------------- */
@@ -3539,6 +3560,7 @@ p.has-background {
 
 hr.wp-block-separator {
 	background-color: transparent !important;
+	border: none;
 	margin-left: auto;
 	margin-right: auto;
 	text-align: center;
@@ -3742,13 +3764,15 @@ table.is-style-stripes tbody tr:nth-child(odd),
 
 /* DIRECT DESCENDANT ALIGNMENTS */
 
-.entry-content > .alignfull {
+.entry-content > .alignfull,
+.wp-site-blocks > .alignfull {
 	margin-left: calc( 50% - 50vw + ( var( --eksell-aside-width ) / 2 ) );
 	max-width: calc( 100vw - var( --eksell-aside-width ) );
 	width: calc( 100vw - var( --eksell-aside-width ) );
 }
 
-.entry-content > .alignwide {
+.entry-content > .alignwide,
+.wp-site-blocks > .alignwide {
 	margin-left: max( calc( ( var( --eksell-inner-width-max ) - var( --eksell-inner-width-thin ) ) / -2 ), calc( ( 100vw - 100% - var( --eksell-inner-gutter ) - var( --eksell-aside-width ) ) / -2 ) );
 	width: calc( 100vw - var( --eksell-inner-gutter ) - var( --eksell-aside-width ) );
 }
@@ -5038,12 +5062,16 @@ hr + .comment-reply-title {
 	/* Direct Descendant Alignments */
 
 	.entry-content > .alignleft,
-	.entry-content > .wp-block-image > .alignleft {
+	.entry-content > .wp-block-image > .alignleft,
+	.wp-site-blocks > .alignleft,
+	.wp-site-blocks > .wp-block-image > .alignleft {
 		margin-left: max( -24.4rem, calc( ( ( 100vw - var( --eksell-inner-gutter ) - var( --eksell-aside-width) ) - 100% ) / -2 ) ) !important;
 	}
 
 	.entry-content > .alignright,
-	.entry-content > .wp-block-image > .alignright {
+	.entry-content > .wp-block-image > .alignright,
+	.wp-site-blocks > .alignright,
+	.wp-site-blocks > .wp-block-image > .alignright {
 		margin-right: max( -24.4rem, calc( ( ( 100vw - var( --eksell-inner-gutter ) - var( --eksell-aside-width ) ) - 100% ) / -2 ) ) !important;
 	}
 
@@ -5480,7 +5508,8 @@ hr + .comment-reply-title {
 
 	/* BLOCK: GROUP */
 
-	.entry-content > .wp-block-group.alignfull.has-background {
+	.entry-content > .wp-block-group.alignfull.has-background,
+	.wp-site-blocks > .wp-block-group.alignfull.has-background {
 		padding: 6.4rem calc( var( --eksell-inner-gutter ) / 2 );
 	}
 

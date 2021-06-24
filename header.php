@@ -1,6 +1,13 @@
+<?php
+
+// Used to determine whether the aside element should be output on the page. Filterable within the function.
+$has_aside = eksell_has_aside();
+
+?>
+
 <!DOCTYPE html>
 
-<html class="no-js" <?php language_attributes(); ?>>
+<html class="no-js<?php if ( $has_aside ) echo ' has-aside'; ?>" <?php language_attributes(); ?>>
 
 	<head>
 
