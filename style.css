@@ -2,7 +2,7 @@
 
 	Theme Name: Eksell
     Text Domain: eksell
-	Version: 1.6.0
+	Version: 1.6.1
 	Description: Eksell is a feature-rich portfolio and blog theme, with deep support for the block editor and full color settings. It includes extensive block styles and multiple prebuilt block patterns, and it styles the block editor to match the front-end of your site so you always have a good idea of what the end result will look like when you’re creating your content. Visitors can filter your posts and Jetpack Portfolio items without reloading the page with the lazyloading category filter, and full color settings in the Customizer give you easy control over all of the colors used in the theme, including the option to set a separate dark mode color scheme for devices that support it. Eksell also features a Blank Canvas page template that only outputs the content you add in the block editor, infinite scroll on archive pages, an optional search overlay, a sticky header setting, a social menu with icons, custom logo support, options for what post meta to display, support for the Block Templates editor, a lightweight construction for fast load times, and developer friendly code. Demo: https://andersnoren.se/themes/eksell/
 	Tags: blog, portfolio, grid-layout, one-column, two-columns, three-columns, four-columns, custom-background, custom-colors, custom-logo, custom-menu, editor-style, featured-images, sticky-post, theme-options, threaded-comments, translation-ready, block-styles, wide-blocks
 	Author: Anders Norén
@@ -11,7 +11,7 @@
 	License: GNU General Public License version 2.0
 	License URI: http://www.gnu.org/licenses/gpl-2.0.html
 	Requires PHP: 5.4
-	Tested up to: 5.7.2
+	Tested up to: 5.8
 
 	All files, unless otherwise stated, are released under the GNU General Public License
 	version 2.0 (http://www.gnu.org/licenses/gpl-2.0.html)
@@ -3004,7 +3004,7 @@ section.wp-block-cover-image > h2 {
 .wp-block-file {
 	background-color: var( --eksell-light-background-color );
 	display: block;
-	padding: 1.9rem 2.4rem 2.4rem;
+	padding: 2.4rem;
 	text-align: center;
 	width: 100%;
 }
@@ -3066,9 +3066,9 @@ section.wp-block-cover-image > h2 {
 
 /* Block: Gallery ---------------------------- */
 
-.wp-block-gallery:not(.alignleft):not(.alignright) + .wp-block-gallery:not(.alignleft):not(.alignright),
-.wp-block-gallery:not(.alignleft):not(.alignright) + .wp-block-image:not(.alignleft):not(.alignright),
-.wp-block-image:not(.alignleft):not(.alignright) + .wp-block-gallery:not(.alignleft):not(.alignright) {
+.wp-block-gallery:not(.alignleft):not(.alignright):not(.is-style-no-gutter) + .wp-block-gallery:not(.alignleft):not(.alignright):not(.is-style-no-gutter),
+.wp-block-gallery:not(.alignleft):not(.alignright):not(.is-style-no-gutter) + .wp-block-image:not(.alignleft):not(.alignright),
+.wp-block-image:not(.alignleft):not(.alignright) + .wp-block-gallery:not(.alignleft):not(.alignright):not(.is-style-no-gutter) {
 	margin-top: -1.6rem;
 }
 
@@ -3126,9 +3126,9 @@ section.wp-block-cover-image > h2 {
 
 @media ( min-width: 600px ) {
 
-	.wp-block-gallery:not(.alignleft):not(.alignright) + .wp-block-gallery:not(.alignleft):not(.alignright),
-	.wp-block-gallery:not(.alignleft):not(.alignright) + .wp-block-image:not(.alignleft):not(.alignright),
-	.wp-block-image:not(.alignleft):not(.alignright) + .wp-block-gallery:not(.alignleft):not(.alignright) {
+	.wp-block-gallery:not(.alignleft):not(.alignright):not(.is-style-no-gutter) + .wp-block-gallery:not(.alignleft):not(.alignright):not(.is-style-no-gutter),
+	.wp-block-gallery:not(.alignleft):not(.alignright):not(.is-style-no-gutter) + .wp-block-image:not(.alignleft):not(.alignright),
+	.wp-block-image:not(.alignleft):not(.alignright) + .wp-block-gallery:not(.alignleft):not(.alignright):not(.is-style-no-gutter) {
 		margin-top: -.8rem;
 	}
 
@@ -3295,9 +3295,7 @@ h6.has-background {
 /* STYLE: GRID */
 
 .wp-block-latest-posts.is-grid > li {
-	border-top: .1rem solid var( --eksell-border-color );
     margin: 0 0 2.4rem 0;
-	padding-top: 1.2rem;
     width: 100%;
 }
 
@@ -3572,8 +3570,12 @@ p.has-background {
 }
 
 .wp-block-search .wp-block-search__button {
+	background-color: var( --eksell-accent-color );
+	border: none;
+	color: var( --eksell-background-color );
 	flex-shrink: 0;
     margin-left: 1rem;
+	padding: 1.5rem 1.8rem;
 }
 
 /* Block: Separator -------------------------- */
@@ -3713,6 +3715,19 @@ table.is-style-stripes tbody tr:nth-child(odd),
 /* Block: Verse ------------------------------ */
 /* Block: Video ------------------------------ */
 
+.wp-block-video video {
+	display: block;
+}
+
+.wp-block-video figcaption {
+	margin-bottom: 0;
+	margin-top: 1.2rem;
+}
+
+.wp-block-video.aligncenter {
+	text-align: inherit;
+}
+
 
 /* --------------------------------------------------------------------------------------------- */
 /*	12. Entry Content
@@ -3755,6 +3770,7 @@ table.is-style-stripes tbody tr:nth-child(odd),
 
 .alignnone,
 .aligncenter,
+.wp-block-image .aligncenter,
 .alignwide,
 .alignfull {
 	margin: 4rem 0;
@@ -4899,18 +4915,18 @@ hr + .comment-reply-title {
 
 	/* BLOCK: GALLERY */
 
-	.wp-block-gallery:not(.alignleft):not(.alignright) + .wp-block-gallery:not(.alignleft):not(.alignright),
-	.wp-block-gallery:not(.alignleft):not(.alignright) + .wp-block-image:not(.alignleft):not(.alignright),
-	.wp-block-image:not(.alignleft):not(.alignright) + .wp-block-gallery:not(.alignleft):not(.alignright) {
+	.wp-block-gallery:not(.alignleft):not(.alignright):not(.is-style-no-gutter) + .wp-block-gallery:not(.alignleft):not(.alignright):not(.is-style-no-gutter),
+	.wp-block-gallery:not(.alignleft):not(.alignright):not(.is-style-no-gutter) + .wp-block-image:not(.alignleft):not(.alignright),
+	.wp-block-image:not(.alignleft):not(.alignright) + .wp-block-gallery:not(.alignleft):not(.alignright):not(.is-style-no-gutter) {
 		margin-top: -2.4rem;
 	}
 
-	.alignfull.wp-block-gallery + .alignfull.wp-block-gallery,
-	.alignfull.wp-block-gallery + .alignwide.wp-block-gallery,
-	.alignwide.wp-block-gallery + .alignwide.wp-block-gallery,
-	.alignwide.wp-block-gallery + .alignfull.wp-block-gallery,
-	.alignwide.wp-block-gallery + .alignwide.wp-block-image,
-	.alignwide.wp-block-image + .alignwide.wp-block-gallery {
+	.alignfull.wp-block-gallery:not(.is-style-no-gutter) + .alignfull.wp-block-gallery:not(.is-style-no-gutter),
+	.alignfull.wp-block-gallery:not(.is-style-no-gutter) + .alignwide.wp-block-gallery:not(.is-style-no-gutter),
+	.alignwide.wp-block-gallery:not(.is-style-no-gutter) + .alignwide.wp-block-gallery:not(.is-style-no-gutter),
+	.alignwide.wp-block-gallery:not(.is-style-no-gutter) + .alignfull.wp-block-gallery:not(.is-style-no-gutter),
+	.alignwide.wp-block-gallery:not(.is-style-no-gutter) + .alignwide.wp-block-image,
+	.alignwide.wp-block-image + .alignwide.wp-block-gallery:not(.is-style-no-gutter) {
 		margin-top: -4rem !important;
 	}
 
@@ -4972,12 +4988,6 @@ hr + .comment-reply-title {
 	.wp-block-latest-posts__post-excerpt {
 		font-size: 1.8rem;
 		margin-top: 1.6rem;
-	}
-
-	/* Style: Grid */
-
-	.wp-block-latest-posts.is-grid > li {
-		padding-top: 1.6rem;
 	}
 
 	/* BLOCK: MEDIA AND TEXT */
@@ -5063,7 +5073,8 @@ hr + .comment-reply-title {
 	/* ALIGNMENTS */
 
 	.alignnone,
-	.aligncenter {
+	.aligncenter,
+	.wp-block-image .aligncenter {
 		margin-bottom: 4.8rem;
 		margin-top: 4.8rem;
 	}
@@ -5379,14 +5390,14 @@ hr + .comment-reply-title {
 
 	/* BLOCK: GALLERY */
 
-	.alignfull.wp-block-gallery + .alignfull.wp-block-gallery,
-	.alignfull.wp-block-gallery + .alignwide.wp-block-gallery,
-	.alignfull.wp-block-gallery + .alignfull.wp-block-image,
-	.alignfull.wp-block-image + .alignfull.wp-block-gallery,
-	.alignwide.wp-block-gallery + .alignwide.wp-block-gallery,
-	.alignwide.wp-block-gallery + .alignfull.wp-block-gallery,
-	.alignwide.wp-block-gallery + .alignwide.wp-block-image,
-	.alignwide.wp-block-image + .alignwide.wp-block-gallery {
+	.alignfull.wp-block-gallery:not(.is-style-no-gutter) + .alignfull.wp-block-gallery:not(.is-style-no-gutter),
+	.alignfull.wp-block-gallery:not(.is-style-no-gutter) + .alignwide.wp-block-gallery:not(.is-style-no-gutter),
+	.alignfull.wp-block-gallery:not(.is-style-no-gutter) + .alignfull.wp-block-image,
+	.alignfull.wp-block-image + .alignfull.wp-block-gallery:not(.is-style-no-gutter),
+	.alignwide.wp-block-gallery:not(.is-style-no-gutter) + .alignwide.wp-block-gallery:not(.is-style-no-gutter),
+	.alignwide.wp-block-gallery:not(.is-style-no-gutter) + .alignfull.wp-block-gallery:not(.is-style-no-gutter),
+	.alignwide.wp-block-gallery:not(.is-style-no-gutter) + .alignwide.wp-block-image,
+	.alignwide.wp-block-image + .alignwide.wp-block-gallery:not(.is-style-no-gutter) {
 		margin-top: -3.2rem !important;
 	}
 
@@ -5626,14 +5637,14 @@ hr + .comment-reply-title {
 
 	/* BLOCK: GALLERY */
 
-	.alignfull.wp-block-gallery + .alignfull.wp-block-gallery,
-	.alignfull.wp-block-gallery + .alignwide.wp-block-gallery,
-	.alignfull.wp-block-gallery + .alignfull.wp-block-image,
-	.alignfull.wp-block-image + .alignfull.wp-block-gallery,
-	.alignwide.wp-block-gallery + .alignwide.wp-block-gallery,
-	.alignwide.wp-block-gallery + .alignfull.wp-block-gallery,
-	.alignwide.wp-block-gallery + .alignwide.wp-block-image,
-	.alignwide.wp-block-image + .alignwide.wp-block-gallery {
+	.alignfull.wp-block-gallery:not(.is-style-no-gutter) + .alignfull.wp-block-gallery:not(.is-style-no-gutter),
+	.alignfull.wp-block-gallery:not(.is-style-no-gutter) + .alignwide.wp-block-gallery:not(.is-style-no-gutter),
+	.alignfull.wp-block-gallery:not(.is-style-no-gutter) + .alignfull.wp-block-image,
+	.alignfull.wp-block-image + .alignfull.wp-block-gallery:not(.is-style-no-gutter),
+	.alignwide.wp-block-gallery:not(.is-style-no-gutter) + .alignwide.wp-block-gallery:not(.is-style-no-gutter),
+	.alignwide.wp-block-gallery:not(.is-style-no-gutter) + .alignfull.wp-block-gallery:not(.is-style-no-gutter),
+	.alignwide.wp-block-gallery:not(.is-style-no-gutter) + .alignwide.wp-block-image,
+	.alignwide.wp-block-image + .alignwide.wp-block-gallery:not(.is-style-no-gutter) {
 		margin-top: -1.6rem !important;
 	}
 

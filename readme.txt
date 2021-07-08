@@ -3,7 +3,7 @@ Contributors: Anlino
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=anders%40andersnoren%2ese&lc=US&item_name=Free%20WordPress%20Themes%20from%20Anders%20Noren&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted
 Requires at least: 4.5
 Requires PHP: 5.4
-Tested up to: 5.7.2
+Tested up to: 5.8
 Stable tag: trunk
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -255,6 +255,16 @@ Included as part of:
 
 
 == Changelog ==
+
+Version 1.6.1 (2021-06-XX)
+-------------------------
+- Fixed the margin between galleries set to the "No Gutter" block style added in 1.6.0.
+- Fixed uneven inner padding on the file block.
+- Fixed the caption margin of the video block, and set the text alignment of the video caption to match other blocks.
+- Tweaked the styles of the Latest Posts block when set to Grid View.
+- Fixed the Search block button not matching other button styles.
+- Tweaked Block Template editor styles.
+- Bumped "Tested up to" to 5.8.
 
 Version 1.6.0 (2021-06-24)
 -------------------------

@@ -33,6 +33,7 @@
 	color: var( --eksell-primary-color );
 	-moz-osx-font-smoothing: grayscale;
 	-webkit-font-smoothing: antialiased;
+	padding: 0;
 }
 
 :root * {
