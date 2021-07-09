@@ -1003,12 +1003,6 @@
 	margin-bottom: 24px;
 }
 
-:root ul.wp-block-latest-posts.is-grid li {
-	border-style: solid;
-	border-width: 1px 0 0;
-	padding-top: 16px;
-}
-
 :root .wp-block-latest-posts__post-excerpt {
 	font-size: .95em;
 	line-height: 1.4;
@@ -1650,7 +1644,6 @@
 	.wp-block[data-align="full"] > .wp-block-latest-posts.is-grid li,
 	.wp-block[data-align="wide"] > .wp-block-latest-posts.is-grid li {
 		margin-bottom: 48px;
-		padding-top: 24px;
 	}
 
 	.wp-block[data-align="full"] > .wp-block-latest-posts.is-grid .wp-block-latest-posts__featured-image,

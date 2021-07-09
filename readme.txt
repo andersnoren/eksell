@@ -256,7 +256,11 @@ Included as part of:
 
 == Changelog ==
 
-Version 1.6.1 (2021-06-XX)
+Version 1.6.2 (2021-06-09)
+-------------------------
+- Latest Posts block: Fixed the editor styles not matching the front-end styles after 1.6.1.
+
+Version 1.6.1 (2021-06-08)
 -------------------------
 - Fixed the margin between galleries set to the "No Gutter" block style added in 1.6.0.
 - Fixed uneven inner padding on the file block.
