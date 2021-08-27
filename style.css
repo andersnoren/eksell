@@ -4358,6 +4358,17 @@ hr + .comment-reply-title {
 	align-items: baseline;
 }
 
+.footer-inner a {
+	color: inherit;
+	outline: none;
+	text-decoration: none;
+}
+
+.footer-inner a:hover,
+.footer-inner a:focus {
+	text-decoration: underline;
+}
+
 /* Footer Credits ---------------------------- */
 
 .footer-credits {
@@ -4369,17 +4380,6 @@ hr + .comment-reply-title {
 
 .footer-credits p {
 	margin: .4rem 0 0 2.4rem;
-}
-
-.footer-credits a {
-	color: inherit;
-	outline: none;
-	text-decoration: none;
-}
-
-.footer-credits a:hover,
-.footer-credits a:focus {
-	text-decoration: underline;
 }
 
 .theme-credits {
@@ -4410,17 +4410,6 @@ hr + .comment-reply-title {
 
 .footer-menu li {
 	margin: .4rem 0 0 1.6rem
-}
-
-.footer-menu a {
-	color: inherit;
-	text-decoration: none;
-}
-
-.footer-menu a:hover,
-.footer-menu a:focus {
-	outline: none;
-	text-decoration: underline;
 }
 
 /* Footer Social ----------------------------- */
