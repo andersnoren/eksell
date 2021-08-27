@@ -13,17 +13,17 @@
 					<?php eksell_the_theme_svg( 'ui', 'search', 24, 24 ); ?>
 				</label>
 				<button type="submit" class="search-submit"><?php echo esc_html_x( 'Search', 'Submit button', 'eksell' ); ?></button>
-			</form><!-- .search-form -->
+			</form><!-- .modal-search-form -->
 
 			<a href="#" class="toggle search-untoggle fill-cc-primary" data-toggle-target=".search-modal" data-toggle-screen-lock="true" data-toggle-body-class="showing-search-modal" data-set-focus="#site-header .search-toggle">
 				<span class="screen-reader-text"><?php esc_html_e( 'Close', 'eksell' ); ?></span>
 				<div class="search-untoggle-inner">
 					<?php eksell_the_theme_svg( 'ui', 'close', 18, 18 ); ?>
 				</div><!-- .search-untoggle-inner -->
-			</a><!-- .search-toggle -->
+			</a><!-- .search-untoggle -->
 
 		</div><!-- .section-inner -->
 
 	</div><!-- .search-modal-inner -->
 
-</div><!-- .menu-modal -->
+</div><!-- .search-modal -->

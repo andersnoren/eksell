@@ -178,7 +178,8 @@ function eksell_get_social_link_svg( $uri, $width = 24, $height = 24 ) {
 function eksell_nav_menu_social_icons( $item_output, $item, $depth, $args ) {
 
 	// Change SVG icon inside social menu if there is a supported URL.
-	if ( 'social' === $args->theme_location ) {
+	$social_menu_args = eksell_get_social_menu_args();
+	if ( $social_menu_args['theme_location'] === $args->theme_location ) {
 		$svg = eksell_get_social_link_svg( $item->url, 24, 24 );
 		if ( ! empty( $svg ) ) {
 			$item_output = str_replace( $args->link_before, $svg, $item_output );
@@ -202,36 +203,38 @@ if ( ! function_exists( 'eksell_the_social_menu' ) ) :
 
 		$social_args = eksell_get_social_menu_args( $args );
 
-		if ( has_nav_menu( $social_args['theme_location'] ) ) {
-			wp_nav_menu( $social_args );
-		}
+		if ( ! has_nav_menu( $social_args['theme_location'] ) ) return;
+
+		wp_nav_menu( $social_args );
 
 	}
 endif;
 
 
-/*	-----------------------------------------------------------------------------------------------
-	GET SOCIAL MENU WP_NAV_MENU ARGS
-	Return the social menu arguments for wp_nav_menu().
-
-	@param array $args		Arguments to use in conjunction with the default arguments.
+/* ------------------------------------------------------------------------------------------------
+   MAYBE OUTPUT FOOTER MENU
+   If a footer menu is set, output it in the footer. If a footer menu isn't set, and there's a social
+   menu set, the social menu is output instead. If neither is set, nothing is output.
 --------------------------------------------------------------------------------------------------- */
 
-if ( ! function_exists( 'eksell_get_social_menu_args' ) ) :
-	function eksell_get_social_menu_args( $args = array() ) {
+if ( ! function_exists( 'eksell_the_footer_menu' ) ) :
+	function eksell_the_footer_menu() {
 
-		return $args = wp_parse_args( $args, array(
-			'theme_location'	=> 'social',
-			'container'			=> '',
-			'container_class'	=> '',
-			'menu_class'		=> 'social-menu reset-list-style social-icons',
-			'depth'				=> 1,
-			'link_before'		=> '<span class="screen-reader-text">',
-			'link_after'		=> '</span>',
-			'fallback_cb'		=> '',
-		) );
+		if ( has_nav_menu( 'footer' ) ) {
+			wp_nav_menu( array(
+				'container'			=> '',
+				'container_class'	=> '',
+				'depth'				=> 1,
+				'fallback_cb'		=> '',
+				'menu_class'		=> 'footer-menu reset-list-style',
+				'theme_location'	=> 'footer',
+			) );
+		} else {
+			eksell_the_social_menu();
+		}
 
 	}
+	add_action( 'eksell_footer_inner_end', 'eksell_the_footer_menu' );
 endif;
 
 

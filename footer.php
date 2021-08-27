@@ -33,9 +33,10 @@
 
 					</div><!-- .footer-credits -->
 
-					<?php 
-					eksell_the_social_menu(); 
-
+					<?php
+					/*
+					 * @hooked eksell_the_footer_menu - 10
+					 */
 					do_action( 'eksell_footer_inner_end' ); 
 					?>
 

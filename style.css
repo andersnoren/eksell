@@ -2,8 +2,8 @@
 
 	Theme Name: Eksell
     Text Domain: eksell
-	Version: 1.6.2
-	Description: Eksell is a feature-rich portfolio and blog theme, with deep support for the block editor and full color settings. It includes extensive block styles and multiple prebuilt block patterns, and it styles the block editor to match the front-end of your site so you always have a good idea of what the end result will look like when you’re creating your content. Visitors can filter your posts and Jetpack Portfolio items without reloading the page with the lazyloading category filter, and full color settings in the Customizer give you easy control over all of the colors used in the theme, including the option to set a separate dark mode color scheme for devices that support it. Eksell also features a Blank Canvas page template that only outputs the content you add in the block editor, infinite scroll on archive pages, an optional search overlay, a sticky header setting, a social menu with icons, custom logo support, options for what post meta to display, support for the Block Templates editor, a lightweight construction for fast load times, and developer friendly code. Demo: https://andersnoren.se/themes/eksell/
+	Version: 1.7
+	Description: Eksell is a feature-rich portfolio and blog theme, with deep support for the block editor and full color settings. It includes extensive block styles and multiple prebuilt block patterns, and it styles the block editor to match the front-end of your site so you always have a good idea of what the end result will look like when you’re creating your content. Visitors can filter your posts and Jetpack Portfolio items without reloading the page with the lazyloading category filter, and full color settings in the Customizer give you easy control over all of the colors used in the theme, including the option to set a separate dark mode color scheme for devices that support it. Eksell also features a Blank Canvas page template that only outputs the content you add in the block editor, infinite scroll on archive pages, an optional search overlay, a sticky header setting, a social menu with icons, a footer menu, custom logo support, options for what post meta to display, support for the Block Templates editor, a lightweight construction for fast load times, and developer friendly code. Demo: https://andersnoren.se/themes/eksell/
 	Tags: blog, portfolio, grid-layout, one-column, two-columns, three-columns, four-columns, custom-background, custom-colors, custom-logo, custom-menu, editor-style, featured-images, sticky-post, theme-options, threaded-comments, translation-ready, block-styles, wide-blocks
 	Author: Anders Norén
 	Author URI: https://andersnoren.se
@@ -217,6 +217,7 @@ body {
 :root .wp-site-blocks > .skip-link + *,
 :root .comment-content > *:first-child,
 :root *[class*="_inner-container"] > *:first-child,
+:root *[class*="_inner-container"] > .wp-block-image:first-child > [class*="align"],
 :root fieldset > *:first-child,
 :root form > *:first-child,
 :root .wp-block-column > *:first-child,
@@ -229,6 +230,7 @@ body {
 :root .entry-content > *:last-child,
 :root .comment-content > *:last-child,
 :root *[class*="_inner-container"] > *:last-child,
+:root *[class*="_inner-container"] > .wp-block-image:last-child > [class*="align"],
 :root fieldset > *:last-child,
 :root form > *:last-child,
 :root .wp-block-column > *:last-child,
@@ -3194,6 +3196,10 @@ h6.has-background {
 	margin-top: 0;
 }
 
+.wp-block-image figure.aligncenter {
+	width: 100%;
+}
+
 .wp-block-image:not(:first-child):not(.alignwide):not(.alignfull):not(.alignnone) figure:not(.alignleft):not(.alignright):not(.aligncenter),
 .wp-block-image:not(:first-child):not(.alignwide):not(.alignfull):not(.alignnone) > img:first-child,
 .wp-block-image:not(:first-child):not(.alignwide):not(.alignfull):not(.alignnone) > img:only-child {
@@ -4344,8 +4350,12 @@ hr + .comment-reply-title {
 .footer-inner {
 	align-items: center;
 	display: flex;
-	flex-wrap: wrap;
+	font-size: 1.4rem;
 	justify-content: space-between;
+}
+
+.has-footer-menu .footer-inner {
+	align-items: baseline;
 }
 
 /* Footer Credits ---------------------------- */
@@ -4353,13 +4363,12 @@ hr + .comment-reply-title {
 .footer-credits {
 	align-items: baseline;
 	display: flex;
-	flex-grow: 1;
-	font-size: 1.4rem;
-	margin: -1.2rem 2.4rem 0 -2.4rem;
+	flex-shrink: 0;
+	margin: -.4rem 2.4rem 0 -2.4rem;
 }
 
 .footer-credits p {
-	margin: 1.2rem 0 0 2.4rem;
+	margin: .4rem 0 0 2.4rem;
 }
 
 .footer-credits a {
@@ -4389,9 +4398,35 @@ hr + .comment-reply-title {
 	display: block;
 }
 
+/* Footer Menu ------------------------------- */
+
+.footer-menu {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: flex-end;
+	margin: -.4rem 0 0 -1.6rem;
+	text-align: right;
+}
+
+.footer-menu li {
+	margin: .4rem 0 0 1.6rem
+}
+
+.footer-menu a {
+	color: inherit;
+	text-decoration: none;
+}
+
+.footer-menu a:hover,
+.footer-menu a:focus {
+	outline: none;
+	text-decoration: underline;
+}
+
 /* Footer Social ----------------------------- */
 
 #site-footer .social-menu {
+	justify-content: flex-end;
 	margin: 0 -1.2rem;
 }
 
@@ -5300,8 +5335,22 @@ hr + .comment-reply-title {
 
 	/* FOOTER INNER */
 
-	.footer-credits {
+	.footer-inner {
 		font-size: 1.6rem;
+	}
+
+	.footer-credits,
+	.footer-menu {
+		margin: -.8rem 0 0 -2.4rem;
+	}
+
+	.footer-credits {
+		margin-right: 2.4rem;
+	}
+
+	.footer-credits p,
+	.footer-menu li {
+		margin: .8rem 0 0 2.4rem;
 	}
 
 	.theme-credits {
@@ -5431,7 +5480,6 @@ hr + .comment-reply-title {
 	.wp-block-latest-posts.alignwide.is-grid > li,
 	.wp-block-latest-posts.alignfull.is-grid > li {
 		margin: 1.6rem 3.2rem 1.6rem 0;
-		padding-top: 2.4rem;
 	}
 
 	.wp-block-latest-posts.alignfull.columns-2 > li,

@@ -250,13 +250,41 @@ endif;
 if ( ! function_exists( 'eksell_register_nav_menus' ) ) :
 	function eksell_register_nav_menus() {
 
+		$social_menu_args = eksell_get_social_menu_args();
+
 		register_nav_menus( array(
-			'main'   => esc_html__( 'Main Menu', 'eksell' ),
-			'social' => esc_html__( 'Social Menu', 'eksell' ),
+			'main'								=> esc_html__( 'Main Menu', 'eksell' ),
+			'footer'							=> esc_html__( 'Footer Menu', 'eksell' ),
+			$social_menu_args['theme_location']	=> esc_html__( 'Social Menu', 'eksell' ),
 		) );
 
 	}
 	add_action( 'init', 'eksell_register_nav_menus' );
+endif;
+
+
+/*	-----------------------------------------------------------------------------------------------
+	GET SOCIAL MENU WP_NAV_MENU ARGS
+	Return the social menu arguments for wp_nav_menu().
+
+	@param array $args		Arguments to use in conjunction with the default arguments.
+--------------------------------------------------------------------------------------------------- */
+
+if ( ! function_exists( 'eksell_get_social_menu_args' ) ) :
+	function eksell_get_social_menu_args( $args = array() ) {
+
+		return apply_filters( 'eksell_social_menu_args', wp_parse_args( $args, array(
+			'container'			=> '',
+			'container_class'	=> '',
+			'depth'				=> 1,
+			'fallback_cb'		=> '',
+			'link_before'		=> '<span class="screen-reader-text">',
+			'link_after'		=> '</span>',
+			'menu_class'		=> 'social-menu reset-list-style social-icons',
+			'theme_location'	=> 'social',
+		) ) );
+
+	}
 endif;
 
 
@@ -298,8 +326,14 @@ if ( ! function_exists( 'eksell_body_classes' ) ) :
 			$classes[] = 'disable-search-modal';
 		}
 
+		// Check for footer menu.
+		if ( has_nav_menu( 'footer' ) ) {
+			$classes[] = 'has-footer-menu';
+		}
+
 		// Check for social menu.
-		if ( has_nav_menu( 'social' ) ) {
+		$social_menu_args = eksell_get_social_menu_args();
+		if ( has_nav_menu( $social_menu_args['theme_location'] ) ) {
 			$classes[] = 'has-social-menu';
 		}
 

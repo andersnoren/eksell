@@ -256,6 +256,20 @@ Included as part of:
 
 == Changelog ==
 
+Version 1.7 (2021-08-27)
+-------------------------
+- New: Added a footer menu which, if set, replaces the social menu on the right side of the footer. Underlying changes:
+	- Replaced the eksell_the_social_menu() call in the footer with eksell_the_footer_menu(), which is hooked to the eksell_footer_inner_end action.
+	- Moved eksell_get_social_menu_args() to functions.php.
+	- Made the social menu arguments in eksell_get_social_menu_args() easier to modify in child themes by adding a filter (eksell_social_menu_args).
+	- Updated eksell_register_nav_menus() to register the social menu with the theme_location set for the social menu in eksell_get_social_menu_args().
+	- Updated hardcoded checks for the 'social' menu theme_location to instead check for the theme_location property set in eksell_get_social_menu_args(), in case it has been filtered.
+	- Updated the theme description to mention the footer menu.
+- Fixed incorrect closing element comments in inc/parts/modal-search.php.
+- Latest Posts block: More front-end tweaks.
+- Fixed the alignment of centered images inside wide and full groups (thanks, @rpetges1).
+- Fixed the top/bottom margin of image blocks not being removed when they're the first/last blocks inside a group block.
+
 Version 1.6.2 (2021-06-09)
 -------------------------
 - Latest Posts block: Fixed the editor styles not matching the front-end styles after 1.6.1.
