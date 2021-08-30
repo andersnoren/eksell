@@ -256,6 +256,11 @@ Included as part of:
 
 == Changelog ==
 
+Version 1.7.1 (2021-08-30)
+-------------------------
+- Modified the focus style for the main menu links to be visually distinctive from the active style (thanks, @adamkheckler).
+- When the desktop navigation toggle is clicked, move focus to the main menu wrapper element instead of the first link, to minimize confusion about active/focused element.
+
 Version 1.7 (2021-08-27)
 -------------------------
 - New: Added a footer menu which, if set, replaces the social menu on the right side of the footer. Underlying changes:

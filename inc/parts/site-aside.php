@@ -4,7 +4,7 @@
 	do_action( 'eksell_site_aside_start' );
 	?>
 
-	<a href="#" class="toggle nav-toggle has-bars" data-toggle-target=".menu-modal" data-toggle-screen-lock="true" data-toggle-body-class="showing-menu-modal" aria-pressed="false" role="button" data-set-focus=".menu-modal .main-menu &gt; li:first-child a">
+	<a href="#" class="toggle nav-toggle has-bars" data-toggle-target=".menu-modal" data-toggle-screen-lock="true" data-toggle-body-class="showing-menu-modal" aria-pressed="false" role="button" data-set-focus=".menu-modal .main-menu">
 		<div class="nav-toggle-inner">
 			<div class="bars">
 
