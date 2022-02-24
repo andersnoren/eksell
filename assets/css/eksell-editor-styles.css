@@ -280,15 +280,16 @@
 }
 
 .wp-block.editor-post-title:before {
+	background-image: linear-gradient( -45deg, currentColor 25%, transparent 25%, transparent 50%, currentColor 50%, currentColor 75%, transparent 75%, transparent );
+	background-position: 0;
+	background-size: 4px 4px;
 	color: var( --eksell-accent-color );
 	content: "";
 	display: block;
 	height: 10px;
 	image-rendering: pixelated;
+	margin-bottom: .5em;
 	width: 66px;
-	background-image: linear-gradient( -45deg, currentColor 25%, transparent 25%, transparent 50%, currentColor 50%, currentColor 75%, transparent 75%, transparent );
-	background-position: 0;
-	background-size: 4px 4px;
 }
 
 .editor-post-title__block .editor-post-title__input,
@@ -851,7 +852,8 @@
 
 .wp-block-gallery.is-style-no-gutter .blocks-gallery-grid,
 .wp-block-gallery.is-style-no-gutter .blocks-gallery-image, 
-.wp-block-gallery.is-style-no-gutter .blocks-gallery-item {
+.wp-block-gallery.is-style-no-gutter .blocks-gallery-item,
+.wp-block-gallery.is-style-no-gutter .wp-block-image {
 	margin: 0 !important;
 }
 

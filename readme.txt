@@ -256,6 +256,11 @@ Included as part of:
 
 == Changelog ==
 
+Version 1.7.3 (2022-02-24)
+-------------------------
+- Gallery block: Fixed the "No Gutter" block style in WordPress 5.9.
+- Editor Styles: Updated the margin of the separator before the title to match the front-end.
+
 Version 1.7.2 (2022-02-18)
 -------------------------
 - Fixed a margin issue with gallery blocks created in WordPress 5.9.
