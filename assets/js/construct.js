@@ -10,8 +10,9 @@ var eksell = eksell || {},
 	Global variables
 --------------------------------------------------------------------------------------------------- */
 
-var $eksellDoc = $( document ),
-    $eksellWin = $( window );
+var $eksellDoc 		= $( document ),
+    $eksellWin 		= $( window ),
+	eksellIsIE11 	= !!window.MSInputMethodContext && !!document.documentMode;
 
 
 /*	-----------------------------------------------------------------------------------------------
@@ -1047,6 +1048,19 @@ eksell.elementInView = {
 			docViewLimit 			= docViewBottom;
 
 		var elemTop 				= $elem.offset().top;
+
+		// For elements with a transform: translateY value, subtract the translateY value for the elemTop comparison point.
+		// IE11 doesn't support WebKitCSSMatrix, so don't do it in IE11.
+		var elemTransform = window.getComputedStyle( $elem[0] ).getPropertyValue( 'transform' );
+		if ( elemTransform && ! eksellIsIE11 ) {
+			var elemTransformMatrix = new WebKitCSSMatrix( elemTransform );
+			if ( elemTransformMatrix ) {
+				elemTranslateY = elemTransformMatrix.m42;
+				if ( elemTranslateY ) {
+					elemTop = elemTop - elemTranslateY;
+				}
+			}
+		}
 
 		// If checkAbove is set to true, which is default, return true if the browser has already scrolled past the element.
 		if ( checkAbove && ( elemTop <= docViewBottom ) ) {

@@ -256,6 +256,11 @@ Included as part of:
 
 == Changelog ==
 
+Version 1.7.4 (2022-04-19)
+-------------------------
+- Buttons block: Removed margin styles in favor of Core gap styles.
+- Updated elementInView.isVisible JS function to account for translateY position when checking if an element is visible.
+
 Version 1.7.3 (2022-02-24)
 -------------------------
 - Gallery block: Fixed the "No Gutter" block style in WordPress 5.9.

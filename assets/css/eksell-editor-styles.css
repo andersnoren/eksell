@@ -568,10 +568,6 @@
 
 /* Block: Button ----------------------------- */
 
-.wp-block-button {
-	margin-top: 0;
-}
-
 .wp-block-button__link,
 :root .wp-block-file .wp-block-file__button {
 	-webkit-appearance: none;
@@ -587,7 +583,6 @@
 	justify-content: center;
 	letter-spacing: 0;
 	line-height: 1.25;
-	margin: 0;
 	padding: 15px 24px;
 	text-align: center;
 	text-decoration: none;
@@ -620,25 +615,6 @@
 
 .is-style-squared .wp-block-button__link {
 	border-radius: 0;
-}
-
-/* Block: Buttons ---------------------------- */
-
-:root .wp-block-buttons:last-child {
-	margin-bottom: -24px !important;
-}
-
-:root .wp-block-buttons .wp-block-button {
-	margin: 0 24px 24px 0;
-}
-
-:root .wp-block-buttons .wp-block-button:only-child,
-:root .wp-block-buttons .wp-block-button:last-child {
-	margin-right: 0;
-}
-
-.wp-block-buttons.is-content-justification-right > .wp-block-button {
-	margin-left: 0;
 }
 
 /* Block: Calendar --------------------------- */
