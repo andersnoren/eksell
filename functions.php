@@ -177,7 +177,7 @@ if ( ! function_exists( 'eksell_register_styles' ) ) :
 		$google_fonts_url = apply_filters( 'eksell_google_fonts_url', get_stylesheet_directory_uri() . '/assets/css/fonts.css' );
 
 		if ( $google_fonts_url ) {
-			wp_register_style( 'eksell-google-fonts', $google_fonts_url, false, $theme_version, 'all' );
+			wp_register_style( 'eksell-google-fonts', $google_fonts_url );
 			$css_dependencies[] = 'eksell-google-fonts';
 		}
 
@@ -752,31 +752,6 @@ if ( ! function_exists( 'eksell_filter_post_thumbnail_size' ) ) :
 endif;
 
 
-/* 	-----------------------------------------------------------------------------------------------
-	MAYBE DISABLE GOOGLE FONTS
-	Check whether to disable Google Fonts based on the setting in the Customizer.
-
-	@param string 		$url		The Google Fonts URL.
---------------------------------------------------------------------------------------------------- */
-
-if ( ! function_exists( 'eksell_maybe_disable_google_fonts' ) ) :
-	function eksell_maybe_disable_google_fonts( $url ) {
-
-		// If the Customizer setting is set to disable, return false.
-		$disable_google_fonts = get_theme_mod( 'eksell_disable_google_fonts' );
-
-		if ( $disable_google_fonts ) {
-			return false;
-		}
-		
-		// If not, return the Google Fonts URL.
-		return $url;
-
-	}
-	add_filter( 'eksell_google_fonts_url', 'eksell_maybe_disable_google_fonts' );
-endif;
-
-
 /*	-----------------------------------------------------------------------------------------------
 	AJAX LOAD MORE
 	Called in construct.js when the the pagination is triggered to load more posts.
@@ -994,16 +969,13 @@ endif;
 if ( ! function_exists( 'eksell_block_editor_styles' ) ) :
 	function eksell_block_editor_styles() {
 
-		// The URL for Google Fonts. You can modify or remove it by filtering `eksell_google_fonts_url`.
-		$google_fonts_url = apply_filters( 'eksell_google_fonts_url', 'https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap' );
-
 		// This URL is filtered by eksell_pre_http_request_block_editor_customizer_styles to load dynamic CSS as inline styles.
 		$inline_styles_url = 'https://eksell-inline-editor-styles';
 
 		// Build a filterable array of the editor styles to load.
 		$eksell_editor_styles = apply_filters( 'eksell_editor_styles', array(
 			'assets/css/eksell-editor-styles.css',
-			$google_fonts_url,
+			'assets/css/fonts.css',
 			$inline_styles_url
 		) );
 

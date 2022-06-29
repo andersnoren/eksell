@@ -256,6 +256,11 @@ Included as part of:
 
 == Changelog ==
 
+Version 1.8.1 (2022-06-29)
+-------------------------
+- Removed the "Disable Google Fonts" Customizer setting, since Google Fonts is no longer used in the theme.
+- Fixed Google Fonts still being used for the editor styles.
+
 Version 1.8 (2022-06-29)
 -------------------------
 - Switched from the Google Fonts CDN to font files included in the theme folder.

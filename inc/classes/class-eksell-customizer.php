@@ -174,21 +174,6 @@ if ( ! class_exists( 'Eksell_Customizer' ) ) :
 				'description'	=> esc_html__( 'Check to disable animations and transitions in the theme.', 'eksell' ),
 			) );
 
-			/* Disable Google Fonts ---------- */
-
-			$wp_customize->add_setting( 'eksell_disable_google_fonts', array(
-				'capability' 		=> 'edit_theme_options',
-				'default'			=> false,
-				'sanitize_callback' => 'eksell_sanitize_checkbox'
-			) );
-
-			$wp_customize->add_control( 'eksell_disable_google_fonts', array(
-				'type' 			=> 'checkbox',
-				'section' 		=> 'eksell_general_options',
-				'label' 		=> esc_html__( 'Disable Google Fonts', 'eksell' ),
-				'description'	=> esc_html__( 'Check to disable the connection to Google Fonts in the theme.', 'eksell' ),
-			) );
-
 			/* ------------------------------------------------------------------------
 			 * Site Header Options
 			 * ------------------------------------------------------------------------ */
