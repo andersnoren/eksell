@@ -173,12 +173,11 @@ if ( ! function_exists( 'eksell_register_styles' ) ) :
 		$theme_version = wp_get_theme( 'eksell' )->get( 'Version' );
 		$css_dependencies = array();
 
-		// Retrieve and enqueue the URL for Google Fonts.
-		// You can remove the Google Fonts enqueue by filtering `eksell_google_fonts_url`.
-		$google_fonts_url = apply_filters( 'eksell_google_fonts_url', '//fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap' );
+		// Enqueue the CSS file for fonts. The name of the URL filter reflects the earlier use of the Google Fonts CDN.
+		$google_fonts_url = apply_filters( 'eksell_google_fonts_url', get_stylesheet_directory_uri() . '/assets/css/fonts.css' );
 
 		if ( $google_fonts_url ) {
-			wp_register_style( 'eksell-google-fonts', $google_fonts_url, false, 1.0, 'all' );
+			wp_register_style( 'eksell-google-fonts', $google_fonts_url, false, $theme_version, 'all' );
 			$css_dependencies[] = 'eksell-google-fonts';
 		}
 
