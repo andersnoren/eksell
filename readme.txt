@@ -256,6 +256,10 @@ Included as part of:
 
 == Changelog ==
 
+Version 1.8.3 (2022-07-01)
+-------------------------
+- Block styles: Tweaked gallery and large quotes to look correct in WordPress 6.0 (thanks, @oslaferbmon).
+
 Version 1.8.2 (2022-07-01)
 -------------------------
 - Improved fonts.css enqueue for child themes.

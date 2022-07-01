@@ -2,7 +2,7 @@
 
 	Theme Name: Eksell
     Text Domain: eksell
-	Version: 1.8.2
+	Version: 1.8.3
 	Description: Eksell is a feature-rich portfolio and blog theme, with deep support for the block editor and full color settings. It includes extensive block styles and multiple prebuilt block patterns, and it styles the block editor to match the front-end of your site so you always have a good idea of what the end result will look like when you’re creating your content. Visitors can filter your posts and Jetpack Portfolio items without reloading the page with the lazyloading category filter, and full color settings in the Customizer give you easy control over all of the colors used in the theme, including the option to set a separate dark mode color scheme for devices that support it. Eksell also features a Blank Canvas page template that only outputs the content you add in the block editor, infinite scroll on archive pages, an optional search overlay, a sticky header setting, a social menu with icons, a footer menu, custom logo support, options for what post meta to display, support for the Block Templates editor, a lightweight construction for fast load times, and developer friendly code. Demo: https://andersnoren.se/themes/eksell/
 	Tags: blog, portfolio, grid-layout, one-column, two-columns, three-columns, four-columns, custom-background, custom-colors, custom-logo, custom-menu, editor-style, featured-images, sticky-post, theme-options, threaded-comments, translation-ready, block-styles, wide-blocks
 	Author: Anders Norén
@@ -3043,6 +3043,11 @@ section.wp-block-cover-image > h2 {
 
 /* Block: Gallery ---------------------------- */
 
+:root .wp-block-gallery {
+	--wp--style--unstable-gallery-gap: 1.6rem;
+	gap: var( --wp--style--unstable-gallery-gap );
+}
+
 .wp-block-gallery:not(.alignleft):not(.alignright):not(.is-style-no-gutter) + .wp-block-gallery:not(.alignleft):not(.alignright):not(.is-style-no-gutter),
 .wp-block-gallery:not(.alignleft):not(.alignright):not(.is-style-no-gutter) + .wp-block-image:not(.alignleft):not(.alignright),
 .wp-block-image:not(.alignleft):not(.alignright) + .wp-block-gallery:not(.alignleft):not(.alignright):not(.is-style-no-gutter) {
@@ -3106,6 +3111,10 @@ section.wp-block-cover-image > h2 {
 */
 
 @media ( min-width: 600px ) {
+
+	:root .wp-block-gallery {
+		--wp--style--unstable-gallery-gap: 2.4rem;
+	}
 
 	.wp-block-gallery:not(.alignleft):not(.alignright):not(.is-style-no-gutter) + .wp-block-gallery:not(.alignleft):not(.alignright):not(.is-style-no-gutter),
 	.wp-block-gallery:not(.alignleft):not(.alignright):not(.is-style-no-gutter) + .wp-block-image:not(.alignleft):not(.alignright),
@@ -3518,17 +3527,17 @@ p.has-background {
 	font-size: 2.1rem;
 }
 
-.wp-block-quote.is-large p,
-.wp-block-quote.is-style-large p {
+.wp-block-quote.is-large:not(.is-style-plain) p,
+.wp-block-quote.is-style-large:not(.is-style-plain) p {
 	font-size: inherit;
 	font-style: normal;
 	line-height: 1.5;
 }
 
-.wp-block-quote.is-large cite,
-.wp-block-quote.is-large footer,
-.wp-block-quote.is-style-large cite,
-.wp-block-quote.is-style-large footer {
+.wp-block-quote.is-large:not(.is-style-plain) cite, 
+.wp-block-quote.is-large:not(.is-style-plain) footer, 
+.wp-block-quote.is-style-large:not(.is-style-plain) cite, 
+.wp-block-quote.is-style-large:not(.is-style-plain) footer {
 	font-size: 1.6rem;
 	text-align: inherit;
 }
@@ -5387,6 +5396,11 @@ hr + .comment-reply-title {
 
 	/* BLOCK: GALLERY */
 
+	:root .wp-block-gallery.alignfull,
+	:root .wp-block-gallery.alignwide {
+		--wp--style--unstable-gallery-gap: 3.2rem;
+	}
+
 	.alignfull.wp-block-gallery:not(.is-style-no-gutter) + .alignfull.wp-block-gallery:not(.is-style-no-gutter),
 	.alignfull.wp-block-gallery:not(.is-style-no-gutter) + .alignwide.wp-block-gallery:not(.is-style-no-gutter),
 	.alignfull.wp-block-gallery:not(.is-style-no-gutter) + .alignfull.wp-block-image,
@@ -5632,6 +5646,11 @@ hr + .comment-reply-title {
 	.wp-block-column h5, .wp-block-column .h5 { font-size: 2.4rem; }
 
 	/* BLOCK: GALLERY */
+
+	:root .wp-block-gallery.alignfull,
+	:root .wp-block-gallery.alignwide {
+		--wp--style--unstable-gallery-gap: 4.8rem;
+	}
 
 	.alignfull.wp-block-gallery:not(.is-style-no-gutter) + .alignfull.wp-block-gallery:not(.is-style-no-gutter),
 	.alignfull.wp-block-gallery:not(.is-style-no-gutter) + .alignwide.wp-block-gallery:not(.is-style-no-gutter),
