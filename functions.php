@@ -174,7 +174,7 @@ if ( ! function_exists( 'eksell_register_styles' ) ) :
 		$css_dependencies = array();
 
 		// Enqueue the CSS file for fonts. The name of the URL filter reflects the earlier use of the Google Fonts CDN.
-		$google_fonts_url = apply_filters( 'eksell_google_fonts_url', get_stylesheet_directory_uri() . '/assets/css/fonts.css' );
+		$google_fonts_url = apply_filters( 'eksell_google_fonts_url', get_theme_file_uri( '/assets/css/fonts.css' ) );
 
 		if ( $google_fonts_url ) {
 			wp_register_style( 'eksell-google-fonts', $google_fonts_url );

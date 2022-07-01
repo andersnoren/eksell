@@ -256,6 +256,10 @@ Included as part of:
 
 == Changelog ==
 
+Version 1.8.2 (2022-07-01)
+-------------------------
+- Improved fonts.css enqueue for child themes.
+
 Version 1.8.1 (2022-06-29)
 -------------------------
 - Removed the "Disable Google Fonts" Customizer setting, since Google Fonts is no longer used in the theme.
