@@ -296,6 +296,21 @@ if ( ! class_exists( 'Eksell_Customizer' ) ) :
 				'description' 	=> esc_html__( 'Whether to display the category filter on the post archive.', 'eksell' ),
 			) );
 
+			/* Show Category Post Count ------ */
+
+			$wp_customize->add_setting( 'eksell_show_filter_category_post_count', array(
+				'capability' 		=> 'edit_theme_options',
+				'default'			=> false,
+				'sanitize_callback' => 'eksell_sanitize_checkbox',
+			) );
+
+			$wp_customize->add_control( 'eksell_show_filter_category_post_count', array(
+				'type' 			=> 'checkbox',
+				'section' 		=> 'eksell_archive_pages_options',
+				'label' 		=> esc_html__( 'Show Filter Category Post Count', 'eksell' ),
+				'description' 	=> esc_html__( 'Whether to display the number of posts in each category in the filter.', 'eksell' ),
+			) );
+
 			/* Separator --------------------- */
 
 			$wp_customize->add_setting( 'eksell_archive_pages_options_sep_1', array(

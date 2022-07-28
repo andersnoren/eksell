@@ -256,6 +256,10 @@ Included as part of:
 
 == Changelog ==
 
+Version 1.9 (2022-07-28)
+-------------------------
+- New option: Show the number of posts in each category in the home filtration.
+
 Version 1.8.3 (2022-07-01)
 -------------------------
 - Block styles: Tweaked gallery and large quotes to look correct in WordPress 6.0 (thanks, @oslaferbmon).

@@ -314,6 +314,9 @@ if ( ! function_exists( 'eksell_the_archive_filter' ) ) :
 		$home_url 	= '';
 		$post_type 	= '';
 
+		// Whether the show the number of posts in each category.
+		$show_category_post_count = get_theme_mod( 'eksell_show_filter_category_post_count', false );
+
 		// Determine the correct home URL to link to.
 		if ( is_home() ) {
 			$post_type 	= 'post';
@@ -336,11 +339,18 @@ if ( ! function_exists( 'eksell_the_archive_filter' ) ) :
 			<ul class="filter-list reset-list-style">
 
 				<?php if ( $home_url ) : ?>
-					<li class="filter-show-all"><a class="filter-link active" data-filter-post-type="<?php echo esc_attr( $post_type ); ?>" href="<?php echo esc_url( $home_url ); ?>"><?php esc_html_e( 'Show All', 'eksell' ); ?></a></li>
+					<li class="filter-show-all"><a class="filter-link active" data-filter-post-type="<?php echo esc_attr( $post_type ); ?>" href="<?php echo esc_url( $home_url ); ?>"><span class="term-name"><?php esc_html_e( 'Show All', 'eksell' ); ?></span></a></li>
 				<?php endif; ?>
 
 				<?php foreach ( $terms as $term ) : ?>
-					<li class="filter-term-<?php echo esc_attr( $term->slug ); ?>"><a class="filter-link" data-filter-term-id="<?php echo esc_attr( $term->term_id ); ?>" data-filter-taxonomy="<?php echo esc_attr( $term->taxonomy ); ?>" data-filter-post-type="<?php echo esc_attr( $post_type ); ?>" href="<?php echo esc_url( get_term_link( $term ) ); ?>"><?php echo $term->name; ?></a></li>
+					<li class="filter-term-<?php echo esc_attr( $term->slug ); ?>">
+						<a class="filter-link" data-filter-term-id="<?php echo esc_attr( $term->term_id ); ?>" data-filter-taxonomy="<?php echo esc_attr( $term->taxonomy ); ?>" data-filter-post-type="<?php echo esc_attr( $post_type ); ?>" href="<?php echo esc_url( get_term_link( $term ) ); ?>">
+							<span class="term-name"><?php echo $term->name; ?></span>
+							<?php if ( $show_category_post_count ) : ?>
+								<span class="term-count"><?php echo $term->count; ?></span>
+							<?php endif; ?>
+						</a>
+					</li>
 				<?php endforeach; ?>
 				
 			</ul><!-- .filter-list -->
