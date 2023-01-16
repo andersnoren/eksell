@@ -707,7 +707,7 @@ eksell.mainMenu = {
 	anchorLinks: function() {
 
 		// Close any parent modal before scrolling
-		$( '.menu-modal a[href*="#"]' ).on( 'click', function() {
+		$( '.menu-modal a[href*="#"]:not([href="#"])' ).on( 'click', function() {
 
 			eksell.coverModals.untoggleModal( $( '.menu-modal' ) );
 

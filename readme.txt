@@ -256,6 +256,10 @@ Included as part of:
 
 == Changelog ==
 
+Version 1.9.3 (2023-01-16)
+-------------------------
+- Fixed a bug with the sub menu toggle in the previous version.
+
 Version 1.9.2 (2023-01-16)
 -------------------------
 - Added support for linking to anchor links on the current page in the modal menu.
