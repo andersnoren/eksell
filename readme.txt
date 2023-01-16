@@ -256,6 +256,10 @@ Included as part of:
 
 == Changelog ==
 
+Version 1.9.2 (2023-01-16)
+-------------------------
+- Added support for linking to anchor links on the current page in the modal menu.
+
 Version 1.9.1 (2022-12-07)
 -------------------------
 - Improved the visual fidelity of the angled gradient separator.

@@ -685,6 +685,9 @@ eksell.mainMenu = {
 		// If the current menu item is in a sub level, expand all the levels higher up on load.
 		eksell.mainMenu.expandLevel();
 
+		// Handle the menu modal when anchor links are clicked.
+		eksell.mainMenu.anchorLinks();
+
 	},
 
 	// If the current menu item is in a sub level, expand all the levels higher up on load.
@@ -700,6 +703,29 @@ eksell.mainMenu = {
 			} )
 		}
 	},
+
+	anchorLinks: function() {
+
+		// Close any parent modal before scrolling
+		$( '.menu-modal a[href*="#"]' ).on( 'click', function() {
+
+			eksell.coverModals.untoggleModal( $( '.menu-modal' ) );
+
+			var $target = $( this.hash ).length ? $( this.hash ) : $( '[name=' + this.hash.slice(1) + ']' );
+			if ( $target.length ) {
+				setTimeout( function() {
+
+					var elementOffset = $target.offset().top,
+						$stickyHeader = $( '.header-sticky-adjuster' );
+
+					if ( $stickyHeader.length ) elementOffset -= $stickyHeader.outerHeight();
+
+					$eksellWin.scrollTop( elementOffset );
+				}, 10 );
+			}
+		} );
+
+	}
 
 } // eksell.mainMenu
 
