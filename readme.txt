@@ -256,6 +256,10 @@ Included as part of:
 
 == Changelog ==
 
+Version 1.9.4 (2023-02-21)
+-------------------------
+- Updated the scaling behavior of the header logo, title and toggles elements to prevent the logo overlapping the menu on mobile.
+
 Version 1.9.3 (2023-01-16)
 -------------------------
 - Fixed a bug with the sub menu toggle in the previous version.

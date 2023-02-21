@@ -71,7 +71,7 @@ if ( ! function_exists( 'eksell_get_custom_logo' ) ) :
 			
 				?>
 
-				<img class="logo-<?php echo $slug; ?>" src="<?php echo esc_url( $logo_url ); ?>" width="<?php echo esc_attr( $logo_width ); ?>" height="<?php echo esc_attr( $logo_height ); ?>" style="height: <?php echo esc_attr( $logo_height ); ?>px;"<?php if ( $logo_alt ) echo ' alt="' . esc_attr( $logo_alt ) . '"'; ?> />
+				<img class="logo-<?php echo $slug; ?>" src="<?php echo esc_url( $logo_url ); ?>" width="<?php echo esc_attr( $logo_width ); ?>" height="<?php echo esc_attr( $logo_height ); ?>"<?php if ( $logo_alt ) echo ' alt="' . esc_attr( $logo_alt ) . '"'; ?> />
 
 				<?php 
 			endforeach; 
