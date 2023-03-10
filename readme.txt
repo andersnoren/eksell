@@ -256,6 +256,10 @@ Included as part of:
 
 == Changelog ==
 
+Version 1.9.5 (2023-03-10)
+-------------------------
+- Updated the scaling behavior of the header navigation toggle label to prevent it from line breaking on mobile.
+
 Version 1.9.4 (2023-02-21)
 -------------------------
 - Updated the scaling behavior of the header logo, title and toggles elements to prevent the logo overlapping the menu on mobile.
