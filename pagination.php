@@ -15,6 +15,13 @@ if ( isset( $portfolio_posts_query ) ) {
 // Set the type of pagination to use. Available types: button, links, and scroll.
 $pagination_type = get_theme_mod( 'eksell_pagination_type', 'button' );
 
+// If this post type isn't whitelisted for lazy loading, output the link pagination.
+$post_type = get_post_type() ?: 'post';
+$allowed_post_types = apply_filters( 'eksell_allowed_post_types_for_lazy_loading', array( 'post', 'page', 'product', 'jetpack-portfolio', 'any' ) );
+if ( ! in_array( $post_type, $allowed_post_types ) ) {
+	$pagination_type = 'links';
+}
+
 // Combine the query with the query_vars into a single array.
 $query_args = array_merge( $pagination_query->query, $pagination_query->query_vars );
 

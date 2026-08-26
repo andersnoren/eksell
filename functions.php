@@ -228,12 +228,14 @@ if ( ! function_exists( 'eksell_register_scripts' ) ) :
 
 		// AJAX Load More.
 		wp_localize_script( 'eksell-construct', 'eksell_ajax_load_more', array(
-			'ajaxurl'   => esc_url( $ajax_url ),
+			'ajaxurl' => esc_url( $ajax_url ),
+			'nonce'   => wp_create_nonce( 'eksell_ajax_load_more_nonce' ),
 		) );
 
 		// AJAX Filters.
 		wp_localize_script( 'eksell-construct', 'eksell_ajax_filters', array(
-			'ajaxurl'   => esc_url( $ajax_url ),
+			'ajaxurl' => esc_url( $ajax_url ),
+			'nonce'   => wp_create_nonce( 'eksell_ajax_filters_nonce' ),
 		) );
 
 	}
@@ -760,7 +762,50 @@ endif;
 if ( ! function_exists( 'eksell_ajax_load_more' ) ) :
 	function eksell_ajax_load_more() {
 
-		$query_args = json_decode( wp_unslash( $_POST['json_data'] ), true );
+		check_ajax_referer( 'eksell_ajax_load_more_nonce', 'nonce' );
+
+		$raw_args = json_decode( wp_unslash( $_POST['json_data'] ), true );
+
+		if ( ! is_array( $raw_args ) ) {
+			wp_die();
+		}
+
+		// Whitelist only the query vars this feature actually needs.
+		$allowed_keys = array(
+			'paged',
+			'post_type',
+			'posts_per_page',
+			'cat',
+			'category_name',
+			'tag',
+			'author',
+			's',
+			'order',
+			'orderby',
+		);
+
+		$query_args = array();
+		foreach ( $allowed_keys as $key ) {
+			if ( isset( $raw_args[ $key ] ) ) {
+				$query_args[ $key ] = $raw_args[ $key ];
+			}
+		}
+
+		// Restrict post_type to what's actually allowed for preview output.
+		$allowed_post_types = apply_filters( 'eksell_allowed_post_types_for_lazy_loading', array( 'post', 'page', 'product', 'jetpack-portfolio', 'any' ) );
+
+		// Default the query_args to post.
+		if ( empty( $query_args['post_type'] ) || is_array( $query_args['post_type'] ) ) {
+			$query_args['post_type'] = 'post';
+		}
+
+		// If we're querying a post type that's not allowed, exit.
+		if ( ! in_array( $query_args['post_type'], $allowed_post_types, true ) ) {
+			wp_die();
+		}
+
+		// Only ever load published posts.
+		$query_args['post_status'] = 'publish';
 
 		$ajax_query = new WP_Query( $query_args );
 
@@ -803,6 +848,8 @@ endif;
 if ( ! function_exists( 'eksell_ajax_filters' ) ) : 
 	function eksell_ajax_filters() {
 
+		check_ajax_referer( 'eksell_ajax_filters_nonce', 'nonce' );
+
 		// Get the filters from AJAX.
 		$term_id 	= isset( $_POST['term_id'] ) ? $_POST['term_id'] : null;
 		$taxonomy 	= isset( $_POST['taxonomy'] ) ? $_POST['taxonomy'] : '';
@@ -813,6 +860,12 @@ if ( ! function_exists( 'eksell_ajax_filters' ) ) :
 			'post_status'			=> 'publish',
 			'post_type'				=> $post_type,
 		);
+
+		// Restrict post_type to what this feature is meant to filter.
+		$allowed_post_types = apply_filters( 'eksell_allowed_post_types_for_ajax_filters', array( 'post', 'jetpack-portfolio' ) );
+		if ( ! in_array( $post_type, $allowed_post_types, true ) ) {
+			wp_die();
+		}
 
 		// Get the posts per page setting for Jetpack Portfolio.
 		if ( $post_type == 'jetpack-portfolio' ) {

@@ -869,7 +869,8 @@ eksell.loadMore = {
 			type: 'post',
 			data: {
 				action: 'eksell_ajax_load_more',
-				json_data: jsonQueryArgs
+				json_data: jsonQueryArgs,
+				nonce: eksell_ajax_load_more.nonce
 			},
 			success: function( result ) {
 
@@ -974,10 +975,11 @@ eksell.filters = {
 				url: eksell_ajax_filters.ajaxurl,
 				type: 'post',
 				data: {
-					action: 	'eksell_ajax_filters',
-					post_type: 	postType,
-					term_id: 	termId,
-					taxonomy: 	taxonomy,
+					action:    'eksell_ajax_filters',
+					post_type: postType,
+					term_id:   termId,
+					taxonomy:  taxonomy,
+					nonce:     eksell_ajax_filters.nonce
 				},
 				success: function( result ) {
 
