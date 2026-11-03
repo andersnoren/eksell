@@ -8,6 +8,13 @@ Stable tag: trunk
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
+A feature-rich portfolio and blog theme, with deep support for the block editor and full color settings.
+
+
+== Description ==
+
+Eksell is a feature-rich portfolio and blog theme, with deep support for the block editor and full color settings. It includes extensive block styles and multiple prebuilt block patterns, and it styles the block editor to match the front-end of your site so you always have a good idea of what the end result will look like when you’re creating your content. Visitors can filter your posts and Jetpack Portfolio items without reloading the page with the lazyloading category filter, and full color settings in the Customizer give you easy control over all of the colors used in the theme, including the option to set a separate dark mode color scheme for devices that support it. Eksell also features a Blank Canvas page template that only outputs the content you add in the block editor, infinite scroll on archive pages, an optional search overlay, a sticky header setting, a social menu with icons, a footer menu, custom logo support, options for what post meta to display, support for the Block Templates editor, a lightweight construction for fast load times, and developer friendly code. Demo: https://eksell.andersnoren.se
+
 
 == Installation ==
 
@@ -207,6 +214,21 @@ The fallback image is used for posts that are missing a featured image. By defau
 5. Click the blue "Publish" button to save your changes.
 
 
+== Frequently Asked Questions ==
+
+= Where can I get support? =
+Post your question in the Eksell support forum on WordPress.org: https://wordpress.org/support/theme/eksell/
+
+= Where can I request a feature or report a bug? =
+Open an issue in the Eksell GitHub repository: https://github.com/andersnoren/eksell
+
+
+== Copyright ==
+
+Eksell WordPress Theme, Copyright 2021-2026 Anders Norén
+Eksell is distributed under the terms of the GNU GPL.
+
+
 == Licenses ==
 
 Eksell is derived from the Chaplin theme, Copyright (c) 2019-2021 Anders Norén.
@@ -255,6 +277,14 @@ Included as part of:
 
 
 == Changelog ==
+
+Version 1.9.8 (2026-11-03)
+-------------------------
+- Switched to the variable version of Public Sans, which replaces four font files with two.
+- Replaced deprecated jQuery methods (.keyup(), .keydown(), .focus() and .blur()) with .on() and .trigger().
+- Updated the demo URL in README.md.
+- Added the Requires at least header to style.css.
+- Added Description, FAQ, Copyright and Upgrade Notice sections to the readme.
 
 Version 1.9.7 (2026-08-26)
 -------------------------
@@ -605,3 +635,9 @@ Version 1.0.1 (2021-03-09)
 Version 1.0.0 (2021-03-08)
 -------------------------
 - Initial version
+
+
+== Upgrade Notice ==
+
+= 1.9.8 =
+Switches to the variable version of Public Sans, and replaces deprecated jQuery methods.

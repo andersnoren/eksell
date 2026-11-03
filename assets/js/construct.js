@@ -169,9 +169,9 @@ eksell.toggles = {
 					var $focusElement = $( $toggle.data( 'set-focus' ) );
 					if ( $focusElement.length ) {
 						if ( $toggle.is( '.active' ) ) {
-							$focusElement.focus();
+							$focusElement.trigger( 'focus' );
 						} else {
-							$focusElement.blur();
+							$focusElement.trigger( 'blur' );
 						}
 					}
 				}
@@ -241,7 +241,7 @@ eksell.toggles = {
 	// Close toggle on escape key press.
 	untoggleOnEscapeKeyPress: function() {
 
-		$eksellDoc.keyup( function( e ) {
+		$eksellDoc.on( 'keyup', function( e ) {
 			if ( e.key === "Escape" ) {
 
 				$( '*[data-untoggle-on-escape].active' ).each( function() {
@@ -327,7 +327,7 @@ eksell.coverModals = {
 	// Close modal on escape key press.
 	closeOnEscape: function() {
 
-		$eksellDoc.keyup( function( e ) {
+		$eksellDoc.on( 'keyup', function( e ) {
 			if ( e.key === "Escape" ) {
 				$( '.cover-modal.active' ).each( function() {
 					eksell.coverModals.untoggleModal( $( this ) );
@@ -621,7 +621,7 @@ eksell.focusManagement = {
 	focusLoops: function() {
 
 		// Add focus loops for the menu modal (which includes the #site-aside navigation toggle on desktop) and search modal.
-		$eksellDoc.keydown( function( e ) {
+		$eksellDoc.on( 'keydown', function( e ) {
 
 			var $focusElement = $( ':focus' );
 
@@ -662,7 +662,7 @@ eksell.focusManagement = {
 
 				// If a destination is set, change focus.
 				if ( $destination ) {
-					$destination.focus();
+					$destination.trigger( 'focus' );
 					return false;
 				}
 				

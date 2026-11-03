@@ -27,4 +27,4 @@ Do you want to support the continued development of Eksell? You can send me a Pa
 
 ## Resources
 - [About Eksell](https://andersnoren.se/teman/eksell-wordpress-theme/)
-- [Eksell demo site](https://andersnoren.se/themes/eksell/)
+- [Eksell demo site](https://eksell.andersnoren.se)
